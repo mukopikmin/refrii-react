@@ -8,7 +8,8 @@ const initialState = {
   boxes: [],
   units: [],
   error: null,
-  selectedBox: null,
+  box: null,
+  food: null,
 };
 
 export default handleActions({
@@ -36,4 +37,8 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
+  [types.SELECT_BOX]: (state, action) => ({
+    ...state,
+    box: action.payload.box
+  })
 }, initialState);

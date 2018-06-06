@@ -5,11 +5,12 @@ import actions from '../actions';
 const mapStateToProps = state => ({
   credential: state.credential,
   boxes: state.boxes,
-  selectedBox: state.selectedBox,
+  box: state.box,
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: jwt => dispatch(actions.requestGetBoxes(jwt)),
+  select: box => dispatch(actions.selectBox(box))
 });
 
 export default connect(

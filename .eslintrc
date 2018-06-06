@@ -2,5 +2,10 @@
   "extends": "airbnb",
   "globals": {
     "fetch": false
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true
   }
 }

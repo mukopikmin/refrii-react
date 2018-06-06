@@ -4,23 +4,36 @@ import './index.css';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducers';
+import reducers from './reducers';
 import rootSaga from './sagas';
 import AppContainer from './containers/AppContainer';
-// import registerServiceWorker from './registerServiceWorker';
 import { PersistGate } from 'redux-persist/integration/react';
+import logger from 'redux-logger';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+// import registerServiceWorker from './registerServiceWorker';
 
-import store, { persistor } from './configureStore';
+const persistConfig = {
+  key: 'credential',
+  storage,
+  whitelist: ['credential'],
+};
 
-// const sagaMiddleware = createSagaMiddleware();
-// const middlewares = [sagaMiddleware];
-// const store = createStore(reducer, applyMiddleware(...middlewares));
-// sagaMiddleware.run(rootSaga);
+const persistedReducer = persistReducer(persistConfig, reducers);
+const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware, logger];
+const store = createStore(persistedReducer, applyMiddleware(...middlewares));
+const persistor = persistStore(store);
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer />
+    <PersistGate loading={null} persistor={persistor}>
+      <AppContainer />
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );
+
 // registerServiceWorker();

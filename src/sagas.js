@@ -5,7 +5,7 @@ import Api from './api';
 import actions from './actions';
 
 function* handleRequesGoogleAuth(action) {
-  const {googleToken}=action.payload
+  const { googleToken } = action.payload;
   const credential = yield call(Api.authWithGoogle, googleToken);
 
   yield put(actions.receiveGoogleAuth(credential));
@@ -13,7 +13,7 @@ function* handleRequesGoogleAuth(action) {
 
 function* handleRequestGetBoxes(action) {
   try {
-    const {jwt} = action.payload.credential
+    const { jwt } = action.payload.credential;
     const boxes = yield call(Api.getBoxes, jwt);
 
     yield put(actions.receiveGetBoxes(boxes));

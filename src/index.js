@@ -7,7 +7,6 @@ import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
-
 import AppContainer from './containers/AppContainer';
 import reducers from './reducers';
 import rootSaga from './sagas';

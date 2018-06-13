@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, Button } from 'reactstrap';
+import './Header.css'
 
 class Header extends Component {
   render() {
+    const { user }=this.props.credential
+
     return (
-      <div>
-        <ul>
-          <li>
-            <Link to="/boxes">BoxList</Link>
-          </li>
-          <li>
-            <Link to="/signin">Signin</Link>
-          </li>
-        </ul>
+      <div id="header">
+        <Navbar color="light" light expand="md">
+          <Container>
+          <NavbarBrand href="/">Refrii</NavbarBrand>
+          <Nav navbar>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+              {user.name}
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                Option 1
+                </DropdownItem>
+                <DropdownItem>
+                Option 2
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                Sign out
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+        </Container>
+        </Navbar>
       </div>
     );
   }

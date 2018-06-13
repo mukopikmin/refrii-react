@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import FoodListContainer from '../containers/FoodListContainer'
+import { Nav, NavItem, NavLink } from 'reactstrap';
+import {Link, withRouter} from 'react-router-dom'
 
-export default class BoxList extends Component {
+class BoxList extends Component {
   constructor() {
-    super()
+    super();
 
-    this.select= this.select.bind(this)
+    this.select = this.select.bind(this);
   }
   componentDidMount() {
     const { onLoad, credential } = this.props;
@@ -14,22 +14,26 @@ export default class BoxList extends Component {
   }
 
   select(box) {
-    this.props.select(box)
+    this.props.select(box);
+    this.props.history.push(`/boxes/${box.id}`);
   }
 
   render() {
     const { boxes } = this.props;
 
     return (
-      <div>
-        <ul>
+      <div id="box-list">
+        <Nav vertical>
+          <p>Box list</p>
           {boxes.map(box => (
-            <li key={box.id} onClick={() => this.select(box)}>{box.name}</li>
+            <NavItem key={box.id}>
+              <NavLink onClick={() => this.select(box)}>{box.name}</NavLink>
+            </NavItem>
           ))}
-        </ul>
-
-        <FoodListContainer />
+        </Nav>
       </div>
     );
   }
 }
+
+export default withRouter(BoxList);

@@ -10,6 +10,7 @@ class GoogleAuth extends Component {
         clientId="943106981480-6sr30j1mfs9hcj64kc6sp9c9cc32rhb6.apps.googleusercontent.com"
         onSuccess={onGoogleAuthorized}
         onFailure={onGoogleAuthorized}
+        className="btn btn-primary"
       />
     );
   }

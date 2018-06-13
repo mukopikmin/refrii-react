@@ -39,6 +39,6 @@ export default handleActions({
   }),
   [types.SELECT_BOX]: (state, action) => ({
     ...state,
-    box: action.payload.box
-  })
+    box: action.payload.box,
+  }),
 }, initialState);

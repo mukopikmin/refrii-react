@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import FoodList from '../components/FoodList';
 
 const mapStateToProps = state => ({
-  box: state.box
+  box: state.box,
 });
+
 const mapDispatchToProps = dispatch => ({
 
 });

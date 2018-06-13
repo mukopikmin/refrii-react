@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: jwt => dispatch(actions.requestGetBoxes(jwt)),
-  select: box => dispatch(actions.selectBox(box))
+  select: box => dispatch(actions.selectBox(box)),
 });
 
 export default connect(

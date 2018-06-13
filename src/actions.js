@@ -21,6 +21,6 @@ export default createActions({
     error,
   }),
   [types.SELECT_BOX]: box => ({
-    box
-  })
+    box,
+  }),
 });

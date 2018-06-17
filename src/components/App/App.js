@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
 
-import GoogleAuthContainer from '../containers/GoogleAuthContainer';
-import BoxListContainer from '../containers/BoxListContainer';
-import BoxContainer from '../containers/BoxContainer';
-import HeaderContainer from '../containers/HeaderContainer';
-import FoodListContainer from '../containers/FoodListContainer';
+import GoogleAuth from '../GoogleAuth';
+import BoxList from '../BoxList';
+import Box from '../Box';
+import Header from '../Header';
+import FoodList from '../FoodList';
 
 class App extends Component {
   render() {
@@ -15,15 +15,15 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
-            <HeaderContainer />
+            <Header />
             <Container>
               <Row>
                 <Col xs="3">
-                  <BoxListContainer />
+                  <BoxList />
                 </Col>
                 <Col xs="9">
-                  <Route exact path="/" component={GoogleAuthContainer} />
-                  <Route path="/boxes/:id" component={FoodListContainer} />
+                  <Route exact path="/" component={GoogleAuth} />
+                  <Route path="/boxes/:id" component={FoodList} />
                 </Col>
               </Row>
             </Container>

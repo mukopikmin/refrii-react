@@ -7,7 +7,7 @@ import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
-import AppContainer from './containers/AppContainer';
+import App from './components/App';
 import reducers from './reducers';
 import rootSaga from './sagas';
 import './index.css';
@@ -30,7 +30,7 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <AppContainer />
+      <App />
     </PersistGate>
   </Provider>,
   document.getElementById('root'),

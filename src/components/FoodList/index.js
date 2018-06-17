@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import FoodList from '../components/FoodList';
+import FoodList from './FoodList';
 
 const mapStateToProps = state => ({
   box: state.box.selected,

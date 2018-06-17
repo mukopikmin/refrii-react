@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import BoxList from '../components/BoxList';
-import actions from '../actions';
-console.log(actions)
+import BoxList from './BoxList';
+import actions from '../../actions';
+
 const mapStateToProps = state => ({
   session: state.session,
   boxes: state.box.list,

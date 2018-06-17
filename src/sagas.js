@@ -5,16 +5,16 @@ import Api from './api';
 import actions from './actions';
 import selectors from './selectors'
 
-function* handleRequesGoogleAuth(action) {
-  const { googleToken } = action.payload;
-  const credential = yield call(Api.authWithGoogle, googleToken);
-  yield put(actions.receiveGoogleAuth(credential));
+function* handleRequesGoogleAuth() {
+  const {googleToken} = yield select(selectors.getSession)
+  const session = yield call(Api.authWithGoogle, googleToken);
+  yield put(actions.receiveGoogleAuth(session));
 }
 
-function* handleRequestGetBoxes(action) {
+function* handleRequestGetBoxes() {
   try {
-    const { jwt } = action.payload.credential;
-    const boxes = yield call(Api.getBoxes, jwt);
+    const session = yield select(selectors.getSession)
+    const boxes = yield call(Api.getBoxes, session.jwt);
     yield put(actions.receiveGetBoxes(boxes));
 
     if (boxes.length > 0) {

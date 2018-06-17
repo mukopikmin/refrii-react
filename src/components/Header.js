@@ -4,7 +4,7 @@ import './Header.css'
 
 class Header extends Component {
   render() {
-    const { user }=this.props.credential
+    const { session }=this.props
 
     return (
       <div id="header">
@@ -14,7 +14,7 @@ class Header extends Component {
           <Nav navbar>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-              {user.name}
+              {session.name}
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>

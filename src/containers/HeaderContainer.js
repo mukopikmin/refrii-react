@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 const mapStateToProps = state => ({
-  credential: state.credential,
+  session: state.session,
 });
 const mapDispatchToProps = dispatch => ({
 

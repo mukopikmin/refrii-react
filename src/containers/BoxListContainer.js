@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 import BoxList from '../components/BoxList';
 import actions from '../actions';
-
+console.log(actions)
 const mapStateToProps = state => ({
-  credential: state.credential,
-  boxes: state.boxes,
-  box: state.box,
+  session: state.session,
+  boxes: state.box.list,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: jwt => dispatch(actions.requestGetBoxes(jwt)),
+  onLoad: () => dispatch(actions.requestGetBoxes()),
   select: box => dispatch(actions.selectBox(box)),
 });
 

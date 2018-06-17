@@ -14,9 +14,9 @@ import './index.css';
 // import registerServiceWorker from './registerServiceWorker';
 
 const persistConfig = {
-  key: 'credential',
+  key: 'session',
   storage,
-  whitelist: ['credential'],
+  whitelist: ['session'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

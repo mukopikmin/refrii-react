@@ -14,7 +14,7 @@ class Header extends Component {
           <Nav navbar>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-              {session.name}
+              {session.user.name}
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>

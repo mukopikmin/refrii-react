@@ -6,7 +6,7 @@ const initialState = {
   expiresAt: null,
   jwt: null,
   user: null,
-  error: null
+  error: null,
 };
 
 export default handleActions({

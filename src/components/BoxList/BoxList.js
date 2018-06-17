@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
-import {Link, withRouter} from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom';
 
 class BoxList extends Component {
   constructor() {
@@ -24,7 +24,7 @@ class BoxList extends Component {
     return (
       <div id="box-list">
         <Nav vertical>
-          <p>Box list</p>
+          <p>カテゴリ</p>
           {boxes.map(box => (
             <NavItem key={box.id}>
               <NavLink onClick={() => this.select(box)}>{box.name}</NavLink>

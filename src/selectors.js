@@ -1,4 +1,4 @@
 export default {
   getSession: state => state.session,
-  getBox: state => state.box
-}
+  getSelectedBox: state => state.box.seleced,
+};

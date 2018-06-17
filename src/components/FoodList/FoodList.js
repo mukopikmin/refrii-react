@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardColumns,
- CardSubtitle, CardBody, CardLink } from 'reactstrap';
+import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody, Row, Col } from 'reactstrap';
 
 export default class FoodList extends Component {
   render() {
@@ -14,10 +13,21 @@ export default class FoodList extends Component {
               <CardBody>
                 <CardSubtitle>{food.name}</CardSubtitle>
                 <CardText>{food.notice}</CardText>
-                <Button block>Button</Button>
-                  <CardLink href="#">Link</CardLink>
-                    <CardLink href="#">Another</CardLink>
+                <Row>
+                  <Col sm={3}>
+                    <Button block outline color="danger" size="sm">-</Button>
+                  </Col>
+                  <Col sm={6} align="center">
+                    {food.amount} {food.unit.label}
+                  </Col>
+                  <Col sm={3}>
+                    <Button block outline color="primary" size="sm">+</Button>
+                  </Col>
+                </Row>
               </CardBody>
+              <CardFooter>
+                {food.expiration_date}
+              </CardFooter>
             </Card>
           ))}
         </CardColumns>

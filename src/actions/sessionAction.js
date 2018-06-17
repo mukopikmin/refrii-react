@@ -11,4 +11,5 @@ export default createActions({
   [types.FAILED_GOOGLE_AUTH]: error => ({
     error,
   }),
+  [types.SIGNOUT]: () => ({}),
 });

@@ -4,7 +4,7 @@ import './Header.css';
 
 class Header extends Component {
   render() {
-    const { session } = this.props;
+    const { session, signout } = this.props;
 
     return (
       <div id="header">
@@ -21,7 +21,7 @@ class Header extends Component {
                   アカウント情報
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
+                  <DropdownItem onClick={signout}>
                   ログアウト
                   </DropdownItem>
                 </DropdownMenu>

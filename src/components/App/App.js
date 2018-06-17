@@ -10,9 +10,13 @@ import Header from '../Header';
 import FoodList from '../FoodList';
 
 class App extends Component {
-  render() {
-    return (
-      <div>
+  componentDidMount() {
+    this.content = this.content.bind(this);
+  }
+
+  content() {
+    if (this.props.session.user) {
+      return (
         <BrowserRouter>
           <div>
             <Header />
@@ -29,6 +33,18 @@ class App extends Component {
             </Container>
           </div>
         </BrowserRouter>
+      );
+    }
+
+    return <GoogleAuth />;
+  }
+
+  render() {
+    const content = this.content();
+
+    return (
+      <div>
+        {content}
       </div>
     );
   }

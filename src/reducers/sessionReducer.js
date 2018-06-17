@@ -24,4 +24,7 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
+  [types.SIGNOUT]: state => ({
+    ...initialState,
+  }),
 }, initialState);

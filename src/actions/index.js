@@ -1,7 +1,9 @@
-import boxAction from './boxAction';
 import sessionAction from './sessionAction';
+import boxAction from './boxAction';
+import foodAction from './foodAction';
 
 export default {
-  ...boxAction,
   ...sessionAction,
+  ...boxAction,
+  ...foodAction,
 };

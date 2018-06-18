@@ -10,4 +10,6 @@ function* handleRequesGoogleAuth() {
   yield put(actions.receiveGoogleAuth(session));
 }
 
-export default [takeLatest(types.REQUEST_GOOGLE_AUTH, handleRequesGoogleAuth)];
+export default [
+  takeLatest(types.GOOGLE_AUTH.REQUEST, handleRequesGoogleAuth),
+];

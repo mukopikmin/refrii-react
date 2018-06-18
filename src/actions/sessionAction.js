@@ -2,13 +2,13 @@ import { createActions } from 'redux-actions';
 import types from '../actionTypes';
 
 export default createActions({
-  [types.REQUEST_GOOGLE_AUTH]: googleToken => ({
+  [types.GOOGLE_AUTH.REQUEST]: googleToken => ({
     googleToken,
   }),
-  [types.RECEIVE_GOOGLE_AUTH]: session => ({
+  [types.GOOGLE_AUTH.RECEIVE]: session => ({
     session,
   }),
-  [types.FAILED_GOOGLE_AUTH]: error => ({
+  [types.GOOGLE_AUTH.FAILED]: error => ({
     error,
   }),
   [types.SIGNOUT]: () => ({}),

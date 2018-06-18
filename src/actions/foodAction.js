@@ -2,11 +2,11 @@ import { createActions } from 'redux-actions';
 import types from '../actionTypes';
 
 export default createActions({
-  [types.REQUEST_UPDATE_FOOD]: food => ({
+  [types.UPDATE_FOOD.REQUEST]: food => ({
     food,
   }),
-  [types.RECEIVE_UPDATE_FOOD]: () => ({ }),
-  [types.FAILED_UPDATE_FOOD]: error => ({
+  [types.UPDATE_FOOD.RECEIVE]: () => ({ }),
+  [types.UPDATE_FOOD.FAILED]: error => ({
     error,
   }),
 });

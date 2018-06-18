@@ -7,19 +7,19 @@ const initialState = {
 };
 
 export default handleActions({
-  [types.REQUEST_GET_BOXES]: (state, action) => ({
+  [types.GET_BOXES.REQUEST]: (state, action) => ({
     ...state,
     session: action.payload.session,
   }),
-  [types.RECEIVE_GET_BOXES]: (state, action) => ({
+  [types.GET_BOXES.RECEIVE]: (state, action) => ({
     ...state,
     list: action.payload.boxes,
   }),
-  [types.FAILED_GET_BOXES]: (state, action) => ({
+  [types.GET_BOXES.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),
-  [types.SELECT_BOX]: (state, action) => ({
+  [types.BOX.SELECT]: (state, action) => ({
     ...state,
     selected: action.payload.box,
   }),

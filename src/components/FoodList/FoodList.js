@@ -3,7 +3,7 @@ import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody
 
 export default class FoodList extends Component {
   render() {
-    const { box } = this.props;
+    const { box, increment, decrement } = this.props;
 
     if (box) {
       return (
@@ -15,13 +15,13 @@ export default class FoodList extends Component {
                 <CardText>{food.notice}</CardText>
                 <Row>
                   <Col sm={3}>
-                    <Button block outline color="danger" size="sm">-</Button>
+                    <Button block outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
                   </Col>
                   <Col sm={6} align="center">
                     {food.amount} {food.unit.label}
                   </Col>
                   <Col sm={3}>
-                    <Button block outline color="primary" size="sm">+</Button>
+                    <Button block outline color="primary" size="sm" onClick={() => increment(food)}>+</Button>
                   </Col>
                 </Row>
               </CardBody>

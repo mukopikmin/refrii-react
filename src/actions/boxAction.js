@@ -2,16 +2,16 @@ import { createActions } from 'redux-actions';
 import types from '../actionTypes';
 
 export default createActions({
-  [types.REQUEST_GET_BOXES]: session => ({
+  [types.GET_BOXES.REQUEST]: session => ({
     session,
   }),
-  [types.RECEIVE_GET_BOXES]: boxes => ({
+  [types.GET_BOXES.RECEIVE]: boxes => ({
     boxes,
   }),
-  [types.FAILED_GET_BOXES]: error => ({
+  [types.GET_BOXES.FAILED]: error => ({
     error,
   }),
-  [types.SELECT_BOX]: box => ({
+  [types.BOX.SELECT]: box => ({
     box,
   }),
 });

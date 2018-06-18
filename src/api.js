@@ -46,7 +46,9 @@ export default class Api {
   static updateFood(jwt, food) {
     const options = {
       method: 'PUT',
-      'Content-Type': 'application/json',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         name: food.name,
         amount: food.amount,
@@ -57,7 +59,7 @@ export default class Api {
       }),
     };
 
-    return authFetch(`/foods/${food.id}`, jwt, options)
+    return authFetch(`${endpoint}/foods/${food.id}`, jwt, options)
       .then(response => response.json());
   }
 }

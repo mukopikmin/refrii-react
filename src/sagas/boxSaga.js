@@ -21,4 +21,6 @@ function* handleRequestGetBoxes() {
   }
 }
 
-export default [takeLatest(types.REQUEST_GET_BOXES, handleRequestGetBoxes)];
+export default [
+  takeLatest(types.GET_BOXES.REQUEST, handleRequestGetBoxes),
+];

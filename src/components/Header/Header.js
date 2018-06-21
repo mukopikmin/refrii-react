@@ -8,7 +8,7 @@ class Header extends Component {
 
     return (
       <div id="header">
-        <Navbar color="light" light expand="md">
+        <Navbar fixed="top" color="light" light expand="md">
           <Container>
             <NavbarBrand href="/">Refrii</NavbarBrand>
             <Nav navbar>

@@ -3,7 +3,7 @@ import types from '../actionTypes';
 
 const initialState = {
   list: [],
-  selected: null,
+  selectedId: null,
 };
 
 export default handleActions({
@@ -21,6 +21,6 @@ export default handleActions({
   }),
   [types.BOX.SELECT]: (state, action) => ({
     ...state,
-    selected: action.payload.box,
+    selectedId: action.payload.boxId,
   }),
 }, initialState);

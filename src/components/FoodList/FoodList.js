@@ -3,7 +3,8 @@ import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody
 
 export default class FoodList extends Component {
   render() {
-    const { box, increment, decrement } = this.props;
+    const { boxes, selectedBoxId,increment, decrement } = this.props;
+    const box = boxes.filter(box => box.id === selectedBoxId)[0]
 
     if (box) {
       return (

@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestGetBoxes()),
-  select: box => dispatch(actions.selectBox(box)),
+  select: box => dispatch(actions.selectBox(box.id)),
 });
 
 export default connect(

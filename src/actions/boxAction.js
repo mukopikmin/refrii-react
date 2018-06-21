@@ -11,7 +11,7 @@ export default createActions({
   [types.GET_BOXES.FAILED]: error => ({
     error,
   }),
-  [types.BOX.SELECT]: box => ({
-    box,
+  [types.BOX.SELECT]: boxId => ({
+    boxId,
   }),
 });

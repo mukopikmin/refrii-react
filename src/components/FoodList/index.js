@@ -3,7 +3,8 @@ import FoodList from './FoodList';
 import actions from '../../actions';
 
 const mapStateToProps = state => ({
-  box: state.box.selected,
+  boxes: state.box.list,
+  selectedBoxId: state.box.selectedId,
 });
 
 const mapDispatchToProps = dispatch => ({

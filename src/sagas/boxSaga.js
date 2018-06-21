@@ -13,7 +13,7 @@ function* handleRequestGetBoxes() {
     if (boxes.length > 0) {
       const box = yield select(selectors.getSelectedBox);
       if (!box) {
-        yield put(actions.selectBox(boxes[0]));
+        yield put(actions.selectBox(boxes[0].id));
       }
     }
   } catch (error) {

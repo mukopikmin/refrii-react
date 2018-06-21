@@ -5,10 +5,8 @@ import actions from '../actions';
 import selectors from '../selectors';
 
 function* handleRequestUpdateFood(action) {
-  console.log(action);
   try {
     const food = action.payload.food;
-    console.log(food);
     const session = yield select(selectors.getSession);
     yield call(Api.updateFood, session.jwt, food);
     const boxes = yield call(Api.getBoxes, session.jwt);

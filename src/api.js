@@ -35,7 +35,12 @@ export default class Api {
 
   static getBoxes(jwt) {
     return authFetch(`${endpoint}/boxes`, jwt)
-      .then(response => response.json());
+      .then(response => response.json())
+      .then(boxes => boxes.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()))
+      .then(boxes => boxes.map(box => ({
+        ...box,
+        foods: box.foods.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()),
+      })));
   }
 
   static getFoodsInBox(jwt, boxId) {

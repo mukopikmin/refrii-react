@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(actions.requestGetBoxes()),
+  onLoad: () => dispatch(actions.requestListBox()),
   select: box => dispatch(actions.selectBox(box.id)),
 });
 

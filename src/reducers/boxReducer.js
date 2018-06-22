@@ -7,15 +7,15 @@ const initialState = {
 };
 
 export default handleActions({
-  [types.GET_BOXES.REQUEST]: (state, action) => ({
+  [types.BOX.LIST.REQUEST]: (state, action) => ({
     ...state,
     session: action.payload.session,
   }),
-  [types.GET_BOXES.RECEIVE]: (state, action) => ({
+  [types.BOX.LIST.RECEIVE]: (state, action) => ({
     ...state,
     list: action.payload.boxes,
   }),
-  [types.GET_BOXES.FAILED]: (state, action) => ({
+  [types.BOX.LIST.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),

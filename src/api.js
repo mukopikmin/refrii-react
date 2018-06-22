@@ -36,10 +36,10 @@ export default class Api {
   static getBoxes(jwt) {
     return authFetch(`${endpoint}/boxes`, jwt)
       .then(response => response.json())
-      .then(boxes => boxes.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()))
+      .then(boxes => boxes.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()))
       .then(boxes => boxes.map(box => ({
         ...box,
-        foods: box.foods.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()),
+        foods: box.foods.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()),
       })));
   }
 
@@ -65,6 +65,33 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/${food.id}`, jwt, options)
+      .then(response => response.json());
+  }
+
+  static createFood(jwt, body) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: body.name,
+        notice: body.notice,
+        amount: body.amount,
+        expiration_date: body.expirationDate,
+        image_url: body.imageUrl,
+        user_id: body.userId,
+        box_id: body.boxId,
+        unit_id: body.unitId,
+      }),
+    };
+
+    return authFetch(`${endpoint}/foods/`, jwt, options)
+      .then(response => response.json());
+  }
+
+  static getUnits(jwt) {
+    return authFetch(`${endpoint}/units`, jwt)
       .then(response => response.json());
   }
 }

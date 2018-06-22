@@ -4,11 +4,11 @@ import Api from '../api';
 import actions from '../actions';
 import selectors from '../selectors';
 
-function* handleRequestGetBoxes() {
+function* handleRequestListBox() {
   try {
     const session = yield select(selectors.getSession);
     const boxes = yield call(Api.getBoxes, session.jwt);
-    yield put(actions.receiveGetBoxes(boxes));
+    yield put(actions.receiveListBox(boxes));
 
     if (boxes.length > 0) {
       const box = yield select(selectors.getSelectedBox);
@@ -17,10 +17,10 @@ function* handleRequestGetBoxes() {
       }
     }
   } catch (error) {
-    yield put(actions.failedGetBoxes(error));
+    yield put(actions.failedListBox(error));
   }
 }
 
 export default [
-  takeLatest(types.GET_BOXES.REQUEST, handleRequestGetBoxes),
+  takeLatest(types.BOX.LIST.REQUEST, handleRequestListBox),
 ];

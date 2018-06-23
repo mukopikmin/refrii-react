@@ -87,25 +87,28 @@ class EditFoodModal extends Component {
             </FormGroup>
             <FormGroup row>
               <Label for="amount" sm={3}>数量</Label>
-              <Col sm={9}>
+              <Col sm={3}>
                 <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={this.state.amount} />
               </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="unit" sm={3}>単位</Label>
-              <Col sm={9}>
+              <Col sm={6}>
                 <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={this.state.unitId}>
                   <option value="0" />
                   {units.map(unit => (
                     <option key={unit.id} value={unit.id}>{unit.label}</option>
-                ))}
+                  ))}
                 </Input>
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="expiration-date" sm={3}>期限</Label>
               <Col sm={9}>
-                <DatePicker customInput={<Input />} type="text" name="expiration-date" id="expiration-date" selected={this.state.expirationDate} onChange={this.onDateChange} />
+                <DatePicker inline
+                  customInput={<Input />}
+                  name="expiration-date"
+                  id="expiration-date"
+                  selected={this.state.expirationDate}
+                  onChange={this.onDateChange}
+                />
               </Col>
             </FormGroup>
             <FormGroup row>

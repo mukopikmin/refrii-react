@@ -90,6 +90,14 @@ export default class Api {
       .then(response => response.json());
   }
 
+  static removeFood(jwt, id) {
+    const options = {
+      method: 'DELETE',
+    };
+
+    return authFetch(`${endpoint}/foods/${id}`, jwt, options);
+  }
+
   static getUnits(jwt) {
     return authFetch(`${endpoint}/units`, jwt)
       .then(response => response.json());

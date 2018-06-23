@@ -9,11 +9,11 @@ const initialState = {
 export default handleActions({
   [types.FOOD.CREATE.REQUEST]: (state, action) => ({
     ...state,
-    params: action.payload.params
+    params: action.payload.params,
   }),
   [types.FOOD.CREATE.RECEIVE]: (state, action) => ({
     ...state,
-    isEditFoodModalOpen: false
+    isEditFoodModalOpen: false,
   }),
   [types.FOOD.CREATE.FAILED]: (state, action) => ({
     ...state,

@@ -7,15 +7,15 @@ import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
-import moment from 'moment'
+import moment from 'moment';
 import App from './components/App';
 import reducers from './reducers';
 import rootSaga from './sagas';
 import './index.css';
 // import registerServiceWorker from './registerServiceWorker';
-import 'moment/locale/ja'
+import 'moment/locale/ja';
 
-moment.locale('ja-JP')
+moment.locale('ja-JP');
 
 const persistConfig = {
   key: 'session',

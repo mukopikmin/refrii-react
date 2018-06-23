@@ -23,6 +23,11 @@ export default {
       RECEIVE: 'RECEIVE_UPDATE_FOOD',
       FAILED: 'FAILED_UPDATE_FOOD',
     },
+    REMOVE: {
+      REQUEST: 'REQUEST_REMOVE_FOOD',
+      RECEIVE: 'RECEIVE_REMOVE_FOOD',
+      FAILED: 'FAILED_REMOVE_FOOD',
+    },
   },
   UNIT: {
     LIST: {

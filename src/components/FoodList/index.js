@@ -27,6 +27,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.requestUpdateFood(food));
   },
   openEditFoodModal: () => dispatch(actions.openEditFoodModal()),
+  remove: food => dispatch(actions.requestRemoveFood(food)),
 });
 
 export default connect(

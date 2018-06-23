@@ -8,6 +8,9 @@ export default createActions({
   [types.FOOD.UPDATE.REQUEST]: food => ({ food }),
   [types.FOOD.UPDATE.RECEIVE]: () => ({ }),
   [types.FOOD.UPDATE.FAILED]: error => ({ error }),
+  [types.FOOD.REMOVE.REQUEST]: food => ({ food }),
+  [types.FOOD.REMOVE.RECEIVE]: () => ({ }),
+  [types.FOOD.REMOVE.FAILED]: error => ({ error }),
   [types.MODAL.EDIT_FOOD.OPEN]: () => ({}),
   [types.MODAL.EDIT_FOOD.CLOSE]: () => ({ }),
 });

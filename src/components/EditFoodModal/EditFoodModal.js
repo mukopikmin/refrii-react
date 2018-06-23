@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input,CustomInput } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -45,7 +45,7 @@ class EditFoodModal extends Component {
   }
 
   onDateChange(date) {
-    this.setState({expirationDate: date})
+    this.setState({ expirationDate: date });
   }
 
   onNoticeChange(e) {
@@ -62,7 +62,7 @@ class EditFoodModal extends Component {
 
     this.props.submit({
       ...this.state,
-      boxId: selectedBoxId
+      boxId: selectedBoxId,
     });
   }
 
@@ -72,7 +72,9 @@ class EditFoodModal extends Component {
   }
 
   render() {
-    const {isOpen, units, boxes, selectedBoxId} = this.props;
+    const {
+      isOpen, units, boxes, selectedBoxId,
+    } = this.props;
 
     return (
       <Modal isOpen={isOpen} toggle={this.close}>
@@ -102,7 +104,8 @@ class EditFoodModal extends Component {
             <FormGroup row>
               <Label for="expiration-date" sm={3}>期限</Label>
               <Col sm={9}>
-                <DatePicker inline
+                <DatePicker
+                  inline
                   customInput={<Input />}
                   name="expiration-date"
                   id="expiration-date"

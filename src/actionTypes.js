@@ -28,6 +28,7 @@ export default {
       RECEIVE: 'RECEIVE_REMOVE_FOOD',
       FAILED: 'FAILED_REMOVE_FOOD',
     },
+    SET_PARAMS: 'SET_PARAMS_FOOD'
   },
   UNIT: {
     LIST: {
@@ -37,9 +38,15 @@ export default {
     },
   },
   MODAL: {
-    EDIT_FOOD: {
-      OPEN: 'OPEN_EDIT_FOOD_MODAL',
-      CLOSE: 'CLOSE_EDIT_FOOD_MODAL',
+    FOOD: {
+      NEW: {
+        OPEN: 'OPEN_NEW_FOOD_MODAL',
+        CLOSE: 'CLOSE_NEW_FOOD_MODAL',
+      },
+      EDIT: {
+        OPEN: 'OPEN_EDIT_FOOD_MODAL',
+        CLOSE: 'CLOSE_EDIT_FOOD_MODAL',
+      },
     },
   },
   SIGNOUT: 'SIGNOUT',

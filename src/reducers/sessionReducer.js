@@ -17,7 +17,7 @@ export default handleActions({
   [types.GOOGLE_AUTH.RECEIVE]: (state, action) => ({
     ...state,
     jwt: action.payload.session.jwt,
-    expiresAt: action.payload.session.expires_at,
+    expiresAt: action.payload.session.expiresAt,
     user: action.payload.session.user,
   }),
   [types.GOOGLE_AUTH.FAILED]: (state, action) => ({

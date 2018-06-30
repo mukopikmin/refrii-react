@@ -7,13 +7,13 @@ import selectors from '../selectors';
 function* handleRequestCreateFood(action) {
   try {
     const session = yield select(selectors.getSession);
-    const params = action.payload.params
+    const params = action.payload.params;
     yield call(Api.createFood, session.jwt, params);
     yield put(actions.receiveCreateFood());
     const boxes = yield call(Api.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error)
+    console.log(error);
     yield put(actions.failedCreateFood(error));
   }
 }
@@ -27,7 +27,7 @@ function* handleRequestUpdateFood(action) {
     const boxes = yield call(Api.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error)
+    console.log(error);
     yield put(actions.failedUpdateFood(error));
   }
 }
@@ -40,7 +40,7 @@ function* handleRequestRemoveFood(action) {
     const boxes = yield call(Api.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error)
+    console.log(error);
     yield put(actions.failedRemoveFood(error));
   }
 }

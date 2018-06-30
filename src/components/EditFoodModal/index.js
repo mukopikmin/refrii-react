@@ -9,18 +9,18 @@ const mapStateToProps = (state, ownProps) => ({
   units: state.unit.list,
   boxes: state.box.list,
   selectedBoxId: state.box.selectedId,
-  params: state.food.params
+  params: state.food.params,
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListUnit()),
   close: () => {
-    dispatch(actions.closeNewFoodModal())
-    dispatch(actions.closeEditFoodModal())
+    dispatch(actions.closeNewFoodModal());
+    dispatch(actions.closeEditFoodModal());
   },
   create: params => dispatch(actions.requestCreateFood(params)),
   update: params => dispatch(actions.requestUpdateFood(params)),
-  updateParams: params => dispatch(actions.setParamsFood(params))
+  updateParams: params => dispatch(actions.setParamsFood(params)),
 });
 
 export default connect(

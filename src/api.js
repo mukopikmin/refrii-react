@@ -1,6 +1,7 @@
-import Camelize from 'camelcase-keys'
+import { camelize, decamelize } from '@ridi/object-case-converter';
 
 const endpoint = 'https://api.refrii.com';
+const format = json => camelize(json, { recursive: true });
 
 const handleErrors = (response) => {
   if (!response.ok) {
@@ -28,16 +29,12 @@ const authFetch = (url, jwt, _options = {}) => {
     .then(handleErrors);
 };
 
-const camelize = (json) => {
-  return Camelize(json, {deep:true})
-}
-
 export default class Api {
   static authWithGoogle(token) {
     return fetch(`${endpoint}/auth/google/token?token=${token}`)
       .then(handleErrors)
       .then(response => response.json())
-      .then(camelize);
+      .then(format);
   }
 
   static getBoxes(jwt) {
@@ -48,13 +45,13 @@ export default class Api {
         ...box,
         foods: box.foods.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()),
       })))
-      .then(camelize);
+      .then(format);
   }
 
   static getFoodsInBox(jwt, boxId) {
     return fetch(`${endpoint}/boxes/${boxId}/foods`, jwt)
       .then(handleErrors)
-      .then(camelize);
+      .then(format);
   }
 
   static updateFood(jwt, body) {
@@ -75,7 +72,7 @@ export default class Api {
 
     return authFetch(`${endpoint}/foods/${body.id}`, jwt, options)
       .then(response => response.json())
-      .then(camelize);
+      .then(format);
   }
 
   static createFood(jwt, body) {
@@ -97,7 +94,7 @@ export default class Api {
 
     return authFetch(`${endpoint}/foods/`, jwt, options)
       .then(response => response.json())
-      .then(camelize);
+      .then(format);
   }
 
   static removeFood(jwt, id) {
@@ -111,6 +108,6 @@ export default class Api {
   static getUnits(jwt) {
     return authFetch(`${endpoint}/units`, jwt)
       .then(response => response.json())
-      .then(camelize);
+      .then(format);
   }
 }

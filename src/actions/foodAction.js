@@ -11,9 +11,9 @@ export default createActions({
   [types.FOOD.REMOVE.REQUEST]: params => ({ params }),
   [types.FOOD.REMOVE.RECEIVE]: () => ({ }),
   [types.FOOD.REMOVE.FAILED]: error => ({ error }),
-  [types.FOOD.SET_PARAMS]: (params) => ({params}),
-  [types.MODAL.FOOD.NEW.OPEN]: (params) => ({params}),
+  [types.FOOD.SET_PARAMS]: params => ({ params }),
+  [types.MODAL.FOOD.NEW.OPEN]: params => ({ params }),
   [types.MODAL.FOOD.NEW.CLOSE]: () => ({ }),
-  [types.MODAL.FOOD.EDIT.OPEN]: (params) => ({params}),
+  [types.MODAL.FOOD.EDIT.OPEN]: params => ({ params }),
   [types.MODAL.FOOD.EDIT.CLOSE]: () => ({ }),
 });

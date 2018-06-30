@@ -22,42 +22,42 @@ export default class EditFoodModal extends Component {
   onNameChange(e) {
     this.props.updateParams({
       ...this.props.params,
-      name: e.target.value
+      name: e.target.value,
     });
   }
 
   onAmountChange(e) {
     this.props.updateParams({
       ...this.props.params,
-      amount: e.target.value
+      amount: e.target.value,
     });
   }
 
   onUnitChange(e) {
     this.props.updateParams({
       ...this.props.params,
-      unitId: e.target.value
+      unitId: e.target.value,
     });
   }
 
   onDateChange(date) {
     this.props.updateParams({
       ...this.props.params,
-      expirationDate: date
+      expirationDate: date,
     });
   }
 
   onNoticeChange(e) {
     this.props.updateParams({
       ...this.props.params,
-      notice: e.target.value
+      notice: e.target.value,
     });
   }
 
   onNeedsAddingChange() {
     this.props.updateParams({
       ...this.props.params,
-      needsAdding: !this.props.params.needsAdding
+      needsAdding: !this.props.params.needsAdding,
     });
   }
 
@@ -91,16 +91,14 @@ export default class EditFoodModal extends Component {
 
   render() {
     const {
-      isEditFoodModalOpen, isNewFoodModalOpen, units, boxes, selectedBoxId,params
+      isEditFoodModalOpen, isNewFoodModalOpen, units, boxes, selectedBoxId, params,
     } = this.props;
-    const isOpen = isNewFoodModalOpen || isEditFoodModalOpen
+    const isOpen = isNewFoodModalOpen || isEditFoodModalOpen;
 
     return (
       <Modal isOpen={isOpen} toggle={this.close}>
         <ModalHeader toggle={this.close}>
-          {(() => {
-            return isEditFoodModalOpen ? '食材の編集' : '食材の追加'
-          })()}
+          {(() => (isEditFoodModalOpen ? '食材の編集' : '食材の追加'))()}
         </ModalHeader>
         <ModalBody>
           <Form>
@@ -160,11 +158,11 @@ export default class EditFoodModal extends Component {
             if (isEditFoodModalOpen) {
               return (
                 <Button color="primary" onClick={this.update}>更新</Button>
-              )
+              );
             }
             return (
               <Button color="primary" onClick={this.create}>追加</Button>
-            )
+            );
           })()}
         </ModalFooter>
       </Modal>

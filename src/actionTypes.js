@@ -28,7 +28,7 @@ export default {
       RECEIVE: 'RECEIVE_REMOVE_FOOD',
       FAILED: 'FAILED_REMOVE_FOOD',
     },
-    SET_PARAMS: 'SET_PARAMS_FOOD'
+    SET_PARAMS: 'SET_PARAMS_FOOD',
   },
   UNIT: {
     LIST: {

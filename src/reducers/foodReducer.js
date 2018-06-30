@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import moment from 'moment'
+import moment from 'moment';
 import types from '../actionTypes';
 
 const initialParams = {
@@ -10,12 +10,13 @@ const initialParams = {
   userId: 0,
   boxId: 0,
   notice: '',
-  expirationDate: moment().format('YYYY-MM-DDTHH:mm:SS.sssZ')
-}
+  needsAdding: false,
+  expirationDate: moment().format('YYYY-MM-DD'),
+};
 const initialState = {
   isNewFoodModalOpen: false,
   isEditFoodModalOpen: false,
-  params: initialParams
+  params: initialParams,
 };
 
 export default handleActions({
@@ -46,26 +47,26 @@ export default handleActions({
   }),
   [types.FOOD.SET_PARAMS]: (state, action) => ({
     ...state,
-    params: action.payload.params
+    params: action.payload.params,
   }),
   [types.MODAL.FOOD.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewFoodModalOpen: true,
-    params: action.payload.params || initialParams
+    params: action.payload.params || initialParams,
   }),
   [types.MODAL.FOOD.NEW.CLOSE]: (state, action) => ({
     ...state,
     isNewFoodModalOpen: false,
-    params: initialParams
+    params: initialParams,
   }),
   [types.MODAL.FOOD.EDIT.OPEN]: (state, action) => ({
     ...state,
     isEditFoodModalOpen: true,
-    params: action.payload.params || initialParams
+    params: action.payload.params || initialParams,
   }),
   [types.MODAL.FOOD.EDIT.CLOSE]: (state, action) => ({
     ...state,
     isEditFoodModalOpen: false,
-    params: initialParams
+    params: initialParams,
   }),
 }, initialState);

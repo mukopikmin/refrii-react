@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem,CardTitle } from 'reactstrap';
+import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle } from 'reactstrap';
 import EditFoodModal from '../EditFoodModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ export default class FoodList extends Component {
     this.props.edit({
       ...food,
       unitId: food.unit.id,
-    })
+    });
   }
 
   render() {
@@ -49,7 +49,7 @@ export default class FoodList extends Component {
                           onClick={() => this.toggle(food.id)}
                           data-toggle="dropdown"
                           aria-expanded
-                          >
+                        >
                           <FontAwesomeIcon icon={faEllipsisV} size="sm" />
                         </DropdownToggle>
                         <DropdownMenu>

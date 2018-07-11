@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class EditFoodModal extends Component {
   componentDidMount() {
@@ -96,11 +104,11 @@ export default class EditFoodModal extends Component {
     const isOpen = isNewFoodModalOpen || isEditFoodModalOpen;
 
     return (
-      <Modal isOpen={isOpen} toggle={this.close}>
-        <ModalHeader toggle={this.close}>
+      <Dialog open={isOpen} onClose={this.close} >
+        <DialogTitle>
           {(() => (isEditFoodModalOpen ? '食材の編集' : '食材の追加'))()}
-        </ModalHeader>
-        <ModalBody>
+        </DialogTitle>
+        <DialogContent>
           <Form>
             <FormGroup row>
               <Label for="name" sm={3}>名前</Label>
@@ -151,7 +159,7 @@ export default class EditFoodModal extends Component {
               </Col>
             </FormGroup>
           </Form>
-        </ModalBody>
+        </DialogContent>
         <ModalFooter>
           <Button color="secondary" onClick={this.close}>キャンセル</Button>
           {(() => {
@@ -165,7 +173,7 @@ export default class EditFoodModal extends Component {
             );
           })()}
         </ModalFooter>
-      </Modal>
+      </Dialog>
     );
   }
 }

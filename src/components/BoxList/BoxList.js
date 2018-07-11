@@ -1,6 +1,39 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import compose from 'recompose/compose';
+
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+
+const drawerWidth = 240;
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    height: '100%',
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+  },
+  drawerPaper: {
+    position: 'relative',
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
+    minWidth: 0, // So the Typography noWrap works
+  },
+  toolbar: theme.mixins.toolbar,
+});
 
 class BoxList extends Component {
   constructor() {
@@ -19,21 +52,27 @@ class BoxList extends Component {
   }
 
   render() {
-    const { boxes } = this.props;
+    const { boxes, classes } = this.props;
 
     return (
-      <div id="box-list">
-        <Nav vertical>
-          <p>カテゴリ</p>
+      <Drawer
+        variant="permanent"
+        classes={{
+            paper: classes.drawerPaper,
+          }}
+      >
+        <div className={classes.toolbar} />
+        <List>
           {boxes.map(box => (
-            <NavItem key={box.id}>
-              <NavLink onClick={() => this.select(box)}>{box.name}</NavLink>
-            </NavItem>
+            <ListItem key={box.id} onClick={() => this.select(box)}>{box.name}</ListItem>
           ))}
-        </Nav>
-      </div>
+        </List>
+      </Drawer>
     );
   }
 }
 
-export default withRouter(BoxList);
+export default compose(
+  withRouter,
+  withStyles(styles),
+)(BoxList);

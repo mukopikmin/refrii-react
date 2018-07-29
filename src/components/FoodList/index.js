@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import FoodList from './FoodList';
 import actions from '../../actions';
+import confirm from '../ConfirmDialog';
 
 const mapStateToProps = state => ({
   boxes: state.box.list,
@@ -27,7 +28,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.requestUpdateFood(food));
   },
   add: () => dispatch(actions.openNewFoodModal()),
-  remove: food => dispatch(actions.requestRemoveFood(food)),
+  remove: (food) => {
+    confirm('Are you sure').then(
+      () => dispatch(actions.requestRemoveFood(food)),
+      () => console.log('dismiss'),
+    );
+  },
   edit: food => dispatch(actions.openEditFoodModal(food)),
 });
 

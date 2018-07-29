@@ -1,68 +1,55 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { confirmable } from 'react-confirm';
 
 class ConfirmDialog extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
-      opened: true
-    }
-    this.show = this.show.bind(this)
-    this.dismiss = this.dismiss.bind(this)
-    this.cancel = this.cancel.bind(this)
-    this.proceed = this.proceed.bind(this)
+      open: true,
+    };
+    this.close = this.close.bind(this);
+    this.continue = this.continue.bind(this);
   }
 
-  show() {
-    console.log('show')
-    this.setState({opened:true})
-    return this.state.opened;
+  close() {
+    this.setState({
+      open: !this.state.open,
+    });
   }
 
-  dismiss() {
-    console.log('dismiss')
-    this.setState({opened:false})
+  close() {
+    const { dismiss } = this.props;
 
+    this.setState({ open: false });
+    dismiss();
   }
 
-  cancel() {
-    console.log('cancel')
-    this.setState({opened:false})
+  continue() {
+    const { proceed } = this.props;
 
-  }
-
-  proceed() {
-    console.log('proceed')
-    // this.setState({opened:false})
+    this.setState({ open: false });
+    proceed();
   }
 
   render() {
-    return (
-      <Dialog
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        open={this.show}
-        onClose={this.dismiss}
-        >
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-        </DialogActions>
-      </Dialog>
+    const {
+      show, proceed, dismiss, cancel, confirmation,
+    } = this.props;
 
-    )
+    return (
+      <Modal isOpen={this.state.open} toggle={this.close}>
+        <ModalHeader toggle={this.close}>確認</ModalHeader>
+        <ModalBody>
+          {confirmation}
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.continue}>実行</Button>{' '}
+          <Button color="secondary" onClick={this.close}>キャンセル</Button>
+        </ModalFooter>
+      </Modal>
+    );
   }
 }
 

@@ -3,6 +3,7 @@ import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody
 import EditFoodModal from '../EditFoodModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import Spinner from '../Spinner';
 
 export default class FoodList extends Component {
   constructor() {
@@ -33,6 +34,7 @@ export default class FoodList extends Component {
     if (box) {
       return (
         <div>
+
           <Button color="primary" onClick={add}>新規作成</Button>
           <EditFoodModal />
 
@@ -81,6 +83,6 @@ export default class FoodList extends Component {
         </div>
       );
     }
-    return <div />;
+    return <Spinner loading={box} />;
   }
 }

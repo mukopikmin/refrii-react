@@ -14,6 +14,10 @@ import rootSaga from './sagas';
 import './index.css';
 // import registerServiceWorker from './registerServiceWorker';
 import 'moment/locale/ja';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-121958327-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 moment.locale('ja-JP');
 

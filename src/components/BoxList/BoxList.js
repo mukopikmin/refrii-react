@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 class BoxList extends Component {
   constructor() {
     super();
@@ -19,7 +20,7 @@ class BoxList extends Component {
   }
 
   render() {
-    const { boxes } = this.props;
+    const { boxes, edit } = this.props;
 
     return (
       <div id="box-list">
@@ -27,7 +28,13 @@ class BoxList extends Component {
           <p>カテゴリ</p>
           {boxes.map(box => (
             <NavItem key={box.id}>
-              <NavLink onClick={() => this.select(box)}>{box.name}</NavLink>
+              <NavLink>
+              <span onClick={() => this.select(box)}>
+{box.name}
+              </span>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)}/>
+                </NavLink>
             </NavItem>
           ))}
         </Nav>

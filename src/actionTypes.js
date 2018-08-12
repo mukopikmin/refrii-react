@@ -10,6 +10,22 @@ export default {
       RECEIVE: 'RECEIVE_LIST_BOX',
       FAILED: 'FAILED_LIST_BOX',
     },
+    CREATE: {
+      REQUEST: 'REQUEST_CREATE_BOX',
+      RECEIVE: 'RECEIVE_CREATE_BOX',
+      FAILED: 'FAILED_CREATE_BOX',
+    },
+    UPDATE: {
+      REQUEST: 'REQUEST_UPDATE_BOX',
+      RECEIVE: 'RECEIVE_UPDATE_BOX',
+      FAILED: 'FAILED_UPDATE_BOX',
+    },
+    REMOVE: {
+      REQUEST: 'REQUEST_REMOVE_BOX',
+      RECEIVE: 'RECEIVE_REMOVE_BOX',
+      FAILED: 'FAILED_REMOVE_BOX',
+    },
+    SET_PARAMS: 'SET_PARAMS_BOX',
     SELECT: 'SELECT_BOX',
   },
   FOOD: {
@@ -38,6 +54,16 @@ export default {
     },
   },
   MODAL: {
+    BOX: {
+      NEW: {
+        OPEN: 'OPEN_NEW_BOX_MODAL',
+        CLOSE: 'CLOSE_NEW_BOX_MODAL',
+      },
+      EDIT: {
+        OPEN: 'OPEN_EDIT_BOX_MODAL',
+        CLOSE: 'CLOSE_EDIT_BOX_MODAL',
+      },
+    },
     FOOD: {
       NEW: {
         OPEN: 'OPEN_NEW_FOOD_MODAL',

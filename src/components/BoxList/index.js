@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListBox()),
   select: box => dispatch(actions.selectBox(box.id)),
+  edit: box => dispatch(actions.openEditBoxModal(box)),
 });
 
 export default connect(

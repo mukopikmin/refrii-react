@@ -48,6 +48,54 @@ export default class Api {
       .then(format);
   }
 
+  static createBox(jwt, body) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: body.name,
+        notice: body.notice,
+      }),
+    };
+
+    return authFetch(`${endpoint}/boxes/`, jwt, options)
+      .then(response => response.json())
+      .then(format);
+  }
+
+  static updateBox(jwt, body) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: body.name,
+        notice: body.notice,
+      }),
+    };
+
+    return authFetch(`${endpoint}/boxes/${body.id}`, jwt, options)
+      .then(response => response.json())
+      .then(format);
+  }
+
+  static removeBox(jwt, id) {
+    const options = {
+      method: 'DELETE',
+    };
+
+    return authFetch(`${endpoint}/boxes/${id}`, jwt, options);
+  }
+
+  static getUnits(jwt) {
+    return authFetch(`${endpoint}/units`, jwt)
+      .then(response => response.json())
+      .then(format);
+  }
+
   static getFoodsInBox(jwt, boxId) {
     return fetch(`${endpoint}/boxes/${boxId}/foods`, jwt)
       .then(handleErrors)

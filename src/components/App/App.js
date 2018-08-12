@@ -6,6 +6,8 @@ import GoogleAuth from '../GoogleAuth';
 import BoxList from '../BoxList';
 import Header from '../Header';
 import FoodList from '../FoodList';
+import Account from '../Account'
+import EditBoxModal from '../EditBoxModal';
 
 class App extends Component {
   componentDidMount() {
@@ -25,9 +27,12 @@ class App extends Component {
                 </Col>
                 <Col xs="9">
                   <Route exact path="/" component={GoogleAuth} />
-                  <Route path="/boxes/:id" component={FoodList} />
+                  <Route exact path="/boxes/:id" component={FoodList} />
+                  <Route exact path="/account" component={Account} />
                 </Col>
               </Row>
+
+              <EditBoxModal />
             </Container>
           </div>
         </BrowserRouter>

@@ -6,7 +6,7 @@ import GoogleAuth from '../GoogleAuth';
 import BoxList from '../BoxList';
 import Header from '../Header';
 import FoodList from '../FoodList';
-import Account from '../Account'
+import Account from '../Account';
 import EditBoxModal from '../EditBoxModal';
 
 class App extends Component {

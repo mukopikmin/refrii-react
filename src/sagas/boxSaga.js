@@ -66,5 +66,5 @@ export default [
   takeLatest(types.BOX.LIST.REQUEST, handleRequestListBox),
   takeLatest(types.BOX.CREATE.REQUEST, handleRequestCreateBox),
   takeLatest(types.BOX.UPDATE.REQUEST, handleRequestUpdateBox),
-  takeLatest(types.BOX.REMOVE.REQUEST, handleRequestRemoveBox)
+  takeLatest(types.BOX.REMOVE.REQUEST, handleRequestRemoveBox),
 ];

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 class BoxList extends Component {
   constructor() {
     super();
@@ -20,21 +21,21 @@ class BoxList extends Component {
   }
 
   render() {
-    const { boxes, edit } = this.props;
-    
+    const { boxes, edit, add } = this.props;
+
     return (
       <div id="box-list">
         <Nav vertical>
-          <p>カテゴリ</p>
+          <p>カテゴリ <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} /></p>
           {boxes.map(box => (
             <NavItem key={box.id}>
               <NavLink>
-              <span onClick={() => this.select(box)}>
-{box.name}
-              </span>
+                <span onClick={() => this.select(box)}>
+                  {box.name}
+                </span>
               &nbsp;&nbsp;&nbsp;&nbsp;
-                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)}/>
-                </NavLink>
+                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
+              </NavLink>
             </NavItem>
           ))}
         </Nav>

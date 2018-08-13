@@ -28,16 +28,11 @@ export default class EditBoxModal extends Component {
   }
 
   create() {
-    const { boxes, selectedBoxId, params } = this.props;
-    const box = boxes.filter(box => box.id === selectedBoxId)[0];
+    const { params } = this.props;
 
     this.props.create({
       name: params.name,
-      amount: params.amount,
       notice: params.notice,
-      expirationDate: params.expirationDate,
-      unitId: params.unitId,
-      boxId: selectedBoxId,
     });
   }
 

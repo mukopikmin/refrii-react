@@ -11,7 +11,7 @@ const initialState = {
   selectedId: null,
   isNewBoxModalOpen: false,
   isEditBoxModalOpen: false,
-  params: initialParams
+  params: initialParams,
 };
 
 export default handleActions({

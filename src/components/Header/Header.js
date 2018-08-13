@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Container } from 'reactstrap';
 import './Header.css';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   render() {

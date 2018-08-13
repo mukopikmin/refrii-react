@@ -51,6 +51,18 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
+  [types.BOX.REMOVE.REQUEST]: (state) => ({
+    ...state
+  }),
+  [types.BOX.REMOVE.RECEIVE]: (state) => ({
+    ...state,
+    isEditBoxModalOpen: false,
+  }),
+  [types.BOX.REMOVE.FAILED]: (state,action) => ({
+    ...state,
+    isEditBoxModalOpen: false,
+    error: action.payload.error
+  }),
   [types.BOX.SELECT]: (state, action) => ({
     ...state,
     selectedId: action.payload.boxId,

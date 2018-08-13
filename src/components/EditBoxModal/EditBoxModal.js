@@ -43,17 +43,21 @@ export default class EditBoxModal extends Component {
   close() {
     this.props.close();
   }
+  
+  remove(params) {
+    this.props.remove(params);
+  }
 
   render() {
     const {
-      isEditBoxModalOpen, isNewBoxModalOpen, units, boxes, selectedBoxId, params,
+      isEditBoxModalOpen, isNewBoxModalOpen, params,
     } = this.props;
     const isOpen = isNewBoxModalOpen || isEditBoxModalOpen;
 
     return (
       <Modal isOpen={isOpen} toggle={this.close}>
         <ModalHeader toggle={this.close}>
-          {(() => (isEditBoxModalOpen ? '食材の編集' : '食材の追加'))()}
+          {(() => (isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加'))()}
         </ModalHeader>
         <ModalBody>
           <Form>
@@ -76,7 +80,10 @@ export default class EditBoxModal extends Component {
           {(() => {
             if (isEditBoxModalOpen) {
               return (
+                <div>
                 <Button color="primary" onClick={this.update}>更新</Button>
+                <Button color="danger" onClick={()=>this.remove(params)}>削除</Button>
+                </div>
               );
             }
             return (

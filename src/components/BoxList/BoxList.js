@@ -21,7 +21,7 @@ class BoxList extends Component {
 
   render() {
     const { boxes, edit } = this.props;
-
+    
     return (
       <div id="box-list">
         <Nav vertical>

@@ -42,13 +42,7 @@ export default class EditBoxModal extends Component {
   }
 
   update() {
-    const { boxes, selectedBoxId } = this.props;
-    const box = boxes.filter(box => box.id === selectedBoxId)[0];
-
-    this.props.update({
-      ...this.props.params,
-      boxId: selectedBoxId,
-    });
+    this.props.update(this.props.params);
   }
 
   close() {

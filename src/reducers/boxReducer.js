@@ -27,11 +27,35 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
+  [types.BOX.CREATE.REQUEST]: (state, action) => ({
+    ...state,
+    params: action.payload.params,
+  }),
+  [types.BOX.CREATE.RECEIVE]: (state, action) => ({
+    ...state,
+    isNewBoxModalOpen: false,
+  }),
+  [types.BOX.CREATE.FAILED]: (state, action) => ({
+    ...state,
+    error: action.payload.error,
+  }),
+  [types.BOX.UPDATE.REQUEST]: (state, action) => ({
+    ...state,
+  }),
+  [types.BOX.UPDATE.RECEIVE]: (state, action) => ({
+    ...state,
+    isEditBoxModalOpen: false,
+    params: initialParams,
+  }),
+  [types.BOX.UPDATE.FAILED]: (state, action) => ({
+    ...state,
+    error: action.payload.error,
+  }),
   [types.BOX.SELECT]: (state, action) => ({
     ...state,
     selectedId: action.payload.boxId,
   }),
-  [types.FOOD.SET_PARAMS]: (state, action) => ({
+  [types.BOX.SET_PARAMS]: (state, action) => ({
     ...state,
     params: action.payload.params,
   }),

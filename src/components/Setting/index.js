@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
-import Account from './Account';
+import Setting from './Setting';
+import actions from '../../actions';
 
 const mapStateToProps = state => ({
   session: state.session,
+  units: state.unit.list
 });
 const mapDispatchToProps = dispatch => ({
-
+  onLoad: () => dispatch(actions.requestListUnit())
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Account);
+)(Setting);

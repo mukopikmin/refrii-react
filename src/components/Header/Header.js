@@ -19,9 +19,7 @@ class Header extends Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <Link to="/account">
-                    アカウント情報
-                    </Link>
+                    <Link to="/setting">設定</Link>
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem onClick={signout}>

@@ -36,7 +36,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,jsx src",
     "lint:fix": "eslint --fix --ext js,jsx src",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages --dist build --repo git@github.com:mukopikmin/refrii-react.git"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

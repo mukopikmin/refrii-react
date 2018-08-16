@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import EditBoxModal from './EditBoxModal';
 import actions from '../../actions';
-import confirm from '../ConfirmDialog'
+import confirm from '../ConfirmDialog';
 
 const mapStateToProps = (state, ownProps) => ({
   session: state.session,
@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   },
   create: params => dispatch(actions.requestCreateBox(params)),
   update: params => dispatch(actions.requestUpdateBox(params)),
-  remove: params => {
+  remove: (params) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveBox(params)),
       () => console.log('dismiss'),

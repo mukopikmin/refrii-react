@@ -4,10 +4,12 @@ import actions from '../../actions';
 
 const mapStateToProps = state => ({
   session: state.session,
-  units: state.unit.list
+  units: state.unit.list,
 });
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(actions.requestListUnit())
+  onLoad: () => dispatch(actions.requestListUnit()),
+  addUnit: () => dispatch(actions.openNewUnitModal()),
+  editUnit: unit => dispatch(actions.openEditUnitModal(unit)),
 });
 
 export default connect(

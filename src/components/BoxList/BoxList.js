@@ -33,7 +33,7 @@ class BoxList extends Component {
                 <span onClick={() => this.select(box)}>
                   {box.name}
                 </span>
-              &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
                 <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
               </NavLink>
             </NavItem>

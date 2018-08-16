@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class EditBoxModal extends Component {
+export default class EditUnitModal extends Component {
   componentDidMount() {
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onNoticeChange = this.onNoticeChange.bind(this);
+    this.onLabelChange = this.onLabelChange.bind(this);
+    this.onStepChange = this.onStepChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.close = this.close.bind(this);
   }
 
-  onNameChange(e) {
+  onLabelChange(e) {
     this.props.updateParams({
       ...this.props.params,
-      name: e.target.value,
+      label: e.target.value,
     });
   }
 
-  onNoticeChange(e) {
+  onStepChange(e) {
     this.props.updateParams({
       ...this.props.params,
-      notice: e.target.value,
+      step: e.target.value,
     });
   }
 
@@ -31,8 +29,8 @@ export default class EditBoxModal extends Component {
     const { params } = this.props;
 
     this.props.create({
-      name: params.name,
-      notice: params.notice,
+      label: params.label,
+      step: params.step,
     });
   }
 
@@ -50,44 +48,45 @@ export default class EditBoxModal extends Component {
 
   render() {
     const {
-      isEditBoxModalOpen, isNewBoxModalOpen, params,
+      isEditUnitModalOpen, isNewUnitModalOpen, params,
     } = this.props;
-    const isOpen = isNewBoxModalOpen || isEditBoxModalOpen;
+    const isOpen = isNewUnitModalOpen || isEditUnitModalOpen;
 
     return (
       <Modal isOpen={isOpen} toggle={this.close}>
         <ModalHeader toggle={this.close}>
-          {(() => (isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加'))()}
+          {(() => (isEditUnitModalOpen ? 'ラベルの編集' : 'ラベルの追加'))()}
         </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup row>
-              <Label for="name" sm={3}>名前</Label>
+              <Label for="label" sm={3}>ラベル</Label>
               <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={this.props.params.name} />
+                <Input type="text" name="label" id="label" onChange={this.onLabelChange} value={this.props.params.label} />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="notice" sm={3}>メモ</Label>
+              <Label for="step" sm={3}>メモ</Label>
               <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={this.props.params.notice} />
+                <Input type="number" name="step" id="step" onChange={this.onStepChange} value={this.props.params.step} />
               </Col>
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={this.close}>キャンセル</Button>
+          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
           {(() => {
-            if (isEditBoxModalOpen) {
+            if (isEditUnitModalOpen) {
               return (
                 <div>
-                  <Button color="primary" onClick={this.update}>更新</Button>
-                  <Button color="danger" onClick={() => this.remove(params)}>削除</Button>
+                  <Button outline color="primary" onClick={this.update}>更新</Button>
+                  &nbsp;
+                  <Button outline color="danger" onClick={() => this.remove(params)}>削除</Button>
                 </div>
               );
             }
             return (
-              <Button color="primary" onClick={this.create}>追加</Button>
+              <Button outline color="primary" onClick={this.create}>追加</Button>
             );
           })()}
         </ModalFooter>

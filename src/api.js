@@ -158,4 +158,48 @@ export default class Api {
       .then(response => response.json())
       .then(format);
   }
+
+  static createUnit(jwt, body) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        label: body.label,
+        step: body.step,
+        // box_id: body.boxId,
+      }),
+    };
+
+    return authFetch(`${endpoint}/units`, jwt, options)
+      .then(response => response.json())
+      .then(format);
+  }
+
+  static updateUnit(jwt, body) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: body.name,
+        notice: body.notice,
+        box_id: body.boxId,
+      }),
+    };
+
+    return authFetch(`${endpoint}/units`, jwt, options)
+      .then(response => response.json())
+      .then(format);
+  }
+
+  static removeUnit(jwt, id) {
+    const options = {
+      method: 'DELETE',
+    };
+
+    return authFetch(`${endpoint}/units/${id}`, jwt, options);
+  }
 }

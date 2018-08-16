@@ -8,6 +8,7 @@ import Header from '../Header';
 import FoodList from '../FoodList';
 import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
+import EditUnitModal from '../EditUnitModal';
 
 class App extends Component {
   componentDidMount() {
@@ -33,6 +34,7 @@ class App extends Component {
               </Row>
 
               <EditBoxModal />
+              <EditUnitModal />
             </Container>
           </div>
         </BrowserRouter>

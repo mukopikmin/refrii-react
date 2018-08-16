@@ -54,7 +54,7 @@ function* handleRequestRemoveBox(action) {
     const params = action.payload.params;
     const session = yield select(selectors.getSession);
     yield call(Api.removeBox, session.jwt, params.id);
-    yield put(actions.receiveRemoveBox())
+    yield put(actions.receiveRemoveBox());
     const boxes = yield call(Api.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {

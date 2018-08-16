@@ -47,11 +47,27 @@ export default {
     SET_PARAMS: 'SET_PARAMS_FOOD',
   },
   UNIT: {
+    CREATE: {
+      REQUEST: 'REQUEST_CREATE_UNIT',
+      RECEIVE: 'RECEIVE_CREATE_UNIT',
+      FAILED: 'FAILED_CREATE_UNIT',
+    },
     LIST: {
       REQUEST: 'REQUEST_LIST_UNIT',
       RECEIVE: 'RECEIVE_LIST_UNIT',
       FAILED: 'FAILED_LIST_UNIT',
     },
+    UPDATE: {
+      REQUEST: 'REQUEST_UPDATE_UNIT',
+      RECEIVE: 'RECEIVE_UPDATE_UNIT',
+      FAILED: 'FAILED_UPDATE_UNIT',
+    },
+    REMOVE: {
+      REQUEST: 'REQUEST_REMOVE_UNIT',
+      RECEIVE: 'RECEIVE_REMOVE_UNIT',
+      FAILED: 'FAILED_REMOVE_UNIT',
+    },
+    SET_PARAMS: 'SET_PARAMS_UNIT',
   },
   MODAL: {
     BOX: {
@@ -72,6 +88,16 @@ export default {
       EDIT: {
         OPEN: 'OPEN_EDIT_FOOD_MODAL',
         CLOSE: 'CLOSE_EDIT_FOOD_MODAL',
+      },
+    },
+    UNIT: {
+      NEW: {
+        OPEN: 'OPEN_NEW_UNIT_MODAL',
+        CLOSE: 'CLOSE_NEW_UNIT_MODAL',
+      },
+      EDIT: {
+        OPEN: 'OPEN_EDIT_UNIT_MODAL',
+        CLOSE: 'CLOSE_EDIT_UNIT_MODAL',
       },
     },
   },

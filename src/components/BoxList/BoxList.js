@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 
+import Box from '../../models/box';
+
 class BoxList extends Component {
   componentDidMount() {
-    const { onLoad, credential } = this.props;
+    const { onLoad } = this.props;
 
     this.select = this.select.bind(this);
-    onLoad(credential);
+    onLoad();
   }
 
   select(box) {
@@ -42,9 +44,8 @@ class BoxList extends Component {
 
 BoxList.propTypes = {
   onLoad: PropTypes.func.isRequired,
-  credential: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
-  boxes: PropTypes.func.isRequired,
+  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
   edit: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   history: PropTypes.shape({

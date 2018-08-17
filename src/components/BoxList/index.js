@@ -3,7 +3,6 @@ import BoxList from './BoxList';
 import actions from '../../actions';
 
 const mapStateToProps = state => ({
-  session: state.session,
   boxes: state.box.list,
 });
 

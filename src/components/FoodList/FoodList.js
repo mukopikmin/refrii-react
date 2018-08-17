@@ -5,6 +5,7 @@ import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 
 import Spinner from '../Spinner';
+import Box from '../../models/box';
 
 class FoodList extends Component {
   constructor() {
@@ -93,12 +94,16 @@ class FoodList extends Component {
 
 FoodList.propTypes = {
   edit: PropTypes.func.isRequired,
-  boxes: PropTypes.arrayOf(PropTypes.any).isRequired,
-  selectedBoxId: PropTypes.number.isRequired,
+  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
+  selectedBoxId: PropTypes.number,
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
+};
+
+FoodList.defaultProps = {
+  selectedBoxId: 0,
 };
 
 export default FoodList;

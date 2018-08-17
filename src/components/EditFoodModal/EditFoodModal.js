@@ -5,6 +5,8 @@ import moment from 'moment';
 import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import Unit from '../../models/unit';
+
 class EditFoodModal extends Component {
   componentDidMount() {
     this.props.onLoad();
@@ -178,13 +180,17 @@ EditFoodModal.propTypes = {
     notice: PropTypes.string.isRequired,
     needsAdding: PropTypes.bool.isRequired,
   }).isRequired,
-  selectedBoxId: PropTypes.number.isRequired,
+  selectedBoxId: PropTypes.number,
   create: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   isEditFoodModalOpen: PropTypes.bool.isRequired,
   isNewFoodModalOpen: PropTypes.bool.isRequired,
-  units: PropTypes.arrayOf(PropTypes.any).isRequired,
+  units: PropTypes.arrayOf(PropTypes.instanceOf(Unit)).isRequired,
+};
+
+EditFoodModal.defaultProps = {
+  selectedBoxId: 0,
 };
 
 export default EditFoodModal;

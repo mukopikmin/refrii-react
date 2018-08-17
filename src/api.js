@@ -1,7 +1,6 @@
 import Box from './models/box';
 import Food from './models/food';
 import Unit from './models/unit';
-import Session from './models/session';
 
 const endpoint = 'https://api.refrii.com';
 const handleErrors = (response) => {

@@ -17,3 +17,7 @@ before_install:
 script:
   - npm run build
   - npm run deploy
+notifications:
+  email: false
+  slack:
+    secure: "iKGp27C3JYFLmICTf4PhxVP72DVT/8fi56s2Vpze4dpodXnWL72/J6mHMbXrdFaoPcucmPNc81Tvx9s9Be9VuhkAmNr1TIZ+lslU/g3lkm5cdxiA7AXHhgxhvJRqNR97FqPDyqClns+aULjxwqCXCk8FH7M17kGSwcwDHjzFbz7QrD94coT/p/5v+vMwJYLbSvESXxGtlfTBtMxljoiQbF/8kQGjxh9ERlU8czKFWgITiFybUX3u+mng7atOVCxF41o8Q9vJuSv/Gpgk9++76D3rzefHDarUJMne7VmV/N/Pey7LomkwZKKrM47mlWCQZpypP8VxEk9cJAmWREyO7UxGcXqGPjFDbcl33YVlUL+kb+p4RV/Dex8BnO1WxWI0dWQfBxE0jMZQVOdmdG5faTeydTPGNvV1wNLDbYXM8WWPbx35O40Fc8+wpoh/5Y9fxA3wKg4hgfU9+qQ1CUNL46Lg+fJs9nzeZvbpPb/GrV80tnSbmlQUs7LjPOGPf56/+/ULa3P00Ovt5/jNX/IPDpyyini9dLsfSXr6CH9F3ee9gs1IjIwXTRQWPCTnLUTrDuNJjJVLbqsZ2go85FtC1yhhZR7xbyVhhCxWau7Zt6Om75X5PEDgMY2Aehc0clgK0qhDQVZhgOYVZ/hQoX8hBpQpQUbKoIoy9ibcbkWmPpA="

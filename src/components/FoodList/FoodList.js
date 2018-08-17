@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle } from 'reactstrap';
-import EditFoodModal from '../EditFoodModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../Spinner';
@@ -34,9 +33,9 @@ export default class FoodList extends Component {
     if (box) {
       return (
         <div>
-
-          <Button color="primary" onClick={add}>新規作成</Button>
-          <EditFoodModal />
+          <p align="right">
+            <Button outline color="primary" onClick={add}>新規作成</Button>
+          </p>
 
           <CardColumns>
             {box.foods.map(food => (

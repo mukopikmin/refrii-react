@@ -8,6 +8,7 @@ import Header from '../Header';
 import FoodList from '../FoodList';
 import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
+import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
 
 class App extends Component {
@@ -27,13 +28,14 @@ class App extends Component {
                   <BoxList />
                 </Col>
                 <Col xs="9">
-                  <Route exact path="/" component={GoogleAuth} />
+                  <Route exact path="/" component={FoodList} />
                   <Route exact path="/boxes/:id" component={FoodList} />
                   <Route exact path="/setting" component={Setting} />
                 </Col>
               </Row>
 
               <EditBoxModal />
+              <EditFoodModal />
               <EditUnitModal />
             </Container>
           </div>

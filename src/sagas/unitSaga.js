@@ -47,7 +47,7 @@ function* handleRequestRemoveUnit(action) {
     const params = action.payload.params;
     const session = yield select(selectors.getSession);
     yield call(Api.removeUnit, session.jwt, params.id);
-    yield put(actions.receiveRemoveUnit())
+    yield put(actions.receiveRemoveUnit());
     const units = yield call(Api.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {

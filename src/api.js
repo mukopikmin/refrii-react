@@ -81,7 +81,8 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/boxes/`, jwt, options)
-      .then(response => new Box(response.json()));
+      .then(response => response.json())
+      .then(box => new Box(box));
   }
 
   static updateBox(jwt, body) {
@@ -97,7 +98,8 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/boxes/${body.id}`, jwt, options)
-      .then(response => new Box(response.json()));
+      .then(response => response.json())
+      .then(box => new Box(box));
   }
 
   static removeBox(jwt, id) {
@@ -132,7 +134,8 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/${body.id}`, jwt, options)
-      .then(response => new Food(response.json()));
+      .then(response => response.json())
+      .then(food => new Food(food));
   }
 
   static createFood(jwt, body) {
@@ -153,7 +156,8 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/`, jwt, options)
-      .then(response => new Food(response.json()));
+      .then(response => response.json())
+      .then(food => new Food(food));
   }
 
   static removeFood(jwt, id) {
@@ -183,7 +187,8 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/units`, jwt, options)
-      .then(response => new Unit(response.json()));
+      .then(response => response.json())
+      .then(unit => new Unit(unit));
   }
 
   static updateUnit(jwt, body) {
@@ -200,7 +205,8 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/units`, jwt, options)
-      .then(response => new Unit(response.json()));
+      .then(response => response.json())
+      .then(unit => new Unit(unit));
   }
 
   static removeUnit(jwt, id) {

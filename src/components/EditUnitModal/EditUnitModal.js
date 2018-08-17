@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class EditUnitModal extends Component {
+class EditUnitModal extends Component {
   componentDidMount() {
     this.onLabelChange = this.onLabelChange.bind(this);
     this.onStepChange = this.onStepChange.bind(this);
@@ -94,3 +95,19 @@ export default class EditUnitModal extends Component {
     );
   }
 }
+
+EditUnitModal.propTypes = {
+  updateParams: PropTypes.func.isRequired,
+  params: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    step: PropTypes.number.isRequired,
+  }).isRequired,
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  isEditUnitModalOpen: PropTypes.bool.isRequired,
+  isNewUnitModalOpen: PropTypes.bool.isRequired,
+};
+
+export default EditUnitModal;

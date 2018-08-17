@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { PropTypes } from 'prop-types';
 
-export default class Setting extends Component {
+class Setting extends Component {
   componentDidMount() {
     this.props.onLoad();
   }
@@ -31,8 +32,25 @@ export default class Setting extends Component {
             </li>
             ))}
         </ul>
-        <Button outline color="primary" onClick={addUnit}>追加</Button>
+        <Button outline color="primary" onClick={addUnit}>
+          <FontAwesomeIcon icon={faPlus} size="sm" />{' '}追加
+        </Button>
       </div>
     );
   }
 }
+
+Setting.propTypes = {
+  onLoad: PropTypes.func.isRequired,
+  units: PropTypes.arrayOf(PropTypes.any).isRequired,
+  session: PropTypes.shape({
+    expiresAt: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  addUnit: PropTypes.func.isRequired,
+  editUnit: PropTypes.func.isRequired,
+};
+
+export default Setting;

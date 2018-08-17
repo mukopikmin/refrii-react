@@ -4,9 +4,7 @@ import App from './App';
 const mapStateToProps = state => ({
   session: state.session,
 });
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapDispatchToProps = () => ({});
 
 export default connect(
   mapStateToProps,

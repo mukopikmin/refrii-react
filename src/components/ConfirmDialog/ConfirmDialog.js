@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { confirmable } from 'react-confirm';
+import { PropTypes } from 'prop-types';
 
 class ConfirmDialog extends Component {
   constructor() {
@@ -11,12 +12,6 @@ class ConfirmDialog extends Component {
     };
     this.close = this.close.bind(this);
     this.continue = this.continue.bind(this);
-  }
-
-  close() {
-    this.setState({
-      open: !this.state.open,
-    });
   }
 
   close() {
@@ -34,9 +29,7 @@ class ConfirmDialog extends Component {
   }
 
   render() {
-    const {
-      show, proceed, dismiss, cancel, confirmation,
-    } = this.props;
+    const { confirmation } = this.props;
 
     return (
       <Modal isOpen={this.state.open} toggle={this.close}>
@@ -52,5 +45,11 @@ class ConfirmDialog extends Component {
     );
   }
 }
+
+ConfirmDialog.propTypes = {
+  dismiss: PropTypes.func.isRequired,
+  proceed: PropTypes.func.isRequired,
+  confirmation: PropTypes.func.isRequired,
+};
 
 export default confirmable(ConfirmDialog);

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
+import { PropTypes } from 'prop-types';
+
 import GoogleAuth from '../GoogleAuth';
 import BoxList from '../BoxList';
 import Header from '../Header';
@@ -56,5 +58,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  session: PropTypes.shape({
+    user: PropTypes.shape({}).isRequired,
+  }).isRequired,
+};
 
 export default App;

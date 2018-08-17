@@ -31,7 +31,7 @@ export default handleActions({
     ...state,
     params: action.payload.params,
   }),
-  [types.BOX.CREATE.RECEIVE]: (state, action) => ({
+  [types.BOX.CREATE.RECEIVE]: state => ({
     ...state,
     isNewBoxModalOpen: false,
   }),
@@ -39,10 +39,10 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.BOX.UPDATE.REQUEST]: (state, action) => ({
+  [types.BOX.UPDATE.REQUEST]: state => ({
     ...state,
   }),
-  [types.BOX.UPDATE.RECEIVE]: (state, action) => ({
+  [types.BOX.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
     params: initialParams,
@@ -76,7 +76,7 @@ export default handleActions({
     isNewBoxModalOpen: true,
     params: action.payload.params || initialParams,
   }),
-  [types.MODAL.BOX.NEW.CLOSE]: (state, action) => ({
+  [types.MODAL.BOX.NEW.CLOSE]: state => ({
     ...state,
     isNewBoxModalOpen: false,
     params: initialParams,
@@ -86,7 +86,7 @@ export default handleActions({
     isEditBoxModalOpen: true,
     params: action.payload.params || initialParams,
   }),
-  [types.MODAL.BOX.EDIT.CLOSE]: (state, action) => ({
+  [types.MODAL.BOX.EDIT.CLOSE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
     params: initialParams,

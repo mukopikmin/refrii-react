@@ -30,7 +30,7 @@ export default handleActions({
     ...state,
     params: action.payload.params,
   }),
-  [types.UNIT.CREATE.RECEIVE]: (state, action) => ({
+  [types.UNIT.CREATE.RECEIVE]: state => ({
     ...state,
     isNewUnitModalOpen: false,
   }),
@@ -38,10 +38,10 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.UNIT.UPDATE.REQUEST]: (state, action) => ({
+  [types.UNIT.UPDATE.REQUEST]: state => ({
     ...state,
   }),
-  [types.UNIT.UPDATE.RECEIVE]: (state, action) => ({
+  [types.UNIT.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditUnitModalOpen: false,
     params: initialParams,
@@ -71,7 +71,7 @@ export default handleActions({
     isNewUnitModalOpen: true,
     params: action.payload.params || initialParams,
   }),
-  [types.MODAL.UNIT.NEW.CLOSE]: (state, action) => ({
+  [types.MODAL.UNIT.NEW.CLOSE]: state => ({
     ...state,
     isNewUnitModalOpen: false,
     params: initialParams,
@@ -81,7 +81,7 @@ export default handleActions({
     isEditUnitModalOpen: true,
     params: action.payload.params || initialParams,
   }),
-  [types.MODAL.UNIT.EDIT.CLOSE]: (state, action) => ({
+  [types.MODAL.UNIT.EDIT.CLOSE]: state => ({
     ...state,
     isEditUnitModalOpen: false,
     params: initialParams,

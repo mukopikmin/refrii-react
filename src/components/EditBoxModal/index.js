@@ -3,13 +3,12 @@ import EditBoxModal from './EditBoxModal';
 import actions from '../../actions';
 import confirm from '../ConfirmDialog';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   session: state.session,
   isEditBoxModalOpen: state.box.isEditBoxModalOpen,
   isNewBoxModalOpen: state.box.isNewBoxModalOpen,
   params: state.box.params,
 });
-
 const mapDispatchToProps = dispatch => ({
   close: () => {
     dispatch(actions.closeNewBoxModal());

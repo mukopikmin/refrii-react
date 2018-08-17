@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
+import { PropTypes } from 'prop-types';
 
 class GoogleAuth extends Component {
   render() {
@@ -15,5 +16,9 @@ class GoogleAuth extends Component {
     );
   }
 }
+
+GoogleAuth.propTypes = {
+  onGoogleAuthorized: PropTypes.func.isRequired,
+};
 
 export default GoogleAuth;

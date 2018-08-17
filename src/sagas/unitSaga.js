@@ -17,7 +17,7 @@ function* handleRequestListUnit() {
 function* handleRequestCreateUnit(action) {
   try {
     const session = yield select(selectors.getSession);
-    const params = action.payload.params;
+    const { params } = action.payload;
     yield call(Api.createUnit, session.jwt, params);
     yield put(actions.receiveCreateUnit());
     const units = yield call(Api.getUnits, session.jwt);
@@ -30,7 +30,7 @@ function* handleRequestCreateUnit(action) {
 
 function* handleRequestUpdateUnit(action) {
   try {
-    const params = action.payload.params;
+    const { params } = action.payload;
     const session = yield select(selectors.getSession);
     yield call(Api.updateUnit, session.jwt, params);
     yield put(actions.receiveUpdateUnit());
@@ -44,7 +44,7 @@ function* handleRequestUpdateUnit(action) {
 
 function* handleRequestRemoveUnit(action) {
   try {
-    const params = action.payload.params;
+    const { params } = action.payload;
     const session = yield select(selectors.getSession);
     yield call(Api.removeUnit, session.jwt, params.id);
     yield put(actions.receiveRemoveUnit());

@@ -8,13 +8,14 @@ import { PersistGate } from 'redux-persist/integration/react';
 import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
 import moment from 'moment';
+import ReactGA from 'react-ga';
+import 'moment/locale/ja';
+
 import App from './components/App';
 import reducers from './reducers';
 import rootSaga from './sagas';
 import './index.css';
 // import registerServiceWorker from './registerServiceWorker';
-import 'moment/locale/ja';
-import ReactGA from 'react-ga';
 
 ReactGA.initialize('UA-121958327-1');
 ReactGA.pageview(window.location.pathname + window.location.search);

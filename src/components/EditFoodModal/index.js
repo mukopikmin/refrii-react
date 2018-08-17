@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import EditFoodModal from './EditFoodModal';
 import actions from '../../actions';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   session: state.session,
   isEditFoodModalOpen: state.food.isEditFoodModalOpen,
   isNewFoodModalOpen: state.food.isNewFoodModalOpen,
@@ -11,7 +11,6 @@ const mapStateToProps = (state, ownProps) => ({
   selectedBoxId: state.box.selectedId,
   params: state.food.params,
 });
-
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListUnit()),
   close: () => {

@@ -3,15 +3,13 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { PropTypes } from 'prop-types';
 
 class BoxList extends Component {
-  constructor() {
-    super();
-
-    this.select = this.select.bind(this);
-  }
   componentDidMount() {
     const { onLoad, credential } = this.props;
+
+    this.select = this.select.bind(this);
     onLoad(credential);
   }
 
@@ -28,11 +26,9 @@ class BoxList extends Component {
         <Nav vertical>
           <p>カテゴリ <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} /></p>
           {boxes.map(box => (
-            <NavItem key={box.id}>
+            <NavItem key={box.id} onClick={() => this.select(box)}>
               <NavLink>
-                <span onClick={() => this.select(box)}>
-                  {box.name}
-                </span>
+                {box.name}
                 &nbsp;&nbsp;
                 <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
               </NavLink>
@@ -43,5 +39,17 @@ class BoxList extends Component {
     );
   }
 }
+
+BoxList.propTypes = {
+  onLoad: PropTypes.func.isRequired,
+  credential: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
+  boxes: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
+  add: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default withRouter(BoxList);

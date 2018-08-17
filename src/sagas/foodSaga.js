@@ -7,7 +7,7 @@ import selectors from '../selectors';
 function* handleRequestCreateFood(action) {
   try {
     const session = yield select(selectors.getSession);
-    const params = action.payload.params;
+    const { params } = action.payload;
     yield call(Api.createFood, session.jwt, params);
     yield put(actions.receiveCreateFood());
     const boxes = yield call(Api.getBoxes, session.jwt);
@@ -20,7 +20,7 @@ function* handleRequestCreateFood(action) {
 
 function* handleRequestUpdateFood(action) {
   try {
-    const params = action.payload.params;
+    const { params } = action.payload;
     const session = yield select(selectors.getSession);
     yield call(Api.updateFood, session.jwt, params);
     yield put(actions.receiveUpdateFood());
@@ -34,7 +34,7 @@ function* handleRequestUpdateFood(action) {
 
 function* handleRequestRemoveFood(action) {
   try {
-    const params = action.payload.params;
+    const { params } = action.payload;
     const session = yield select(selectors.getSession);
     yield call(Api.removeFood, session.jwt, params.id);
     const boxes = yield call(Api.getBoxes, session.jwt);

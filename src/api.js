@@ -1,4 +1,4 @@
-import { camelize, decamelize } from '@ridi/object-case-converter';
+import { camelize } from '@ridi/object-case-converter';
 
 const endpoint = 'https://api.refrii.com';
 const format = json => camelize(json, { recursive: true });
@@ -40,11 +40,25 @@ export default class Api {
   static getBoxes(jwt) {
     return authFetch(`${endpoint}/boxes`, jwt)
       .then(response => response.json())
-      .then(boxes => boxes.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()))
-      .then(boxes => boxes.map(box => ({
-        ...box,
-        foods: box.foods.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()),
-      })))
+      .then(boxes => boxes.sort((a, b) => {
+        const timeA = new Date(a.updated_at).getTime();
+        const timeB = new Date(b.updated_at).getTime();
+
+        return timeB - timeA;
+      }))
+      .then(boxes => boxes.map((box) => {
+        const foods = box.foods.sort((a, b) => {
+          const timeA = new Date(a.updated_at).getTime();
+          const timeB = new Date(b.updated_at).getTime();
+
+          return timeB - timeA;
+        });
+
+        return {
+          ...box,
+          foods,
+        };
+      }))
       .then(format);
   }
 
@@ -151,12 +165,6 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/${id}`, jwt, options);
-  }
-
-  static getUnits(jwt) {
-    return authFetch(`${endpoint}/units`, jwt)
-      .then(response => response.json())
-      .then(format);
   }
 
   static createUnit(jwt, body) {

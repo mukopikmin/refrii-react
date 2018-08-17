@@ -24,7 +24,7 @@ export default handleActions({
     ...state,
     params: action.payload.params,
   }),
-  [types.FOOD.CREATE.RECEIVE]: (state, action) => ({
+  [types.FOOD.CREATE.RECEIVE]: state => ({
     ...state,
     isNewFoodModalOpen: false,
   }),
@@ -32,7 +32,7 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.FOOD.UPDATE.REQUEST]: (state, action) => ({
+  [types.FOOD.UPDATE.REQUEST]: state => ({
     ...state,
   }),
   [types.FOOD.UPDATE.RECEIVE]: (state, action) => ({
@@ -54,7 +54,7 @@ export default handleActions({
     isNewFoodModalOpen: true,
     params: action.payload.params || initialParams,
   }),
-  [types.MODAL.FOOD.NEW.CLOSE]: (state, action) => ({
+  [types.MODAL.FOOD.NEW.CLOSE]: state => ({
     ...state,
     isNewFoodModalOpen: false,
     params: initialParams,
@@ -64,7 +64,7 @@ export default handleActions({
     isEditFoodModalOpen: true,
     params: action.payload.params || initialParams,
   }),
-  [types.MODAL.FOOD.EDIT.CLOSE]: (state, action) => ({
+  [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
     params: initialParams,

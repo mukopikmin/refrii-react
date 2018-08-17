@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class EditBoxModal extends Component {
+class EditBoxModal extends Component {
   componentDidMount() {
     this.onNameChange = this.onNameChange.bind(this);
     this.onNoticeChange = this.onNoticeChange.bind(this);
@@ -49,9 +48,7 @@ export default class EditBoxModal extends Component {
   }
 
   render() {
-    const {
-      isEditBoxModalOpen, isNewBoxModalOpen, params,
-    } = this.props;
+    const { isEditBoxModalOpen, isNewBoxModalOpen, params } = this.props;
     const isOpen = isNewBoxModalOpen || isEditBoxModalOpen;
 
     return (
@@ -95,3 +92,19 @@ export default class EditBoxModal extends Component {
     );
   }
 }
+
+EditBoxModal.propTypes = {
+  updateParams: PropTypes.func.isRequired,
+  params: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    notice: PropTypes.string.isRequired,
+  }).isRequired,
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  isEditBoxModalOpen: PropTypes.bool.isRequired,
+  isNewBoxModalOpen: PropTypes.bool.isRequired,
+};
+
+export default EditBoxModal;

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Container } from 'reactstrap';
+import { PropTypes } from 'prop-types';
+import { withRouter } from 'react-router-dom';
+
 import './Header.css';
-import { Link } from 'react-router-dom';
 
 class Header extends Component {
+  componentDidMount() {
+    this.handleToSetting = this.handleToSetting.bind(this);
+  }
+
+  handleToSetting() {
+    this.props.history.push('/setting');
+  }
+
   render() {
     const { session, signout } = this.props;
 
@@ -18,8 +28,8 @@ class Header extends Component {
                   {session.user.name}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    <Link to="/setting">設定</Link>
+                  <DropdownItem onClick={() => this.handleToSetting()}>
+                    設定
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem onClick={signout}>
@@ -35,4 +45,12 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  session: PropTypes.shape({}).isRequired,
+  signout: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default withRouter(Header);

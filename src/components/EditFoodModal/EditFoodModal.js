@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class EditFoodModal extends Component {
+class EditFoodModal extends Component {
   componentDidMount() {
     this.props.onLoad();
 
@@ -62,8 +63,7 @@ export default class EditFoodModal extends Component {
   }
 
   create() {
-    const { boxes, selectedBoxId, params } = this.props;
-    const box = boxes.filter(box => box.id === selectedBoxId)[0];
+    const { selectedBoxId, params } = this.props;
 
     this.props.create({
       name: params.name,
@@ -76,8 +76,7 @@ export default class EditFoodModal extends Component {
   }
 
   update() {
-    const { boxes, selectedBoxId } = this.props;
-    const box = boxes.filter(box => box.id === selectedBoxId)[0];
+    const { selectedBoxId } = this.props;
 
     this.props.update({
       ...this.props.params,
@@ -90,9 +89,7 @@ export default class EditFoodModal extends Component {
   }
 
   render() {
-    const {
-      isEditFoodModalOpen, isNewFoodModalOpen, units, boxes, selectedBoxId, params,
-    } = this.props;
+    const { isEditFoodModalOpen, isNewFoodModalOpen, units } = this.props;
     const isOpen = isNewFoodModalOpen || isEditFoodModalOpen;
 
     return (
@@ -169,3 +166,25 @@ export default class EditFoodModal extends Component {
     );
   }
 }
+
+EditFoodModal.propTypes = {
+  onLoad: PropTypes.func.isRequired,
+  updateParams: PropTypes.func.isRequired,
+  params: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    unitId: PropTypes.number.isRequired,
+    expirationDate: PropTypes.string.isRequired,
+    notice: PropTypes.string.isRequired,
+    needsAdding: PropTypes.bool.isRequired,
+  }).isRequired,
+  selectedBoxId: PropTypes.number.isRequired,
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  isEditFoodModalOpen: PropTypes.bool.isRequired,
+  isNewFoodModalOpen: PropTypes.bool.isRequired,
+  units: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
+
+export default EditFoodModal;

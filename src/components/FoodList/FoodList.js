@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Card, Button, CardFooter, CardText, CardColumns, CardSubtitle, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle } from 'reactstrap';
+import { Card, Button, CardFooter, CardText, CardColumns, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { PropTypes } from 'prop-types';
+
 import Spinner from '../Spinner';
 
-export default class FoodList extends Component {
+class FoodList extends Component {
   constructor() {
     super();
     this.toggle = this.toggle.bind(this);
@@ -28,7 +30,7 @@ export default class FoodList extends Component {
     const {
       boxes, selectedBoxId, increment, decrement, add, remove,
     } = this.props;
-    const box = boxes.filter(box => box.id === selectedBoxId)[0];
+    const box = boxes.filter(b => b.id === selectedBoxId)[0];
 
     if (box) {
       return (
@@ -44,7 +46,10 @@ export default class FoodList extends Component {
                   <Row>
                     <Col xs={10}><CardTitle>{food.name}</CardTitle></Col>
                     <Col xs={2}>
-                      <Dropdown isOpen={this.state.dropdownOpen === food.id} toggle={() => this.toggle(food.id)}>
+                      <Dropdown
+                        isOpen={this.state.dropdownOpen === food.id}
+                        toggle={() => this.toggle(food.id)}
+                      >
                         <DropdownToggle
                           tag="span"
                           onClick={() => this.toggle(food.id)}
@@ -85,3 +90,15 @@ export default class FoodList extends Component {
     return <Spinner loading={box} />;
   }
 }
+
+FoodList.propTypes = {
+  edit: PropTypes.func.isRequired,
+  boxes: PropTypes.arrayOf(PropTypes.any).isRequired,
+  selectedBoxId: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+  add: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+};
+
+export default FoodList;

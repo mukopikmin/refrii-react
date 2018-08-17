@@ -3,7 +3,7 @@ import EditUnitModal from './EditUnitModal';
 import actions from '../../actions';
 import confirm from '../ConfirmDialog';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   session: state.session,
   isEditUnitModalOpen: state.unit.isEditUnitModalOpen,
   isNewUnitModalOpen: state.unit.isNewUnitModalOpen,

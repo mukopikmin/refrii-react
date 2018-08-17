@@ -1,8 +1,9 @@
-import { camelize } from '@ridi/object-case-converter';
+import Box from './models/box';
+import Food from './models/food';
+import Unit from './models/unit';
+import Session from './models/session';
 
 const endpoint = 'https://api.refrii.com';
-const format = json => camelize(json, { recursive: true });
-
 const handleErrors = (response) => {
   if (!response.ok) {
     throw Error(response.json());
@@ -10,7 +11,6 @@ const handleErrors = (response) => {
 
   return response;
 };
-
 const authFetch = (url, jwt, _options = {}) => {
   const options = {
     ..._options,
@@ -34,22 +34,32 @@ export default class Api {
     return fetch(`${endpoint}/auth/google/token?token=${token}`)
       .then(handleErrors)
       .then(response => response.json())
-      .then(format);
+      .then(json => ({
+        expiresAt: json.expires_at,
+        jwt: json.jwt,
+        user: {
+          email: json.user.email,
+          id: json.user.id,
+          name: json.user.name,
+          provider: json.user.provider,
+        },
+      }));
   }
 
   static getBoxes(jwt) {
     return authFetch(`${endpoint}/boxes`, jwt)
       .then(response => response.json())
+      .then(boxes => boxes.map(param => new Box(param)))
       .then(boxes => boxes.sort((a, b) => {
-        const timeA = new Date(a.updated_at).getTime();
-        const timeB = new Date(b.updated_at).getTime();
+        const timeA = new Date(a.updatedAt).getTime();
+        const timeB = new Date(b.updatedAt).getTime();
 
         return timeB - timeA;
       }))
       .then(boxes => boxes.map((box) => {
         const foods = box.foods.sort((a, b) => {
-          const timeA = new Date(a.updated_at).getTime();
-          const timeB = new Date(b.updated_at).getTime();
+          const timeA = new Date(a.updatedAt).getTime();
+          const timeB = new Date(b.updatedAt).getTime();
 
           return timeB - timeA;
         });
@@ -58,8 +68,7 @@ export default class Api {
           ...box,
           foods,
         };
-      }))
-      .then(format);
+      }));
   }
 
   static createBox(jwt, body) {
@@ -75,8 +84,7 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/boxes/`, jwt, options)
-      .then(response => response.json())
-      .then(format);
+      .then(response => new Box(response.json()));
   }
 
   static updateBox(jwt, body) {
@@ -92,8 +100,7 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/boxes/${body.id}`, jwt, options)
-      .then(response => response.json())
-      .then(format);
+      .then(response => new Box(response.json()));
   }
 
   static removeBox(jwt, id) {
@@ -104,16 +111,11 @@ export default class Api {
     return authFetch(`${endpoint}/boxes/${id}`, jwt, options);
   }
 
-  static getUnits(jwt) {
-    return authFetch(`${endpoint}/units`, jwt)
-      .then(response => response.json())
-      .then(format);
-  }
-
   static getFoodsInBox(jwt, boxId) {
-    return fetch(`${endpoint}/boxes/${boxId}/foods`, jwt)
+    return authFetch(`${endpoint}/boxes/${boxId}/foods`, jwt)
       .then(handleErrors)
-      .then(format);
+      .then(response => response.json())
+      .then(foods => foods.map(food => new Food(food)));
   }
 
   static updateFood(jwt, body) {
@@ -133,8 +135,7 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/${body.id}`, jwt, options)
-      .then(response => response.json())
-      .then(format);
+      .then(response => new Food(response.json()));
   }
 
   static createFood(jwt, body) {
@@ -155,8 +156,7 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/`, jwt, options)
-      .then(response => response.json())
-      .then(format);
+      .then(response => new Food(response.json()));
   }
 
   static removeFood(jwt, id) {
@@ -165,6 +165,12 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/foods/${id}`, jwt, options);
+  }
+
+  static getUnits(jwt) {
+    return authFetch(`${endpoint}/units`, jwt)
+      .then(response => response.json())
+      .then(units => units.map(unit => new Unit(unit)));
   }
 
   static createUnit(jwt, body) {
@@ -176,13 +182,11 @@ export default class Api {
       body: JSON.stringify({
         label: body.label,
         step: body.step,
-        // box_id: body.boxId,
       }),
     };
 
     return authFetch(`${endpoint}/units`, jwt, options)
-      .then(response => response.json())
-      .then(format);
+      .then(response => new Unit(response.json()));
   }
 
   static updateUnit(jwt, body) {
@@ -199,8 +203,7 @@ export default class Api {
     };
 
     return authFetch(`${endpoint}/units`, jwt, options)
-      .then(response => response.json())
-      .then(format);
+      .then(response => new Unit(response.json()));
   }
 
   static removeUnit(jwt, id) {

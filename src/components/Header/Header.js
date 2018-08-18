@@ -3,6 +3,7 @@ import { Navbar, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, Dropdow
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
+import logo from '../../static/logo.png';
 import './Header.css';
 
 class Header extends Component {
@@ -21,7 +22,9 @@ class Header extends Component {
       <div id="header">
         <Navbar fixed="top" color="light" light expand="md">
           <Container>
-            <NavbarBrand href="/">Refrii</NavbarBrand>
+            <NavbarBrand href="/">
+              <img src={logo} height="28px" alt="" />{' '}Refrii
+            </NavbarBrand>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

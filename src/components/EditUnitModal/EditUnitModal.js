@@ -67,7 +67,7 @@ class EditUnitModal extends Component {
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="step" sm={3}>メモ</Label>
+              <Label for="step" sm={3}>増減値</Label>
               <Col sm={9}>
                 <Input type="number" name="step" id="step" onChange={this.onStepChange} value={this.props.params.step} />
               </Col>

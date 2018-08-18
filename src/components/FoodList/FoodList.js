@@ -88,7 +88,7 @@ class FoodList extends Component {
         </div>
       );
     }
-    return <Spinner loading={box} />;
+    return <Spinner loading />;
   }
 }
 

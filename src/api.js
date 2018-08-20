@@ -110,6 +110,20 @@ export default class Api {
     return authFetch(`${endpoint}/boxes/${id}`, jwt, options);
   }
 
+  static invite(jwt, id, email) {
+    const options ={
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        user_id: 0
+      }
+    }
+
+    return authFetch(`${endpoint}/boxes/${id}/invite`)
+  }
+
   static getFoodsInBox(jwt, boxId) {
     return authFetch(`${endpoint}/boxes/${boxId}/foods`, jwt)
       .then(handleErrors)

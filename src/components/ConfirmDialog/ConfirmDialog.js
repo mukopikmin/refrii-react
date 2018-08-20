@@ -38,8 +38,8 @@ class ConfirmDialog extends Component {
           {confirmation}
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.continue}>実行</Button>{' '}
-          <Button color="secondary" onClick={this.close}>キャンセル</Button>
+          <Button outline color="primary" onClick={this.continue}>実行</Button>{' '}
+          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
         </ModalFooter>
       </Modal>
     );
@@ -49,7 +49,7 @@ class ConfirmDialog extends Component {
 ConfirmDialog.propTypes = {
   dismiss: PropTypes.func.isRequired,
   proceed: PropTypes.func.isRequired,
-  confirmation: PropTypes.func.isRequired,
+  confirmation: PropTypes.string.isRequired,
 };
 
 export default confirmable(ConfirmDialog);

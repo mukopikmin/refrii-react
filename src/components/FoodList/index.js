@@ -27,7 +27,6 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(actions.requestUpdateFood(food));
   },
-  add: () => dispatch(actions.openNewFoodModal()),
   remove: (food) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveFood(food)),

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 
+import BoxInfo from '../BoxInfo';
 import Spinner from '../Spinner';
 import Box from '../../models/box';
 
@@ -29,17 +30,14 @@ class FoodList extends Component {
 
   render() {
     const {
-      boxes, selectedBoxId, increment, decrement, add, remove,
+      boxes, selectedBoxId, increment, decrement, remove,
     } = this.props;
     const box = boxes.filter(b => b.id === selectedBoxId)[0];
 
     if (box) {
       return (
         <div>
-          <p align="right">
-            <Button outline color="primary" onClick={add}>新規作成</Button>
-          </p>
-
+          <BoxInfo box={box} />
           <CardColumns>
             {box.foods.map(food => (
               <Card key={food.id}>
@@ -98,7 +96,6 @@ FoodList.propTypes = {
   selectedBoxId: PropTypes.number,
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
 };
 

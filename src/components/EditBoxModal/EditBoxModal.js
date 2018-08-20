@@ -73,18 +73,19 @@ class EditBoxModal extends Component {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={this.close}>キャンセル</Button>
+          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
           {(() => {
             if (isEditBoxModalOpen) {
               return (
                 <div>
-                  <Button color="primary" onClick={this.update}>更新</Button>
-                  <Button color="danger" onClick={() => this.remove(params)}>削除</Button>
+                  <Button outline color="primary" onClick={this.update}>更新</Button>
+                  {' '}
+                  <Button outline color="danger" onClick={() => this.remove(params)}>削除</Button>
                 </div>
               );
             }
             return (
-              <Button color="primary" onClick={this.create}>追加</Button>
+              <Button outline color="primary" onClick={this.create}>追加</Button>
             );
           })()}
         </ModalFooter>

@@ -63,9 +63,24 @@ function* handleRequestRemoveBox(action) {
   }
 }
 
+function* handleRequestInviteBox(action) {
+  try {
+    const { box, email } = action.payload;
+    const session = yield select(selectors.getSession);
+    yield call(Api.invite, session.jwt, box.id, email);
+    yield put(actions.receiveInviteBox());
+    const boxes = yield call(Api.getBoxes, session.jwt);
+    yield put(actions.receiveListBox(boxes));
+  } catch (error) {
+    console.log(error);
+    yield put(actions.failedInviteBox(error));
+  }
+}
+
 export default [
   takeLatest(types.BOX.LIST.REQUEST, handleRequestListBox),
   takeLatest(types.BOX.CREATE.REQUEST, handleRequestCreateBox),
   takeLatest(types.BOX.UPDATE.REQUEST, handleRequestUpdateBox),
   takeLatest(types.BOX.REMOVE.REQUEST, handleRequestRemoveBox),
+  takeLatest(types.BOX.INVITE.REQUEST, handleRequestInviteBox),
 ];

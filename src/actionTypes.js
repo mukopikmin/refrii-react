@@ -25,6 +25,11 @@ export default {
       RECEIVE: 'RECEIVE_REMOVE_BOX',
       FAILED: 'FAILED_REMOVE_BOX',
     },
+    INVITE: {
+      REQUEST: 'REQUEST_INVITE_BOX',
+      RECEIVE: 'RECEIVE_INVITE_BOX',
+      FAILED: 'FAILED_INVITE_BOX',
+    },
     SET_PARAMS: 'SET_PARAMS_BOX',
     SELECT: 'SELECT_BOX',
   },

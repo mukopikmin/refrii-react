@@ -63,6 +63,16 @@ export default handleActions({
     isEditBoxModalOpen: false,
     error: action.payload.error,
   }),
+  [types.BOX.INVITE.REQUEST]: state => ({
+    ...state,
+  }),
+  [types.BOX.INVITE.RECEIVE]: state => ({
+    ...state,
+  }),
+  [types.BOX.INVITE.FAILED]: (state, action) => ({
+    ...state,
+    error: action.payload.error,
+  }),
   [types.BOX.SELECT]: (state, action) => ({
     ...state,
     selectedId: action.payload.boxId,

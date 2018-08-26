@@ -3,6 +3,7 @@ import BoxInfo from './BoxInfo';
 import actions from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
+  session: state.session,
   box: ownProps.box,
 });
 const mapDispatchToProps = dispatch => ({

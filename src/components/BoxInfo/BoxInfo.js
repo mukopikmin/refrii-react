@@ -7,13 +7,21 @@ import Invitation from '../Invitation';
 
 class BoxInfo extends Component {
   render() {
-    const { box, add } = this.props;
+    const { session, box, add } = this.props;
 
     return (
       <div>
         <h5>{box.name}</h5>
         <Row>
           <Col sm={6}>
+            <p>
+              <Button size="sm">{session.user.email}</Button>
+              {box.invitedUsers.map(user => (
+                <span key={user.email}>
+                  {' '}<Button size="sm">{user.email}</Button>
+                </span>
+            ))}
+            </p>
             {box.notice.split('\n').map(line => <span key={line}>{line}<br /></span>)}
           </Col>
           <Col sm={6}>
@@ -29,6 +37,11 @@ class BoxInfo extends Component {
 }
 
 BoxInfo.propTypes = {
+  session: PropTypes.shape({
+    user: PropTypes.shape({
+      email: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
   box: PropTypes.instanceOf(Box).isRequired,
   add: PropTypes.func.isRequired,
 };

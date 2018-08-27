@@ -7,7 +7,7 @@ import Invitation from '../Invitation';
 
 class BoxInfo extends Component {
   render() {
-    const { session, box, add } = this.props;
+    const {  box, add } = this.props;
 
     return (
       <div>
@@ -15,7 +15,7 @@ class BoxInfo extends Component {
         <Row>
           <Col sm={6}>
             <p>
-              <Button size="sm">{session.user.email}</Button>
+              <Button size="sm">{box.owner.name}</Button>
               {box.invitedUsers.map(user => (
                 <span key={user.email}>
                   {' '}<Button size="sm">{user.email}</Button>

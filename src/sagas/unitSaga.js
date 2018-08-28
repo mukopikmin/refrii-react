@@ -1,13 +1,14 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
+
 import types from '../actionTypes';
-import Api from '../api';
 import actions from '../actions';
 import selectors from '../selectors';
+import Unit from '../models/unit';
 
 function* handleRequestListUnit() {
   try {
     const session = yield select(selectors.getSession);
-    const units = yield call(Api.getUnits, session.jwt);
+    const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
     yield put(actions.failedListUnit(error));
@@ -18,9 +19,9 @@ function* handleRequestCreateUnit(action) {
   try {
     const session = yield select(selectors.getSession);
     const { params } = action.payload;
-    yield call(Api.createUnit, session.jwt, params);
+    yield call(Unit.createUnit, session.jwt, params);
     yield put(actions.receiveCreateUnit());
-    const units = yield call(Api.getUnits, session.jwt);
+    const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
     console.log(error);
@@ -32,9 +33,9 @@ function* handleRequestUpdateUnit(action) {
   try {
     const { params } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Api.updateUnit, session.jwt, params);
+    yield call(Unit.updateUnit, session.jwt, params);
     yield put(actions.receiveUpdateUnit());
-    const units = yield call(Api.getUnits, session.jwt);
+    const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
     console.log(error);
@@ -46,9 +47,9 @@ function* handleRequestRemoveUnit(action) {
   try {
     const { params } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Api.removeUnit, session.jwt, params.id);
+    yield call(Unit.removeUnit, session.jwt, params.id);
     yield put(actions.receiveRemoveUnit());
-    const units = yield call(Api.getUnits, session.jwt);
+    const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
     console.log(error);

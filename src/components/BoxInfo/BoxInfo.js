@@ -7,7 +7,7 @@ import Invitation from '../Invitation';
 
 class BoxInfo extends Component {
   render() {
-    const {  box, add } = this.props;
+    const { box, add } = this.props;
 
     return (
       <div>

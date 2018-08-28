@@ -1,13 +1,14 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
+
 import types from '../actionTypes';
-import Api from '../api';
 import actions from '../actions';
 import selectors from '../selectors';
+import Box from '../models/box';
 
 function* handleRequestListBox() {
   try {
     const session = yield select(selectors.getSession);
-    const boxes = yield call(Api.getBoxes, session.jwt);
+    const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
 
     if (boxes.length > 0) {
@@ -25,9 +26,9 @@ function* handleRequestCreateBox(action) {
   try {
     const session = yield select(selectors.getSession);
     const { params } = action.payload;
-    yield call(Api.createBox, session.jwt, params);
+    yield call(Box.createBox, session.jwt, params);
     yield put(actions.receiveCreateBox());
-    const boxes = yield call(Api.getBoxes, session.jwt);
+    const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
     console.log(error);
@@ -39,9 +40,9 @@ function* handleRequestUpdateBox(action) {
   try {
     const { params } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Api.updateBox, session.jwt, params);
+    yield call(Box.updateBox, session.jwt, params);
     yield put(actions.receiveUpdateBox());
-    const boxes = yield call(Api.getBoxes, session.jwt);
+    const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
     console.log(error);
@@ -53,9 +54,9 @@ function* handleRequestRemoveBox(action) {
   try {
     const { params } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Api.removeBox, session.jwt, params.id);
+    yield call(Box.removeBox, session.jwt, params.id);
     yield put(actions.receiveRemoveBox());
-    const boxes = yield call(Api.getBoxes, session.jwt);
+    const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
     console.log(error);
@@ -67,9 +68,9 @@ function* handleRequestInviteBox(action) {
   try {
     const { box, email } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Api.invite, session.jwt, box.id, email);
+    yield call(Box.invite, session.jwt, box.id, email);
     yield put(actions.receiveInviteBox());
-    const boxes = yield call(Api.getBoxes, session.jwt);
+    const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
     console.log(error);

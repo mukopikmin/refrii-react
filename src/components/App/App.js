@@ -61,8 +61,14 @@ class App extends Component {
 
 App.propTypes = {
   session: PropTypes.shape({
-    user: PropTypes.shape({}).isRequired,
-  }).isRequired,
+    user: PropTypes.shape({}),
+  }),
+};
+
+App.defaultProps = {
+  session: {
+    user: {},
+  },
 };
 
 export default App;

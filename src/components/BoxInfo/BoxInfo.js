@@ -37,11 +37,6 @@ class BoxInfo extends Component {
 }
 
 BoxInfo.propTypes = {
-  session: PropTypes.shape({
-    user: PropTypes.shape({
-      email: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
   box: PropTypes.instanceOf(Box).isRequired,
   add: PropTypes.func.isRequired,
 };

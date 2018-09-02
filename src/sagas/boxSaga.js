@@ -1,9 +1,10 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest, select, fork } from 'redux-saga/effects';
 
 import types from '../actionTypes';
 import actions from '../actions';
 import selectors from '../selectors';
 import Box from '../models/box';
+import handleError from './handleErrors';
 
 function* handleRequestListBox() {
   try {
@@ -19,10 +20,7 @@ function* handleRequestListBox() {
     }
   } catch (error) {
     yield put(actions.failedListBox(error));
-    
-    // if (error.error.includes('auth')) {
-    //   yield put(actions.signout())
-    // }
+    yield fork(handleError, error);
   }
 }
 
@@ -37,6 +35,7 @@ function* handleRequestCreateBox(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedCreateBox(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -51,6 +50,7 @@ function* handleRequestUpdateBox(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedUpdateBox(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -65,6 +65,7 @@ function* handleRequestRemoveBox(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedRemoveBox(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -79,6 +80,7 @@ function* handleRequestInviteBox(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedInviteBox(error));
+    yield fork(handleError, error);
   }
 }
 

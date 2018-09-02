@@ -1,9 +1,10 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest, select, fork } from 'redux-saga/effects';
 
 import types from '../actionTypes';
 import actions from '../actions';
 import selectors from '../selectors';
 import Unit from '../models/unit';
+import handleError from './handleErrors';
 
 function* handleRequestListUnit() {
   try {
@@ -12,6 +13,7 @@ function* handleRequestListUnit() {
     yield put(actions.receiveListUnit(units));
   } catch (error) {
     yield put(actions.failedListUnit(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -26,6 +28,7 @@ function* handleRequestCreateUnit(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedCreateUnit(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -40,6 +43,7 @@ function* handleRequestUpdateUnit(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedUpdateUnit(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -54,6 +58,7 @@ function* handleRequestRemoveUnit(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedRemoveUnit(error));
+    yield fork(handleError, error);
   }
 }
 

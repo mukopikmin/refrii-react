@@ -1,10 +1,11 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest, select, fork } from 'redux-saga/effects';
 
 import types from '../actionTypes';
 import actions from '../actions';
 import selectors from '../selectors';
 import Food from '../models/food';
 import Box from '../models/box';
+import handleError from './handleErrors';
 
 function* handleRequestCreateFood(action) {
   try {
@@ -17,6 +18,8 @@ function* handleRequestCreateFood(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedCreateFood(error));
+    yield fork(handleError, error);
+    yield fork(handleError, error);
   }
 }
 
@@ -31,6 +34,7 @@ function* handleRequestUpdateFood(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedUpdateFood(error));
+    yield fork(handleError, error);
   }
 }
 
@@ -44,6 +48,7 @@ function* handleRequestRemoveFood(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.failedRemoveFood(error));
+    yield fork(handleError, error);
   }
 }
 

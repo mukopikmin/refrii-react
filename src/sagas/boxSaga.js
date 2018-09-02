@@ -19,6 +19,10 @@ function* handleRequestListBox() {
     }
   } catch (error) {
     yield put(actions.failedListBox(error));
+    
+    // if (error.error.includes('auth')) {
+    //   yield put(actions.signout())
+    // }
   }
 }
 

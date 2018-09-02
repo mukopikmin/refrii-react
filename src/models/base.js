@@ -1,7 +1,9 @@
 class Base {
   static handleErrors(response) {
     if (!response.ok) {
-      throw Error(response.json());
+      return response.json().then((json) => {
+        throw json;
+      });
     }
 
     return response;

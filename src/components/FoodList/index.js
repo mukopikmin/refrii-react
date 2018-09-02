@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
   remove: (food) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveFood(food)),
-      () => console.log('dismiss'),
+      () => {},
     );
   },
   edit: food => dispatch(actions.openEditFoodModal(food)),

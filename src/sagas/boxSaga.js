@@ -33,7 +33,6 @@ function* handleRequestCreateBox(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedCreateBox(error));
     yield fork(handleError, error);
   }
@@ -48,7 +47,6 @@ function* handleRequestUpdateBox(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedUpdateBox(error));
     yield fork(handleError, error);
   }
@@ -63,7 +61,6 @@ function* handleRequestRemoveBox(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedRemoveBox(error));
     yield fork(handleError, error);
   }
@@ -78,7 +75,6 @@ function* handleRequestInviteBox(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedInviteBox(error));
     yield fork(handleError, error);
   }

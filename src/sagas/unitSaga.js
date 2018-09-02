@@ -26,7 +26,6 @@ function* handleRequestCreateUnit(action) {
     const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedCreateUnit(error));
     yield fork(handleError, error);
   }
@@ -41,7 +40,6 @@ function* handleRequestUpdateUnit(action) {
     const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedUpdateUnit(error));
     yield fork(handleError, error);
   }
@@ -56,7 +54,6 @@ function* handleRequestRemoveUnit(action) {
     const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedRemoveUnit(error));
     yield fork(handleError, error);
   }

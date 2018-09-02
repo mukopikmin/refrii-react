@@ -34,9 +34,7 @@ const middlewares = [sagaMiddleware, logger];
 const store = createStore(persistedReducer, applyMiddleware(...middlewares));
 const persistor = persistStore(store);
 
-sagaMiddleware.run(rootSaga).done.catch((error) => {
-  console.log(error);
-});
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
   remove: (params) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveBox(params)),
-      () => console.log('dismiss'),
+      () => {},
     );
   },
   updateParams: params => dispatch(actions.setParamsBox(params)),

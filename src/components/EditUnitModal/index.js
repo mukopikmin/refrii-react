@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
   remove: (params) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveUnit(params)),
-      () => console.log('dismiss'),
+      () => {},
     );
   },
   updateParams: params => dispatch(actions.setParamsUnit(params)),

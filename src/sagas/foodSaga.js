@@ -16,7 +16,6 @@ function* handleRequestCreateFood(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedCreateFood(error));
     yield fork(handleError, error);
     yield fork(handleError, error);
@@ -32,7 +31,6 @@ function* handleRequestUpdateFood(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedUpdateFood(error));
     yield fork(handleError, error);
   }
@@ -46,7 +44,6 @@ function* handleRequestRemoveFood(action) {
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
-    console.log(error);
     yield put(actions.failedRemoveFood(error));
     yield fork(handleError, error);
   }

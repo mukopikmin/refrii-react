@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 
-import GoogleAuth from '../GoogleAuth';
+import Landing from '../Landing';
 import BoxList from '../BoxList';
 import Header from '../Header';
 import FoodList from '../FoodList';
@@ -19,7 +19,10 @@ class App extends Component {
   }
 
   content() {
-    if (this.props.session.user) {
+    const { session } = this.props;
+    const { user } = session;
+
+    if (user) {
       return (
         <BrowserRouter>
           <div>
@@ -45,7 +48,7 @@ class App extends Component {
       );
     }
 
-    return <GoogleAuth />;
+    return <Landing />;
   }
 
   render() {

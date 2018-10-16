@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Container } from 'reactstrap';
+import {
+  Navbar, NavbarBrand, Nav, UncontrolledDropdown,
+  DropdownToggle, DropdownMenu, DropdownItem, Container,
+} from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import logo from '../../static/logo.png';
+import logo from '../../assets/logo.png';
 import './Header.css';
 
 class Header extends Component {
@@ -12,7 +15,9 @@ class Header extends Component {
   }
 
   handleToSetting() {
-    this.props.history.push('/setting');
+    const history = this.props;
+
+    history.push('/setting');
   }
 
   render() {
@@ -23,7 +28,9 @@ class Header extends Component {
         <Navbar fixed="top" color="light" light expand="md">
           <Container>
             <NavbarBrand href="/">
-              <img src={logo} height="28px" alt="" />{' '}Refrii
+              <img src={logo} height="28px" alt="" />
+              {' '}
+              Refrii
             </NavbarBrand>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import {
+  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput,
+} from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { PropTypes } from 'prop-types';

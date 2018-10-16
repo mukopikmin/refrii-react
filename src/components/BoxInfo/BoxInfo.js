@@ -18,15 +18,22 @@ class BoxInfo extends Component {
               <Button size="sm">{box.owner.name}</Button>
               {box.invitedUsers.map(user => (
                 <span key={user.email}>
-                  {' '}<Button size="sm">{user.email}</Button>
+                  {' '}
+                  <Button size="sm">{user.email}</Button>
                 </span>
-            ))}
+              ))}
             </p>
-            {box.notice.split('\n').map(line => <span key={line}>{line}<br /></span>)}
+            {box.notice.split('\n').map(line => (
+              <span key={line}>
+                {line}
+                <br />
+              </span>
+            ))}
           </Col>
           <Col sm={6}>
             <div align="right">
-              <Button outline color="primary" onClick={() => add(box)}>新規作成</Button>{' '}
+              <Button outline color="primary" onClick={() => add(box)}>新規作成</Button>
+              {' '}
               <Invitation box={box} />
             </div>
           </Col>

@@ -1,0 +1,58 @@
+#landing {
+  background: url('../../assets/background.jpg')  ;
+  background-size:  cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#explain {
+  margin: 40px;
+}
+
+.app-name {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #3289e7;
+}
+
+.contents {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 200px 0;
+  z-index: 1;
+}
+
+.contents:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 60%;
+  margin: 400px -10% 0;
+  background: #011931;
+  -webkit-transform-origin: left center;
+  -ms-transform-origin: left center;
+  transform-origin: left center;
+  -webkit-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  z-index: -1;
+}
+
+.contents-inner {
+  box-sizing: boder-box;
+  width: 100%;
+  max-width: 640px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 400px 10px 120px;
+  color: #fff;
+  text-align: center;
+  height: 800px;
+}
+
+#landing {
+  height: 100%;
+}

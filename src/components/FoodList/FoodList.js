@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Button, CardFooter, CardText, CardColumns, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle } from 'reactstrap';
+import {
+  Card, Button, CardFooter, CardText, CardColumns, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle,
+} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
@@ -70,7 +72,9 @@ class FoodList extends Component {
                       <Button block outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
                     </Col>
                     <Col sm={6} align="center">
-                      {food.amount} {food.unit.label}
+                      {food.amount}
+                      {' '}
+                      {food.unit.label}
                     </Col>
                     <Col sm={3}>
                       <Button block outline color="primary" size="sm" onClick={() => increment(food)}>+</Button>
@@ -81,7 +85,7 @@ class FoodList extends Component {
                   {food.expirationDate}
                 </CardFooter>
               </Card>
-          ))}
+            ))}
           </CardColumns>
         </div>
       );

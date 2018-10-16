@@ -27,13 +27,17 @@ class Setting extends Component {
         <ul>
           {units.map(unit => (
             <li key={unit.id}>
-              {unit.label} &nbsp;&nbsp;
+              {unit.label}
+              {' '}
+&nbsp;&nbsp;
               <FontAwesomeIcon icon={faPen} size="sm" onClick={() => editUnit(unit)} />
             </li>
-            ))}
+          ))}
         </ul>
         <Button outline color="primary" onClick={addUnit}>
-          <FontAwesomeIcon icon={faPlus} size="sm" />{' '}追加
+          <FontAwesomeIcon icon={faPlus} size="sm" />
+          {' '}
+追加
         </Button>
       </div>
     );

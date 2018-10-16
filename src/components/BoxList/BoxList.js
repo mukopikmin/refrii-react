@@ -26,7 +26,10 @@ class BoxList extends Component {
     return (
       <div id="box-list">
         <Nav vertical>
-          <p>カテゴリ <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} /></p>
+          <p>
+カテゴリ
+            <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} />
+          </p>
           {boxes.map(box => (
             <NavItem key={box.id} onClick={() => this.select(box)}>
               <NavLink>

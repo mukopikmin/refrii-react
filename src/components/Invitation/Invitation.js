@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Collapse, Button, CardBody, Card, Input } from 'reactstrap';
+import {
+  Collapse, Button, CardBody, Card, Input,
+} from 'reactstrap';
 
 import Box from '../../models/box';
 

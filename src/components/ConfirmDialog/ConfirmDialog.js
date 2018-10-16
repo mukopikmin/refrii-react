@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button, Modal, ModalHeader, ModalBody, ModalFooter,
+} from 'reactstrap';
 import { confirmable } from 'react-confirm';
 import { PropTypes } from 'prop-types';
 
@@ -38,7 +40,8 @@ class ConfirmDialog extends Component {
           {confirmation}
         </ModalBody>
         <ModalFooter>
-          <Button outline color="primary" onClick={this.continue}>実行</Button>{' '}
+          <Button outline color="primary" onClick={this.continue}>実行</Button>
+          {' '}
           <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
         </ModalFooter>
       </Modal>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Card, Button, CardFooter, CardText, CardColumns, CardBody, Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle,
+  Card, Button, CardFooter, CardText, CardColumns, CardBody, Row,
+  Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 
-import BoxInfo from '../BoxInfo';
 import Spinner from '../Spinner';
 import Box from '../../models/box';
 
@@ -20,11 +20,15 @@ class FoodList extends Component {
   }
 
   toggle(id) {
-    this.setState({ dropdownOpen: this.state.dropdownOpen === id ? 0 : id });
+    this.setState(prev => ({
+      dropdownOpen: prev.id === id ? 0 : id,
+    }));
   }
 
   edit(food) {
-    this.props.edit({
+    const { edit } = this.props;
+
+    edit({
       ...food,
       unitId: food.unit.id,
     });
@@ -34,12 +38,12 @@ class FoodList extends Component {
     const {
       boxes, selectedBoxId, increment, decrement, remove,
     } = this.props;
+    const { dropdownOpen } = this.state;
     const box = boxes.filter(b => b.id === selectedBoxId)[0];
 
     if (box) {
       return (
         <div>
-          <BoxInfo box={box} />
           <CardColumns>
             {box.foods.map(food => (
               <Card key={food.id}>
@@ -48,7 +52,7 @@ class FoodList extends Component {
                     <Col xs={10}><CardTitle>{food.name}</CardTitle></Col>
                     <Col xs={2}>
                       <Dropdown
-                        isOpen={this.state.dropdownOpen === food.id}
+                        isOpen={dropdownOpen === food.id}
                         toggle={() => this.toggle(food.id)}
                       >
                         <DropdownToggle

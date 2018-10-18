@@ -12,37 +12,50 @@ import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
+import BoxInfo from '../BoxInfo';
 
 class App extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
+    const { onLoad } = this.props;
+
     this.content = this.content.bind(this);
+    onLoad();
   }
 
   content() {
-    const { session } = this.props;
+    const { session, boxes, selectedBoxId } = this.props;
     const { user } = session;
+    const box = boxes.filter(b => b.id === selectedBoxId)[0];
 
     if (user) {
       return (
         <BrowserRouter>
           <div>
             <Header />
-            <Container>
-              <Row>
-                <Col xs="3">
-                  <BoxList />
-                </Col>
-                <Col xs="9">
-                  <Route exact path="/" component={FoodList} />
-                  <Route exact path="/boxes/:id" component={FoodList} />
-                  <Route exact path="/setting" component={Setting} />
-                </Col>
-              </Row>
+            <Row>
+              <Col sm="3">
+                <BoxList />
+              </Col>
+              <Col sm="6">
+                <Route exact path="/" component={FoodList} />
+                <Route exact path="/boxes/:id" component={FoodList} />
+                <Route exact path="/setting" component={Setting} />
+              </Col>
+              <Col sm={3}>
+                {(() => {
+                  if (box) {
+                    return <BoxInfo box={box} />;
+                  }
+                  return <div />;
+                })()}
+              </Col>
+            </Row>
 
-              <EditBoxModal />
-              <EditFoodModal />
-              <EditUnitModal />
-            </Container>
+            <EditBoxModal />
+            <EditFoodModal />
+            <EditUnitModal />
           </div>
         </BrowserRouter>
       );

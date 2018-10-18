@@ -15,38 +15,48 @@ class EditUnitModal extends Component {
   }
 
   onLabelChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       label: e.target.value,
     });
   }
 
   onStepChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       step: e.target.value,
     });
   }
 
   create() {
-    const { params } = this.props;
+    const { create, params } = this.props;
 
-    this.props.create({
+    create({
       label: params.label,
       step: params.step,
     });
   }
 
   update() {
-    this.props.update(this.props.params);
+    const { update, params } = this.props;
+
+    update(params);
   }
 
   close() {
-    this.props.close();
+    const { close } = this.props;
+
+    close();
   }
 
   remove(params) {
-    this.props.remove(params);
+    const { remove } = this.props;
+
+    remove(params);
   }
 
   render() {
@@ -65,13 +75,13 @@ class EditUnitModal extends Component {
             <FormGroup row>
               <Label for="label" sm={3}>ラベル</Label>
               <Col sm={9}>
-                <Input type="text" name="label" id="label" onChange={this.onLabelChange} value={this.props.params.label} />
+                <Input type="text" name="label" id="label" onChange={this.onLabelChange} value={params.label} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="step" sm={3}>増減値</Label>
               <Col sm={9}>
-                <Input type="number" name="step" id="step" onChange={this.onStepChange} value={this.props.params.step} />
+                <Input type="number" name="step" id="step" onChange={this.onStepChange} value={params.step} />
               </Col>
             </FormGroup>
           </Form>

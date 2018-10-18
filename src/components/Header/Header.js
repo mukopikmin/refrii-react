@@ -25,10 +25,10 @@ class Header extends Component {
 
     return (
       <div id="header">
-        <Navbar fixed="top" color="light" light expand="md">
+        <Navbar fixed="top" expand="md">
           <Container>
             <NavbarBrand href="/">
-              <img src={logo} height="28px" alt="" />
+              <img className="logo" src={logo} alt="" />
               {' '}
               Refrii
             </NavbarBrand>

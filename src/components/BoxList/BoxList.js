@@ -16,8 +16,10 @@ class BoxList extends Component {
   }
 
   select(box) {
-    this.props.select(box);
-    this.props.history.push(`/boxes/${box.id}`);
+    const { select, history } = this.props;
+
+    select(box);
+    history.push(`/boxes/${box.id}`);
   }
 
   render() {

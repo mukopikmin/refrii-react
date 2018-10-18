@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, CustomInput,
+  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button,
+  Form, FormGroup, Label, Input, CustomInput,
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -10,8 +11,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Unit from '../../models/unit';
 
 class EditFoodModal extends Component {
-  componentDidMount() {
-    this.props.onLoad();
+  constructor(props) {
+    super(props);
+
+    const { onLoad } = this.props;
 
     this.onNameChange = this.onNameChange.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
@@ -22,54 +25,68 @@ class EditFoodModal extends Component {
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.close = this.close.bind(this);
+
+    onLoad();
   }
 
   onNameChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       name: e.target.value,
     });
   }
 
   onAmountChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       amount: e.target.value,
     });
   }
 
   onUnitChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       unitId: e.target.value,
     });
   }
 
   onDateChange(date) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       expirationDate: date,
     });
   }
 
   onNoticeChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       notice: e.target.value,
     });
   }
 
   onNeedsAddingChange() {
-    this.props.updateParams({
-      ...this.props.params,
-      needsAdding: !this.props.params.needsAdding,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
+      needsAdding: !params.needsAdding,
     });
   }
 
   create() {
-    const { selectedBoxId, params } = this.props;
+    const { create, selectedBoxId, params } = this.props;
 
-    this.props.create({
+    create({
       name: params.name,
       amount: params.amount,
       notice: params.notice,
@@ -80,20 +97,24 @@ class EditFoodModal extends Component {
   }
 
   update() {
-    const { selectedBoxId } = this.props;
+    const { update, params, selectedBoxId } = this.props;
 
-    this.props.update({
-      ...this.props.params,
+    update({
+      ...params,
       boxId: selectedBoxId,
     });
   }
 
   close() {
-    this.props.close();
+    const { close } = this.props;
+
+    close();
   }
 
   render() {
-    const { isEditFoodModalOpen, isNewFoodModalOpen, units } = this.props;
+    const {
+      isEditFoodModalOpen, isNewFoodModalOpen, units, params,
+    } = this.props;
     const isOpen = isNewFoodModalOpen || isEditFoodModalOpen;
 
     return (
@@ -106,16 +127,16 @@ class EditFoodModal extends Component {
             <FormGroup row>
               <Label for="name" sm={3}>名前</Label>
               <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={this.props.params.name} />
+                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={params.name} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="amount" sm={3}>数量</Label>
               <Col sm={3}>
-                <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={this.props.params.amount} />
+                <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={params.amount} />
               </Col>
               <Col sm={6}>
-                <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={this.props.params.unitId}>
+                <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={params.unitId}>
                   <option value="0" />
                   {units.map(unit => (
                     <option key={unit.id} value={unit.id}>{unit.label}</option>
@@ -131,7 +152,7 @@ class EditFoodModal extends Component {
                   customInput={<Input />}
                   name="expiration-date"
                   id="expiration-date"
-                  selected={moment(this.props.params.expirationDate)}
+                  selected={moment(params.expirationDate)}
                   onChange={this.onDateChange}
                 />
               </Col>
@@ -139,14 +160,14 @@ class EditFoodModal extends Component {
             <FormGroup row>
               <Label for="notice" sm={3}>メモ</Label>
               <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={this.props.params.notice} />
+                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={params.notice} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Col sm={{ size: 9, offset: 3 }}>
                 <FormGroup check>
                   <Label check>
-                    <CustomInput type="checkbox" id="needs-adding" onChange={this.onNeedsAddingChange} checked={this.props.params.needsAdding} label="買い足しが必要" />
+                    <CustomInput type="checkbox" id="needs-adding" onChange={this.onNeedsAddingChange} checked={params.needsAdding} label="買い足しが必要" />
                   </Label>
                 </FormGroup>
               </Col>

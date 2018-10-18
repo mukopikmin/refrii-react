@@ -15,38 +15,48 @@ class EditBoxModal extends Component {
   }
 
   onNameChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       name: e.target.value,
     });
   }
 
   onNoticeChange(e) {
-    this.props.updateParams({
-      ...this.props.params,
+    const { updateParams, params } = this.props;
+
+    updateParams({
+      ...params,
       notice: e.target.value,
     });
   }
 
   create() {
-    const { params } = this.props;
+    const { create, params } = this.props;
 
-    this.props.create({
+    create({
       name: params.name,
       notice: params.notice,
     });
   }
 
   update() {
-    this.props.update(this.props.params);
+    const { update, params } = this.props;
+
+    update(params);
   }
 
   close() {
-    this.props.close();
+    const { close } = this.props;
+
+    close();
   }
 
   remove(params) {
-    this.props.remove(params);
+    const { remove } = this.props;
+
+    remove(params);
   }
 
   render() {
@@ -63,13 +73,13 @@ class EditBoxModal extends Component {
             <FormGroup row>
               <Label for="name" sm={3}>名前</Label>
               <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={this.props.params.name} />
+                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={params.name} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="notice" sm={3}>メモ</Label>
               <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={this.props.params.notice} />
+                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={params.notice} />
               </Col>
             </FormGroup>
           </Form>

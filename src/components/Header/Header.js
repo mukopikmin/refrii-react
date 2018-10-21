@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
-import './Header.css';
+import styles from './Header.module.css';
 
 class Header extends Component {
   componentDidMount() {
@@ -24,20 +24,20 @@ class Header extends Component {
     const { session, signout } = this.props;
 
     return (
-      <div id="header">
-        <Navbar fixed="top" expand="md">
+      <div className={styles.header}>
+        <Navbar className={styles.navbar} fixed="top" expand="md">
           <Container>
-            <NavbarBrand href="/">
-              <img className="logo" src={logo} alt="" />
+            <NavbarBrand className={styles.brand} href="/">
+              <img className={styles.logo} src={logo} alt="" />
               {' '}
               Refrii
             </NavbarBrand>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle className={styles.brand} nav caret>
                   {session.user.name}
                 </DropdownToggle>
-                <DropdownMenu right>
+                <DropdownMenu className={styles.brand} right>
                   <DropdownItem onClick={() => this.handleToSetting()}>
                     設定
                   </DropdownItem>

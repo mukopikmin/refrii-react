@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { ScaleLoader } from 'react-spinners';
-import './Spinner.css';
+import styles from './Spinner.module.css';
 
 class Spinner extends Component {
   render() {
+    const { loading } = this.props;
+
     return (
-      <div className="spinner">
+      <div className={styles.spinner}>
         <ScaleLoader
           color="#123abc"
-          loading={this.props.loading}
+          loading={loading}
         />
       </div>
     );

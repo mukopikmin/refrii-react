@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { PropTypes } from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Landing from '../Landing';
 import BoxList from '../BoxList';
@@ -13,6 +13,7 @@ import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
 import BoxInfo from '../BoxInfo';
+import Box from '../../models/box';
 
 class App extends Component {
   constructor(props) {
@@ -79,12 +80,16 @@ App.propTypes = {
   session: PropTypes.shape({
     user: PropTypes.shape({}),
   }),
+  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
+  selectedBoxId: PropTypes.number,
+  onLoad: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
   session: {
     user: {},
   },
+  selectedBoxId: 0,
 };
 
 export default App;

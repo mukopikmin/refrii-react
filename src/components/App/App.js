@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,8 +12,10 @@ import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
+import EditAmountModal from '../EditAmountModal';
 import BoxInfo from '../BoxInfo';
 import Box from '../../models/box';
+import styles from './App.module.css';
 
 class App extends Component {
   constructor(props) {
@@ -21,38 +23,43 @@ class App extends Component {
 
     const { onLoad } = this.props;
 
-    this.content = this.content.bind(this);
     onLoad();
   }
 
-  content() {
-    const { session, boxes, selectedBoxId } = this.props;
-    const { user } = session;
+  renderBoxInfo() {
+    const { boxes, selectedBoxId } = this.props;
     const box = boxes.filter(b => b.id === selectedBoxId)[0];
+
+    if (box) {
+      return <BoxInfo box={box} />;
+    }
+    return <div />;
+  }
+
+  render() {
+    const { session } = this.props;
+    const { user } = session;
 
     if (user) {
       return (
         <BrowserRouter>
           <div>
             <Header />
-            <Row>
-              <Col sm="3">
-                <BoxList />
-              </Col>
-              <Col sm="6">
-                <Route exact path="/" component={FoodList} />
-                <Route exact path="/boxes/:id" component={FoodList} />
-                <Route exact path="/setting" component={Setting} />
-              </Col>
-              <Col sm={3}>
-                {(() => {
-                  if (box) {
-                    return <BoxInfo box={box} />;
-                  }
-                  return <div />;
-                })()}
-              </Col>
-            </Row>
+            <Container className={styles.main}>
+              <Row>
+                <Col sm={3}>
+                  <BoxList />
+                </Col>
+                <Col sm={6}>
+                  <Route exact path="/" component={FoodList} />
+                  <Route exact path="/boxes/:id" component={FoodList} />
+                  <Route exact path="/setting" component={Setting} />
+                </Col>
+                <Col sm={3}>
+                  {this.renderBoxInfo()}
+                </Col>
+              </Row>
+            </Container>
 
             <EditBoxModal />
             <EditFoodModal />
@@ -63,16 +70,6 @@ class App extends Component {
     }
 
     return <Landing />;
-  }
-
-  render() {
-    const content = this.content();
-
-    return (
-      <div>
-        {content}
-      </div>
-    );
   }
 }
 

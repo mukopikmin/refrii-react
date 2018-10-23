@@ -94,6 +94,10 @@ export default {
         OPEN: 'OPEN_EDIT_FOOD_MODAL',
         CLOSE: 'CLOSE_EDIT_FOOD_MODAL',
       },
+      AMOUNT: {
+        OPEN: 'OPEN_AMOUNT_FOOD_MODAL',
+        CLOSE: 'CLOSE_AMOUNT_FOOD_MODAL',
+      },
     },
     UNIT: {
       NEW: {

@@ -16,6 +16,7 @@ const initialParams = {
 const initialState = {
   isNewFoodModalOpen: false,
   isEditFoodModalOpen: false,
+  isAmountFoodModalOpen: false,
   params: initialParams,
 };
 
@@ -67,6 +68,16 @@ export default handleActions({
   [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
+    params: initialParams,
+  }),
+  [types.MODAL.FOOD.AMOUNT.OPEN]: (state, action) => ({
+    ...state,
+    isAmountFoodModalOpen: true,
+    params: action.payload.params || initialParams,
+  }),
+  [types.MODAL.FOOD.AMOUNT.CLOSE]: state => ({
+    ...state,
+    isAmountFoodModalOpen: false,
     params: initialParams,
   }),
 }, initialState);

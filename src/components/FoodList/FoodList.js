@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Card, Button, CardFooter, CardText, CardColumns, CardBody, Row,
+  Card, Button, CardFooter, CardText, CardBody, Row,
   Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,10 +9,12 @@ import { PropTypes } from 'prop-types';
 
 import Spinner from '../Spinner';
 import Box from '../../models/box';
+import EditAmountModal from '../EditAmountModal';
 
 class FoodList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: 0,
@@ -34,6 +36,14 @@ class FoodList extends Component {
     });
   }
 
+  editAmount(food) {
+    const { editAmount } = this.props;
+
+    editAmount({
+      ...food,
+    });
+  }
+
   render() {
     const {
       boxes, selectedBoxId, increment, decrement, remove,
@@ -44,13 +54,15 @@ class FoodList extends Component {
     if (box) {
       return (
         <div>
-          <CardColumns>
-            {box.foods.map(food => (
-              <Card key={food.id}>
+          {box.foods.map(food => (
+            <div>
+              <Card key={food.id} onClick={() => this.editAmount(food)}>
                 <CardBody>
                   <Row>
-                    <Col xs={10}><CardTitle>{food.name}</CardTitle></Col>
-                    <Col xs={2}>
+                    <Col xs={6}>
+                      <span>{food.name}</span>
+                    </Col>
+                    <Col xs={6}>
                       <Dropdown
                         isOpen={dropdownOpen === food.id}
                         toggle={() => this.toggle(food.id)}
@@ -64,33 +76,23 @@ class FoodList extends Component {
                           <FontAwesomeIcon icon={faEllipsisV} size="sm" />
                         </DropdownToggle>
                         <DropdownMenu>
-                          <DropdownItem onClick={() => this.edit(food)}>編集</DropdownItem>
+                          <DropdownItem onClick={() => this.edit(food)}>
+                          編集
+                          </DropdownItem>
                           <DropdownItem onClick={() => remove(food)}>削除</DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
-                    </Col>
-                  </Row>
-                  <CardText>{food.notice}</CardText>
-                  <Row>
-                    <Col sm={3}>
-                      <Button block outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
-                    </Col>
-                    <Col sm={6} align="center">
-                      {food.amount}
-                      {' '}
-                      {food.unit.label}
-                    </Col>
-                    <Col sm={3}>
-                      <Button block outline color="primary" size="sm" onClick={() => increment(food)}>+</Button>
+                      <Button outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
+                      {`${food.amount} ${food.unit.label}`}
+                      <Button outline color="primary" size="sm" onClick={() => increment(food)}>+</Button>
                     </Col>
                   </Row>
                 </CardBody>
-                <CardFooter>
-                  {food.expirationDate}
-                </CardFooter>
               </Card>
-            ))}
-          </CardColumns>
+
+              <EditAmountModal food={food} />
+            </div>
+          ))}
         </div>
       );
     }

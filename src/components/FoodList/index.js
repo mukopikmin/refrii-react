@@ -9,24 +9,28 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  increment: (_food) => {
-    const amount = _food.amount + _food.unit.step;
-    const food = {
-      ..._food,
-      amount,
-    };
-
-    dispatch(actions.requestUpdateFood(food));
+  editAmount: (food) => {
+    console.log('AAAAAAAAAAAAAAAAAaaa');
+    dispatch(actions.openAmountFoodModal(food));
   },
-  decrement: (_food) => {
-    const amount = _food.amount - _food.unit.step;
-    const food = {
-      ..._food,
-      amount,
-    };
+  // increment: (_food) => {
+  //   const amount = _food.amount + _food.unit.step;
+  //   const food = {
+  //     ..._food,
+  //     amount,
+  //   };
 
-    dispatch(actions.requestUpdateFood(food));
-  },
+  //   dispatch(actions.requestUpdateFood(food));
+  // },
+  // decrement: (_food) => {
+  //   const amount = _food.amount - _food.unit.step;
+  //   const food = {
+  //     ..._food,
+  //     amount,
+  //   };
+
+  //   dispatch(actions.requestUpdateFood(food));
+  // },
   remove: (food) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveFood(food)),

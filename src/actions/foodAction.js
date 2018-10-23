@@ -16,4 +16,6 @@ export default createActions({
   [types.MODAL.FOOD.NEW.CLOSE]: () => ({ }),
   [types.MODAL.FOOD.EDIT.OPEN]: params => ({ params }),
   [types.MODAL.FOOD.EDIT.CLOSE]: () => ({ }),
+  [types.MODAL.FOOD.AMOUNT.OPEN]: params => ({ params }),
+  [types.MODAL.FOOD.AMOUNT.CLOSE]: () => ({ }),
 });

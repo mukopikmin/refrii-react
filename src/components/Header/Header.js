@@ -15,7 +15,7 @@ class Header extends Component {
   }
 
   handleToSetting() {
-    const history = this.props;
+    const { history } = this.props;
 
     history.push('/setting');
   }

@@ -9,6 +9,17 @@ import Food from '../models/food';
 import Box from '../models/box';
 import handleError from './handleErrors';
 
+function* handleRequestListFood(action) {
+  try {
+    const session = yield select(selectors.getSession);
+    const foods = yield call(Food.getFoods, session.jwt);
+    yield put(actions.receiveListFood(foods));
+  } catch (error) {
+    yield put(actions.failedCreateFood(error));
+    yield fork(handleError, error);
+  }
+}
+
 function* handleRequestCreateFood(action) {
   try {
     const session = yield select(selectors.getSession);
@@ -20,7 +31,6 @@ function* handleRequestCreateFood(action) {
   } catch (error) {
     yield put(actions.failedCreateFood(error));
     yield fork(handleError, error);
-    yield fork(handleError, error);
   }
 }
 
@@ -28,8 +38,8 @@ function* handleRequestUpdateFood(action) {
   try {
     const { params } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Food.updateFood, session.jwt, params);
-    yield put(actions.receiveUpdateFood());
+    const food = yield call(Food.updateFood, session.jwt, params);
+    yield put(actions.receiveUpdateFood(food));
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {
@@ -52,6 +62,7 @@ function* handleRequestRemoveFood(action) {
 }
 
 export default [
+  takeLatest(types.FOOD.LIST.REQUEST, handleRequestListFood),
   takeLatest(types.FOOD.CREATE.REQUEST, handleRequestCreateFood),
   takeLatest(types.FOOD.UPDATE.REQUEST, handleRequestUpdateFood),
   takeLatest(types.FOOD.REMOVE.REQUEST, handleRequestRemoveFood),

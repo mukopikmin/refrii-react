@@ -198,7 +198,7 @@ EditFoodModal.propTypes = {
   params: PropTypes.shape({
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
-    unitId: PropTypes.number.isRequired,
+    // unitId: PropTypes.number.isRequired,
     expirationDate: PropTypes.string.isRequired,
     notice: PropTypes.string.isRequired,
     needsAdding: PropTypes.bool.isRequired,

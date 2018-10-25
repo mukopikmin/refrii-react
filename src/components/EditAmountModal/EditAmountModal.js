@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, Row, Container,InputGroup,InputGroupAddon
+  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input, Row, Container, InputGroup, InputGroupAddon,
 } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 

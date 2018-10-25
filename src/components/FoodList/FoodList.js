@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Card, Button, CardFooter, CardText, CardBody, Row,
-  Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem, CardTitle,
+  Card, CardBody, Row,
+  Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
@@ -39,14 +39,12 @@ class FoodList extends Component {
   editAmount(food) {
     const { editAmount } = this.props;
 
-    editAmount({
-      ...food,
-    });
+    editAmount(food);
   }
 
   render() {
     const {
-      boxes, selectedBoxId, increment, decrement, remove,
+      boxes, selectedBoxId, remove, foods,
     } = this.props;
     const { dropdownOpen } = this.state;
     const box = boxes.filter(b => b.id === selectedBoxId)[0];
@@ -54,9 +52,9 @@ class FoodList extends Component {
     if (box) {
       return (
         <div>
-          {box.foods.map(food => (
-            <div>
-              <Card key={food.id} onClick={() => this.editAmount(food)}>
+          {box.getFoods(foods).map(food => (
+            <div key={food.id}>
+              <Card onClick={() => this.editAmount(food)}>
                 <CardBody>
                   <Row>
                     <Col xs={6}>
@@ -82,9 +80,6 @@ class FoodList extends Component {
                           <DropdownItem onClick={() => remove(food)}>削除</DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
-                      <Button outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
-                      {`${food.amount} ${food.unit.label}`}
-                      <Button outline color="primary" size="sm" onClick={() => increment(food)}>+</Button>
                     </Col>
                   </Row>
                 </CardBody>
@@ -96,6 +91,7 @@ class FoodList extends Component {
         </div>
       );
     }
+
     return <Spinner loading />;
   }
 }
@@ -104,8 +100,6 @@ FoodList.propTypes = {
   edit: PropTypes.func.isRequired,
   boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
   selectedBoxId: PropTypes.number,
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
 };
 

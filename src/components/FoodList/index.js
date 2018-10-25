@@ -5,36 +5,16 @@ import confirm from '../ConfirmDialog';
 
 const mapStateToProps = state => ({
   boxes: state.box.list,
+  foods: state.food.list,
   selectedBoxId: state.box.selectedId,
 });
 
 const mapDispatchToProps = dispatch => ({
-  editAmount: (food) => {
-    console.log('AAAAAAAAAAAAAAAAAaaa');
-    dispatch(actions.openAmountFoodModal(food));
-  },
-  // increment: (_food) => {
-  //   const amount = _food.amount + _food.unit.step;
-  //   const food = {
-  //     ..._food,
-  //     amount,
-  //   };
-
-  //   dispatch(actions.requestUpdateFood(food));
-  // },
-  // decrement: (_food) => {
-  //   const amount = _food.amount - _food.unit.step;
-  //   const food = {
-  //     ..._food,
-  //     amount,
-  //   };
-
-  //   dispatch(actions.requestUpdateFood(food));
-  // },
+  editAmount: food => dispatch(actions.openAmountFoodModal(food)),
   remove: (food) => {
     confirm('Are you sure').then(
       () => dispatch(actions.requestRemoveFood(food)),
-      () => {},
+      () => { },
     );
   },
   edit: food => dispatch(actions.openEditFoodModal(food)),

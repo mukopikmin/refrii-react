@@ -34,6 +34,11 @@ export default {
     SELECT: 'SELECT_BOX',
   },
   FOOD: {
+    LIST: {
+      REQUEST: 'REQUEST_LIST_FOOD',
+      RECEIVE: 'RECEIVE_LIST_FOOD',
+      FAILED: 'FAILED_LIST_FOOD',
+    },
     CREATE: {
       REQUEST: 'REQUEST_CREATE_FOOD',
       RECEIVE: 'RECEIVE_CREATE_FOOD',

@@ -20,6 +20,13 @@ export default class Food extends Base {
     this.notice = params.notice;
     this.unit = new Unit(params.unit);
     this.updatedAt = moment(params.updated_at);
+    this.boxId = params.box.id;
+  }
+
+  static getFoods(jwt) {
+    return super.authFetch(`${super.endpoint}/foods`, jwt)
+      .then(response => response.json())
+      .then(foods => foods.map(food => new Food(food)));
   }
 
   static updateFood(jwt, body) {

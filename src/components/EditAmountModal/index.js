@@ -4,7 +4,9 @@ import actions from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   isOpen: state.food.isAmountFoodModalOpen,
-  food: ownProps.food,
+  params: state.food.params
+  // food: ownProps.food,
+  // close: ownProps.close,
 });
 const mapDispatchToProps = dispatch => ({
   increment: (_food) => {

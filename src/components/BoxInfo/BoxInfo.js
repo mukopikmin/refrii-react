@@ -6,6 +6,21 @@ import Box from '../../models/box';
 import Invitation from '../Invitation';
 
 class BoxInfo extends Component {
+  renderNotice() {
+    const { box } = this.props;
+
+    return box.notice.split('\n').map((line, key) => {
+      const id = `${box.id}-${key}`;
+
+      return (
+        <span key={id}>
+          {line}
+          <br />
+        </span>
+      );
+    });
+  }
+
   render() {
     const { box, add } = this.props;
 
@@ -23,12 +38,7 @@ class BoxInfo extends Component {
                 </span>
               ))}
             </p>
-            {box.notice.split('\n').map(line => (
-              <span key={line}>
-                {line}
-                <br />
-              </span>
-            ))}
+            {this.renderNotice()}
           </Col>
           <Col sm={6}>
             <div align="right">

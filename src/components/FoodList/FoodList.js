@@ -16,8 +16,11 @@ class FoodList extends Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.close = this.close.bind(this);
+
     this.state = {
       dropdownOpen: 0,
+      food: null,
     };
   }
 
@@ -40,6 +43,10 @@ class FoodList extends Component {
     const { editAmount } = this.props;
 
     editAmount(food);
+  }
+
+  close() {
+    // this.setState({ food: null });
   }
 
   render() {
@@ -85,9 +92,10 @@ class FoodList extends Component {
                 </CardBody>
               </Card>
 
-              <EditAmountModal food={food} />
             </div>
           ))}
+
+          <EditAmountModal  />
         </div>
       );
     }

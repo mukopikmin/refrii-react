@@ -23,30 +23,30 @@ class EditAmountModal extends Component {
 
   render() {
     const {
-      food, isOpen, decrement, increment,
+      params, isOpen, decrement, increment,
     } = this.props;
 
-    if (food) {
+    // if (params) {
       return (
         <Modal isOpen={isOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
-            {food.name}
+            {params.name}
           </ModalHeader>
           <ModalBody>
             <Form inline>
               <Container>
                 <Row>
                   <Col sm={3}>
-                    <Button block outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
+                    <Button block outline color="danger" size="sm" onClick={() => decrement(params)}>-</Button>
                   </Col>
                   <Col sm={6}>
                     <InputGroup>
-                      <Input type="text" name="amount" id="amount" onChange={this.onAmountChange} value={food.amount} />
-                      <InputGroupAddon addonType="append">{food.unit.label}</InputGroupAddon>
+                      <Input type="text" name="amount" id="amount" onChange={this.onAmountChange} value={params.amount} />
+                      {/* <InputGroupAddon addonType="append">{params.unit.label}</InputGroupAddon> */}
                     </InputGroup>
                   </Col>
                   <Col sm={3}>
-                    <Button block outline color="primary" size="sm" onClick={() => increment(food)}>+</Button>
+                    <Button block outline color="primary" size="sm" onClick={() => increment(params)}>+</Button>
                   </Col>
                 </Row>
               </Container>
@@ -58,7 +58,7 @@ class EditAmountModal extends Component {
           </ModalFooter>
         </Modal>
       );
-    }
+    // }
 
     return <div />;
   }

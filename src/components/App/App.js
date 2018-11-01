@@ -12,20 +12,11 @@ import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
-import EditAmountModal from '../EditAmountModal';
 import BoxInfo from '../BoxInfo';
 import Box from '../../models/box';
 import styles from './App.module.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    const { onLoad } = this.props;
-
-    onLoad();
-  }
-
   renderBoxInfo() {
     const { boxes, selectedBoxId } = this.props;
     const box = boxes.filter(b => b.id === selectedBoxId)[0];
@@ -79,7 +70,6 @@ App.propTypes = {
   }),
   boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
   selectedBoxId: PropTypes.number,
-  onLoad: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {

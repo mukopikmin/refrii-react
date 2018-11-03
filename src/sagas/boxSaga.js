@@ -17,7 +17,7 @@ function* handleRequestListBox() {
     if (boxes.length > 0) {
       const box = yield select(selectors.getSelectedBox);
       if (!box) {
-        yield put(actions.selectBox(boxes[0].id));
+        yield put(actions.selectBox(boxes[0]));
       }
     }
   } catch (error) {

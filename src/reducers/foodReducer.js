@@ -14,53 +14,54 @@ const initialParams = {
   expirationDate: moment().format('YYYY-MM-DD'),
 };
 const initialState = {
-  list: [],
+  // list: [],
   isNewFoodModalOpen: false,
   isEditFoodModalOpen: false,
   isAmountFoodModalOpen: false,
-  params: initialParams,
+  target: null,
+  // params: initialParams,
 };
 
 export default handleActions({
-  [types.FOOD.LIST.REQUEST]: state => ({
-    ...state,
-  }),
-  [types.FOOD.LIST.RECEIVE]: (state, action) => ({
-    ...state,
-    list: action.payload.foods,
-  }),
-  [types.FOOD.LIST.FAILED]: (state, action) => ({
-    ...state,
-    error: action.payload.error,
-  }),
-  [types.FOOD.CREATE.REQUEST]: (state, action) => ({
-    ...state,
-    params: action.payload.params,
-  }),
-  [types.FOOD.CREATE.RECEIVE]: state => ({
-    ...state,
-    isNewFoodModalOpen: false,
-  }),
-  [types.FOOD.CREATE.FAILED]: (state, action) => ({
-    ...state,
-    error: action.payload.error,
-  }),
-  [types.FOOD.UPDATE.REQUEST]: state => ({
-    ...state,
-  }),
-  [types.FOOD.UPDATE.RECEIVE]: (state, action) => ({
-    ...state,
-    isEditFoodModalOpen: false,
-    params: initialParams,
-  }),
-  [types.FOOD.UPDATE.FAILED]: (state, action) => ({
-    ...state,
-    error: action.payload.error,
-  }),
-  [types.FOOD.SET_PARAMS]: (state, action) => ({
-    ...state,
-    params: action.payload.params,
-  }),
+  // [types.FOOD.LIST.REQUEST]: state => ({
+  //   ...state,
+  // }),
+  // [types.FOOD.LIST.RECEIVE]: (state, action) => ({
+  //   ...state,
+  //   list: action.payload.foods,
+  // }),
+  // [types.FOOD.LIST.FAILED]: (state, action) => ({
+  //   ...state,
+  //   error: action.payload.error,
+  // }),
+  // [types.FOOD.CREATE.REQUEST]: (state, action) => ({
+  //   ...state,
+  //   params: action.payload.params,
+  // }),
+  // [types.FOOD.CREATE.RECEIVE]: state => ({
+  //   ...state,
+  //   isNewFoodModalOpen: false,
+  // }),
+  // [types.FOOD.CREATE.FAILED]: (state, action) => ({
+  //   ...state,
+  //   error: action.payload.error,
+  // }),
+  // [types.FOOD.UPDATE.REQUEST]: state => ({
+  //   ...state,
+  // }),
+  // [types.FOOD.UPDATE.RECEIVE]: (state, action) => ({
+  //   ...state,
+  //   isEditFoodModalOpen: false,
+  //   params: initialParams,
+  // }),
+  // [types.FOOD.UPDATE.FAILED]: (state, action) => ({
+  //   ...state,
+  //   error: action.payload.error,
+  // }),
+  // [types.FOOD.SET_PARAMS]: (state, action) => ({
+  //   ...state,
+  //   params: action.payload.params,
+  // }),
   [types.MODAL.FOOD.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewFoodModalOpen: true,

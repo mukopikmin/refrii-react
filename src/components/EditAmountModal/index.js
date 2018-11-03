@@ -4,7 +4,7 @@ import actions from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   isOpen: state.food.isAmountFoodModalOpen,
-  params: state.food.params
+  params: state.food.params,
   // food: ownProps.food,
   // close: ownProps.close,
 });

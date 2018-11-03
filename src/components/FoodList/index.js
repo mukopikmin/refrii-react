@@ -4,9 +4,9 @@ import actions from '../../actions';
 import confirm from '../ConfirmDialog';
 
 const mapStateToProps = state => ({
-  boxes: state.box.list,
-  foods: state.food.list,
-  selectedBoxId: state.box.selectedId,
+  boxes: state.api.boxes,
+  // foods: state.api.foods,
+  box: state.box.target,
 });
 
 const mapDispatchToProps = dispatch => ({

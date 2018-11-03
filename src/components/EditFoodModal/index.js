@@ -6,10 +6,10 @@ const mapStateToProps = state => ({
   session: state.session,
   isEditFoodModalOpen: state.food.isEditFoodModalOpen,
   isNewFoodModalOpen: state.food.isNewFoodModalOpen,
-  units: state.unit.list,
-  boxes: state.box.list,
-  selectedBoxId: state.box.selectedId,
-  params: state.food.params,
+  units: state.api.units,
+  boxes: state.api.boxes,
+  box: state.box.target,
+  food: state.food.target,
 });
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListUnit()),

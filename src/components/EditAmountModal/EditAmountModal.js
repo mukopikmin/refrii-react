@@ -26,7 +26,7 @@ class EditAmountModal extends Component {
       params, isOpen, decrement, increment,
     } = this.props;
 
-    // if (params) {
+    if (params) {
       return (
         <Modal isOpen={isOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
@@ -58,7 +58,7 @@ class EditAmountModal extends Component {
           </ModalFooter>
         </Modal>
       );
-    // }
+    }
 
     return <div />;
   }

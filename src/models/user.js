@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import Base from './base';
 
-export default class User extends Base {
+class User extends Base {
   constructor(params) {
     super();
 
@@ -12,6 +12,10 @@ export default class User extends Base {
     this.id = params.id;
     this.name = params.name;
     this.provider = params.provider;
+  }
+
+  static mock() {
+    return new User(this.emptyParams);
   }
 
   static authWithGoogle(token) {
@@ -30,3 +34,14 @@ export default class User extends Base {
       }));
   }
 }
+
+User.emptyParams = {
+  avatar_url: '',
+  created_at: null,
+  email: '',
+  id: 0,
+  name: '',
+  provider: '',
+};
+
+export default User;

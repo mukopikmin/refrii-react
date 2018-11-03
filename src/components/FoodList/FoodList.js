@@ -51,15 +51,14 @@ class FoodList extends Component {
 
   render() {
     const {
-      boxes, selectedBoxId, remove, foods,
+      box, selectedBoxId, remove, foods,
     } = this.props;
     const { dropdownOpen } = this.state;
-    const box = boxes.filter(b => b.id === selectedBoxId)[0];
 
     if (box) {
       return (
         <div>
-          {box.getFoods(foods).map(food => (
+          {box.foods.map(food => (
             <div key={food.id}>
               <Card onClick={() => this.editAmount(food)}>
                 <CardBody>
@@ -95,7 +94,7 @@ class FoodList extends Component {
             </div>
           ))}
 
-          <EditAmountModal  />
+          <EditAmountModal />
         </div>
       );
     }

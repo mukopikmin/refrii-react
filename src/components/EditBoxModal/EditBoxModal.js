@@ -60,64 +60,67 @@ class EditBoxModal extends Component {
   }
 
   render() {
-    const { isEditBoxModalOpen, isNewBoxModalOpen, params } = this.props;
+    const { isEditBoxModalOpen, isNewBoxModalOpen, box } = this.props;
     const isOpen = isNewBoxModalOpen || isEditBoxModalOpen;
 
-    return (
-      <Modal isOpen={isOpen} toggle={this.close}>
-        <ModalHeader toggle={this.close}>
-          {(() => (isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加'))()}
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup row>
-              <Label for="name" sm={3}>名前</Label>
-              <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={params.name} />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="notice" sm={3}>メモ</Label>
-              <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={params.notice} />
-              </Col>
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
-          {(() => {
-            if (isEditBoxModalOpen) {
+    if (box) {
+      return (
+        <Modal isOpen={isOpen} toggle={this.close}>
+          <ModalHeader toggle={this.close}>
+            {(() => (isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加'))()}
+          </ModalHeader>
+          <ModalBody>
+            <Form>
+              <FormGroup row>
+                <Label for="name" sm={3}>名前</Label>
+                <Col sm={9}>
+                  <Input type="text" name="name" id="name" onChange={this.onNameChange} value={box.name} />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="notice" sm={3}>メモ</Label>
+                <Col sm={9}>
+                  <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={box.notice} />
+                </Col>
+              </FormGroup>
+            </Form>
+          </ModalBody>
+          <ModalFooter>
+            <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
+            {(() => {
+              if (isEditBoxModalOpen) {
+                return (
+                  <div>
+                    <Button outline color="primary" onClick={this.update}>更新</Button>
+                    {' '}
+                    <Button outline color="danger" onClick={() => this.remove(box)}>削除</Button>
+                  </div>
+                );
+              }
               return (
-                <div>
-                  <Button outline color="primary" onClick={this.update}>更新</Button>
-                  {' '}
-                  <Button outline color="danger" onClick={() => this.remove(params)}>削除</Button>
-                </div>
+                <Button outline color="primary" onClick={this.create}>追加</Button>
               );
-            }
-            return (
-              <Button outline color="primary" onClick={this.create}>追加</Button>
-            );
-          })()}
-        </ModalFooter>
-      </Modal>
-    );
+            })()}
+          </ModalFooter>
+        </Modal>
+      );
+    }
+    return <div />;
   }
 }
 
-EditBoxModal.propTypes = {
-  updateParams: PropTypes.func.isRequired,
-  params: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    notice: PropTypes.string.isRequired,
-  }).isRequired,
-  create: PropTypes.func.isRequired,
-  update: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
-  isEditBoxModalOpen: PropTypes.bool.isRequired,
-  isNewBoxModalOpen: PropTypes.bool.isRequired,
-};
+// EditBoxModal.propTypes = {
+//   updateParams: PropTypes.func.isRequired,
+//   params: PropTypes.shape({
+//     name: PropTypes.string.isRequired,
+//     notice: PropTypes.string.isRequired,
+//   }).isRequired,
+//   create: PropTypes.func.isRequired,
+//   update: PropTypes.func.isRequired,
+//   close: PropTypes.func.isRequired,
+//   remove: PropTypes.func.isRequired,
+//   isEditBoxModalOpen: PropTypes.bool.isRequired,
+//   isNewBoxModalOpen: PropTypes.bool.isRequired,
+// };
 
 export default EditBoxModal;

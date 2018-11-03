@@ -17,7 +17,7 @@ export default createActions({
   [types.BOX.INVITE.REQUEST]: (box, email) => ({ box, email }),
   [types.BOX.INVITE.RECEIVE]: () => ({ }),
   [types.BOX.INVITE.FAILED]: error => ({ error }),
-  [types.BOX.SELECT]: boxId => ({ boxId }),
+  [types.BOX.SELECT]: box => ({ box }),
   [types.BOX.SET_PARAMS]: params => ({ params }),
   [types.MODAL.BOX.NEW.OPEN]: params => ({ params }),
   [types.MODAL.BOX.NEW.CLOSE]: () => ({ }),

@@ -20,7 +20,7 @@ export default class Food extends Base {
     this.notice = params.notice;
     this.unit = new Unit(params.unit);
     this.updatedAt = moment(params.updated_at);
-    this.boxId = params.box.id;
+    // this.boxId = params.box.id;
   }
 
   static getFoods(jwt) {

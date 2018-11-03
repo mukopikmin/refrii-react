@@ -26,23 +26,21 @@ class BoxList extends Component {
     const { boxes, edit, add } = this.props;
 
     return (
-      <div id="box-list">
-        <Nav vertical>
-          <p>
-カテゴリ
-            <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} />
-          </p>
-          {boxes.map(box => (
-            <NavItem key={box.id} onClick={() => this.select(box)}>
-              <NavLink>
-                {box.name}
+      <Nav vertical>
+        <p>
+          <span>カテゴリ</span>
+          <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} />
+        </p>
+        {boxes.map(box => (
+          <NavItem key={box.id} onClick={() => this.select(box)}>
+            <NavLink>
+              {box.name}
                 &nbsp;&nbsp;
-                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
-              </NavLink>
-            </NavItem>
-          ))}
-        </Nav>
-      </div>
+              <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
+            </NavLink>
+          </NavItem>
+        ))}
+      </Nav>
     );
   }
 }

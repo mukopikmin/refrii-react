@@ -4,13 +4,13 @@ import Base from './base';
 import Food from './food';
 import User from './user';
 
-export default class Box extends Base {
+class Box extends Base {
   constructor(params) {
     super();
 
     this.changeSets = params.change_sets;
     this.createdAt = moment(params.created_at);
-    // this.foods = params.foods.map(food => new Food(food));
+    this.foods = params.foods.map(food => new Food(food));
     this.id = params.id;
     this.imageUrl = params.image_url;
     this.invitedUsers = params.invited_users;
@@ -19,6 +19,10 @@ export default class Box extends Base {
     this.notice = params.notice;
     this.owner = new User(params.owner);
     this.updatedAt = moment(params.updated_at);
+  }
+
+  static mock() {
+    return new Box(this.emptyParams);
   }
 
   static getBoxes(jwt) {
@@ -108,3 +112,19 @@ export default class Box extends Base {
     return foods.filter(food => food.boxId === this.id);
   }
 }
+
+Box.emptyParams = {
+  change_sets: [],
+  created_at: null,
+  foods: [],
+  id: 0,
+  image_url: null,
+  invited_users: [],
+  is_invited: false,
+  name: '',
+  notice: '',
+  owner: User.emptyParams,
+  updated_At: null,
+};
+
+export default Box;

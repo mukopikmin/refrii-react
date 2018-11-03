@@ -18,8 +18,7 @@ import styles from './App.module.css';
 
 class App extends Component {
   renderBoxInfo() {
-    const { boxes, selectedBoxId } = this.props;
-    const box = boxes.filter(b => b.id === selectedBoxId)[0];
+    const { box } = this.props;
 
     if (box) {
       return <BoxInfo box={box} />;

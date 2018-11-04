@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import moment from 'moment';
 import types from '../actionTypes';
+import Food from '../models/food';
 
 const initialParams = {
   id: 0,
@@ -58,14 +59,15 @@ export default handleActions({
   //   ...state,
   //   error: action.payload.error,
   // }),
-  // [types.FOOD.SET_PARAMS]: (state, action) => ({
-  //   ...state,
-  //   params: action.payload.params,
-  // }),
+  [types.FOOD.SET_PARAMS]: (state, action) => ({
+    ...state,
+    target: action.payload.food,
+  }),
   [types.MODAL.FOOD.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewFoodModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: Food.mock(),
+    // params: action.payload.params || initialParams,
   }),
   [types.MODAL.FOOD.NEW.CLOSE]: state => ({
     ...state,
@@ -75,21 +77,21 @@ export default handleActions({
   [types.MODAL.FOOD.EDIT.OPEN]: (state, action) => ({
     ...state,
     isEditFoodModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: action.payload.food,
   }),
   [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
-    params: initialParams,
+    target: null,
   }),
   [types.MODAL.FOOD.AMOUNT.OPEN]: (state, action) => ({
     ...state,
     isAmountFoodModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: action.payload.food,
   }),
   [types.MODAL.FOOD.AMOUNT.CLOSE]: state => ({
     ...state,
     isAmountFoodModalOpen: false,
-    params: initialParams,
+    target: null,
   }),
 }, initialState);

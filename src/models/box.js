@@ -111,6 +111,22 @@ class Box extends Base {
   getFoods(foods) {
     return foods.filter(food => food.boxId === this.id);
   }
+
+  toJson() {
+    return {
+      changeSets: this.changeSets,
+      createdAt: this.createdAt,
+      foods: this.foods,
+      id: this.id,
+      imageUrl: this.imageUrl,
+      invitedUsers: this.invitedUsers,
+      isInvited: this.isInvited,
+      name: this.name,
+      notice: this.notice,
+      owner: this.owner,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
 
 Box.emptyParams = {

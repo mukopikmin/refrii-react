@@ -12,6 +12,7 @@ import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
+import EditAmountModal from '../EditAmountModal';
 import BoxInfo from '../BoxInfo';
 import Box from '../../models/box';
 import styles from './App.module.css';
@@ -54,6 +55,7 @@ class App extends Component {
             <EditBoxModal />
             <EditFoodModal />
             <EditUnitModal />
+            <EditAmountModal />
           </div>
         </BrowserRouter>
       );

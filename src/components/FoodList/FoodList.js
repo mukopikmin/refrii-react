@@ -50,56 +50,52 @@ class FoodList extends Component {
   }
 
   render() {
-    const {
-      box, selectedBoxId, remove, foods,
-    } = this.props;
+    const { box, remove, foods } = this.props;
     const { dropdownOpen } = this.state;
 
-    if (box) {
-      return (
-        <div>
-          {box.foods.map(food => (
-            <div key={food.id}>
-              <Card onClick={() => this.editAmount(food)}>
-                <CardBody>
-                  <Row>
-                    <Col xs={6}>
-                      <span>{food.name}</span>
-                    </Col>
-                    <Col xs={6}>
-                      <Dropdown
-                        isOpen={dropdownOpen === food.id}
-                        toggle={() => this.toggle(food.id)}
-                      >
-                        <DropdownToggle
-                          tag="span"
-                          onClick={() => this.toggle(food.id)}
-                          data-toggle="dropdown"
-                          aria-expanded
-                        >
-                          <FontAwesomeIcon icon={faEllipsisV} size="sm" />
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          <DropdownItem onClick={() => this.edit(food)}>
-                          編集
-                          </DropdownItem>
-                          <DropdownItem onClick={() => remove(food)}>削除</DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-
-            </div>
-          ))}
-
-          <EditAmountModal />
-        </div>
-      );
+    if (!box) {
+      return <Spinner loading />;
     }
 
-    return <Spinner loading />;
+    return (
+      <div>
+        {box.foods.map(food => (
+          <div key={food.id}>
+            <Card onClick={() => this.editAmount(food)}>
+              <CardBody>
+                <Row>
+                  <Col xs={6}>
+                    <span>{food.name}</span>
+                  </Col>
+                  <Col xs={6}>
+                    {`${food.amount} ${food.unit.label}`}
+                    {/* <Dropdown
+                      isOpen={dropdownOpen === food.id}
+                      toggle={() => this.toggle(food.id)}
+                    >
+                      <DropdownToggle
+                        tag="span"
+                        onClick={() => this.toggle(food.id)}
+                        data-toggle="dropdown"
+                        aria-expanded
+                      >
+                        <FontAwesomeIcon icon={faEllipsisV} size="sm" />
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem onClick={() => this.edit(food)}>
+                          編集
+                          </DropdownItem>
+                        <DropdownItem onClick={() => remove(food)}>削除</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown> */}
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 

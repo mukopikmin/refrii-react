@@ -4,7 +4,7 @@ import actions from '../../actions';
 
 const mapStateToProps = state => ({
   session: state.session,
-  units: state.unit.list,
+  units: state.api.units,
 });
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListUnit()),

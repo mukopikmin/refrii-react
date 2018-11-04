@@ -33,6 +33,17 @@ class User extends Base {
         },
       }));
   }
+
+  toJson() {
+    return {
+      avatarUrl: this.avatarUrl,
+      createdAt: this.createdAt,
+      email: this.email,
+      id: this.id,
+      name: this.name,
+      provider: this.provider,
+    };
+  }
 }
 
 User.emptyParams = {

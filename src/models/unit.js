@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import Base from './base';
 
-export default class Unit extends Base {
+class Unit extends Base {
   constructor(params) {
     super();
 
@@ -11,6 +11,10 @@ export default class Unit extends Base {
     this.label = params.label;
     this.step = params.step;
     this.updatedAt = moment(params.updated_at);
+  }
+
+  static mock() {
+    return new Unit(this.emptyParams);
   }
 
   static getUnits(jwt) {
@@ -61,4 +65,24 @@ export default class Unit extends Base {
 
     return super.authFetch(`${super.endpoint}/units/${id}`, jwt, options);
   }
+
+  toJson() {
+    return {
+      createdAt: this.createdAt,
+      id: this.id,
+      label: this.label,
+      step: this.step,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
+
+Unit.emptyParams = {
+  created_at: null,
+  id: 0,
+  label: '',
+  step: 0,
+  updated_at: null,
+};
+
+export default Unit;

@@ -30,77 +30,77 @@ class EditFoodModal extends Component {
   }
 
   onNameChange(e) {
-    const { updateParams, params } = this.props;
+    const { updateParams, food } = this.props;
 
     updateParams({
-      ...params,
+      ...food,
       name: e.target.value,
     });
   }
 
   onAmountChange(e) {
-    const { updateParams, params } = this.props;
+    const { updateParams, food } = this.props;
 
     updateParams({
-      ...params,
+      ...food,
       amount: e.target.value,
     });
   }
 
   onUnitChange(e) {
-    const { updateParams, params } = this.props;
+    const { updateParams, food } = this.props;
 
     updateParams({
-      ...params,
+      ...food,
       unitId: e.target.value,
     });
   }
 
   onDateChange(date) {
-    const { updateParams, params } = this.props;
+    const { updateParams, food } = this.props;
 
     updateParams({
-      ...params,
+      ...food,
       expirationDate: date,
     });
   }
 
   onNoticeChange(e) {
-    const { updateParams, params } = this.props;
+    const { updateParams, food } = this.props;
 
     updateParams({
-      ...params,
+      ...food,
       notice: e.target.value,
     });
   }
 
   onNeedsAddingChange() {
-    const { updateParams, params } = this.props;
+    const { updateParams, food } = this.props;
 
     updateParams({
-      ...params,
-      needsAdding: !params.needsAdding,
+      ...food,
+      needsAdding: !food.needsAdding,
     });
   }
 
   create() {
-    const { create, selectedBoxId, params } = this.props;
+    const { create, selectedBoxId, food } = this.props;
 
     create({
-      name: params.name,
-      amount: params.amount,
-      notice: params.notice,
-      expirationDate: params.expirationDate,
-      unitId: params.unitId,
+      name: food.name,
+      amount: food.amount,
+      notice: food.notice,
+      expirationDate: food.expirationDate,
+      unitId: food.unitId,
       boxId: selectedBoxId,
     });
   }
 
   update() {
-    const { update, params, selectedBoxId } = this.props;
+    const { update, food, selectedBoxId } = this.props;
 
     update({
-      ...params,
+      ...food,
       boxId: selectedBoxId,
     });
   }
@@ -117,89 +117,89 @@ class EditFoodModal extends Component {
     } = this.props;
     const isOpen = isNewFoodModalOpen || isEditFoodModalOpen;
 
-    if (food) {
-      return (
-        <Modal isOpen={isOpen} toggle={this.close}>
-          <ModalHeader toggle={this.close}>
-            {(() => (isEditFoodModalOpen ? '食材の編集' : '食材の追加'))()}
-          </ModalHeader>
-          <ModalBody>
-            <Form>
-              <FormGroup row>
-                <Label for="name" sm={3}>名前</Label>
-                <Col sm={9}>
-                  <Input type="text" name="name" id="name" onChange={this.onNameChange} value={food.name} />
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label for="amount" sm={3}>数量</Label>
-                <Col sm={3}>
-                  <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={food.amount} />
-                </Col>
-                <Col sm={6}>
-                  <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={food.unitId}>
-                    <option value="0" />
-                    {units.map(unit => (
-                      <option key={unit.id} value={unit.id}>{unit.label}</option>
-                    ))}
-                  </Input>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label for="expiration-date" sm={3}>期限</Label>
-                <Col sm={9}>
-                  <DatePicker
-                    inline
-                    customInput={<Input />}
-                    name="expiration-date"
-                    id="expiration-date"
-                    selected={moment(food.expirationDate)}
-                    onChange={this.onDateChange}
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label for="notice" sm={3}>メモ</Label>
-                <Col sm={9}>
-                  <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={food.notice} />
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col sm={{ size: 9, offset: 3 }}>
-                  <FormGroup check>
-                    <Label check>
-                      <CustomInput type="checkbox" id="needs-adding" onChange={this.onNeedsAddingChange} checked={food.needsAdding} label="買い足しが必要" />
-                    </Label>
-                  </FormGroup>
-                </Col>
-              </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this.close}>キャンセル</Button>
-            {(() => {
-              if (isEditFoodModalOpen) {
-                return (
-                  <Button color="primary" onClick={this.update}>更新</Button>
-                );
-              }
-              return (
-                <Button color="primary" onClick={this.create}>追加</Button>
-              );
-            })()}
-          </ModalFooter>
-        </Modal>
-      );
+    if (!food) {
+      return <div />;
     }
 
-    return <div />;
+    return (
+      <Modal isOpen={isOpen} toggle={this.close}>
+        <ModalHeader toggle={this.close}>
+          {(() => (isEditFoodModalOpen ? '食材の編集' : '食材の追加'))()}
+        </ModalHeader>
+        <ModalBody>
+          <Form>
+            <FormGroup row>
+              <Label for="name" sm={3}>名前</Label>
+              <Col sm={9}>
+                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={food.name} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="amount" sm={3}>数量</Label>
+              <Col sm={3}>
+                <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={food.amount} />
+              </Col>
+              <Col sm={6}>
+                <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={food.unitId}>
+                  <option value="0" />
+                  {units.map(unit => (
+                    <option key={unit.id} value={unit.id}>{unit.label}</option>
+                  ))}
+                </Input>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="expiration-date" sm={3}>期限</Label>
+              <Col sm={9}>
+                <DatePicker
+                  inline
+                  customInput={<Input />}
+                  name="expiration-date"
+                  id="expiration-date"
+                  selected={moment(food.expirationDate)}
+                  onChange={this.onDateChange}
+                />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="notice" sm={3}>メモ</Label>
+              <Col sm={9}>
+                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={food.notice} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col sm={{ size: 9, offset: 3 }}>
+                <FormGroup check>
+                  <Label check>
+                    <CustomInput type="checkbox" id="needs-adding" onChange={this.onNeedsAddingChange} checked={food.needsAdding} label="買い足しが必要" />
+                  </Label>
+                </FormGroup>
+              </Col>
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={this.close}>キャンセル</Button>
+          {(() => {
+            if (isEditFoodModalOpen) {
+              return (
+                <Button color="primary" onClick={this.update}>更新</Button>
+              );
+            }
+            return (
+              <Button color="primary" onClick={this.create}>追加</Button>
+            );
+          })()}
+        </ModalFooter>
+      </Modal>
+    );
   }
 }
 
 // EditFoodModal.propTypes = {
 //   onLoad: PropTypes.func.isRequired,
 //   updateParams: PropTypes.func.isRequired,
-//   params: PropTypes.shape({
+//   food: PropTypes.shape({
 //     name: PropTypes.string.isRequired,
 //     amount: PropTypes.number.isRequired,
 //     // unitId: PropTypes.number.isRequired,

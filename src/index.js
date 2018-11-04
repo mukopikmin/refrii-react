@@ -9,6 +9,7 @@ import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
 import moment from 'moment';
 import ReactGA from 'react-ga';
+import 'babel-polyfill';
 import 'moment/locale/ja';
 
 import App from './components/App';

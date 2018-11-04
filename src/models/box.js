@@ -10,7 +10,7 @@ export default class Box extends Base {
 
     this.changeSets = params.change_sets;
     this.createdAt = moment(params.created_at);
-    this.foods = params.foods.map(food => new Food(food));
+    // this.foods = params.foods.map(food => new Food(food));
     this.id = params.id;
     this.imageUrl = params.image_url;
     this.invitedUsers = params.invited_users;
@@ -30,18 +30,18 @@ export default class Box extends Base {
         const timeB = new Date(b.updatedAt).getTime();
 
         return timeB - timeA;
-      }))
-      .then(boxes => boxes.map((_box) => {
-        const box = _box;
-        const foods = box.foods.sort((a, b) => {
-          const timeA = new Date(a.updatedAt).getTime();
-          const timeB = new Date(b.updatedAt).getTime();
-
-          return timeB - timeA;
-        });
-        box.foods = foods;
-        return box;
       }));
+    // .then(boxes => boxes.map((_box) => {
+    //   const box = _box;
+    //   const foods = box.foods.sort((a, b) => {
+    //     const timeA = new Date(a.updatedAt).getTime();
+    //     const timeB = new Date(b.updatedAt).getTime();
+
+    //     return timeB - timeA;
+    //   });
+    //   box.foods = foods;
+    //   return box;
+    // }));
   }
 
   static createBox(jwt, body) {
@@ -102,5 +102,9 @@ export default class Box extends Base {
     return super.authFetch(`${super.endpoint}/boxes/${boxId}/foods`, jwt)
       .then(response => response.json())
       .then(foods => foods.map(food => new Food(food)));
+  }
+
+  getFoods(foods) {
+    return foods.filter(food => food.boxId === this.id);
   }
 }

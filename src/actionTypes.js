@@ -34,6 +34,11 @@ export default {
     SELECT: 'SELECT_BOX',
   },
   FOOD: {
+    LIST: {
+      REQUEST: 'REQUEST_LIST_FOOD',
+      RECEIVE: 'RECEIVE_LIST_FOOD',
+      FAILED: 'FAILED_LIST_FOOD',
+    },
     CREATE: {
       REQUEST: 'REQUEST_CREATE_FOOD',
       RECEIVE: 'RECEIVE_CREATE_FOOD',
@@ -93,6 +98,10 @@ export default {
       EDIT: {
         OPEN: 'OPEN_EDIT_FOOD_MODAL',
         CLOSE: 'CLOSE_EDIT_FOOD_MODAL',
+      },
+      AMOUNT: {
+        OPEN: 'OPEN_AMOUNT_FOOD_MODAL',
+        CLOSE: 'CLOSE_AMOUNT_FOOD_MODAL',
       },
     },
     UNIT: {

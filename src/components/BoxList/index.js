@@ -7,7 +7,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(actions.requestListBox()),
+  onLoad: () => {
+    dispatch(actions.requestListBox());
+    dispatch(actions.requestListFood());
+  },
   select: box => dispatch(actions.selectBox(box.id)),
   add: () => dispatch(actions.openNewBoxModal()),
   edit: box => dispatch(actions.openEditBoxModal(box)),

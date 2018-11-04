@@ -1,15 +1,16 @@
-#landing {
-  background: url('../../assets/background.jpg')  ;
+.background {
+  height: 100%;
+  background: url('../../assets/background.jpg');
   background-size:  cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-#explain {
+.explain {
   margin: 40px;
 }
 
-.app-name {
+.appName {
   margin-top: 20px;
   font-weight: bold;
   color: #3289e7;
@@ -41,7 +42,7 @@
   z-index: -1;
 }
 
-.contents-inner {
+.contentsInner {
   box-sizing: boder-box;
   width: 100%;
   max-width: 640px;
@@ -51,8 +52,4 @@
   color: #fff;
   text-align: center;
   height: 800px;
-}
-
-#landing {
-  height: 100%;
 }

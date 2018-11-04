@@ -14,12 +14,25 @@ const initialParams = {
   expirationDate: moment().format('YYYY-MM-DD'),
 };
 const initialState = {
+  list: [],
   isNewFoodModalOpen: false,
   isEditFoodModalOpen: false,
+  isAmountFoodModalOpen: false,
   params: initialParams,
 };
 
 export default handleActions({
+  [types.FOOD.LIST.REQUEST]: state => ({
+    ...state,
+  }),
+  [types.FOOD.LIST.RECEIVE]: (state, action) => ({
+    ...state,
+    list: action.payload.foods,
+  }),
+  [types.FOOD.LIST.FAILED]: (state, action) => ({
+    ...state,
+    error: action.payload.error,
+  }),
   [types.FOOD.CREATE.REQUEST]: (state, action) => ({
     ...state,
     params: action.payload.params,
@@ -35,11 +48,10 @@ export default handleActions({
   [types.FOOD.UPDATE.REQUEST]: state => ({
     ...state,
   }),
-  [types.FOOD.UPDATE.RECEIVE]: (state, action) => ({
+  [types.FOOD.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
     params: initialParams,
-    list: action.payload.boxes,
   }),
   [types.FOOD.UPDATE.FAILED]: (state, action) => ({
     ...state,
@@ -67,6 +79,16 @@ export default handleActions({
   [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
+    params: initialParams,
+  }),
+  [types.MODAL.FOOD.AMOUNT.OPEN]: (state, action) => ({
+    ...state,
+    isAmountFoodModalOpen: true,
+    params: action.payload.params || initialParams,
+  }),
+  [types.MODAL.FOOD.AMOUNT.CLOSE]: state => ({
+    ...state,
+    isAmountFoodModalOpen: false,
     params: initialParams,
   }),
 }, initialState);

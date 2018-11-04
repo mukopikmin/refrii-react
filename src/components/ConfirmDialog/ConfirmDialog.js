@@ -32,9 +32,10 @@ class ConfirmDialog extends Component {
 
   render() {
     const { confirmation } = this.props;
+    const { open } = this.state;
 
     return (
-      <Modal isOpen={this.state.open} toggle={this.close}>
+      <Modal isOpen={open} toggle={this.close}>
         <ModalHeader toggle={this.close}>確認</ModalHeader>
         <ModalBody>
           {confirmation}

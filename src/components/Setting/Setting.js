@@ -6,7 +6,9 @@ import { PropTypes } from 'prop-types';
 
 class Setting extends Component {
   componentDidMount() {
-    this.props.onLoad();
+    const { onLoad } = this.props;
+
+    onLoad();
   }
 
   render() {

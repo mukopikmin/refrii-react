@@ -25,10 +25,10 @@ class Invitation extends Component {
   }
 
   toggle() {
-    this.setState({
-      collapse: !this.state.collapse,
+    this.setState(prev => ({
+      collapse: !prev.collapse,
       email: '',
-    });
+    }));
   }
 
   invite() {
@@ -40,16 +40,18 @@ class Invitation extends Component {
   }
 
   render() {
+    const { collapse, email } = this.state;
+
     return (
       <span>
         <Button id="share" outline color="success" onClick={this.toggle}>共有</Button>
-        <Collapse isOpen={this.state.collapse}>
+        <Collapse isOpen={collapse}>
           <Card>
             <CardBody>
               <p align="left">
               共有するユーザーのメールアドレスを入力してください
               </p>
-              <Input type="text" value={this.state.email} onChange={this.onChangeEmail} />
+              <Input type="text" value={email} onChange={this.onChangeEmail} />
               <Button outline color="info" onClick={this.invite}>共有</Button>
             </CardBody>
           </Card>

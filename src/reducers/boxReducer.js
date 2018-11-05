@@ -2,11 +2,6 @@ import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
 import Box from '../models/box';
 
-// const initialParams = {
-//   id: 0,
-//   name: '',
-//   notice: '',
-// };
 const initialState = {
   list: [],
   isNewBoxModalOpen: false,
@@ -27,9 +22,8 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.BOX.CREATE.REQUEST]: (state, action) => ({
+  [types.BOX.CREATE.REQUEST]: state => ({
     ...state,
-    // // params: action.payload.params,
   }),
   [types.BOX.CREATE.RECEIVE]: state => ({
     ...state,
@@ -43,7 +37,6 @@ export default handleActions({
   [types.BOX.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
-    // params: initialParams,
   }),
   [types.BOX.UPDATE.FAILED]: (state, action) => ({
     ...state,
@@ -69,29 +62,21 @@ export default handleActions({
     ...state,
     target: action.payload.box,
   }),
-  // [types.BOX.SET_PARAMS]: (state, action) => ({
-  //   ...state,
-  // params: action.payload.params,
-  // }),
   [types.MODAL.BOX.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewBoxModalOpen: true,
     target: action.payload.target || Box.mock(),
-    // params: action.payload.params || initialParams,
   }),
   [types.MODAL.BOX.NEW.CLOSE]: state => ({
     ...state,
     isNewBoxModalOpen: false,
-    // params: initialParams,
   }),
-  [types.MODAL.BOX.EDIT.OPEN]: (state, action) => ({
+  [types.MODAL.BOX.EDIT.OPEN]: state => ({
     ...state,
     isEditBoxModalOpen: true,
-    // // params: action.payload.params || initialParams,
   }),
   [types.MODAL.BOX.EDIT.CLOSE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
-    // params: initialParams,
   }),
 }, initialState);

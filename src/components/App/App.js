@@ -14,7 +14,6 @@ import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
 import EditAmountModal from '../EditAmountModal';
 import BoxInfo from '../BoxInfo';
-import Box from '../../models/box';
 import styles from './App.module.css';
 
 class App extends Component {
@@ -69,15 +68,12 @@ App.propTypes = {
   session: PropTypes.shape({
     user: PropTypes.shape({}),
   }),
-  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
-  selectedBoxId: PropTypes.number,
 };
 
 App.defaultProps = {
   session: {
     user: {},
   },
-  selectedBoxId: 0,
 };
 
 export default App;

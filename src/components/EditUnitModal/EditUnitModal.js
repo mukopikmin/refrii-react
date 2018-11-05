@@ -126,25 +126,24 @@ class EditUnitModal extends Component {
   }
 }
 
-// EditUnitModal.propTypes = {
-//   updateParams: PropTypes.func.isRequired,
-//   params: PropTypes.shape({
-//     label: PropTypes.string,
-//     step: PropTypes.number,
-//   }),
-//   create: PropTypes.func.isRequired,
-//   update: PropTypes.func.isRequired,
-//   close: PropTypes.func.isRequired,
-//   remove: PropTypes.func.isRequired,
-//   isEditUnitModalOpen: PropTypes.bool.isRequired,
-//   isNewUnitModalOpen: PropTypes.bool.isRequired,
-// };
+EditUnitModal.propTypes = {
+  params: PropTypes.shape({
+    label: PropTypes.string,
+    step: PropTypes.number,
+  }),
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  isEditUnitModalOpen: PropTypes.bool.isRequired,
+  isNewUnitModalOpen: PropTypes.bool.isRequired,
+};
 
-// EditUnitModal.defaultProps = {
-//   params: {
-//     label: '',
-//     step: 0,
-//   },
-// };
+EditUnitModal.defaultProps = {
+  params: {
+    label: '',
+    step: 0,
+  },
+};
 
 export default EditUnitModal;

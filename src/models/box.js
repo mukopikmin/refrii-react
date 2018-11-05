@@ -1,7 +1,6 @@
 import moment from 'moment';
 
 import Base from './base';
-// import Food from './food';
 import User from './user';
 
 class Box extends Base {

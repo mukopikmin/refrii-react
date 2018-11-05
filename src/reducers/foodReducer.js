@@ -1,26 +1,13 @@
 import { handleActions } from 'redux-actions';
-// import moment from 'moment';
 import types from '../actionTypes';
 import Food from '../models/food';
 
-// const initialParams = {
-//   id: 0,
-//   name: '',
-//   amount: 0,
-//   unitId: 0,
-//   userId: 0,
-//   boxId: 0,
-//   notice: '',
-//   needsAdding: false,
-//   expirationDate: moment().format('YYYY-MM-DD'),
-// };
 const initialState = {
   list: [],
   isNewFoodModalOpen: false,
   isEditFoodModalOpen: false,
   isAmountFoodModalOpen: false,
   target: null,
-  // params: initialParams,
 };
 
 export default handleActions({
@@ -46,11 +33,10 @@ export default handleActions({
     error: action.payload.error,
   }),
   [types.FOOD.UPDATE.REQUEST]: state => ({ ...state }),
-  [types.FOOD.UPDATE.RECEIVE]: (state, action) => ({
+  [types.FOOD.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
     isAmountFoodModalOpen: false,
-    // params: initialParams,
   }),
   [types.FOOD.UPDATE.FAILED]: (state, action) => ({
     ...state,

@@ -195,28 +195,21 @@ class EditFoodModal extends Component {
   }
 }
 
-// EditFoodModal.propTypes = {
-//   onLoad: PropTypes.func.isRequired,
-//   updateParams: PropTypes.func.isRequired,
-//   food: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     amount: PropTypes.number.isRequired,
-//     // unitId: PropTypes.number.isRequired,
-//     expirationDate: PropTypes.string.isRequired,
-//     notice: PropTypes.string.isRequired,
-//     needsAdding: PropTypes.bool.isRequired,
-//   }).isRequired,
-//   selectedBoxId: PropTypes.number,
-//   create: PropTypes.func.isRequired,
-//   update: PropTypes.func.isRequired,
-//   close: PropTypes.func.isRequired,
-//   isEditFoodModalOpen: PropTypes.bool.isRequired,
-//   isNewFoodModalOpen: PropTypes.bool.isRequired,
-//   units: PropTypes.arrayOf(PropTypes.instanceOf(Unit)).isRequired,
-// };
-
-// EditFoodModal.defaultProps = {
-//   selectedBoxId: 0,
-// };
+EditFoodModal.propTypes = {
+  onLoad: PropTypes.func.isRequired,
+  food: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    expirationDate: PropTypes.string.isRequired,
+    notice: PropTypes.string.isRequired,
+    needsAdding: PropTypes.bool.isRequired,
+  }).isRequired,
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  isEditFoodModalOpen: PropTypes.bool.isRequired,
+  isNewFoodModalOpen: PropTypes.bool.isRequired,
+  units: PropTypes.arrayOf(PropTypes.instanceOf(Unit)).isRequired,
+};
 
 export default EditFoodModal;

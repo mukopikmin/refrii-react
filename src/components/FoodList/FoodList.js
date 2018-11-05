@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Card, CardBody, Row,
-  Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem,
+  Card, CardBody, Row, Col,
 } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 
 import Spinner from '../Spinner';
-import Box from '../../models/box';
-import EditAmountModal from '../EditAmountModal';
 
 class FoodList extends Component {
   edit(food) {
@@ -61,15 +56,9 @@ class FoodList extends Component {
   }
 }
 
-// FoodList.propTypes = {
-//   edit: PropTypes.func.isRequired,
-//   boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
-//   selectedBoxId: PropTypes.number,
-//   remove: PropTypes.func.isRequired,
-// };
-
-// FoodList.defaultProps = {
-//   selectedBoxId: 0,
-// };
+FoodList.propTypes = {
+  editAmount: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
+};
 
 export default FoodList;

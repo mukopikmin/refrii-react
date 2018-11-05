@@ -9,7 +9,7 @@ import Food from '../models/food';
 import Box from '../models/box';
 import handleError from './handleErrors';
 
-function* handleRequestListFood(action) {
+function* handleRequestListFood() {
   try {
     const session = yield select(selectors.getSession);
     const foods = yield call(Food.getFoods, session.jwt);

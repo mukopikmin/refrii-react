@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, Input, Row, Container, InputGroup, InputGroupAddon,
+  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form,
+  Input, Row, Container, InputGroup, InputGroupAddon,
 } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 
@@ -104,5 +105,13 @@ class EditAmountModal extends Component {
     );
   }
 }
+
+EditAmountModal.propTypes = {
+  edit: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  food: PropTypes.instanceOf(Food).isRequired,
+};
 
 export default EditAmountModal;

@@ -18,6 +18,7 @@ class EditBoxModal extends Component {
     this.close = this.close.bind(this);
     this.isOpen = this.isOpen.bind(this);
     this.onOpened = this.onOpened.bind(this);
+    this.remove = this.remove.bind(this);
 
     this.state = Box.mock().toJson();
   }
@@ -130,18 +131,17 @@ class EditBoxModal extends Component {
   }
 }
 
-// EditBoxModal.propTypes = {
-//   updateParams: PropTypes.func.isRequired,
-//   params: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     notice: PropTypes.string.isRequired,
-//   }).isRequired,
-//   create: PropTypes.func.isRequired,
-//   update: PropTypes.func.isRequired,
-//   close: PropTypes.func.isRequired,
-//   remove: PropTypes.func.isRequired,
-//   isEditBoxModalOpen: PropTypes.bool.isRequired,
-//   isNewBoxModalOpen: PropTypes.bool.isRequired,
-// };
+EditBoxModal.propTypes = {
+  params: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    notice: PropTypes.string.isRequired,
+  }).isRequired,
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  isEditBoxModalOpen: PropTypes.bool.isRequired,
+  isNewBoxModalOpen: PropTypes.bool.isRequired,
+};
 
 export default EditBoxModal;

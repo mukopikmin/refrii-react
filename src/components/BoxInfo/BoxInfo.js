@@ -42,7 +42,7 @@ class BoxInfo extends Component {
           </Col>
           <Col sm={6}>
             <div align="right">
-              <Button outline color="primary" onClick={() => add(box)}>新規作成</Button>
+              <Button outline color="primary" onClick={add}>新規作成</Button>
               {' '}
               <Invitation box={box} />
             </div>

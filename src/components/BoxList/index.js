@@ -3,7 +3,7 @@ import BoxList from './BoxList';
 import actions from '../../actions';
 
 const mapStateToProps = state => ({
-  boxes: state.api.boxes,
+  boxes: state.box.list,
 });
 
 const mapDispatchToProps = dispatch => ({

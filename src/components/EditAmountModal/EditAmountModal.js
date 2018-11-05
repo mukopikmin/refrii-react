@@ -15,12 +15,15 @@ class EditAmountModal extends Component {
     this.onDecrease = this.onDecrease.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.submit = this.submit.bind(this);
+    this.edit = this.edit.bind(this);
 
     this.state = Food.mock().toJson();
   }
 
-  onAmountChange() {
+  onAmountChange(e) {
+    const amount = e.target.value;
 
+    this.setState({ amount });
   }
 
   onIncrease() {
@@ -37,28 +40,32 @@ class EditAmountModal extends Component {
     }));
   }
 
-  toggle() {
-    const { close } = this.props;
-
-    close();
-  }
-
   onOpened() {
     const { food } = this.props;
 
     this.setState(food.toJson());
   }
 
-  submit() {
-    const {update}=this.props
+  toggle() {
+    const { close } = this.props;
 
-    update(this.state)
+    close();
+  }
+
+  submit() {
+    const { update } = this.props;
+
+    update(this.state);
+  }
+
+  edit() {
+    const { edit, food } = this.props;
+
+    edit(food);
   }
 
   render() {
-    const {
-      food, isOpen, decrement, increment,
-    } = this.props;
+    const { food, isOpen } = this.props;
     const { name, amount, unit } = this.state;
 
     if (!food) {
@@ -73,7 +80,7 @@ class EditAmountModal extends Component {
             <Container>
               <Row>
                 <Col sm={3}>
-                  <Button block outline color="danger" size="sm" onClick={() => decrement(food)}>-</Button>
+                  <Button block outline color="danger" size="sm" onClick={this.onDecrease}>-</Button>
                 </Col>
                 <Col sm={6}>
                   <InputGroup>
@@ -90,6 +97,7 @@ class EditAmountModal extends Component {
         </ModalBody>
         <ModalFooter>
           <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
+          <Button outline color="primary" onClick={this.edit}>編集</Button>
           <Button outline color="primary" onClick={this.submit}>更新</Button>
         </ModalFooter>
       </Modal>

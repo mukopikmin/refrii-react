@@ -6,8 +6,8 @@ const mapStateToProps = state => ({
   session: state.session,
   isEditFoodModalOpen: state.food.isEditFoodModalOpen,
   isNewFoodModalOpen: state.food.isNewFoodModalOpen,
-  units: state.api.units,
-  boxes: state.api.boxes,
+  units: state.unit.list,
+  boxes: state.box.list,
   box: state.box.target,
   food: state.food.target,
 });
@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
   },
   create: params => dispatch(actions.requestCreateFood(params)),
   update: params => dispatch(actions.requestUpdateFood(params)),
-  updateParams: params => dispatch(actions.setParamsFood(params)),
+  // updateParams: params => dispatch(actions.setParamsFood(params)),
 });
 
 export default connect(

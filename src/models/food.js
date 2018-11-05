@@ -24,7 +24,7 @@ class Food extends Base {
   }
 
   static mock() {
-    return new Food(this.empltyParams);
+    return new Food(this.emptyParams);
   }
 
   static getFoods(jwt) {
@@ -102,7 +102,7 @@ class Food extends Base {
   }
 }
 
-Food.empltyParams = {
+Food.emptyParams = {
   amount: 0,
   change_Sets: [],
   created_at: null,

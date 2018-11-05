@@ -6,7 +6,9 @@ import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class EditBoxModal extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     this.onNameChange = this.onNameChange.bind(this);
     this.onNoticeChange = this.onNoticeChange.bind(this);
     this.create = this.create.bind(this);

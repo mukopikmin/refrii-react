@@ -3,7 +3,7 @@ import App from './App';
 
 const mapStateToProps = state => ({
   session: state.session,
-  boxes: state.api.boxes,
+  boxes: state.box.list,
   box: state.box.target,
 });
 const mapDispatchToProps = () => ({});

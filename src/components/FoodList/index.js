@@ -4,8 +4,8 @@ import actions from '../../actions';
 import confirm from '../ConfirmDialog';
 
 const mapStateToProps = state => ({
-  boxes: state.api.boxes,
-  // foods: state.api.foods,
+  boxes: state.box.list,
+  // foods: state.food.list,
   box: state.box.target,
 });
 

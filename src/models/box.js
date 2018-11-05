@@ -34,18 +34,18 @@ class Box extends Base {
         const timeB = new Date(b.updatedAt).getTime();
 
         return timeB - timeA;
-      }));
-    // .then(boxes => boxes.map((_box) => {
-    //   const box = _box;
-    //   const foods = box.foods.sort((a, b) => {
-    //     const timeA = new Date(a.updatedAt).getTime();
-    //     const timeB = new Date(b.updatedAt).getTime();
+      }))
+      .then(boxes => boxes.map((_box) => {
+        const box = _box;
+        const foods = box.foods.sort((a, b) => {
+          const timeA = new Date(a.updatedAt).getTime();
+          const timeB = new Date(b.updatedAt).getTime();
 
-    //     return timeB - timeA;
-    //   });
-    //   box.foods = foods;
-    //   return box;
-    // }));
+          return timeB - timeA;
+        });
+        box.foods = foods;
+        return box;
+      }));
   }
 
   static createBox(jwt, body) {

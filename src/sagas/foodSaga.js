@@ -23,8 +23,8 @@ function* handleRequestListFood(action) {
 function* handleRequestCreateFood(action) {
   try {
     const session = yield select(selectors.getSession);
-    const { params } = action.payload;
-    yield call(Food.createFood, session.jwt, params);
+    const { food } = action.payload;
+    yield call(Food.createFood, session.jwt, food);
     yield put(actions.receiveCreateFood());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
@@ -36,10 +36,11 @@ function* handleRequestCreateFood(action) {
 
 function* handleRequestUpdateFood(action) {
   try {
-    const { params } = action.payload;
+    const { food } = action.payload;
+    console.log(food);
     const session = yield select(selectors.getSession);
-    const food = yield call(Food.updateFood, session.jwt, params);
-    yield put(actions.receiveUpdateFood(food));
+    const updatedFood = yield call(Food.updateFood, session.jwt, food);
+    yield put(actions.receiveUpdateFood(updatedFood));
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {

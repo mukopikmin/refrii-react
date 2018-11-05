@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
       () => {},
     );
   },
-  updateParams: params => dispatch(actions.setParamsBox(params)),
+  // updateParams: params => dispatch(actions.setParamsBox(params)),
 });
 
 export default connect(

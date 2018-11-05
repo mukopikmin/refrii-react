@@ -3,6 +3,7 @@ import moment from 'moment';
 import Base from './base';
 import Unit from './unit';
 import User from './user';
+import Box from './box';
 
 class Food extends Base {
   constructor(params) {
@@ -20,7 +21,7 @@ class Food extends Base {
     this.notice = params.notice;
     this.unit = new Unit(params.unit);
     this.updatedAt = moment(params.updated_at);
-    // this.boxId = params.box.id;
+    this.boxId = params.box.id;
   }
 
   static mock() {
@@ -115,6 +116,7 @@ Food.emptyParams = {
   notice: '',
   unit: Unit.emptyParams,
   updated_at: null,
+  box: Box.emptyParams,
 };
 
 export default Food;

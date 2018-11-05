@@ -12,24 +12,6 @@ import Box from '../../models/box';
 import EditAmountModal from '../EditAmountModal';
 
 class FoodList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.close = this.close.bind(this);
-
-    this.state = {
-      dropdownOpen: 0,
-      food: null,
-    };
-  }
-
-  toggle(id) {
-    this.setState(prev => ({
-      dropdownOpen: prev.id === id ? 0 : id,
-    }));
-  }
-
   edit(food) {
     const { edit } = this.props;
 
@@ -45,21 +27,20 @@ class FoodList extends Component {
     editAmount(food);
   }
 
-  close() {
-    // this.setState({ food: null });
-  }
-
   render() {
-    const { box, remove, foods } = this.props;
-    const { dropdownOpen } = this.state;
+    const { box, foods } = this.props;
 
     if (!box) {
       return <Spinner loading />;
     }
 
+    if (box.getFoods(foods).length === 0) {
+      return <p>食材は登録されていません</p>
+    }
+
     return (
       <div>
-        {box.foods.map(food => (
+        {box.getFoods(foods).map(food => (
           <div key={food.id}>
             <Card onClick={() => this.editAmount(food)}>
               <CardBody>
@@ -69,25 +50,6 @@ class FoodList extends Component {
                   </Col>
                   <Col xs={6}>
                     {`${food.amount} ${food.unit.label}`}
-                    {/* <Dropdown
-                      isOpen={dropdownOpen === food.id}
-                      toggle={() => this.toggle(food.id)}
-                    >
-                      <DropdownToggle
-                        tag="span"
-                        onClick={() => this.toggle(food.id)}
-                        data-toggle="dropdown"
-                        aria-expanded
-                      >
-                        <FontAwesomeIcon icon={faEllipsisV} size="sm" />
-                      </DropdownToggle>
-                      <DropdownMenu>
-                        <DropdownItem onClick={() => this.edit(food)}>
-                          編集
-                          </DropdownItem>
-                        <DropdownItem onClick={() => remove(food)}>削除</DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown> */}
                   </Col>
                 </Row>
               </CardBody>
@@ -99,15 +61,15 @@ class FoodList extends Component {
   }
 }
 
-FoodList.propTypes = {
-  edit: PropTypes.func.isRequired,
-  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
-  selectedBoxId: PropTypes.number,
-  remove: PropTypes.func.isRequired,
-};
+// FoodList.propTypes = {
+//   edit: PropTypes.func.isRequired,
+//   boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
+//   selectedBoxId: PropTypes.number,
+//   remove: PropTypes.func.isRequired,
+// };
 
-FoodList.defaultProps = {
-  selectedBoxId: 0,
-};
+// FoodList.defaultProps = {
+//   selectedBoxId: 0,
+// };
 
 export default FoodList;

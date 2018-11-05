@@ -29,8 +29,8 @@ function* handleRequestListBox() {
 function* handleRequestCreateBox(action) {
   try {
     const session = yield select(selectors.getSession);
-    const { params } = action.payload;
-    yield call(Box.createBox, session.jwt, params);
+    const { box } = action.payload;
+    yield call(Box.createBox, session.jwt, box);
     yield put(actions.receiveCreateBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
@@ -42,9 +42,9 @@ function* handleRequestCreateBox(action) {
 
 function* handleRequestUpdateBox(action) {
   try {
-    const { params } = action.payload;
+    const { box } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Box.updateBox, session.jwt, params);
+    yield call(Box.updateBox, session.jwt, box);
     yield put(actions.receiveUpdateBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));

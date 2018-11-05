@@ -37,7 +37,6 @@ function* handleRequestCreateFood(action) {
 function* handleRequestUpdateFood(action) {
   try {
     const { food } = action.payload;
-    console.log(food);
     const session = yield select(selectors.getSession);
     const updatedFood = yield call(Food.updateFood, session.jwt, food);
     yield put(actions.receiveUpdateFood(updatedFood));

@@ -5,7 +5,7 @@ import confirm from '../ConfirmDialog';
 
 const mapStateToProps = state => ({
   boxes: state.box.list,
-  // foods: state.food.list,
+  foods: state.food.list,
   box: state.box.target,
 });
 

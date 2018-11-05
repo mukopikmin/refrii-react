@@ -36,44 +36,29 @@ class EditFoodModal extends Component {
   onNameChange(e) {
     const name = e.target.value;
 
-    this.setState(prev => ({
-      ...prev,
-      name,
-    }));
+    this.setState({ name });
   }
 
   onAmountChange(e) {
     const amount = e.target.value;
 
-    this.setState(prev => ({
-      ...prev,
-      amount,
-    }));
+    this.setState({ amount });
   }
 
   onUnitChange(e) {
     const unitId = e.target.value;
 
-    this.setState(prev => ({
-      ...prev,
-      unitId,
-    }));
+    this.setState({ unitId });
   }
 
   onDateChange(date) {
-    this.setState(prev => ({
-      ...prev,
-      expirationDate: date,
-    }));
+    this.setState({ expirationDate: date });
   }
 
   onNoticeChange(e) {
     const notice = e.target.value;
 
-    this.setState(prev => ({
-      ...prev,
-      notice,
-    }));
+    this.setState({ notice });
   }
 
   onNeedsAddingChange() {

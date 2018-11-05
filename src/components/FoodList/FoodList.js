@@ -35,7 +35,7 @@ class FoodList extends Component {
     }
 
     if (box.getFoods(foods).length === 0) {
-      return <p>食材は登録されていません</p>
+      return <p>食材は登録されていません</p>;
     }
 
     return (

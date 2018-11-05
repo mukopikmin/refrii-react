@@ -50,9 +50,9 @@ function* handleRequestUpdateFood(action) {
 
 function* handleRequestRemoveFood(action) {
   try {
-    const { params } = action.payload;
+    const { food } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Food.removeFood, session.jwt, params.id);
+    yield call(Food.removeFood, session.jwt, food.id);
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
   } catch (error) {

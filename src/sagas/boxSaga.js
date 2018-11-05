@@ -56,9 +56,9 @@ function* handleRequestUpdateBox(action) {
 
 function* handleRequestRemoveBox(action) {
   try {
-    const { params } = action.payload;
+    const { box } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Box.removeBox, session.jwt, params.id);
+    yield call(Box.removeBox, session.jwt, box.id);
     yield put(actions.receiveRemoveBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));

@@ -1,11 +1,12 @@
 import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
+import Unit from '../models/unit';
 
-const initialParams = {
-  id: 0,
-  label: '',
-  step: undefined,
-};
+// const initialParams = {
+//   id: 0,
+//   label: '',
+//   step: undefined,
+// };
 const initialState = {
   list: [],
   isNewUnitModalOpen: false,
@@ -29,7 +30,7 @@ export default handleActions({
   }),
   [types.UNIT.CREATE.REQUEST]: (state, action) => ({
     ...state,
-    params: action.payload.params,
+    // // params: action.payload.params,
   }),
   [types.UNIT.CREATE.RECEIVE]: state => ({
     ...state,
@@ -45,7 +46,7 @@ export default handleActions({
   [types.UNIT.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditUnitModalOpen: false,
-    params: initialParams,
+    // params: initialParams,
   }),
   [types.UNIT.UPDATE.FAILED]: (state, action) => ({
     ...state,
@@ -65,26 +66,30 @@ export default handleActions({
   }),
   // [types.UNIT.SET_PARAMS]: (state, action) => ({
   //   ...state,
-  //   params: action.payload.params,
+  // params: action.payload.params,
   // }),
   [types.MODAL.UNIT.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewUnitModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: Unit.mock(),
+    // // params: action.payload.params || initialParams,
   }),
   [types.MODAL.UNIT.NEW.CLOSE]: state => ({
     ...state,
     isNewUnitModalOpen: false,
-    params: initialParams,
+    target: null,
+    // params: initialParams,
   }),
   [types.MODAL.UNIT.EDIT.OPEN]: (state, action) => ({
     ...state,
     isEditUnitModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: action.payload.unit,
+    // // params: action.payload.params || initialParams,
   }),
   [types.MODAL.UNIT.EDIT.CLOSE]: state => ({
     ...state,
     isEditUnitModalOpen: false,
-    params: initialParams,
+    target: null,
+    // params: initialParams,
   }),
 }, initialState);

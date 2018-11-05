@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
   session: state.session,
   isEditUnitModalOpen: state.unit.isEditUnitModalOpen,
   isNewUnitModalOpen: state.unit.isNewUnitModalOpen,
-  params: state.unit.params,
+  unit: state.unit.target,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
       () => {},
     );
   },
-  updateParams: params => dispatch(actions.setParamsUnit(params)),
+  // updateParams: params => dispatch(actions.setParamsUnit(params)),
 });
 
 export default connect(

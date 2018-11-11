@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form,
+  Modal, ModalHeader, ModalBody, ModalFooter, Col, Form,
   Input, Row, Container, InputGroup, InputGroupAddon,
 } from 'reactstrap';
 import { PropTypes } from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 import Food from '../../models/food';
+import styles from './EditAmountModal.module.css'
 
 class EditAmountModal extends Component {
   constructor(props) {
@@ -66,7 +78,7 @@ class EditAmountModal extends Component {
   }
 
   render() {
-    const { food, isOpen } = this.props;
+    const { food, isOpen, close } = this.props;
     const { name, amount, unit } = this.state;
 
     if (!food) {
@@ -74,34 +86,39 @@ class EditAmountModal extends Component {
     }
 
     return (
-      <Modal isOpen={isOpen} toggle={this.toggle} onOpened={this.onOpened}>
-        <ModalHeader toggle={this.toggle}>{name}</ModalHeader>
-        <ModalBody>
-          <Form inline>
-            <Container>
-              <Row>
-                <Col sm={3}>
-                  <Button block outline color="danger" size="sm" onClick={this.onDecrease}>-</Button>
-                </Col>
-                <Col sm={6}>
-                  <InputGroup>
-                    <Input type="text" name="amount" id="amount" onChange={this.onAmountChange} value={amount} />
-                    <InputGroupAddon addonType="append">{unit.label}</InputGroupAddon>
-                  </InputGroup>
-                </Col>
-                <Col sm={3}>
-                  <Button block outline color="primary" size="sm" onClick={this.onIncrease}>+</Button>
-                </Col>
-              </Row>
-            </Container>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
-          <Button outline color="primary" onClick={this.edit}>編集</Button>
-          <Button outline color="primary" onClick={this.submit}>更新</Button>
-        </ModalFooter>
-      </Modal>
+      <Dialog
+        open={isOpen}
+        onEnter={this.onOpened}
+        onClose={this.toggle}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{name}</DialogTitle>
+        <DialogContent>
+          <div align="center">
+            <Button variant="outlined" color="secondary" onClick={this.onDecrease}>
+              <RemoveIcon />
+            </Button>
+            <span className={styles.amount}>
+              {`${amount} ${unit.label}`}
+            </span>
+            <Button variant="outlined" color="primary" onClick={this.onIncrease}>
+              <AddIcon />
+            </Button>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={close} color="primary">
+          キャンセル
+          </Button>
+          <Button onClick={this.edit} color="primary">
+          編集
+          </Button>
+          <Button onClick={this.submit} color="primary">
+          更新
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

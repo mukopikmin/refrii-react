@@ -4,8 +4,21 @@ import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import CreateIcon from '@material-ui/icons/Create';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
 
 import Box from '../../models/box';
+import styles from './BoxList.module.css';
 
 class BoxList extends Component {
   componentDidMount() {
@@ -26,21 +39,21 @@ class BoxList extends Component {
     const { boxes, edit, add } = this.props;
 
     return (
-      <Nav vertical>
-        <p>
-          <span>カテゴリ</span>
-          <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} />
-        </p>
-        {boxes.map(box => (
-          <NavItem key={box.id} onClick={() => this.select(box)}>
-            <NavLink>
-              {box.name}
-                &nbsp;&nbsp;
-              <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
-            </NavLink>
-          </NavItem>
-        ))}
-      </Nav>
+      <div className={styles.root}>
+        <List
+          component="nav"
+          subheader={<ListSubheader component="div">カテゴリ</ListSubheader>}
+        >
+          {boxes.map(box => (
+            <ListItem button onClick={this.handleClick}>
+              <ListItemIcon>
+                <CreateIcon onClick={() => edit(box)} />
+              </ListItemIcon>
+              <ListItemText inset primary={box.name} onClick={() => this.select(box)} />
+            </ListItem>
+          ))}
+        </List>
+      </div>
     );
   }
 }

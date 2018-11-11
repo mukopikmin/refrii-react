@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
+// import { Container, Row, Col } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import Landing from '../Landing';
 import BoxList from '../BoxList';
@@ -35,21 +38,21 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Header />
-            <Container className={styles.main}>
-              <Row>
-                <Col sm={3}>
+            <div className={styles.root}>
+              <Grid container spacing={24}>
+                <Grid item xs={3}>
                   <BoxList />
-                </Col>
-                <Col sm={6}>
+                </Grid>
+                <Grid item xs={6}>
                   <Route exact path="/" component={FoodList} />
                   <Route exact path="/boxes/:id" component={FoodList} />
                   <Route exact path="/setting" component={Setting} />
-                </Col>
-                <Col sm={3}>
+                </Grid>
+                <Grid item xs={3}>
                   {this.renderBoxInfo()}
-                </Col>
-              </Row>
-            </Container>
+                </Grid>
+              </Grid>
+            </div>
 
             <EditBoxModal />
             <EditFoodModal />

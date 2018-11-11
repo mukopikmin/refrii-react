@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import {
-  Card, CardBody, Row, Col,
-} from 'reactstrap';
+// import {
+//   Card, CardBody, Row, Col,
+// } from 'reactstrap';
 import { PropTypes } from 'prop-types';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import Spinner from '../Spinner';
+import styles from './FoodList.module.css';
 
 class FoodList extends Component {
   edit(food) {
@@ -36,20 +42,14 @@ class FoodList extends Component {
     return (
       <div>
         {box.getFoods(foods).map(food => (
-          <div key={food.id}>
-            <Card onClick={() => this.editAmount(food)}>
-              <CardBody>
-                <Row>
-                  <Col xs={6}>
-                    <span>{food.name}</span>
-                  </Col>
-                  <Col xs={6}>
-                    {`${food.amount} ${food.unit.label}`}
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </div>
+          <Card key={food.id} className={styles.card} onClick={() => this.editAmount(food)}>
+            <CardContent>
+              <Typography className={styles.title} color="textSecondary">
+                {food.name}
+                {`${food.amount} ${food.unit.label}`}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
       </div>
     );

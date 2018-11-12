@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import {
-  Navbar, NavbarBrand, Nav, UncontrolledDropdown,
-  DropdownToggle, DropdownMenu, DropdownItem, Container,
-} from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 
 import logo from '../../assets/logo.png';
 import styles from './Header.module.css';
-import User from '../../models/user';
 
 class Header extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     this.handleToSetting = this.handleToSetting.bind(this);
   }
 
@@ -39,8 +33,9 @@ class Header extends Component {
               <img className={styles.logo} src={logo} alt="" />
               <span styles={styles.title}>Refrii</span>
             </Typography>
+            <Button color="inherit" onClick={this.handleToSetting}>設定</Button>
+            <Button color="inherit" onClick={signout}>ログアウト</Button>
             <Button color="inherit">{session.user.name}</Button>
-            <Button color="inherit" onClick={signout}>Signout</Button>
           </Toolbar>
         </AppBar>
       </div>

@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
 import CreateIcon from '@material-ui/icons/Create';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import AddIcon from '@material-ui/icons/Add';
 
 import Box from '../../models/box';
 import styles from './BoxList.module.css';
@@ -53,6 +46,11 @@ class BoxList extends Component {
             </ListItem>
           ))}
         </List>
+        <div className={styles.add}>
+          <Button variant="outlined" color="primary" fullWidth onClick={add}>
+            <AddIcon />
+          </Button>
+        </div>
       </div>
     );
   }

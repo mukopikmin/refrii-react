@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input,
+  Col, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import { PropTypes } from 'prop-types';
-import 'react-datepicker/dist/react-datepicker.css';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Box from '../../models/box';
 
@@ -83,9 +87,8 @@ class EditBoxModal extends Component {
     if (isEditBoxModalOpen) {
       return (
         <div>
-          <Button outline color="primary" onClick={this.update}>更新</Button>
-          {' '}
-          <Button outline color="danger" onClick={this.remove}>削除</Button>
+          <Button color="primary" onClick={this.update}>更新</Button>
+          <Button color="secondary" onClick={this.remove}>削除</Button>
         </div>
       );
     }
@@ -102,11 +105,15 @@ class EditBoxModal extends Component {
     }
 
     return (
-      <Modal isOpen={this.isOpen()} toggle={this.close} onOpened={this.onOpened}>
-        <ModalHeader toggle={this.close}>
-          {this.renderTitle()}
-        </ModalHeader>
-        <ModalBody>
+      <Dialog
+        open={this.isOpen()}
+        onEnter={this.onOpened}
+        onClose={this.close}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{this.renderTitle()}</DialogTitle>
+        <DialogContent>
           <Form>
             <FormGroup row>
               <Label for="name" sm={3}>名前</Label>
@@ -121,12 +128,14 @@ class EditBoxModal extends Component {
               </Col>
             </FormGroup>
           </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.close}>
+          キャンセル
+          </Button>
           {this.renderActions()}
-        </ModalFooter>
-      </Modal>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

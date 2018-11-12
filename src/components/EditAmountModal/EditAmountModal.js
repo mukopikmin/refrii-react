@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
-import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Form,
-  Input, Row, Container, InputGroup, InputGroupAddon,
-} from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import Icon from '@material-ui/core/Icon';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NavigationIcon from '@material-ui/icons/Navigation';
 
 import Food from '../../models/food';
-import styles from './EditAmountModal.module.css'
+import styles from './EditAmountModal.module.css';
 
 class EditAmountModal extends Component {
   constructor(props) {
@@ -108,7 +100,7 @@ class EditAmountModal extends Component {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close} color="primary">
+          <Button onClick={close}>
           キャンセル
           </Button>
           <Button onClick={this.edit} color="primary">

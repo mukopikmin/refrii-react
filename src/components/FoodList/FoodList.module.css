@@ -1,8 +1,18 @@
 .card {
   min-width: 275;
-},
+  margin-bottom: 10px;
+}
 
 .title {
   margin-bottom: 16;
   font-size: 14;
+}
+
+.root {
+  margin-top: 20px;
+}
+
+.message {
+  text-align: center;
+  margin: 50px 0;
 }

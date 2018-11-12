@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-// import {
-//   Card, CardBody, Row, Col,
-// } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 import Spinner from '../Spinner';
 import styles from './FoodList.module.css';
@@ -29,18 +26,18 @@ class FoodList extends Component {
   }
 
   render() {
-    const { box, foods } = this.props;
+    const { box, foods, add } = this.props;
 
     if (!box) {
       return <Spinner loading />;
     }
 
     if (box.getFoods(foods).length === 0) {
-      return <p>食材は登録されていません</p>;
+      return <p className={styles.message}>食材は登録されていません</p>;
     }
 
     return (
-      <div>
+      <div className={styles.root}>
         {box.getFoods(foods).map(food => (
           <Card key={food.id} className={styles.card} onClick={() => this.editAmount(food)}>
             <CardContent>
@@ -51,6 +48,11 @@ class FoodList extends Component {
             </CardContent>
           </Card>
         ))}
+        <div className={styles.add}>
+          <Button variant="outlined" color="primary" onClick={add} fullWidth>
+            <AddIcon />
+          </Button>
+        </div>
       </div>
     );
   }

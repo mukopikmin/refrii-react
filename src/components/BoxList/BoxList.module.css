@@ -2,3 +2,7 @@
   width: '100%';
   max-width: 360;
 }
+
+.add {
+  margin: 0 24px;
+}

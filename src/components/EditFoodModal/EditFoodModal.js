@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button,
-  Form, FormGroup, Label, Input, CustomInput,
+  Col, Form, FormGroup, Label, Input, CustomInput,
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Unit from '../../models/unit';
 import Food from '../../models/food';
@@ -130,11 +134,15 @@ class EditFoodModal extends Component {
     }
 
     return (
-      <Modal isOpen={this.isOpen()} toggle={this.close} onOpened={this.onOpened}>
-        <ModalHeader toggle={this.close}>
-          {this.renderTitle()}
-        </ModalHeader>
-        <ModalBody>
+      <Dialog
+        open={this.isOpen()}
+        onEnter={this.onOpened}
+        onClose={this.close}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{name}</DialogTitle>
+        <DialogContent>
           <Form>
             <FormGroup row>
               <Label for="name" sm={3}>名前</Label>
@@ -185,12 +193,19 @@ class EditFoodModal extends Component {
               </Col>
             </FormGroup>
           </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={this.close}>キャンセル</Button>
-          {this.renderAction()}
-        </ModalFooter>
-      </Modal>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.close}>
+          キャンセル
+          </Button>
+          <Button onClick={this.edit} color="primary">
+          編集
+          </Button>
+          <Button onClick={this.submit} color="primary">
+          更新
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

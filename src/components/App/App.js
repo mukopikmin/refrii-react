@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-// import { Container, Row, Col } from 'reactstrap';
 import { PropTypes } from 'prop-types';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Landing from '../Landing';
 import BoxList from '../BoxList';

@@ -16,3 +16,14 @@
   text-align: center;
   margin: 50px 0;
 }
+
+.amount {
+  width: 100%;
+  text-align: right;
+  margin: 0;
+}
+
+.name {
+  float: left;
+  margin: 0;
+}

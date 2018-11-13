@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import Grid from '@material-ui/core/Grid';
 
 import Spinner from '../Spinner';
 import styles from './FoodList.module.css';
@@ -38,21 +39,27 @@ class FoodList extends Component {
 
     return (
       <div className={styles.root}>
-        {box.getFoods(foods).map(food => (
-          <Card key={food.id} className={styles.card} onClick={() => this.editAmount(food)}>
-            <CardContent>
-              <Typography className={styles.title} color="textSecondary">
-                {food.name}
-                {`${food.amount} ${food.unit.label}`}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))}
-        <div className={styles.add}>
-          <Button variant="outlined" color="primary" onClick={add} fullWidth>
-            <AddIcon />
-          </Button>
-        </div>
+        <Grid container spacing={8}>
+          {box.getFoods(foods).map(food => (
+            <Grid item xs={6} spacing={0}>
+              <Card key={food.id} className={styles.card} onClick={() => this.editAmount(food)}>
+                <CardContent>
+                  <Typography className={styles.title}>
+                    <p className={styles.name}>{food.name}</p>
+                    <p className={styles.amount}>{`${food.amount} ${food.unit.label}`}</p>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+          <Grid item xs={6} spacing={0}>
+            <div className={styles.add}>
+              <Button variant="outlined" color="primary" onClick={add} fullWidth>
+                <AddIcon />
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
       </div>
     );
   }

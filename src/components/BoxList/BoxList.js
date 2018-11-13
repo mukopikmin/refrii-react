@@ -38,11 +38,11 @@ class BoxList extends Component {
           subheader={<ListSubheader component="div">カテゴリ</ListSubheader>}
         >
           {boxes.map(box => (
-            <ListItem button onClick={this.handleClick}>
+            <ListItem button onClick={() => this.select(box)}>
               <ListItemIcon>
                 <CreateIcon onClick={() => edit(box)} />
               </ListItemIcon>
-              <ListItemText inset primary={box.name} onClick={() => this.select(box)} />
+              <ListItemText inset primary={box.name} />
             </ListItem>
           ))}
         </List>

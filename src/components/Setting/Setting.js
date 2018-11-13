@@ -3,9 +3,22 @@ import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  },
+});
 
 class Setting extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     const { onLoad } = this.props;
 
     onLoad();
@@ -13,12 +26,41 @@ class Setting extends Component {
 
   render() {
     const {
-      units, session, addUnit, editUnit,
+      units, session, addUnit, editUnit, classes,
     } = this.props;
     const { user } = session;
 
     return (
       <div>
+        <Typography variant="headline" component="h5">
+          アカウント情報
+        </Typography>
+        <Typography component="p">
+          {user.name}
+        </Typography>
+        <Typography component="p">
+          {user.email}
+        </Typography>
+        <Typography component="p">
+          {session.expiresAt}
+        </Typography>
+
+        <Typography variant="headline" component="h5">
+        アプリ設定
+        </Typography>
+        <Typography component="p">
+          <ul>
+            {units.map(unit => (
+              <li key={unit.id}>
+                {unit.label}
+                {' '}
+&nbsp;&nbsp;
+                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => editUnit(unit)} />
+              </li>
+            ))}
+          </ul>
+        </Typography>
+
         <h5>ユーザー情報設定</h5>
         <p>{user.name}</p>
         <p>{user.email}</p>
@@ -59,4 +101,4 @@ Setting.propTypes = {
   editUnit: PropTypes.func.isRequired,
 };
 
-export default Setting;
+export default withStyles(styles)(Setting);

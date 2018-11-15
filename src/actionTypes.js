@@ -89,6 +89,10 @@ export default {
         OPEN: 'OPEN_EDIT_BOX_MODAL',
         CLOSE: 'CLOSE_EDIT_BOX_MODAL',
       },
+      INVITE: {
+        OPEN: 'OPEN_INVITE_BOX_MODAL',
+        CLOSE: 'CLOSE_INVITE_BOX_MODAL',
+      },
     },
     FOOD: {
       NEW: {

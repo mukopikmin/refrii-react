@@ -13,10 +13,17 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.handleToSetting = this.handleToSetting.bind(this);
+    this.toRoot = this.toRoot.bind(this);
+    this.toSetting = this.toSetting.bind(this);
   }
 
-  handleToSetting() {
+  toRoot() {
+    const { history } = this.props;
+
+    history.push('/');
+  }
+
+  toSetting() {
     const { history } = this.props;
 
     history.push('/setting');
@@ -29,11 +36,11 @@ class Header extends Component {
       <div className={styles.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="title" color="inherit" className={styles.flex}>
+            <Typography variant="title" color="inherit" className={styles.flex} onClick={this.toRoot}>
               <img className={styles.logo} src={logo} alt="" />
               <span styles={styles.title}>Refrii</span>
             </Typography>
-            <Button color="inherit" onClick={this.handleToSetting}>設定</Button>
+            <Button color="inherit" onClick={this.toSetting}>設定</Button>
             <Button color="inherit" onClick={signout}>ログアウト</Button>
             <Button color="inherit">{session.user.name}</Button>
           </Toolbar>

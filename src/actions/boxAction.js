@@ -23,4 +23,6 @@ export default createActions({
   [types.MODAL.BOX.NEW.CLOSE]: () => ({ }),
   [types.MODAL.BOX.EDIT.OPEN]: box => ({ box }),
   [types.MODAL.BOX.EDIT.CLOSE]: () => ({ }),
+  [types.MODAL.BOX.INVITE.OPEN]: box => ({ box }),
+  [types.MODAL.BOX.INVITE.CLOSE]: () => ({ }),
 });

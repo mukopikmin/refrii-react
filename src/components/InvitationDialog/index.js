@@ -1,15 +1,17 @@
 import { connect } from 'react-redux';
-import Invitation from './Invitation';
+import InvitationDialog from './InvitationDialog';
 import actions from '../../actions';
 
-const mapStateToProps = (state, ownProps) => ({
-  box: ownProps.box,
+const mapStateToProps = state => ({
+  box: state.box.target,
+  isInvitationDialogOpen: state.box.isInvitationDialogOpen,
 });
 const mapDispatchToProps = dispatch => ({
   invite: (box, email) => dispatch(actions.requestInviteBox(box, email)),
+  close: () => dispatch(actions.closeInviteBoxModal()),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Invitation);
+)(InvitationDialog);

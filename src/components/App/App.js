@@ -16,6 +16,7 @@ import EditUnitModal from '../EditUnitModal';
 import EditAmountModal from '../EditAmountModal';
 import BoxInfo from '../BoxInfo';
 import styles from './App.module.css';
+import InvitationDialog from '../InvitationDialog';
 
 class App extends Component {
   renderBoxInfo() {
@@ -37,7 +38,9 @@ class App extends Component {
           <CssBaseline />
           <BrowserRouter>
             <div>
-              <Header />
+              <div className={styles.header}>
+                <Header />
+              </div>
               <div className={styles.root}>
                 <Grid container spacing={24}>
                   <Grid item xs={3}>
@@ -58,6 +61,7 @@ class App extends Component {
               <EditFoodModal />
               <EditUnitModal />
               <EditAmountModal />
+              <InvitationDialog />
             </div>
           </BrowserRouter>
         </React.Fragment>

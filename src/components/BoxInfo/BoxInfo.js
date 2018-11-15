@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import Box from '../../models/box';
-import Invitation from '../Invitation';
+import styles from './BoxInfo.module.css';
 
 class BoxInfo extends Component {
   renderNotice() {
@@ -22,25 +23,30 @@ class BoxInfo extends Component {
   }
 
   render() {
-    const { box, add } = this.props;
+    const { box, add, invite } = this.props;
 
     return (
-      <div>
-        <h5>{box.name}</h5>
-        <p>
-          <Button size="sm">{box.owner.name}</Button>
+      <div className={styles.root}>
+        <Typography variant="headline" align="right">
+          {box.name}
+        </Typography>
+        <div className={styles.add}>
+          <Button color="primary" onClick={add}>食材の追加</Button>
+        </div>
+        <div>
+          {this.renderNotice()}
+        </div>
+        <div className={styles.invitation}>
+          <Typography variant="subheading">
+        共有しているユーザー
+          </Typography>
+          <Button>{box.owner.name}</Button>
           {box.invitedUsers.map(user => (
             <span key={user.email}>
-              {' '}
-              <Button size="sm">{user.email}</Button>
+              <Button>{user.email}</Button>
             </span>
           ))}
-        </p>
-        {this.renderNotice()}
-        <div align="right">
-          <Button outline color="primary" onClick={add}>新規作成</Button>
-          {' '}
-          <Invitation box={box} />
+          <Button onClick={invite}>共有</Button>
         </div>
       </div>
     );

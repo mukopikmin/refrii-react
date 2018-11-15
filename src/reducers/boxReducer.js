@@ -6,6 +6,7 @@ const initialState = {
   list: [],
   isNewBoxModalOpen: false,
   isEditBoxModalOpen: false,
+  isInvitationDialogOpen: false,
   target: null,
 };
 
@@ -78,5 +79,13 @@ export default handleActions({
   [types.MODAL.BOX.EDIT.CLOSE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
+  }),
+  [types.MODAL.BOX.INVITE.OPEN]: state => ({
+    ...state,
+    isInvitationDialogOpen: true,
+  }),
+  [types.MODAL.BOX.INVITE.CLOSE]: state => ({
+    ...state,
+    isInvitationDialogOpen: false,
   }),
 }, initialState);

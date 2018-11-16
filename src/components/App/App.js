@@ -32,43 +32,43 @@ class App extends Component {
     const { session } = this.props;
     const { user } = session;
 
-    if (user) {
-      return (
-        <React.Fragment>
-          <CssBaseline />
-          <BrowserRouter>
-            <div>
-              <div className={styles.header}>
-                <Header />
-              </div>
-              <div className={styles.root}>
-                <Grid container spacing={24}>
-                  <Grid item xs={3}>
-                    <BoxList />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Route exact path="/" component={FoodList} />
-                    <Route exact path="/boxes/:id" component={FoodList} />
-                    <Route exact path="/setting" component={Setting} />
-                  </Grid>
-                  <Grid item xs={3}>
-                    {this.renderBoxInfo()}
-                  </Grid>
-                </Grid>
-              </div>
-
-              <EditBoxModal />
-              <EditFoodModal />
-              <EditUnitModal />
-              <EditAmountModal />
-              <InvitationDialog />
-            </div>
-          </BrowserRouter>
-        </React.Fragment>
-      );
+    if (!user) {
+      return <Landing />;
     }
 
-    return <Landing />;
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <BrowserRouter>
+          <div>
+            <div className={styles.header}>
+              <Header />
+            </div>
+            <div className={styles.root}>
+              <Grid container spacing={24}>
+                <Grid item sm={3}>
+                  <BoxList />
+                </Grid>
+                <Grid item sm={6}>
+                  <Route exact path="/" component={FoodList} />
+                  <Route exact path="/boxes/:id" component={FoodList} />
+                  <Route exact path="/setting" component={Setting} />
+                </Grid>
+                <Grid item sm={3}>
+                  {this.renderBoxInfo()}
+                </Grid>
+              </Grid>
+            </div>
+
+            <EditBoxModal />
+            <EditFoodModal />
+            <EditUnitModal />
+            <EditAmountModal />
+            <InvitationDialog />
+          </div>
+        </BrowserRouter>
+      </React.Fragment>
+    );
   }
 }
 

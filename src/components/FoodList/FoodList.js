@@ -41,7 +41,7 @@ class FoodList extends Component {
       <div className={styles.root}>
         <Grid container spacing={8}>
           {box.getFoods(foods).map(food => (
-            <Grid item xs={6} spacing={0}>
+            <Grid item sm={6} xs={12} spacing={0}>
               <Card key={food.id} className={styles.card} onClick={() => this.editAmount(food)}>
                 <CardContent>
                   <Typography className={styles.title}>
@@ -52,7 +52,7 @@ class FoodList extends Component {
               </Card>
             </Grid>
           ))}
-          <Grid item xs={6} spacing={0}>
+          <Grid item sm={6} xs={12} spacing={0}>
             <div className={styles.add}>
               <Button variant="outlined" color="primary" onClick={add} fullWidth>
                 <AddIcon />

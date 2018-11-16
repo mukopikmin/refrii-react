@@ -21,6 +21,9 @@ import './index.css';
 const theme = createMuiTheme({
   palette: {
   },
+  typography: {
+    useNextVariants: true,
+  },
 });
 
 ReactGA.initialize('UA-121958327-1');

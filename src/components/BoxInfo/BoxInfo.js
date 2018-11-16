@@ -27,7 +27,7 @@ class BoxInfo extends Component {
 
     return (
       <div className={styles.root}>
-        <Typography variant="headline" align="right">
+        <Typography variant="h5" align="right">
           {box.name}
         </Typography>
         <div className={styles.add}>
@@ -37,7 +37,7 @@ class BoxInfo extends Component {
           {this.renderNotice()}
         </div>
         <div className={styles.invitation}>
-          <Typography variant="subheading">
+          <Typography variant="h6">
         共有しているユーザー
           </Typography>
           <Button>{box.owner.name}</Button>

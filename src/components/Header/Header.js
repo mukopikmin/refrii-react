@@ -36,7 +36,7 @@ class Header extends Component {
       <div className={styles.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="title" color="inherit" className={styles.flex} onClick={this.toRoot}>
+            <Typography variant="h5" color="inherit" className={styles.flex} onClick={this.toRoot}>
               <img className={styles.logo} src={logo} alt="" />
               <span styles={styles.title}>Refrii</span>
             </Typography>

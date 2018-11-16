@@ -32,7 +32,7 @@ class Setting extends Component {
 
     return (
       <div>
-        <Typography variant="headline">
+        <Typography variant="h5">
           アカウント情報
         </Typography>
         <Typography variant="body1">
@@ -45,7 +45,7 @@ class Setting extends Component {
           {session.expiresAt}
         </Typography>
 
-        <Typography variant="headline">
+        <Typography variant="h5">
         アプリ設定
         </Typography>
         {/* <Typography variant="body1">

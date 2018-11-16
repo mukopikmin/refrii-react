@@ -41,18 +41,24 @@ class FoodList extends Component {
       <div className={styles.root}>
         <Grid container spacing={8}>
           {box.getFoods(foods).map(food => (
-            <Grid item sm={6} xs={12} spacing={0}>
-              <Card key={food.id} className={styles.card} onClick={() => this.editAmount(food)}>
+            <Grid key={food.id} item sm={6} xs={12}>
+              <Card className={styles.card} onClick={() => this.editAmount(food)}>
                 <CardContent>
-                  <Typography className={styles.title}>
-                    <p className={styles.name}>{food.name}</p>
-                    <p className={styles.amount}>{`${food.amount} ${food.unit.label}`}</p>
-                  </Typography>
+                  <div className={styles.name}>
+                    <Typography variant="body1" className={styles.title}>
+                      {food.name}
+                    </Typography>
+                  </div>
+                  <div className={styles.amount}>
+                    <Typography variant="body1" className={styles.title}>
+                      {`${food.amount} ${food.unit.label}`}
+                    </Typography>
+                  </div>
                 </CardContent>
               </Card>
             </Grid>
           ))}
-          <Grid item sm={6} xs={12} spacing={0}>
+          <Grid item sm={6} xs={12}>
             <div className={styles.add}>
               <Button variant="outlined" color="primary" onClick={add} fullWidth>
                 <AddIcon />

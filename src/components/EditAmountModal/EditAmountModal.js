@@ -120,7 +120,6 @@ EditAmountModal.propTypes = {
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  food: PropTypes.instanceOf(Food).isRequired,
 };
 
 export default EditAmountModal;

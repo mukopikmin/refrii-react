@@ -141,10 +141,6 @@ class EditBoxModal extends Component {
 }
 
 EditBoxModal.propTypes = {
-  params: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    notice: PropTypes.string.isRequired,
-  }).isRequired,
   create: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,

@@ -212,13 +212,6 @@ class EditFoodModal extends Component {
 
 EditFoodModal.propTypes = {
   onLoad: PropTypes.func.isRequired,
-  food: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired,
-    expirationDate: PropTypes.string.isRequired,
-    notice: PropTypes.string.isRequired,
-    needsAdding: PropTypes.bool.isRequired,
-  }).isRequired,
   create: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,

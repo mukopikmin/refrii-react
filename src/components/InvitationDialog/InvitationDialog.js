@@ -48,7 +48,7 @@ class InvitationDialog extends Component {
         <DialogTitle>{box.name}</DialogTitle>
         <DialogContent>
           <div className={styles.message}>
-            <Typography>
+            <Typography variant="body1">
           このカテゴリを共有するユーザーのメールアドレスを入力してください。
             </Typography>
           </div>
@@ -64,10 +64,6 @@ class InvitationDialog extends Component {
 }
 
 InvitationDialog.propTypes = {
-  params: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    notice: PropTypes.string.isRequired,
-  }).isRequired,
   close: PropTypes.func.isRequired,
   isInvitationDialogOpen: PropTypes.bool.isRequired,
 };

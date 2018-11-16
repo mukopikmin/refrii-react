@@ -38,7 +38,7 @@ class BoxList extends Component {
           subheader={<ListSubheader component="div">カテゴリ</ListSubheader>}
         >
           {boxes.map(box => (
-            <ListItem button onClick={() => this.select(box)}>
+            <ListItem key={box.id} button onClick={() => this.select(box)}>
               <ListItemIcon>
                 <CreateIcon onClick={() => edit(box)} />
               </ListItemIcon>

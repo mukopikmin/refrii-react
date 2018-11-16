@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
@@ -26,29 +26,29 @@ class Setting extends Component {
 
   render() {
     const {
-      units, session, addUnit, editUnit, classes,
+      units, session, addUnit, editUnit,
     } = this.props;
     const { user } = session;
 
     return (
       <div>
-        <Typography variant="headline" component="h5">
+        <Typography variant="headline">
           アカウント情報
         </Typography>
-        <Typography component="p">
+        <Typography variant="body1">
           {user.name}
         </Typography>
-        <Typography component="p">
+        <Typography variant="body1">
           {user.email}
         </Typography>
-        <Typography component="p">
+        <Typography variant="body1">
           {session.expiresAt}
         </Typography>
 
-        <Typography variant="headline" component="h5">
+        <Typography variant="headline">
         アプリ設定
         </Typography>
-        <Typography component="p">
+        {/* <Typography variant="body1">
           <ul>
             {units.map(unit => (
               <li key={unit.id}>
@@ -59,7 +59,7 @@ class Setting extends Component {
               </li>
             ))}
           </ul>
-        </Typography>
+        </Typography> */}
 
         <h5>ユーザー情報設定</h5>
         <p>{user.name}</p>

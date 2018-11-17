@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
-});
+import styles from './Setting.module.css';
 
 class Setting extends Component {
   constructor(props) {
@@ -31,58 +29,58 @@ class Setting extends Component {
     const { user } = session;
 
     return (
-      <div>
+      <div className={styles.root}>
         <Typography variant="h5">
-          アカウント情報
-        </Typography>
-        <Typography variant="body1">
-          {user.name}
-        </Typography>
-        <Typography variant="body1">
-          {user.email}
-        </Typography>
-        <Typography variant="body1">
-          {session.expiresAt}
+          設定
         </Typography>
 
-        <Typography variant="h5">
-        アプリ設定
-        </Typography>
-        {/* <Typography variant="body1">
-          <ul>
+        <Paper className={styles.paper}>
+          <List
+            component="nav"
+            subheader={<ListSubheader component="div">アカウント情報</ListSubheader>}
+          >
+            <ListItem button>
+              <ListItemText primary="ユーザー名" secondary={user.name} />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="メールアドレス" secondary={user.email} />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="認証サービス" secondary={user.provider} />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="セッション有効期限" secondary={session.expiresAt} />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              <ListItemText primary="アカウント情報の編集" />
+            </ListItem>
+          </List>
+        </Paper>
+
+        <Paper className={styles.paper}>
+          <List
+            component="nav"
+            subheader={<ListSubheader component="div">登録されている単位</ListSubheader>}
+          >
             {units.map(unit => (
-              <li key={unit.id}>
-                {unit.label}
-                {' '}
-&nbsp;&nbsp;
-                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => editUnit(unit)} />
-              </li>
+              <ListItem button key={unit.id}>
+                <ListItemIcon onClick={() => editUnit(unit)}>
+                  <EditIcon />
+                </ListItemIcon>
+                <ListItemText primary={unit.label} />
+              </ListItem>
             ))}
-          </ul>
-        </Typography> */}
-
-        <h5>ユーザー情報設定</h5>
-        <p>{user.name}</p>
-        <p>{user.email}</p>
-        <p>{session.expiresAt}</p>
-        <hr />
-        <h5>アプリ設定</h5>
-        <h6>ラベル</h6>
-        <ul>
-          {units.map(unit => (
-            <li key={unit.id}>
-              {unit.label}
-              {' '}
-&nbsp;&nbsp;
-              <FontAwesomeIcon icon={faPen} size="sm" onClick={() => editUnit(unit)} />
-            </li>
-          ))}
-        </ul>
-        <Button outline color="primary" onClick={addUnit}>
-          <FontAwesomeIcon icon={faPlus} size="sm" />
-          {' '}
-追加
-        </Button>
+            <ListItem button onClick={addUnit}>
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              <ListItemText primary="単位の追加" />
+            </ListItem>
+          </List>
+        </Paper>
       </div>
     );
   }

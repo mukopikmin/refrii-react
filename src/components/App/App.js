@@ -13,10 +13,10 @@ import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
-import EditAmountModal from '../EditAmountModal';
 import BoxInfo from '../BoxInfo';
 import styles from './App.module.css';
 import InvitationDialog from '../InvitationDialog';
+import EditAmountModal from '../EditAmountModal';
 
 class App extends Component {
   renderBoxInfo() {

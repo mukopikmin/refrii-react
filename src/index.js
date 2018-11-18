@@ -20,6 +20,9 @@ import './index.css';
 
 const theme = createMuiTheme({
   palette: {
+    primary: {
+      main: '#3687E7',
+    },
   },
   typography: {
     useNextVariants: true,

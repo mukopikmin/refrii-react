@@ -7,6 +7,10 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   signout: () => dispatch(actions.signout()),
+  reload: () => {
+    dispatch(actions.requestListBox());
+    dispatch(actions.requestListFood());
+  },
 });
 
 export default connect(

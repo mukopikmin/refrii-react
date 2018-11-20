@@ -10,6 +10,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Grid from '@material-ui/core/Grid';
 
 import styles from './Setting.module.css';
 
@@ -29,59 +30,63 @@ class Setting extends Component {
     const { user } = session;
 
     return (
-      <div className={styles.root}>
-        <Typography variant="h5">
+      <Grid container justify="center">
+        <Grid item xs={12} sm={12} md={6}>
+          <div className={styles.root}>
+            <Typography variant="h5">
           設定
-        </Typography>
+            </Typography>
 
-        <Paper className={styles.paper}>
-          <List
-            component="nav"
-            subheader={<ListSubheader component="div">アカウント情報</ListSubheader>}
-          >
-            <ListItem button>
-              <ListItemText primary="ユーザー名" secondary={user.name} />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="メールアドレス" secondary={user.email} />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="認証サービス" secondary={user.provider} />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="セッション有効期限" secondary={session.expiresAt} />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText primary="アカウント情報の編集" />
-            </ListItem>
-          </List>
-        </Paper>
+            <Paper className={styles.paper}>
+              <List
+                component="nav"
+                subheader={<ListSubheader component="div">アカウント情報</ListSubheader>}
+              >
+                <ListItem button>
+                  <ListItemText primary="ユーザー名" secondary={user.name} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="メールアドレス" secondary={user.email} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="認証サービス" secondary={user.provider} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="セッション有効期限" secondary={session.expiresAt} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <EditIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="アカウント情報の編集" />
+                </ListItem>
+              </List>
+            </Paper>
 
-        <Paper className={styles.paper}>
-          <List
-            component="nav"
-            subheader={<ListSubheader component="div">登録されている単位</ListSubheader>}
-          >
-            {units.map(unit => (
-              <ListItem button key={unit.id}>
-                <ListItemIcon onClick={() => editUnit(unit)}>
-                  <EditIcon />
-                </ListItemIcon>
-                <ListItemText primary={unit.label} />
-              </ListItem>
-            ))}
-            <ListItem button onClick={addUnit}>
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText primary="単位の追加" />
-            </ListItem>
-          </List>
-        </Paper>
-      </div>
+            <Paper className={styles.paper}>
+              <List
+                component="nav"
+                subheader={<ListSubheader component="div">登録されている単位</ListSubheader>}
+              >
+                {units.map(unit => (
+                  <ListItem button key={unit.id}>
+                    <ListItemIcon onClick={() => editUnit(unit)}>
+                      <EditIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={unit.label} />
+                  </ListItem>
+                ))}
+                <ListItem button onClick={addUnit}>
+                  <ListItemIcon>
+                    <AddIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="単位の追加" />
+                </ListItem>
+              </List>
+            </Paper>
+          </div>
+        </Grid>
+      </Grid>
     );
   }
 }

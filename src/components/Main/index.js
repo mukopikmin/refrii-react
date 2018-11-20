@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import App from './App';
+import Main from './Main';
 
 const mapStateToProps = state => ({
-  session: state.session,
+  box: state.box.target,
 });
 const mapDispatchToProps = () => ({ });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(Main);

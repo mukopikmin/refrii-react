@@ -28,6 +28,7 @@ function* handleRequestCreateFood(action) {
     yield put(actions.receiveCreateFood());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${food.name} が作成されました`));
   } catch (error) {
     yield put(actions.failedCreateFood(error));
     yield fork(handleError, error);
@@ -42,6 +43,7 @@ function* handleRequestUpdateFood(action) {
     yield put(actions.receiveUpdateFood(updatedFood));
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${food.name} が更新されました`));
   } catch (error) {
     yield put(actions.failedUpdateFood(error));
     yield fork(handleError, error);
@@ -55,6 +57,7 @@ function* handleRequestRemoveFood(action) {
     yield call(Food.removeFood, session.jwt, food.id);
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${food.name} を削除しました`));
   } catch (error) {
     yield put(actions.failedRemoveFood(error));
     yield fork(handleError, error);

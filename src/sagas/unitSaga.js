@@ -27,6 +27,7 @@ function* handleRequestCreateUnit(action) {
     yield put(actions.receiveCreateUnit());
     const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
+    yield put(actions.showNotification(`${unit.name} が作成されました`));
   } catch (error) {
     yield put(actions.failedCreateUnit(error));
     yield fork(handleError, error);
@@ -41,6 +42,7 @@ function* handleRequestUpdateUnit(action) {
     yield put(actions.receiveUpdateUnit());
     const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
+    yield put(actions.showNotification(`${unit.name} が更新されました`));
   } catch (error) {
     yield put(actions.failedUpdateUnit(error));
     yield fork(handleError, error);
@@ -55,6 +57,7 @@ function* handleRequestRemoveUnit(action) {
     yield put(actions.receiveRemoveUnit());
     const units = yield call(Unit.getUnits, session.jwt);
     yield put(actions.receiveListUnit(units));
+    yield put(actions.showNotification(`${unit.name} が削除されました`));
   } catch (error) {
     yield put(actions.failedRemoveUnit(error));
     yield fork(handleError, error);

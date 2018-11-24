@@ -119,5 +119,9 @@ export default {
       },
     },
   },
+  NOTIFICATION: {
+    SHOW: 'SHOW_NOTIFICATION',
+    HIDE: 'HIDE_NOTIFICATION',
+  },
   SIGNOUT: 'SIGNOUT',
 };

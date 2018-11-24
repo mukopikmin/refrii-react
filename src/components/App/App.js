@@ -14,6 +14,7 @@ import EditUnitModal from '../EditUnitModal';
 import styles from './App.module.css';
 import InvitationDialog from '../InvitationDialog';
 import EditAmountModal from '../EditAmountModal';
+import Notification from '../Notification';
 
 class App extends Component {
   render() {
@@ -42,6 +43,8 @@ class App extends Component {
             <EditUnitModal />
             <EditAmountModal />
             <InvitationDialog />
+
+            <Notification />
           </div>
         </BrowserRouter>
       </Fragment>

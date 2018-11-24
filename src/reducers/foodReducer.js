@@ -59,11 +59,13 @@ export default handleActions({
   [types.MODAL.FOOD.EDIT.OPEN]: (state, action) => ({
     ...state,
     isEditFoodModalOpen: true,
+    isAmountFoodModalOpen: false,
     target: action.payload.food,
   }),
   [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
+    isAmountFoodModalOpen: false,
     target: null,
   }),
   [types.MODAL.FOOD.AMOUNT.OPEN]: (state, action) => ({

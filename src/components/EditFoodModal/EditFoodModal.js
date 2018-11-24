@@ -126,7 +126,7 @@ class EditFoodModal extends Component {
   render() {
     const { units, food } = this.props;
     const {
-      name, amount, unitId, expirationDate, notice,
+      name, amount, unit, expirationDate, notice,
     } = this.state;
 
     if (!food) {
@@ -156,10 +156,10 @@ class EditFoodModal extends Component {
                 <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={amount} />
               </Col>
               <Col sm={6}>
-                <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={unitId}>
+                <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={unit.id}>
                   <option value="0" />
-                  {units.map(unit => (
-                    <option key={unit.id} value={unit.id}>{unit.label}</option>
+                  {units.map(u => (
+                    <option key={u.id} value={u.id}>{u.label}</option>
                   ))}
                 </Input>
               </Col>
@@ -195,15 +195,8 @@ class EditFoodModal extends Component {
           </Form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.close}>
-          キャンセル
-          </Button>
-          <Button onClick={this.edit} color="primary">
-          編集
-          </Button>
-          <Button onClick={this.submit} color="primary">
-          更新
-          </Button>
+          <Button onClick={this.close}>キャンセル</Button>
+          {this.renderAction()}
         </DialogActions>
       </Dialog>
     );

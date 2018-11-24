@@ -15,7 +15,7 @@ class EditAmountModal extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.onClose = this.onClose.bind(this);
     this.onIncrease = this.onIncrease.bind(this);
     this.onDecrease = this.onDecrease.bind(this);
     this.onOpened = this.onOpened.bind(this);
@@ -51,7 +51,7 @@ class EditAmountModal extends Component {
     this.setState(food.toJson());
   }
 
-  toggle() {
+  onClose() {
     const { close } = this.props;
 
     close();
@@ -81,7 +81,7 @@ class EditAmountModal extends Component {
       <Dialog
         open={isOpen}
         onEnter={this.onOpened}
-        onClose={this.toggle}
+        onClose={this.onClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >

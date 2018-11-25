@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input,
+  Col, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 import Unit from '../../models/unit';
 
@@ -82,14 +87,13 @@ class EditUnitModal extends Component {
     if (isEditUnitModalOpen) {
       return (
         <div>
-          <Button outline color="primary" onClick={this.update}>更新</Button>
-          &nbsp;
-          <Button outline color="danger" onClick={this.remove}>削除</Button>
+          <Button color="secondary" onClick={this.remove}>削除</Button>
+          <Button color="primary" onClick={this.update}>更新</Button>
         </div>
       );
     }
     return (
-      <Button outline color="primary" onClick={this.create}>追加</Button>
+      <Button color="primary" onClick={this.create}>追加</Button>
     );
   }
 
@@ -97,11 +101,15 @@ class EditUnitModal extends Component {
     const { label, step } = this.state;
 
     return (
-      <Modal isOpen={this.isOpen()} toggle={this.close} onOpened={this.onOpened}>
-        <ModalHeader toggle={this.close}>
-          {this.renderTitle()}
-        </ModalHeader>
-        <ModalBody>
+      <Dialog
+        open={this.isOpen()}
+        onClose={this.close}
+        onEnter={this.onOpened}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle>{this.renderTitle()}</DialogTitle>
+        <DialogContent>
           <Form>
             <FormGroup row>
               <Label for="label" sm={3}>ラベル</Label>
@@ -116,12 +124,12 @@ class EditUnitModal extends Component {
               </Col>
             </FormGroup>
           </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.close}>キャンセル</Button>
           {this.renderAction()}
-        </ModalFooter>
-      </Modal>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

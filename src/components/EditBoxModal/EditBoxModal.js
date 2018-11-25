@@ -93,7 +93,7 @@ class EditBoxModal extends Component {
       );
     }
 
-    return <Button outline color="primary" onClick={this.create}>追加</Button>;
+    return <Button color="primary" onClick={this.create}>追加</Button>;
   }
 
   render() {

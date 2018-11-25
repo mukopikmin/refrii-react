@@ -33,9 +33,7 @@ class Setting extends Component {
       <Grid container justify="center">
         <Grid item xs={12} sm={12} md={6}>
           <div className={styles.root}>
-            <Typography variant="h5">
-          設定
-            </Typography>
+            <Typography variant="h5">設定</Typography>
 
             <Paper className={styles.paper}>
               <List

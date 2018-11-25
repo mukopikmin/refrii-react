@@ -56,7 +56,7 @@ class InvitationDialog extends Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={close}> キャンセル </Button>
-          <Button outline color="primary" onClick={this.create}>追加</Button>
+          <Button color="primary" onClick={this.create}>追加</Button>
         </DialogActions>
       </Dialog>
     );

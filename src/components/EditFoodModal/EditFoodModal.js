@@ -31,6 +31,7 @@ class EditFoodModal extends Component {
     this.update = this.update.bind(this);
     this.close = this.close.bind(this);
     this.onOpened = this.onOpened.bind(this);
+    this.remove = this.remove.bind(this);
 
     this.state = Food.mock().toJson();
 
@@ -96,6 +97,12 @@ class EditFoodModal extends Component {
     });
   }
 
+  remove() {
+    const { remove, food } = this.props;
+
+    remove(food);
+  }
+
   close() {
     const { close } = this.props;
 
@@ -114,11 +121,16 @@ class EditFoodModal extends Component {
     return isEditFoodModalOpen ? '食材の編集' : '食材の追加';
   }
 
-  renderAction() {
+  renderActions() {
     const { isEditFoodModalOpen } = this.props;
 
     if (isEditFoodModalOpen) {
-      return <Button color="primary" onClick={this.update}>更新 </Button>;
+      return (
+        <div>
+          <Button onClick={this.remove}>削除</Button>
+          <Button color="primary" onClick={this.update}>更新</Button>
+        </div>
+      );
     }
     return <Button color="primary" onClick={this.create}>追加</Button>;
   }
@@ -196,7 +208,7 @@ class EditFoodModal extends Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={this.close}>キャンセル</Button>
-          {this.renderAction()}
+          {this.renderActions()}
         </DialogActions>
       </Dialog>
     );

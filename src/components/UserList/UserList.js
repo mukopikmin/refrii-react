@@ -42,8 +42,8 @@ class UserList extends Component {
               <TableRow key={user.id}>
                 <TableCell component="th" scope="row">{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{UserList.isChecked(user.admin)}</TableCell>
                 <TableCell>{UserList.isChecked(user.disabled)}</TableCell>
+                <TableCell>{UserList.isChecked(user.admin)}</TableCell>
                 <TableCell>{user.provider}</TableCell>
                 <TableCell>{user.createdAt.format('YYYY/MM/DD HH:mm:ss')}</TableCell>
                 <TableCell>{user.updatedAt.format('YYYY/MM/DD HH:mm:ss')}</TableCell>

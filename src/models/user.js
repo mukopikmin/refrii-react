@@ -13,6 +13,8 @@ class User extends Base {
     this.id = params.id;
     this.name = params.name;
     this.provider = params.provider;
+    this.admin = params.admin;
+    this.disabled = params.disabled;
   }
 
   static mock() {
@@ -61,6 +63,8 @@ User.emptyParams = {
   id: 0,
   name: '',
   provider: '',
+  admin: false,
+  disabled: false,
 };
 
 export default User;

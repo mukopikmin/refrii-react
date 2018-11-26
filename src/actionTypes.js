@@ -79,6 +79,13 @@ export default {
     },
     SET_PARAMS: 'SET_PARAMS_UNIT',
   },
+  USER: {
+    LIST: {
+      REQUEST: 'REQUEST_LIST_USER',
+      RECEIVE: 'RECEIVE_LIST_USER',
+      FAILED: 'FAILED_LIST_USER',
+    },
+  },
   MODAL: {
     BOX: {
       NEW: {

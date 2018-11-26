@@ -8,6 +8,7 @@ class User extends Base {
 
     this.avatarUrl = params.avatar_url;
     this.createdAt = moment(params.created_at);
+    this.updatedAt = moment(params.created_at);
     this.email = params.email;
     this.id = params.id;
     this.name = params.name;
@@ -44,11 +45,18 @@ class User extends Base {
       provider: this.provider,
     };
   }
+
+  static getUsers(jwt) {
+    return super.authFetch(`${super.endpoint}/users`, jwt)
+      .then(response => response.json())
+      .then(users => users.map(user => new User(user)));
+  }
 }
 
 User.emptyParams = {
   avatar_url: '',
   created_at: null,
+  updated_at: null,
   email: '',
   id: 0,
   name: '',

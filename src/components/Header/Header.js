@@ -24,6 +24,7 @@ class Header extends Component {
 
     this.toRoot = this.toRoot.bind(this);
     this.toSetting = this.toSetting.bind(this);
+    this.toAdmin = this.toAdmin.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.reload = this.reload.bind(this);
@@ -58,6 +59,13 @@ class Header extends Component {
 
     this.closeMenu();
     history.push('/setting');
+  }
+
+  toAdmin() {
+    const { history } = this.props;
+
+    this.closeMenu();
+    history.push('/admin');
   }
 
   render() {
@@ -99,6 +107,9 @@ class Header extends Component {
                         </ListItem>
                         <ListItem button onClick={this.toSetting}>
                           <ListItemText primary="設定" />
+                        </ListItem>
+                        <ListItem button onClick={this.toAdmin}>
+                          <ListItemText primary="管理メニュー" />
                         </ListItem>
                         <Divider />
                         <ListItem button onClick={signout}>

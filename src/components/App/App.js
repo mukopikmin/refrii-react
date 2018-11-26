@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Landing from '../Landing';
+import Admin from '../Admin';
 import Header from '../Header';
 import Main from '../Main';
 import Setting from '../Setting';
@@ -36,6 +37,7 @@ class App extends Component {
             <div className={styles.root}>
               <Route exact path="/" component={Main} />
               <Route exact path="/setting" component={Setting} />
+              <Route exact path="/admin" component={Admin} />
             </div>
 
             <EditBoxModal />

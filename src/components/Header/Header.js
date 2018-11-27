@@ -68,6 +68,20 @@ class Header extends Component {
     history.push('/admin');
   }
 
+  renderAdminMenu() {
+    const { session } = this.props;
+
+    if (session.user.admin) {
+      return (
+        <ListItem button onClick={this.toAdmin}>
+          <ListItemText primary="管理メニュー" />
+        </ListItem>
+      );
+    }
+
+    return <div />;
+  }
+
   render() {
     const { session, signout } = this.props;
     const { menuOpen } = this.state;
@@ -108,9 +122,7 @@ class Header extends Component {
                         <ListItem button onClick={this.toSetting}>
                           <ListItemText primary="設定" />
                         </ListItem>
-                        <ListItem button onClick={this.toAdmin}>
-                          <ListItemText primary="管理メニュー" />
-                        </ListItem>
+                        {this.renderAdminMenu()}
                         <Divider />
                         <ListItem button onClick={signout}>
                           <ListItemText

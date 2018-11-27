@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import CheckIcon from '@material-ui/icons/Check';
 
+import styles from './UserList.module.css';
+
 class UserList extends Component {
   static isChecked(flag) {
     return flag ? <CheckIcon /> : '';
@@ -24,7 +26,7 @@ class UserList extends Component {
     const { users } = this.props;
 
     return (
-      <Paper>
+      <Paper className={styles.usertable}>
         <Table>
           <TableHead>
             <TableRow>

@@ -28,12 +28,7 @@ class User extends Base {
       .then(json => ({
         expiresAt: json.expires_at,
         jwt: json.jwt,
-        user: {
-          email: json.user.email,
-          id: json.user.id,
-          name: json.user.name,
-          provider: json.user.provider,
-        },
+        user: json.user,
       }));
   }
 

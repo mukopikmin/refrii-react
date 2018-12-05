@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Header from './Header';
+import BoxDrawer from './BoxDrawer';
 import actions from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -8,14 +8,9 @@ const mapStateToProps = (state, ownProps) => ({
   drawerOpen: ownProps.drawerOpen,
 });
 const mapDispatchToProps = dispatch => ({
-  signout: () => dispatch(actions.signout()),
-  reload: () => {
-    dispatch(actions.requestListBox());
-    dispatch(actions.requestListFood());
-  },
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Header);
+)(BoxDrawer);

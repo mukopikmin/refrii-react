@@ -31,9 +31,9 @@ class App extends Component {
         <CssBaseline />
         <BrowserRouter>
           <div>
-            <div className={styles.header}>
+            {/* <div className={styles.header}>
               <Header />
-            </div>
+            </div> */}
             <div className={styles.root}>
               <Route exact path="/" component={Main} />
               <Route exact path="/setting" component={Setting} />

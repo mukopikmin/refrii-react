@@ -1,11 +1,54 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import BoxList from '../BoxList';
 import BoxInfo from '../BoxInfo';
 import FoodList from '../FoodList';
+import BoxDrawer from '../BoxDrawer';
+import Header from '../Header';
+
+const drawerWidth = 360;
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  // appBar: {
+  //   marginLeft: drawerWidth,
+  //   [theme.breakpoints.up('sm')]: {
+  //     width: `calc(100% - ${drawerWidth}px)`,
+  //   },
+  // },
+  // toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    // padding: theme.spacing.unit * 3,
+  },
+});
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+
+    this.state = { drawerOpen: false };
+  }
+
+  toggleDrawer() {
+    console.log('AAAAAA');
+    this.setState(pre => ({
+      ...pre,
+      drawerOpen: !pre.drawerOpen,
+    }));
+  }
+
   renderBoxInfo() {
     const { box } = this.props;
 
@@ -16,20 +59,34 @@ class Main extends Component {
   }
 
   render() {
+    const { classes, theme } = this.props;
+
     return (
-      <Grid container spacing={24}>
-        <Grid item sm={3}>
-          <BoxList />
-        </Grid>
-        <Grid item sm={6}>
-          <FoodList />
-        </Grid>
-        <Grid item sm={3}>
-          {this.renderBoxInfo()}
-        </Grid>
-      </Grid>
+      <div className={classes.root}>
+        {/* <CssBaseline /> */}
+
+        <div className={styles.header}>
+          <Header toggle={this.toggleDrawer} />
+        </div>
+        <nav className={classes.drawer}>
+          <BoxDrawer toggle={this.toggleDrawer} open={this.state.drawerOpen} />
+        </nav>
+        <main className={classes.content}>
+          <div className={classes.toolbar}>
+            <Grid container spacing={24}>
+              <Grid item sm={9}>
+                <FoodList />
+              </Grid>
+              <Grid item sm={3}>
+                {this.renderBoxInfo()}
+              </Grid>
+            </Grid>
+          </div>
+        </main>
+      </div>
+
     );
   }
 }
 
-export default Main;
+export default withStyles(styles, { withTheme: true })(Main);

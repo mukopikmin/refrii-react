@@ -14,9 +14,25 @@ import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
+import { withStyles } from '@material-ui/core/styles';
 import logo from '../../assets/logo.png';
 import styles from './Header.module.css';
+
+const drawerWidth = 360;
+const _styles = theme => ({
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  menuButton: {
+    marginRight: 20,
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+});
 
 class Header extends Component {
   constructor(props) {
@@ -28,6 +44,7 @@ class Header extends Component {
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.reload = this.reload.bind(this);
+    this.renderAdminMenu = this.renderAdminMenu.bind(this);
 
     this.state = { menuOpen: false };
   }
@@ -83,13 +100,21 @@ class Header extends Component {
   }
 
   render() {
-    const { session, signout } = this.props;
+    const { session, signout, classes } = this.props;
     const { menuOpen } = this.state;
 
     return (
       <div className={styles.root}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.props.toggleDrawer}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
             <Typography variant="h5" color="inherit" className={styles.flex} onClick={this.toRoot}>
               <img className={styles.logo} src={logo} alt="" />
             </Typography>
@@ -151,4 +176,4 @@ Header.propTypes = {
   }).isRequired,
 };
 
-export default withRouter(Header);
+export default withStyles(_styles)(withRouter(Header));

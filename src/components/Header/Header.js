@@ -21,7 +21,6 @@ import { withStyles } from '@material-ui/core/styles';
 import logo from '../../assets/logo.png';
 import styles from './Header.module.css';
 
-const drawerWidth = 360;
 const _styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -85,6 +84,25 @@ class Header extends Component {
     history.push('/admin');
   }
 
+  renderAction() {
+    const { location, toggleDrawer, classes } = this.props;
+
+    if (location.pathname === '/') {
+      return (
+        <IconButton
+          color="inherit"
+          aria-label="Open drawer"
+          onClick={toggleDrawer}
+          className={classes.menuButton}
+        >
+          <MenuIcon />
+        </IconButton>
+      );
+    }
+
+    return <div />;
+  }
+
   renderAdminMenu() {
     const { session } = this.props;
 
@@ -107,14 +125,7 @@ class Header extends Component {
       <div className={styles.root}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.props.toggleDrawer}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
+            {this.renderAction()}
             <Typography variant="h5" color="inherit" className={styles.flex} onClick={this.toRoot}>
               <img className={styles.logo} src={logo} alt="" />
             </Typography>

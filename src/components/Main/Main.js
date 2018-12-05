@@ -28,6 +28,7 @@ const styles = theme => ({
   // toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
+    marginTop: 80,
     // padding: theme.spacing.unit * 3,
   },
 });
@@ -42,7 +43,6 @@ class Main extends Component {
   }
 
   toggleDrawer() {
-    console.log('AAAAAA');
     this.setState(pre => ({
       ...pre,
       drawerOpen: !pre.drawerOpen,
@@ -63,11 +63,7 @@ class Main extends Component {
 
     return (
       <div className={classes.root}>
-        {/* <CssBaseline /> */}
-
-        <div className={styles.header}>
-          <Header toggle={this.toggleDrawer} />
-        </div>
+        <Header toggle={this.toggleDrawer} />
         <nav className={classes.drawer}>
           <BoxDrawer toggle={this.toggleDrawer} open={this.state.drawerOpen} />
         </nav>

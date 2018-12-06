@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 import BoxInfo from '../BoxInfo';
 import FoodList from '../FoodList';
@@ -19,17 +18,10 @@ const styles = theme => ({
       flexShrink: 0,
     },
   },
-  // appBar: {
-  //   marginLeft: drawerWidth,
-  //   [theme.breakpoints.up('sm')]: {
-  //     width: `calc(100% - ${drawerWidth}px)`,
-  //   },
-  // },
-  // toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     marginTop: 80,
-    // padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit,
   },
 });
 
@@ -59,13 +51,14 @@ class Main extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
+    const { drawerOpen } = this.state;
 
     return (
       <div className={classes.root}>
         <Header toggle={this.toggleDrawer} />
         <nav className={classes.drawer}>
-          <BoxDrawer toggle={this.toggleDrawer} open={this.state.drawerOpen} />
+          <BoxDrawer toggle={this.toggleDrawer} open={drawerOpen} />
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar}>

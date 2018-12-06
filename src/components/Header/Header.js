@@ -19,9 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { withStyles } from '@material-ui/core/styles';
 import logo from '../../assets/logo.png';
-import styles from './Header.module.css';
 
-const _styles = theme => ({
+const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
@@ -30,6 +29,24 @@ const _styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
+  },
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flexGrow: 1,
+  },
+  logo: {
+    height: 36,
+    marginRight: 10,
+    filter: 'drop-shadow(0px 0px 5px rgba(100, 100, 100, 0.7))',
+  },
+  title: {
+    height: '100%',
+    verticalAlign: 'middle',
+  },
+  setting: {
+    color: 'white',
   },
 });
 
@@ -122,12 +139,12 @@ class Header extends Component {
     const { menuOpen } = this.state;
 
     return (
-      <div className={styles.root}>
+      <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             {this.renderAction()}
-            <Typography variant="h5" color="inherit" className={styles.flex} onClick={this.toRoot}>
-              <img className={styles.logo} src={logo} alt="" />
+            <Typography variant="h5" color="inherit" className={classes.flex} onClick={this.toRoot}>
+              <img className={classes.logo} src={logo} alt="" />
             </Typography>
             <Button
               buttonRef={(node) => {
@@ -137,7 +154,7 @@ class Header extends Component {
               aria-haspopup="true"
               onClick={this.toggleMenu}
             >
-              <SettingsIcon className={styles.setting} />
+              <SettingsIcon className={classes.setting} />
             </Button>
             <Popper open={menuOpen} anchorEl={this.anchorEl} transition disablePortal>
               {({ TransitionProps, placement }) => (
@@ -187,4 +204,4 @@ Header.propTypes = {
   }).isRequired,
 };
 
-export default withStyles(_styles)(withRouter(Header));
+export default withStyles(styles)(withRouter(Header));

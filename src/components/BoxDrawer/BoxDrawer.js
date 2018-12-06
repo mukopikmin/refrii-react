@@ -44,30 +44,20 @@ const styles = theme => ({
 });
 
 class BoxDrawer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { open: false };
-  }
-
-  toggle() {
-    this.setState(pre => ({
-      open: !pre.open,
-    }));
-  }
-
   render() {
-    const { classes, theme } = this.props;
+    const {
+      container, toggleDrawer, open, classes,
+    } = this.props;
 
     return (
       <nav>
         <Hidden smUp implementation="css">
           <Drawer
-            container={this.props.container}
+            container={container}
             variant="temporary"
             anchor="left"
-            open={this.props.open}
-            onClose={this.props.toggleDrawer}
+            open={open}
+            onClose={toggleDrawer}
             classes={{
               paper: classes.drawerPaper,
             }}

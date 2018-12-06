@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Landing from '../Landing';
 import Admin from '../Admin';
-import Header from '../Header';
 import Main from '../Main';
 import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';

@@ -46,7 +46,7 @@ class Food extends Base {
         expiration_date: body.expirationDate,
         needs_adding: body.needsAdding,
         notice: body.notice,
-        unit_id: body.unitId,
+        unit_id: body.unit.id,
       }),
     };
 

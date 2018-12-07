@@ -62,9 +62,9 @@ class EditFoodModal extends Component {
   }
 
   onUnitChange(e) {
-    const unitId = e.target.value;
+    const id = e.target.value;
 
-    this.setState({ unitId });
+    this.setState({ unit: { id } });
   }
 
   onDateChange(date) {
@@ -164,7 +164,7 @@ class EditFoodModal extends Component {
         onClose={this.close}
       >
         <DialogTitle>{name}</DialogTitle>
-        <DialogContent fullWidth>
+        <DialogContent>
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={2}>
               <FormLabel>名前</FormLabel>

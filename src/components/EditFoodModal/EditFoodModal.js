@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import {
-  Col, Form, FormGroup, Label, Input, CustomInput,
-} from 'reactstrap';
 import DatePicker from 'react-datepicker';
+import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import { PropTypes } from 'prop-types';
-import 'react-datepicker/dist/react-datepicker.css';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import Unit from '../../models/unit';
 import Food from '../../models/food';
+
+const styles = theme => ({
+  datePicker: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  },
+});
 
 class EditFoodModal extends Component {
   constructor(props) {
@@ -127,7 +138,7 @@ class EditFoodModal extends Component {
     if (isEditFoodModalOpen) {
       return (
         <div>
-          <Button onClick={this.remove}>削除</Button>
+          <Button color="secondary" onClick={this.remove}>削除</Button>
           <Button color="primary" onClick={this.update}>更新</Button>
         </div>
       );
@@ -136,9 +147,9 @@ class EditFoodModal extends Component {
   }
 
   render() {
-    const { units, food } = this.props;
+    const { units, food, classes } = this.props;
     const {
-      name, amount, unit, expirationDate, notice,
+      name, amount, unit, expirationDate, notice, needsAdding,
     } = this.state;
 
     if (!food) {
@@ -147,64 +158,96 @@ class EditFoodModal extends Component {
 
     return (
       <Dialog
+        fullWidth
         open={this.isOpen()}
         onEnter={this.onOpened}
         onClose={this.close}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{name}</DialogTitle>
-        <DialogContent>
-          <Form>
-            <FormGroup row>
-              <Label for="name" sm={3}>名前</Label>
-              <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={name} />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="amount" sm={3}>数量</Label>
-              <Col sm={3}>
-                <Input type="number" name="amount" id="amount" onChange={this.onAmountChange} value={amount} />
-              </Col>
-              <Col sm={6}>
-                <Input type="select" name="select" id="unit" onChange={this.onUnitChange} value={unit.id}>
-                  <option value="0" />
-                  {units.map(u => (
-                    <option key={u.id} value={u.id}>{u.label}</option>
-                  ))}
-                </Input>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="expiration-date" sm={3}>期限</Label>
-              <Col sm={9}>
-                <DatePicker
-                  inline
-                  customInput={<Input />}
-                  name="expiration-date"
-                  id="expiration-date"
-                  selected={moment(expirationDate)}
-                  onChange={this.onDateChange}
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="notice" sm={3}>メモ</Label>
-              <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={notice} />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col sm={{ size: 9, offset: 3 }}>
-                <FormGroup check>
-                  <Label check>
-                    <CustomInput type="checkbox" id="needs-adding" onChange={this.onNeedsAddingChange} checked={food.needsAdding} label="買い足しが必要" />
-                  </Label>
-                </FormGroup>
-              </Col>
-            </FormGroup>
-          </Form>
+        <DialogTitle>{name}</DialogTitle>
+        <DialogContent fullWidth>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={2}>
+              <FormLabel>名前</FormLabel>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                margin="dense"
+                variant="outlined"
+                value={name}
+                onChange={this.onNameChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={2}>
+              <FormLabel>数量</FormLabel>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                type="number"
+                margin="dense"
+                variant="outlined"
+                value={amount}
+                onChange={this.onAmountChange}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                select
+                margin="dense"
+                variant="outlined"
+                value={unit.id}
+                onChange={this.onUnitChange}
+              >
+                {units.map(u => (
+                  <MenuItem key={u.id} value={u.id}>
+                    {u.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="flex-start">
+            <Grid item xs={2}>
+              <FormLabel>期限</FormLabel>
+            </Grid>
+            <Grid item xs={10} className={classes.datePicker}>
+              <DatePicker
+                inline
+                customInput={<TextField />}
+                selected={moment(expirationDate)}
+                onChange={this.onDateChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="flex-start">
+            <Grid item xs={2}>
+              <FormLabel>メモ</FormLabel>
+            </Grid>
+            <Grid item xs={10} className={classes.datePicker}>
+              <TextField
+                fullWidth
+                multiline
+                margin="dense"
+                variant="outlined"
+                value={notice}
+                onChange={this.onNoticeChange}
+              />
+            </Grid>
+          </Grid>
+          <FormControlLabel
+            control={(
+              <Checkbox
+                color="primary"
+                checked={needsAdding}
+                onChange={this.onNeedsAddingChange}
+              />
+            )}
+            label="買い足しが必要"
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.close}>キャンセル</Button>
@@ -225,4 +268,4 @@ EditFoodModal.propTypes = {
   units: PropTypes.arrayOf(PropTypes.instanceOf(Unit)).isRequired,
 };
 
-export default EditFoodModal;
+export default withStyles(styles)(EditFoodModal);

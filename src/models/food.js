@@ -105,7 +105,7 @@ class Food extends Base {
 
 Food.emptyParams = {
   amount: 0,
-  change_Sets: [],
+  change_sets: [],
   created_at: null,
   created_user: User.emptyParams,
   expiration_date: moment(),

@@ -2,29 +2,12 @@ import { connect } from 'react-redux';
 import EditAmountModal from './EditAmountModal';
 import actions from '../../actions';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   isOpen: state.food.isAmountFoodModalOpen,
-  food: ownProps.food,
+  food: state.food.target,
 });
 const mapDispatchToProps = dispatch => ({
-  increment: (_food) => {
-    const amount = _food.amount + _food.unit.step;
-    const food = {
-      ..._food,
-      amount,
-    };
-
-    dispatch(actions.requestUpdateFood(food));
-  },
-  decrement: (_food) => {
-    const amount = _food.amount - _food.unit.step;
-    const food = {
-      ..._food,
-      amount,
-    };
-
-    dispatch(actions.requestUpdateFood(food));
-  },
+  update: food => dispatch(actions.requestUpdateFood(food)),
   edit: food => dispatch(actions.openEditFoodModal(food)),
   close: () => dispatch(actions.closeAmountFoodModal()),
 });

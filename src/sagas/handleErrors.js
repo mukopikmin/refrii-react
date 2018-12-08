@@ -14,5 +14,7 @@ export default function* handleError(error) {
 
   if (error.message.includes('auth')) {
     yield put(actions.signout());
+  } else {
+    yield put(actions.showNotification(error.message));
   }
 }

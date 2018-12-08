@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import Base from './base';
 
-export default class Unit extends Base {
+class Unit extends Base {
   constructor(params) {
     super();
 
@@ -11,6 +11,10 @@ export default class Unit extends Base {
     this.label = params.label;
     this.step = params.step;
     this.updatedAt = moment(params.updated_at);
+  }
+
+  static mock() {
+    return new Unit(this.emptyParams);
   }
 
   static getUnits(jwt) {
@@ -36,20 +40,19 @@ export default class Unit extends Base {
       .then(unit => new Unit(unit));
   }
 
-  static updateUnit(jwt, body) {
+  static updateUnit(jwt, body, id) {
     const options = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: body.name,
-        notice: body.notice,
-        box_id: body.boxId,
+        label: body.label,
+        step: body.step,
       }),
     };
 
-    return super.authFetch(`${super.endpoint}/units`, jwt, options)
+    return super.authFetch(`${super.endpoint}/units/${id}`, jwt, options)
       .then(response => response.json())
       .then(unit => new Unit(unit));
   }
@@ -61,4 +64,24 @@ export default class Unit extends Base {
 
     return super.authFetch(`${super.endpoint}/units/${id}`, jwt, options);
   }
+
+  toJson() {
+    return {
+      createdAt: this.createdAt,
+      id: this.id,
+      label: this.label,
+      step: this.step,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
+
+Unit.emptyParams = {
+  created_at: null,
+  id: 0,
+  label: '',
+  step: 0,
+  updated_at: null,
+};
+
+export default Unit;

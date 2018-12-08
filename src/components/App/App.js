@@ -1,91 +1,65 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
 import { PropTypes } from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Landing from '../Landing';
-import BoxList from '../BoxList';
-import Header from '../Header';
-import FoodList from '../FoodList';
+import Admin from '../Admin';
+import Main from '../Main';
 import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
 import EditFoodModal from '../EditFoodModal';
 import EditUnitModal from '../EditUnitModal';
-import BoxInfo from '../BoxInfo';
-import Box from '../../models/box';
 import styles from './App.module.css';
+import InvitationDialog from '../InvitationDialog';
+import EditAmountModal from '../EditAmountModal';
+import Notification from '../Notification';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    const { onLoad } = this.props;
-
-    onLoad();
-  }
-
-  renderBoxInfo() {
-    const { boxes, selectedBoxId } = this.props;
-    const box = boxes.filter(b => b.id === selectedBoxId)[0];
-
-    if (box) {
-      return <BoxInfo box={box} />;
-    }
-    return <div />;
-  }
-
   render() {
     const { session } = this.props;
     const { user } = session;
 
-    if (user) {
-      return (
+    if (!user) {
+      return <Landing />;
+    }
+
+    return (
+      <Fragment>
+        <CssBaseline />
         <BrowserRouter>
           <div>
-            <Header />
-            <Container className={styles.main}>
-              <Row>
-                <Col sm={3}>
-                  <BoxList />
-                </Col>
-                <Col sm={6}>
-                  <Route exact path="/" component={FoodList} />
-                  <Route exact path="/boxes/:id" component={FoodList} />
-                  <Route exact path="/setting" component={Setting} />
-                </Col>
-                <Col sm={3}>
-                  {this.renderBoxInfo()}
-                </Col>
-              </Row>
-            </Container>
+            <div className={styles.root}>
+              <Route exact path="/" component={Main} />
+              <Route exact path="/setting" component={Setting} />
+              <Route exact path="/admin" component={Admin} />
+            </div>
 
             <EditBoxModal />
             <EditFoodModal />
             <EditUnitModal />
+            <EditAmountModal />
+            <InvitationDialog />
+
+            <Notification />
           </div>
         </BrowserRouter>
-      );
-    }
-
-    return <Landing />;
+      </Fragment>
+    );
   }
 }
 
 App.propTypes = {
-  onLoad: PropTypes.func.isRequired,
   session: PropTypes.shape({
     user: PropTypes.shape({}),
   }),
-  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
-  selectedBoxId: PropTypes.number,
 };
 
 App.defaultProps = {
   session: {
     user: {},
   },
-  selectedBoxId: 0,
 };
 
 export default App;

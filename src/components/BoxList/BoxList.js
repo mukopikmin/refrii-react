@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import CreateIcon from '@material-ui/icons/Create';
+import AddIcon from '@material-ui/icons/Add';
 
 import Box from '../../models/box';
+import styles from './BoxList.module.css';
 
 class BoxList extends Component {
   componentDidMount() {
@@ -16,32 +22,34 @@ class BoxList extends Component {
   }
 
   select(box) {
-    const { select, history } = this.props;
+    const { select } = this.props;
 
     select(box);
-    history.push(`/boxes/${box.id}`);
   }
 
   render() {
     const { boxes, edit, add } = this.props;
 
     return (
-      <div id="box-list">
-        <Nav vertical>
-          <p>
-カテゴリ
-            <FontAwesomeIcon icon={faPlus} size="sm" onClick={() => add()} />
-          </p>
+      <div className={styles.root}>
+        <List
+          component="nav"
+          subheader={<ListSubheader component="div">カテゴリ</ListSubheader>}
+        >
           {boxes.map(box => (
-            <NavItem key={box.id} onClick={() => this.select(box)}>
-              <NavLink>
-                {box.name}
-                &nbsp;&nbsp;
-                <FontAwesomeIcon icon={faPen} size="sm" onClick={() => edit(box)} />
-              </NavLink>
-            </NavItem>
+            <ListItem key={box.id} button onClick={() => this.select(box)}>
+              <ListItemIcon>
+                <CreateIcon onClick={() => edit(box)} />
+              </ListItemIcon>
+              <ListItemText inset primary={box.name} />
+            </ListItem>
           ))}
-        </Nav>
+        </List>
+        <div className={styles.add}>
+          <Button variant="outlined" color="primary" fullWidth onClick={add}>
+            <AddIcon />
+          </Button>
+        </div>
       </div>
     );
   }

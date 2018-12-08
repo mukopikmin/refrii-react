@@ -3,8 +3,9 @@ import moment from 'moment';
 import Base from './base';
 import Unit from './unit';
 import User from './user';
+import Box from './box';
 
-export default class Food extends Base {
+class Food extends Base {
   constructor(params) {
     super();
 
@@ -21,6 +22,10 @@ export default class Food extends Base {
     this.unit = new Unit(params.unit);
     this.updatedAt = moment(params.updated_at);
     this.boxId = params.box.id;
+  }
+
+  static mock() {
+    return new Food(this.emptyParams);
   }
 
   static getFoods(jwt) {
@@ -41,7 +46,7 @@ export default class Food extends Base {
         expiration_date: body.expirationDate,
         needs_adding: body.needsAdding,
         notice: body.notice,
-        unit_id: body.unitId,
+        unit_id: body.unit.id,
       }),
     };
 
@@ -79,4 +84,39 @@ export default class Food extends Base {
 
     return super.authFetch(`${super.endpoint}/foods/${id}`, jwt, options);
   }
+
+  toJson() {
+    return {
+      amount: this.amount,
+      changeSets: this.changeSets,
+      createdAt: this.createdAt,
+      createdUser: this.createdUser,
+      expirationDate: this.expirationDate,
+      id: this.id,
+      imageUrl: this.imageUrl,
+      name: this.name,
+      needsAdding: this.needsAdding,
+      notice: this.notice,
+      unit: this.unit,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
+
+Food.emptyParams = {
+  amount: 0,
+  change_sets: [],
+  created_at: null,
+  created_user: User.emptyParams,
+  expiration_date: moment(),
+  id: 0,
+  image_url: null,
+  name: '',
+  needs_adding: false,
+  notice: '',
+  unit: Unit.emptyParams,
+  updated_at: null,
+  box: Box.emptyParams,
+};
+
+export default Food;

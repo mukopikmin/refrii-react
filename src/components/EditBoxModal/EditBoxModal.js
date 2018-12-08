@@ -1,50 +1,60 @@
 import React, { Component } from 'react';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Col, Button, Form, FormGroup, Label, Input,
+  Col, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import { PropTypes } from 'prop-types';
-import 'react-datepicker/dist/react-datepicker.css';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Box from '../../models/box';
 
 class EditBoxModal extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     this.onNameChange = this.onNameChange.bind(this);
     this.onNoticeChange = this.onNoticeChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.close = this.close.bind(this);
+    this.isOpen = this.isOpen.bind(this);
+    this.onOpened = this.onOpened.bind(this);
+    this.remove = this.remove.bind(this);
+
+    this.state = Box.mock().toJson();
   }
 
   onNameChange(e) {
-    const { updateParams, params } = this.props;
+    const name = e.target.value;
 
-    updateParams({
-      ...params,
-      name: e.target.value,
-    });
+    this.setState({ name });
   }
 
   onNoticeChange(e) {
-    const { updateParams, params } = this.props;
+    const notice = e.target.value;
 
-    updateParams({
-      ...params,
-      notice: e.target.value,
-    });
+    this.setState({ notice });
+  }
+
+  onOpened() {
+    const { box } = this.props;
+
+    this.setState(box.toJson());
   }
 
   create() {
-    const { create, params } = this.props;
+    const { create } = this.props;
 
-    create({
-      name: params.name,
-      notice: params.notice,
-    });
+    create(this.state);
   }
 
   update() {
-    const { update, params } = this.props;
+    const { update } = this.props;
 
-    update(params);
+    update(this.state);
   }
 
   close() {
@@ -53,65 +63,84 @@ class EditBoxModal extends Component {
     close();
   }
 
-  remove(params) {
+  remove() {
     const { remove } = this.props;
 
-    remove(params);
+    remove(this.state);
+  }
+
+  isOpen() {
+    const { isEditBoxModalOpen, isNewBoxModalOpen } = this.props;
+
+    return isNewBoxModalOpen || isEditBoxModalOpen;
+  }
+
+  renderTitle() {
+    const { isEditBoxModalOpen } = this.props;
+
+    return isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加';
+  }
+
+  renderActions() {
+    const { isEditBoxModalOpen } = this.props;
+
+    if (isEditBoxModalOpen) {
+      return (
+        <div>
+          <Button color="primary" onClick={this.update}>更新</Button>
+          <Button color="secondary" onClick={this.remove}>削除</Button>
+        </div>
+      );
+    }
+
+    return <Button color="primary" onClick={this.create}>追加</Button>;
   }
 
   render() {
-    const { isEditBoxModalOpen, isNewBoxModalOpen, params } = this.props;
-    const isOpen = isNewBoxModalOpen || isEditBoxModalOpen;
+    const { box } = this.props;
+    const { name, notice } = this.state;
+
+    if (!box) {
+      return <div />;
+    }
 
     return (
-      <Modal isOpen={isOpen} toggle={this.close}>
-        <ModalHeader toggle={this.close}>
-          {(() => (isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加'))()}
-        </ModalHeader>
-        <ModalBody>
+      <Dialog
+        open={this.isOpen()}
+        onEnter={this.onOpened}
+        onClose={this.close}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{this.renderTitle()}</DialogTitle>
+        <DialogContent>
           <Form>
             <FormGroup row>
               <Label for="name" sm={3}>名前</Label>
               <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={params.name} />
+                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={name} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="notice" sm={3}>メモ</Label>
               <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={params.notice} />
+                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={notice} />
               </Col>
             </FormGroup>
           </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button outline color="secondary" onClick={this.close}>キャンセル</Button>
-          {(() => {
-            if (isEditBoxModalOpen) {
-              return (
-                <div>
-                  <Button outline color="primary" onClick={this.update}>更新</Button>
-                  {' '}
-                  <Button outline color="danger" onClick={() => this.remove(params)}>削除</Button>
-                </div>
-              );
-            }
-            return (
-              <Button outline color="primary" onClick={this.create}>追加</Button>
-            );
-          })()}
-        </ModalFooter>
-      </Modal>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.close}>
+          キャンセル
+          </Button>
+          {this.renderActions()}
+        </DialogActions>
+      </Dialog>
     );
   }
 }
 
 EditBoxModal.propTypes = {
-  updateParams: PropTypes.func.isRequired,
-  params: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    notice: PropTypes.string.isRequired,
-  }).isRequired,
   create: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,

@@ -28,6 +28,6 @@ class Base {
   }
 }
 
-Base.endpoint = 'https://api.refrii.com';
+Base.endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:9292' : 'https://api.refrii.com';
 
 export default Base;

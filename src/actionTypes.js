@@ -79,6 +79,13 @@ export default {
     },
     SET_PARAMS: 'SET_PARAMS_UNIT',
   },
+  USER: {
+    LIST: {
+      REQUEST: 'REQUEST_LIST_USER',
+      RECEIVE: 'RECEIVE_LIST_USER',
+      FAILED: 'FAILED_LIST_USER',
+    },
+  },
   MODAL: {
     BOX: {
       NEW: {
@@ -88,6 +95,10 @@ export default {
       EDIT: {
         OPEN: 'OPEN_EDIT_BOX_MODAL',
         CLOSE: 'CLOSE_EDIT_BOX_MODAL',
+      },
+      INVITE: {
+        OPEN: 'OPEN_INVITE_BOX_MODAL',
+        CLOSE: 'CLOSE_INVITE_BOX_MODAL',
       },
     },
     FOOD: {
@@ -114,6 +125,10 @@ export default {
         CLOSE: 'CLOSE_EDIT_UNIT_MODAL',
       },
     },
+  },
+  NOTIFICATION: {
+    SHOW: 'SHOW_NOTIFICATION',
+    HIDE: 'HIDE_NOTIFICATION',
   },
   SIGNOUT: 'SIGNOUT',
 };

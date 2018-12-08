@@ -1,10 +1,9 @@
 import moment from 'moment';
 
 import Base from './base';
-import Food from './food';
 import User from './user';
 
-export default class Box extends Base {
+class Box extends Base {
   constructor(params) {
     super();
 
@@ -19,6 +18,10 @@ export default class Box extends Base {
     this.notice = params.notice;
     this.owner = new User(params.owner);
     this.updatedAt = moment(params.updated_at);
+  }
+
+  static mock() {
+    return new Box(this.emptyParams);
   }
 
   static getBoxes(jwt) {
@@ -98,13 +101,45 @@ export default class Box extends Base {
     return super.authFetch(`${super.endpoint}/boxes/${id}/invite`, jwt, options);
   }
 
-  static getFoodsInBox(jwt, boxId) {
-    return super.authFetch(`${super.endpoint}/boxes/${boxId}/foods`, jwt)
-      .then(response => response.json())
-      .then(foods => foods.map(food => new Food(food)));
-  }
+  // static getFoodsInBox(jwt, boxId) {
+  //   return super.authFetch(`${super.endpoint}/boxes/${boxId}/foods`, jwt)
+  //     .then(response => response.json())
+  //     .then(foods => foods.map(food => new Food(food)));
+  // }
 
   getFoods(foods) {
     return foods.filter(food => food.boxId === this.id);
   }
+
+  toJson() {
+    return {
+      changeSets: this.changeSets,
+      createdAt: this.createdAt,
+      foods: this.foods,
+      id: this.id,
+      imageUrl: this.imageUrl,
+      invitedUsers: this.invitedUsers,
+      isInvited: this.isInvited,
+      name: this.name,
+      notice: this.notice,
+      owner: this.owner,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
+
+Box.emptyParams = {
+  change_sets: [],
+  created_at: null,
+  foods: [],
+  id: 0,
+  image_url: null,
+  invited_users: [],
+  is_invited: false,
+  name: '',
+  notice: '',
+  owner: User.emptyParams,
+  updated_At: null,
+};
+
+export default Box;

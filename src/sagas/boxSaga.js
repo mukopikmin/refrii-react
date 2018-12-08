@@ -17,7 +17,7 @@ function* handleRequestListBox() {
     if (boxes.length > 0) {
       const box = yield select(selectors.getSelectedBox);
       if (!box) {
-        yield put(actions.selectBox(boxes[0].id));
+        yield put(actions.selectBox(boxes[0]));
       }
     }
   } catch (error) {
@@ -29,11 +29,12 @@ function* handleRequestListBox() {
 function* handleRequestCreateBox(action) {
   try {
     const session = yield select(selectors.getSession);
-    const { params } = action.payload;
-    yield call(Box.createBox, session.jwt, params);
+    const { box } = action.payload;
+    yield call(Box.createBox, session.jwt, box);
     yield put(actions.receiveCreateBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${box.name} が作成されました`));
   } catch (error) {
     yield put(actions.failedCreateBox(error));
     yield fork(handleError, error);
@@ -42,12 +43,13 @@ function* handleRequestCreateBox(action) {
 
 function* handleRequestUpdateBox(action) {
   try {
-    const { params } = action.payload;
+    const { box } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Box.updateBox, session.jwt, params);
+    yield call(Box.updateBox, session.jwt, box);
     yield put(actions.receiveUpdateBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${box.name} が更新されました`));
   } catch (error) {
     yield put(actions.failedUpdateBox(error));
     yield fork(handleError, error);
@@ -56,12 +58,13 @@ function* handleRequestUpdateBox(action) {
 
 function* handleRequestRemoveBox(action) {
   try {
-    const { params } = action.payload;
+    const { box } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Box.removeBox, session.jwt, params.id);
+    yield call(Box.removeBox, session.jwt, box.id);
     yield put(actions.receiveRemoveBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${box.name} が削除されました`));
   } catch (error) {
     yield put(actions.failedRemoveBox(error));
     yield fork(handleError, error);
@@ -76,6 +79,7 @@ function* handleRequestInviteBox(action) {
     yield put(actions.receiveInviteBox());
     const boxes = yield call(Box.getBoxes, session.jwt);
     yield put(actions.receiveListBox(boxes));
+    yield put(actions.showNotification(`${box.name} が共有されました`));
   } catch (error) {
     yield put(actions.failedInviteBox(error));
     yield fork(handleError, error);

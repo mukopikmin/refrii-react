@@ -10,6 +10,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import moment from 'moment';
 import ReactGA from 'react-ga';
 import 'babel-polyfill';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import 'moment/locale/ja';
 
 import App from './components/App';
@@ -17,6 +18,18 @@ import reducers from './reducers';
 import rootSaga from './sagas';
 import './index.css';
 // import registerServiceWorker from './registerServiceWorker';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#3687E7',
+    },
+  },
+  typography: {
+    useNextVariants: true,
+    fontSize: 12,
+  },
+});
 
 ReactGA.initialize('UA-121958327-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -40,7 +53,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </PersistGate>
   </Provider>,
   document.getElementById('root'),

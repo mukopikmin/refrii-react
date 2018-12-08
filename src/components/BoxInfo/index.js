@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 const mapDispatchToProps = dispatch => ({
   add: () => dispatch(actions.openNewFoodModal()),
+  invite: () => dispatch(actions.openInviteBoxModal()),
 });
 
 export default connect(

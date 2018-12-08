@@ -1,30 +1,17 @@
 import { handleActions } from 'redux-actions';
-import moment from 'moment';
 import types from '../actionTypes';
+import Food from '../models/food';
 
-const initialParams = {
-  id: 0,
-  name: '',
-  amount: 0,
-  unitId: 0,
-  userId: 0,
-  boxId: 0,
-  notice: '',
-  needsAdding: false,
-  expirationDate: moment().format('YYYY-MM-DD'),
-};
 const initialState = {
   list: [],
   isNewFoodModalOpen: false,
   isEditFoodModalOpen: false,
   isAmountFoodModalOpen: false,
-  params: initialParams,
+  target: null,
 };
 
 export default handleActions({
-  [types.FOOD.LIST.REQUEST]: state => ({
-    ...state,
-  }),
+  [types.FOOD.LIST.REQUEST]: state => ({ ...state }),
   [types.FOOD.LIST.RECEIVE]: (state, action) => ({
     ...state,
     list: action.payload.foods,
@@ -35,7 +22,7 @@ export default handleActions({
   }),
   [types.FOOD.CREATE.REQUEST]: (state, action) => ({
     ...state,
-    params: action.payload.params,
+    food: action.payload.food,
   }),
   [types.FOOD.CREATE.RECEIVE]: state => ({
     ...state,
@@ -45,13 +32,11 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.FOOD.UPDATE.REQUEST]: state => ({
-    ...state,
-  }),
+  [types.FOOD.UPDATE.REQUEST]: state => ({ ...state }),
   [types.FOOD.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
-    params: initialParams,
+    isAmountFoodModalOpen: false,
   }),
   [types.FOOD.UPDATE.FAILED]: (state, action) => ({
     ...state,
@@ -59,36 +44,38 @@ export default handleActions({
   }),
   [types.FOOD.SET_PARAMS]: (state, action) => ({
     ...state,
-    params: action.payload.params,
+    target: action.payload.food,
   }),
   [types.MODAL.FOOD.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewFoodModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: Food.mock(action.payload.box),
   }),
   [types.MODAL.FOOD.NEW.CLOSE]: state => ({
     ...state,
     isNewFoodModalOpen: false,
-    params: initialParams,
+    target: null,
   }),
   [types.MODAL.FOOD.EDIT.OPEN]: (state, action) => ({
     ...state,
     isEditFoodModalOpen: true,
-    params: action.payload.params || initialParams,
+    isAmountFoodModalOpen: false,
+    target: action.payload.food,
   }),
   [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
     ...state,
     isEditFoodModalOpen: false,
-    params: initialParams,
+    isAmountFoodModalOpen: false,
+    target: null,
   }),
   [types.MODAL.FOOD.AMOUNT.OPEN]: (state, action) => ({
     ...state,
     isAmountFoodModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: action.payload.food,
   }),
   [types.MODAL.FOOD.AMOUNT.CLOSE]: state => ({
     ...state,
     isAmountFoodModalOpen: false,
-    params: initialParams,
+    target: null,
   }),
 }, initialState);

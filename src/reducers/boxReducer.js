@@ -1,17 +1,13 @@
 import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
+import Box from '../models/box';
 
-const initialParams = {
-  id: 0,
-  name: '',
-  notice: '',
-};
 const initialState = {
   list: [],
-  selectedId: null,
   isNewBoxModalOpen: false,
   isEditBoxModalOpen: false,
-  params: initialParams,
+  isInvitationDialogOpen: false,
+  target: null,
 };
 
 export default handleActions({
@@ -27,9 +23,8 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.BOX.CREATE.REQUEST]: (state, action) => ({
+  [types.BOX.CREATE.REQUEST]: state => ({
     ...state,
-    params: action.payload.params,
   }),
   [types.BOX.CREATE.RECEIVE]: state => ({
     ...state,
@@ -39,21 +34,16 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.BOX.UPDATE.REQUEST]: state => ({
-    ...state,
-  }),
+  [types.BOX.UPDATE.REQUEST]: state => ({ ...state }),
   [types.BOX.UPDATE.RECEIVE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
-    params: initialParams,
   }),
   [types.BOX.UPDATE.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),
-  [types.BOX.REMOVE.REQUEST]: state => ({
-    ...state,
-  }),
+  [types.BOX.REMOVE.REQUEST]: state => ({ ...state }),
   [types.BOX.REMOVE.RECEIVE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
@@ -63,42 +53,39 @@ export default handleActions({
     isEditBoxModalOpen: false,
     error: action.payload.error,
   }),
-  [types.BOX.INVITE.REQUEST]: state => ({
-    ...state,
-  }),
-  [types.BOX.INVITE.RECEIVE]: state => ({
-    ...state,
-  }),
+  [types.BOX.INVITE.REQUEST]: state => ({ ...state }),
+  [types.BOX.INVITE.RECEIVE]: state => ({ ...state }),
   [types.BOX.INVITE.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),
   [types.BOX.SELECT]: (state, action) => ({
     ...state,
-    selectedId: action.payload.boxId,
-  }),
-  [types.BOX.SET_PARAMS]: (state, action) => ({
-    ...state,
-    params: action.payload.params,
+    target: action.payload.box,
   }),
   [types.MODAL.BOX.NEW.OPEN]: (state, action) => ({
     ...state,
     isNewBoxModalOpen: true,
-    params: action.payload.params || initialParams,
+    target: action.payload.target || Box.mock(),
   }),
   [types.MODAL.BOX.NEW.CLOSE]: state => ({
     ...state,
     isNewBoxModalOpen: false,
-    params: initialParams,
   }),
-  [types.MODAL.BOX.EDIT.OPEN]: (state, action) => ({
+  [types.MODAL.BOX.EDIT.OPEN]: state => ({
     ...state,
     isEditBoxModalOpen: true,
-    params: action.payload.params || initialParams,
   }),
   [types.MODAL.BOX.EDIT.CLOSE]: state => ({
     ...state,
     isEditBoxModalOpen: false,
-    params: initialParams,
+  }),
+  [types.MODAL.BOX.INVITE.OPEN]: state => ({
+    ...state,
+    isInvitationDialogOpen: true,
+  }),
+  [types.MODAL.BOX.INVITE.CLOSE]: state => ({
+    ...state,
+    isInvitationDialogOpen: false,
   }),
 }, initialState);

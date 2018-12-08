@@ -1,0 +1,29 @@
+.card {
+  min-width: 275;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin-bottom: 16;
+  font-size: 14;
+}
+
+.root {
+  margin: 10px;
+}
+
+.message {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.amount {
+  width: 100%;
+  text-align: right;
+  margin: 0;
+}
+
+.name {
+  float: left;
+  margin: 0;
+}

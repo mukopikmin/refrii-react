@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
   session: state.session,
   isEditUnitModalOpen: state.unit.isEditUnitModalOpen,
   isNewUnitModalOpen: state.unit.isNewUnitModalOpen,
-  params: state.unit.params,
+  unit: state.unit.target,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -15,15 +15,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.closeNewUnitModal());
     dispatch(actions.closeEditUnitModal());
   },
-  create: params => dispatch(actions.requestCreateUnit(params)),
-  update: params => dispatch(actions.requestUpdateUnit(params)),
-  remove: (params) => {
-    confirm('Are you sure').then(
-      () => dispatch(actions.requestRemoveUnit(params)),
-      () => {},
+  create: unit => dispatch(actions.requestCreateUnit(unit)),
+  update: unit => dispatch(actions.requestUpdateUnit(unit)),
+  remove: (unit) => {
+    confirm(`${unit.label} を削除していいですか？`).then(
+      () => dispatch(actions.requestRemoveUnit(unit)),
+      () => { /* Do nothing */ },
     );
   },
-  updateParams: params => dispatch(actions.setParamsUnit(params)),
 });
 
 export default connect(

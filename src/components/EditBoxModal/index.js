@@ -7,22 +7,21 @@ const mapStateToProps = state => ({
   session: state.session,
   isEditBoxModalOpen: state.box.isEditBoxModalOpen,
   isNewBoxModalOpen: state.box.isNewBoxModalOpen,
-  params: state.box.params,
+  box: state.box.target,
 });
 const mapDispatchToProps = dispatch => ({
   close: () => {
     dispatch(actions.closeNewBoxModal());
     dispatch(actions.closeEditBoxModal());
   },
-  create: params => dispatch(actions.requestCreateBox(params)),
-  update: params => dispatch(actions.requestUpdateBox(params)),
-  remove: (params) => {
-    confirm('Are you sure').then(
-      () => dispatch(actions.requestRemoveBox(params)),
+  create: box => dispatch(actions.requestCreateBox(box)),
+  update: box => dispatch(actions.requestUpdateBox(box)),
+  remove: (box) => {
+    confirm(`${box.name} を削除していいですか？`).then(
+      () => dispatch(actions.requestRemoveBox(box)),
       () => {},
     );
   },
-  updateParams: params => dispatch(actions.setParamsBox(params)),
 });
 
 export default connect(

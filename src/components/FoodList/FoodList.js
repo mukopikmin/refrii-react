@@ -34,7 +34,19 @@ class FoodList extends Component {
     }
 
     if (box.getFoods(foods).length === 0) {
-      return <p className={styles.message}>食材は登録されていません</p>;
+      return (
+        <div>
+          <p className={styles.message}>
+            食材は登録されていません
+          </p>
+          <p className={styles.message}>
+            <Button variant="outlined" color="primary" onClick={add}>
+              <AddIcon className={styles.addIcon} />
+              食材を登録する
+            </Button>
+          </p>
+        </div>
+      );
     }
 
     return (
@@ -58,13 +70,6 @@ class FoodList extends Component {
               </Card>
             </Grid>
           ))}
-          <Grid item sm={6} xs={12}>
-            <div className={styles.add}>
-              <Button variant="outlined" color="primary" onClick={add} fullWidth>
-                <AddIcon />
-              </Button>
-            </div>
-          </Grid>
         </Grid>
       </div>
     );

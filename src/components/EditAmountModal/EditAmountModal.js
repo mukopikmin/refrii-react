@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,9 +8,25 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import Food from '../../models/food';
-import styles from './EditAmountModal.module.css';
+
+const styles = () => ({
+  amount: {
+    margin: 20,
+    fontSize: 12,
+  },
+  actions: {
+    textAlign: 'center',
+    marginTop: 20,
+  },
+});
 
 class EditAmountModal extends Component {
   constructor(props) {
@@ -70,7 +87,9 @@ class EditAmountModal extends Component {
   }
 
   render() {
-    const { food, isOpen, close } = this.props;
+    const {
+      food, isOpen, close, classes,
+    } = this.props;
     const { name, amount, unit } = this.state;
 
     if (!food) {
@@ -82,16 +101,28 @@ class EditAmountModal extends Component {
         open={isOpen}
         onEnter={this.onOpened}
         onClose={this.onClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{name}</DialogTitle>
+        <DialogTitle>{name}</DialogTitle>
         <DialogContent>
-          <div align="center">
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <ChatBubbleOutlineIcon />
+              </ListItemIcon>
+              <ListItemText primary={food.notice} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <HourglassEmptyIcon />
+              </ListItemIcon>
+              <ListItemText primary={food.expirationDate} />
+            </ListItem>
+          </List>
+          <div className={classes.actions}>
             <Button variant="outlined" color="secondary" onClick={this.onDecrease}>
               <RemoveIcon />
             </Button>
-            <span className={styles.amount}>
+            <span className={classes.amount}>
               {`${amount} ${unit.label}`}
             </span>
             <Button variant="outlined" color="primary" onClick={this.onIncrease}>
@@ -100,15 +131,9 @@ class EditAmountModal extends Component {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close}>
-          キャンセル
-          </Button>
-          <Button onClick={this.edit} color="primary">
-          編集
-          </Button>
-          <Button onClick={this.submit} color="primary">
-          更新
-          </Button>
+          <Button onClick={close}>キャンセル</Button>
+          <Button onClick={this.edit} color="primary">編集</Button>
+          <Button onClick={this.submit} color="primary">更新</Button>
         </DialogActions>
       </Dialog>
     );
@@ -122,4 +147,4 @@ EditAmountModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 };
 
-export default EditAmountModal;
+export default withStyles(styles)(EditAmountModal);

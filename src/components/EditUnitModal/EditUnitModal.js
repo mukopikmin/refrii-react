@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  Col, Form, FormGroup, Label, Input,
-} from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
 
 import Unit from '../../models/unit';
 
@@ -102,28 +102,42 @@ class EditUnitModal extends Component {
 
     return (
       <Dialog
+        fullWidth
         open={this.isOpen()}
         onClose={this.close}
         onEnter={this.onOpened}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
         <DialogTitle>{this.renderTitle()}</DialogTitle>
         <DialogContent>
-          <Form>
-            <FormGroup row>
-              <Label for="label" sm={3}>ラベル</Label>
-              <Col sm={9}>
-                <Input type="text" name="label" id="label" onChange={this.onLabelChange} value={label} />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="step" sm={3}>増減値</Label>
-              <Col sm={9}>
-                <Input type="number" name="step" id="step" onChange={this.onStepChange} value={step} />
-              </Col>
-            </FormGroup>
-          </Form>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={2}>
+              <FormLabel>ラベル</FormLabel>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                margin="dense"
+                variant="outlined"
+                value={label}
+                onChange={this.onLabelChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={2}>
+              <FormLabel>増減値</FormLabel>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                type="number"
+                margin="dense"
+                variant="outlined"
+                value={step}
+                onChange={this.onStepChange}
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={this.close}>キャンセル</Button>

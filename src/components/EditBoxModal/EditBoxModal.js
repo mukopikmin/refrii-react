@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {
-  Col, Form, FormGroup, Label, Input,
-} from 'reactstrap';
 import { PropTypes } from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
 
 import Box from '../../models/box';
 
@@ -106,33 +106,45 @@ class EditBoxModal extends Component {
 
     return (
       <Dialog
+        fullWidth
         open={this.isOpen()}
         onEnter={this.onOpened}
         onClose={this.close}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{this.renderTitle()}</DialogTitle>
+        <DialogTitle>{this.renderTitle()}</DialogTitle>
         <DialogContent>
-          <Form>
-            <FormGroup row>
-              <Label for="name" sm={3}>名前</Label>
-              <Col sm={9}>
-                <Input type="text" name="name" id="name" onChange={this.onNameChange} value={name} />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="notice" sm={3}>メモ</Label>
-              <Col sm={9}>
-                <Input type="textarea" name="notice" id="notice" onChange={this.onNoticeChange} value={notice} />
-              </Col>
-            </FormGroup>
-          </Form>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={2}>
+              <FormLabel>名前</FormLabel>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                margin="dense"
+                variant="outlined"
+                value={name}
+                onChange={this.onNameChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="flex-start">
+            <Grid item xs={2}>
+              <FormLabel>メモ</FormLabel>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                multiline
+                margin="dense"
+                variant="outlined"
+                value={notice}
+                onChange={this.onNoticeChange}
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.close}>
-          キャンセル
-          </Button>
+          <Button onClick={this.close}>キャンセル</Button>
           {this.renderActions()}
         </DialogActions>
       </Dialog>

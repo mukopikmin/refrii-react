@@ -227,7 +227,7 @@ class EditFoodModal extends Component {
             <Grid item xs={2}>
               <FormLabel>メモ</FormLabel>
             </Grid>
-            <Grid item xs={10} className={classes.datePicker}>
+            <Grid item xs={10}>
               <TextField
                 fullWidth
                 multiline

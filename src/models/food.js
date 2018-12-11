@@ -68,11 +68,11 @@ class Food extends Base {
         expiration_date: body.expirationDate,
         image_url: body.imageUrl,
         box_id: body.boxId,
-        unit_id: body.unitId,
+        unit_id: body.unit.id,
       }),
     };
 
-    return super.authFetch(`${super.endpoint}/foods/`, jwt, options)
+    return super.authFetch(`${super.endpoint}/foods`, jwt, options)
       .then(response => response.json())
       .then(food => new Food(food));
   }

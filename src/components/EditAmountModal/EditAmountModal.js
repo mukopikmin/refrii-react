@@ -26,6 +26,10 @@ const styles = () => ({
     textAlign: 'center',
     marginTop: 20,
   },
+  content: {
+    padding: 0,
+    marginBottom: 24,
+  },
 });
 
 class EditAmountModal extends Component {
@@ -103,7 +107,7 @@ class EditAmountModal extends Component {
         onClose={this.onClose}
       >
         <DialogTitle>{name}</DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.content}>
           <List>
             <ListItem>
               <ListItemIcon>

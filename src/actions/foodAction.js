@@ -12,7 +12,7 @@ export default createActions({
   [types.FOOD.UPDATE.RECEIVE]: food => ({ food }),
   [types.FOOD.UPDATE.FAILED]: error => ({ error }),
   [types.FOOD.REMOVE.REQUEST]: food => ({ food }),
-  [types.FOOD.REMOVE.RECEIVE]: () => ({}),
+  [types.FOOD.REMOVE.RECEIVE]: food => ({ food }),
   [types.FOOD.REMOVE.FAILED]: error => ({ error }),
   [types.FOOD.SET_PARAMS]: food => ({ food }),
   [types.MODAL.FOOD.NEW.OPEN]: (food, box) => ({ food, box }),

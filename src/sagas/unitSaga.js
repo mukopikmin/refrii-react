@@ -23,11 +23,11 @@ function* handleRequestCreateUnit(action) {
   try {
     const session = yield select(selectors.getSession);
     const { unit } = action.payload;
-    yield call(Unit.createUnit, session.jwt, unit);
-    yield put(actions.receiveCreateUnit());
-    const units = yield call(Unit.getUnits, session.jwt);
-    yield put(actions.receiveListUnit(units));
-    yield put(actions.showNotification(`${unit.name} が作成されました`));
+    const createdUnit = yield call(Unit.createUnit, session.jwt, unit);
+    yield put(actions.receiveCreateUnit(createdUnit));
+    // const units = yield call(Unit.getUnits, session.jwt);
+    // yield put(actions.receiveListUnit(units));
+    yield put(actions.showNotification(`${unit.label} が作成されました`));
   } catch (error) {
     yield put(actions.failedCreateUnit(error));
     yield fork(handleError, error);
@@ -38,11 +38,11 @@ function* handleRequestUpdateUnit(action) {
   try {
     const { unit } = action.payload;
     const session = yield select(selectors.getSession);
-    yield call(Unit.updateUnit, session.jwt, unit, unit.id);
-    yield put(actions.receiveUpdateUnit());
-    const units = yield call(Unit.getUnits, session.jwt);
-    yield put(actions.receiveListUnit(units));
-    yield put(actions.showNotification(`${unit.name} が更新されました`));
+    const updatedUnit = yield call(Unit.updateUnit, session.jwt, unit, unit.id);
+    yield put(actions.receiveUpdateUnit(updatedUnit));
+    // const units = yield call(Unit.getUnits, session.jwt);
+    // yield put(actions.receiveListUnit(units));
+    yield put(actions.showNotification(`${unit.label} が更新されました`));
   } catch (error) {
     yield put(actions.failedUpdateUnit(error));
     yield fork(handleError, error);
@@ -54,10 +54,10 @@ function* handleRequestRemoveUnit(action) {
     const { unit } = action.payload;
     const session = yield select(selectors.getSession);
     yield call(Unit.removeUnit, session.jwt, unit.id);
-    yield put(actions.receiveRemoveUnit());
-    const units = yield call(Unit.getUnits, session.jwt);
-    yield put(actions.receiveListUnit(units));
-    yield put(actions.showNotification(`${unit.name} が削除されました`));
+    yield put(actions.receiveRemoveUnit(unit.id));
+    // const units = yield call(Unit.getUnits, session.jwt);
+    // yield put(actions.receiveListUnit(units));
+    yield put(actions.showNotification(`${unit.label} が削除されました`));
   } catch (error) {
     yield put(actions.failedRemoveUnit(error));
     yield fork(handleError, error);

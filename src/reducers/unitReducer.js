@@ -10,10 +10,7 @@ const initialState = {
 };
 
 export default handleActions({
-  [types.UNIT.LIST.REQUEST]: (state, action) => ({
-    ...state,
-    session: action.payload.session,
-  }),
+  [types.UNIT.LIST.REQUEST]: state => ({ ...state }),
   [types.UNIT.LIST.RECEIVE]: (state, action) => ({
     ...state,
     list: action.payload.units,
@@ -22,33 +19,38 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.UNIT.CREATE.REQUEST]: state => ({
+  [types.UNIT.CREATE.REQUEST]: state => ({ ...state }),
+  [types.UNIT.CREATE.RECEIVE]: (state, action) => ({
     ...state,
-  }),
-  [types.UNIT.CREATE.RECEIVE]: state => ({
-    ...state,
+    list: state.list.concat([action.payload.unit]),
     isNewUnitModalOpen: false,
   }),
   [types.UNIT.CREATE.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),
-  [types.UNIT.UPDATE.REQUEST]: state => ({
-    ...state,
-  }),
-  [types.UNIT.UPDATE.RECEIVE]: state => ({
-    ...state,
-    isEditUnitModalOpen: false,
-  }),
+  [types.UNIT.UPDATE.REQUEST]: state => ({ ...state }),
+  [types.UNIT.UPDATE.RECEIVE]: (state, action) => {
+    const list = state.list.concat([]);
+    const { unit } = action.payload;
+    const index = list.map(u => u.id).indexOf(unit.id);
+
+    list[index] = unit;
+
+    return {
+      ...state,
+      list,
+      isEditUnitModalOpen: false,
+    };
+  },
   [types.UNIT.UPDATE.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),
-  [types.UNIT.REMOVE.REQUEST]: state => ({
+  [types.UNIT.REMOVE.REQUEST]: state => ({ ...state }),
+  [types.UNIT.REMOVE.RECEIVE]: (state, action) => ({
     ...state,
-  }),
-  [types.UNIT.REMOVE.RECEIVE]: state => ({
-    ...state,
+    list: state.list.filter(unit => unit.id !== action.payload.id),
     isEditUnitModalOpen: false,
   }),
   [types.UNIT.REMOVE.FAILED]: (state, action) => ({

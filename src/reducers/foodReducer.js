@@ -20,13 +20,10 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
-  [types.FOOD.CREATE.REQUEST]: (state, action) => ({
-    ...state,
-    food: action.payload.food,
-  }),
+  [types.FOOD.CREATE.REQUEST]: state => ({ ...state }),
   [types.FOOD.CREATE.RECEIVE]: (state, action) => ({
     ...state,
-    list: state.list.concat(action.payload.food),
+    list: state.list.concat([action.payload.food]),
     isNewFoodModalOpen: false,
   }),
   [types.FOOD.CREATE.FAILED]: (state, action) => ({

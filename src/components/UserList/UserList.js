@@ -49,7 +49,6 @@ const columns = [
   },
 ];
 const options = {
-  filter: false,
   responsive: 'scroll',
   filterType: 'checkbox',
   resizableColumns: true,

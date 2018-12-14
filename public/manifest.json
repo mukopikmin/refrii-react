@@ -8,7 +8,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://refrii.com",
+  "start_url": "https://refrii.com/",
   "display": "standalone",
   "theme_color": "#3289e7",
   "background_color": "#ffffff"

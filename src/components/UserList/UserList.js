@@ -19,7 +19,7 @@ const columns = [
     options: {
       filter: true,
       sort: true,
-      customBodyRender: value => (value ? '有効' : '無効'),
+      customBodyRender: value => (value ? '無効' : '有効'),
     },
   }, {
     name: '管理者',

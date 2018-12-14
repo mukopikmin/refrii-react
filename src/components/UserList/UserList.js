@@ -1,59 +1,95 @@
 import React, { Component } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import CheckIcon from '@material-ui/icons/Check';
+import MUIDataTable from 'mui-datatables';
 
-import styles from './UserList.module.css';
+const columns = [
+  {
+    name: '表示名',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  }, {
+    name: 'メールアドレス',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  }, {
+    name: '状態',
+    options: {
+      filter: true,
+      sort: true,
+      customBodyRender: value => (value ? '有効' : '無効'),
+    },
+  }, {
+    name: '管理者',
+    options: {
+      filter: true,
+      sort: true,
+      customBodyRender: value => (value ? '管理者' : '一般ユーザー'),
+    },
+  }, {
+    name: 'プロバイダー',
+    options: {
+      filter: true,
+      sort: true,
+    },
+  }, {
+    name: '作成日',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  }, {
+    name: '更新日',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+];
+const options = {
+  filter: false,
+  responsive: 'scroll',
+  filterType: 'checkbox',
+  resizableColumns: true,
+  print: false,
+  download: false,
+  selectableRows: false,
+};
 
 class UserList extends Component {
-  static isChecked(flag) {
-    return flag ? <CheckIcon /> : '';
-  }
-
   constructor(props) {
     super(props);
 
     const { onLoad } = this.props;
 
+    this.getTableData = this.getTableData.bind(this);
     onLoad();
   }
 
-  render() {
+  getTableData() {
     const { users } = this.props;
 
+    return users.map(user => ([
+      user.name,
+      user.email,
+      user.disabled,
+      user.admin,
+      user.provider,
+      user.createdAt.format('YYYY/MM/DD HH:mm:ss'),
+      user.updatedAt.format('YYYY/MM/DD HH:mm:ss'),
+    ]));
+  }
+
+  render() {
     return (
-      <Paper className={styles.usertable}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>表示名</TableCell>
-              <TableCell>メールアドレス</TableCell>
-              <TableCell>無効</TableCell>
-              <TableCell>管理者</TableCell>
-              <TableCell>プロバイダー</TableCell>
-              <TableCell>作成日</TableCell>
-              <TableCell>更新日</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map(user => (
-              <TableRow key={user.id}>
-                <TableCell component="th" scope="row">{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{UserList.isChecked(user.disabled)}</TableCell>
-                <TableCell>{UserList.isChecked(user.admin)}</TableCell>
-                <TableCell>{user.provider}</TableCell>
-                <TableCell>{user.createdAt.format('YYYY/MM/DD HH:mm:ss')}</TableCell>
-                <TableCell>{user.updatedAt.format('YYYY/MM/DD HH:mm:ss')}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
+      <MUIDataTable
+        title="ユーザー一覧"
+        data={this.getTableData()}
+        columns={columns}
+        options={options}
+      />
     );
   }
 }

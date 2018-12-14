@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import Header from '../Header';
@@ -19,15 +18,12 @@ class Admin extends Component {
         <div className={styles.content}>
           <Grid container spacing={24}>
             <Grid item sm={3}>
-              <List
-                component="nav"
-                subheader={<ListSubheader component="div">メニュー</ListSubheader>}
-              >
+              <List>
                 <ListItem button>
                   <ListItemIcon>
                     <SupervisorAccountIcon />
                   </ListItemIcon>
-                  <ListItemText inset primary="ユーザー" />
+                  <ListItemText inset primary="ユーザー一覧" />
                 </ListItem>
               </List>
             </Grid>

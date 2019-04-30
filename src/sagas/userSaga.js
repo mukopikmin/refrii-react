@@ -12,6 +12,7 @@ function* handleRequestListUser() {
   try {
     const session = yield select(selectors.getSession);
     const users = yield call(User.getUsers, session.jwt);
+
     yield put(actions.receiveListUser(users));
   } catch (error) {
     yield put(actions.failedListUser(error));

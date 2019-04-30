@@ -21,15 +21,11 @@ class User extends Base {
     return new User(this.emptyParams);
   }
 
-  static authWithGoogle(token) {
-    return fetch(`${super.endpoint}/auth/google/token?token=${token}`)
+  static verify(jwt) {
+    return super.authFetch(`${super.endpoint}/users/verify`, jwt)
       .then(super.handleErrors)
       .then(response => response.json())
-      .then(json => ({
-        expiresAt: json.expires_at,
-        jwt: json.jwt,
-        user: json.user,
-      }));
+      .then(user => new User(user));
   }
 
   toJson() {

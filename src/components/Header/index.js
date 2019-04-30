@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Header from './Header';
 import actions from '../../actions';
+import firebase from '../../firebase';
 
 const mapStateToProps = (state, ownProps) => ({
   session: state.session,
@@ -8,7 +9,10 @@ const mapStateToProps = (state, ownProps) => ({
   drawerOpen: ownProps.drawerOpen,
 });
 const mapDispatchToProps = dispatch => ({
-  signout: () => dispatch(actions.signout()),
+  signout: () => {
+    dispatch(actions.signout());
+    firebase.auth().signOut();
+  },
   reload: () => {
     dispatch(actions.requestListBox());
     dispatch(actions.requestListFood());

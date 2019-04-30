@@ -2,25 +2,27 @@ import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
 
 const initialState = {
-  googleToken: null,
-  expiresAt: null,
   jwt: null,
   user: null,
   error: null,
 };
 
 export default handleActions({
-  [types.GOOGLE_AUTH.REQUEST]: (state, action) => ({
+  [types.SESSION.FIREBASE_AUTH.REQUEST]: state => ({ ...state }),
+  [types.SESSION.FIREBASE_AUTH.RECEIVE]: (state, action) => ({
     ...state,
-    googleToken: action.payload.googleToken,
+    jwt: action.payload.session.ra,
   }),
-  [types.GOOGLE_AUTH.RECEIVE]: (state, action) => ({
+  [types.SESSION.FIREBASE_AUTH.FAILED]: (state, action) => ({
     ...state,
-    jwt: action.payload.session.jwt,
-    expiresAt: action.payload.session.expiresAt,
-    user: action.payload.session.user,
+    error: action.payload.error,
   }),
-  [types.GOOGLE_AUTH.FAILED]: (state, action) => ({
+  [types.SESSION.VERIFY.REQUEST]: state => ({ ...state }),
+  [types.SESSION.VERIFY.RECEIVE]: (state, action) => ({
+    ...state,
+    user: action.payload.user,
+  }),
+  [types.SESSION.VERIFY.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
   }),

@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
-import GoogleAuth from '../GoogleAuth';
-import logo from '../../assets/logo.png';
-import styles from './Landing.module.css';
+import { connect } from 'react-redux';
+import Landing from './Landing';
+import actions from '../../actions';
+import firebase from '../../firebase';
 
-class Landing extends Component {
-  render() {
-    return (
-      <div>
-        <div className={styles.background}>
-          <div className={styles.contents}>
-            <div className={styles.contentsInner}>
-              <img src={logo} alt="" />
-              <h1 className={styles.appName}>Refrii</h1>
-              <p className={styles.explain}>
-              Refriiは冷蔵庫の中身を管理し、家族で共有するためのサービスです。
-              </p>
-              <GoogleAuth />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+const mapStateToProps = state => ({
+  session: state.session,
+});
+const mapDispatchToProps = dispatch => ({
+  signin: () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  },
+  watchAuthState: () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        return;
+      }
 
-export default Landing;
+      dispatch(actions.receiveFirebaseAuthSession(user));
+      dispatch(actions.requestVerifySession(user.ra));
+    });
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Landing);

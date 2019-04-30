@@ -1,17 +1,24 @@
 import {
-  call, put, takeLatest, select,
+  call, put, takeLatest, select, fork,
 } from 'redux-saga/effects';
 import types from '../actionTypes';
 import actions from '../actions';
 import selectors from '../selectors';
+import handleError from './handleErrors';
 import User from '../models/user';
 
-function* handleRequesGoogleAuth() {
-  const { googleToken } = yield select(selectors.getSession);
-  const session = yield call(User.authWithGoogle, googleToken);
-  yield put(actions.receiveGoogleAuth(session));
+function* handleRequestVerifySession() {
+  try {
+    const session = yield select(selectors.getSession);
+    const user = yield call(User.verify, session.jwt);
+
+    yield put(actions.receiveVerifySession(user));
+  } catch (error) {
+    yield put(actions.failedVerifySession(error));
+    yield fork(handleError, error);
+  }
 }
 
 export default [
-  takeLatest(types.GOOGLE_AUTH.REQUEST, handleRequesGoogleAuth),
+  takeLatest(types.SESSION.VERIFY.REQUEST, handleRequestVerifySession),
 ];

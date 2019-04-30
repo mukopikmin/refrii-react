@@ -54,9 +54,6 @@ class Setting extends Component {
                       <ListItemText primary="認証サービス" secondary={user.provider} />
                     </ListItem>
                     <ListItem button>
-                      <ListItemText primary="セッション有効期限" secondary={session.expiresAt} />
-                    </ListItem>
-                    <ListItem button>
                       <ListItemIcon>
                         <EditIcon />
                       </ListItemIcon>
@@ -99,7 +96,6 @@ Setting.propTypes = {
   onLoad: PropTypes.func.isRequired,
   units: PropTypes.arrayOf(PropTypes.any).isRequired,
   session: PropTypes.shape({
-    expiresAt: PropTypes.string.isRequired,
     user: PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,

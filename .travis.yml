@@ -1,21 +1,22 @@
 language: node_js
 node_js:
-  - '10'
+- 10.6.0
+branches:
+  only:
+  - master
+script:
+- npm install
+- npm run build
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  token: 
+    secure: acFmJrehiLNn8anOyuxO2OMRTLV9bBw/t0QRBv9VT3eXrfRNNAQrYU93UUKYoBNws+BrH6IwVR3kalFopg1i3iTomWzhRKj09ollBqr/TWOzlsnu3enqOBKshTRqjf8SAJxTAX6IZWvMdvxtnpV0HOpSkf8GZ/JbDwSq/V3Jx+EFhxeOCv05ixM5cY66QkAzwlNJb9NGD60+aDWvUV9ncxLpkFWqvcDMSbRtF4jF65DSL1aEQfovNUOQkMqfk2XsQ8icF2DQi/BjUvH4R6oqJG/wliD4NIKNgShLby8XGB4g5GHxA2KL8E66qf+kSmMYqh7iIjUuVTbzWW1tdcqNLNtvii7F1xuSS4+XuxFrIN1k6kMQNgIn7nPW3fa1iG2ExVMDDkM/vUDOh6HE8lbdAHo3cD2Jyx+aTh15sK6xG0s/vcUGn7rK2zvy9mBj0FJhY1YPpFFYwjDFnXksJRfwsMjvVG9YiO4lk1LFxedzgkJ9vP33fgUZmBtBFhVrGxhJTQPv1iQZEEDnMlqeN4EXMEm7Sa/uJTF629IR8IeI7NkPXsBquaPWrouHBco0q19E526ZDsluQoaenFrzhuXdL1ycRPba1GqA4Jz5OKjIGZoU6v0Awd+mxyfivU2bf/8OSMhIghKoVwv2rpmKSYgAcPav3b8smCe5200ZJIswYjQ=
 sudo: false
 cache:
   directories:
-    - node_modules
-before_install:
-  - openssl aes-256-cbc -K $encrypted_f3e88143ab2a_key -iv $encrypted_f3e88143ab2a_iv -in deploy_key.enc -out deploy_key -d
-  - chmod 600 deploy_key
-  - eval `ssh-agent -s`
-  - ssh-add deploy_key
-  - git config --global user.name "Travis-CI"
-  - git config --global user.email "travis-ci@example.com"  
-script:
-  - npm run build || travis_terminate 1
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run deploy; fi || travis_terminate 1
+  - node_modules
 notifications:
   email: false
   slack:
-    secure: "iKGp27C3JYFLmICTf4PhxVP72DVT/8fi56s2Vpze4dpodXnWL72/J6mHMbXrdFaoPcucmPNc81Tvx9s9Be9VuhkAmNr1TIZ+lslU/g3lkm5cdxiA7AXHhgxhvJRqNR97FqPDyqClns+aULjxwqCXCk8FH7M17kGSwcwDHjzFbz7QrD94coT/p/5v+vMwJYLbSvESXxGtlfTBtMxljoiQbF/8kQGjxh9ERlU8czKFWgITiFybUX3u+mng7atOVCxF41o8Q9vJuSv/Gpgk9++76D3rzefHDarUJMne7VmV/N/Pey7LomkwZKKrM47mlWCQZpypP8VxEk9cJAmWREyO7UxGcXqGPjFDbcl33YVlUL+kb+p4RV/Dex8BnO1WxWI0dWQfBxE0jMZQVOdmdG5faTeydTPGNvV1wNLDbYXM8WWPbx35O40Fc8+wpoh/5Y9fxA3wKg4hgfU9+qQ1CUNL46Lg+fJs9nzeZvbpPb/GrV80tnSbmlQUs7LjPOGPf56/+/ULa3P00Ovt5/jNX/IPDpyyini9dLsfSXr6CH9F3ee9gs1IjIwXTRQWPCTnLUTrDuNJjJVLbqsZ2go85FtC1yhhZR7xbyVhhCxWau7Zt6Om75X5PEDgMY2Aehc0clgK0qhDQVZhgOYVZ/hQoX8hBpQpQUbKoIoy9ibcbkWmPpA="
+    secure: iKGp27C3JYFLmICTf4PhxVP72DVT/8fi56s2Vpze4dpodXnWL72/J6mHMbXrdFaoPcucmPNc81Tvx9s9Be9VuhkAmNr1TIZ+lslU/g3lkm5cdxiA7AXHhgxhvJRqNR97FqPDyqClns+aULjxwqCXCk8FH7M17kGSwcwDHjzFbz7QrD94coT/p/5v+vMwJYLbSvESXxGtlfTBtMxljoiQbF/8kQGjxh9ERlU8czKFWgITiFybUX3u+mng7atOVCxF41o8Q9vJuSv/Gpgk9++76D3rzefHDarUJMne7VmV/N/Pey7LomkwZKKrM47mlWCQZpypP8VxEk9cJAmWREyO7UxGcXqGPjFDbcl33YVlUL+kb+p4RV/Dex8BnO1WxWI0dWQfBxE0jMZQVOdmdG5faTeydTPGNvV1wNLDbYXM8WWPbx35O40Fc8+wpoh/5Y9fxA3wKg4hgfU9+qQ1CUNL46Lg+fJs9nzeZvbpPb/GrV80tnSbmlQUs7LjPOGPf56/+/ULa3P00Ovt5/jNX/IPDpyyini9dLsfSXr6CH9F3ee9gs1IjIwXTRQWPCTnLUTrDuNJjJVLbqsZ2go85FtC1yhhZR7xbyVhhCxWau7Zt6Om75X5PEDgMY2Aehc0clgK0qhDQVZhgOYVZ/hQoX8hBpQpQUbKoIoy9ibcbkWmPpA=

@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Button from '@material-ui/core/Button';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import CreateIcon from '@material-ui/icons/Create';
-import AddIcon from '@material-ui/icons/Add';
-
+import { ListGroup } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Box from '../../models/box';
 import styles from './BoxList.module.css';
 
@@ -31,25 +25,19 @@ class BoxList extends Component {
     const { boxes, edit, add } = this.props;
 
     return (
-      <div className={styles.root}>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div">カテゴリ</ListSubheader>}
-        >
+      <div>
+        <ListGroup>
           {boxes.map(box => (
-            <ListItem key={box.id} button onClick={() => this.select(box)}>
-              <ListItemIcon>
-                <CreateIcon onClick={() => edit(box)} />
-              </ListItemIcon>
-              <ListItemText inset primary={box.name} />
-            </ListItem>
+            <ListGroup.Item
+              key={box.id}
+              onClick={() => this.select(box)}
+            >
+              {box.name}
+              <FontAwesomeIcon icon={faPen} onClick={() => edit(box)} />
+            </ListGroup.Item>
           ))}
-        </List>
-        <div className={styles.add}>
-          <Button variant="outlined" color="primary" fullWidth onClick={add}>
-            <AddIcon />
-          </Button>
-        </div>
+          <ListGroup.Item onClick={add}><FontAwesomeIcon icon={faPlus} /></ListGroup.Item>
+        </ListGroup>
       </div>
     );
   }

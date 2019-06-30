@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { Container } from 'react-bootstrap';
 import Landing from '../Landing';
 import Admin from '../Admin';
 import Main from '../Main';
@@ -27,10 +27,9 @@ class App extends Component {
 
     return (
       <Fragment>
-        <CssBaseline />
         <BrowserRouter>
           <div>
-            <div className={styles.root}>
+            <div>
               <Route exact path="/" component={Main} />
               <Route exact path="/setting" component={Setting} />
               <Route exact path="/admin" component={Admin} />
@@ -42,7 +41,9 @@ class App extends Component {
             <EditAmountModal />
             <InvitationDialog />
 
-            <Notification />
+            <Container>
+              <Notification />
+            </Container>
           </div>
         </BrowserRouter>
       </Fragment>

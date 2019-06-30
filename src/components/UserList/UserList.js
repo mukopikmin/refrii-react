@@ -1,61 +1,7 @@
 import React, { Component } from 'react';
-import MUIDataTable from 'mui-datatables';
-
-const columns = [
-  {
-    name: '表示名',
-    options: {
-      filter: false,
-      sort: true,
-    },
-  }, {
-    name: 'メールアドレス',
-    options: {
-      filter: false,
-      sort: true,
-    },
-  }, {
-    name: '状態',
-    options: {
-      filter: true,
-      sort: true,
-      customBodyRender: value => (value ? '無効' : '有効'),
-    },
-  }, {
-    name: '管理者',
-    options: {
-      filter: true,
-      sort: true,
-      customBodyRender: value => (value ? '管理者' : '一般ユーザー'),
-    },
-  }, {
-    name: 'プロバイダー',
-    options: {
-      filter: true,
-      sort: true,
-    },
-  }, {
-    name: '作成日',
-    options: {
-      filter: false,
-      sort: true,
-    },
-  }, {
-    name: '更新日',
-    options: {
-      filter: false,
-      sort: true,
-    },
-  },
-];
-const options = {
-  responsive: 'scroll',
-  filterType: 'checkbox',
-  resizableColumns: true,
-  print: false,
-  download: false,
-  selectableRows: false,
-};
+import { Table } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 class UserList extends Component {
   constructor(props) {
@@ -63,32 +9,43 @@ class UserList extends Component {
 
     const { onLoad } = this.props;
 
-    this.getTableData = this.getTableData.bind(this);
     onLoad();
   }
 
-  getTableData() {
-    const { users } = this.props;
-
-    return users.map(user => ([
-      user.name,
-      user.email,
-      user.disabled,
-      user.admin,
-      user.provider,
-      user.createdAt.format('YYYY/MM/DD HH:mm:ss'),
-      user.updatedAt.format('YYYY/MM/DD HH:mm:ss'),
-    ]));
+  renderChecked(isChecked) {
+    return isChecked ? <FontAwesomeIcon icon={faPen} /> : <div />;
   }
 
   render() {
+    const { users } = this.props;
+
     return (
-      <MUIDataTable
-        title="ユーザー一覧"
-        data={this.getTableData()}
-        columns={columns}
-        options={options}
-      />
+      <Table>
+        <thead>
+          <tr>
+            <td>表示名</td>
+            <td>メールアドレス</td>
+            <td>無効</td>
+            <td>管理者</td>
+            <td>認証</td>
+            <td>作成日時</td>
+            <td>更新日時</td>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.id}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{this.renderChecked(user.disabled)}</td>
+              <td>{this.renderChecked(user.admin)}</td>
+              <td>{user.provider}</td>
+              <td>{user.createdAt.format('YYYY/MM/DD HH:mm:ss')}</td>
+              <td>{user.updatedAt.format('YYYY/MM/DD HH:mm:ss')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     );
   }
 }

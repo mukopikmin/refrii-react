@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { Input } from 'reactstrap';
+import { Modal, Form, Button } from 'react-bootstrap';
 import { PropTypes } from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
 
 import styles from './InvitationDialog.module.css';
 
@@ -15,6 +9,7 @@ class InvitationDialog extends Component {
     super(props);
 
     this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.invite = this.invite.bind(this);
 
     this.state = { email: '' };
   }
@@ -39,26 +34,27 @@ class InvitationDialog extends Component {
     }
 
     return (
-      <Dialog
-        open={isInvitationDialogOpen}
-        onClose={close}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle>{box.name}</DialogTitle>
-        <DialogContent>
-          <div className={styles.message}>
-            <Typography variant="body1">
-          このカテゴリを共有するユーザーのメールアドレスを入力してください。
-            </Typography>
-          </div>
-          <Input type="text" onChange={this.onChangeEmail} value={email} placeholder="メールアドレス" />
-        </DialogContent>
-        <DialogActions>
+      <Modal show={isInvitationDialogOpen} onHide={close}>
+        <Modal.Header closeButton>
+          <Modal.Title>{box.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        このカテゴリを共有するユーザーのメールアドレスを入力してください。
+          <Form>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                value={email}
+                onChange={this.onChangeEmail}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
           <Button onClick={close}> キャンセル </Button>
-          <Button color="primary" onClick={this.create}>追加</Button>
-        </DialogActions>
-      </Dialog>
+          <Button color="primary" onClick={this.invite}>追加</Button>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

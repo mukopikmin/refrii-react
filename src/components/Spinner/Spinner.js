@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Fade from '@material-ui/core/Fade';
-
+import { Spinner as Bspinner } from 'react-bootstrap';
 import styles from './Spinner.module.css';
 
 class Spinner extends Component {
   render() {
     const { loading } = this.props;
 
-    return (
-      <div className={styles.spinner}>
-        <Fade
-          in={loading}
-          style={{
-            transitionDelay: loading ? '800ms' : '0ms',
-          }}
-          unmountOnExit
-        >
-          <CircularProgress />
-        </Fade>
-      </div>
-    );
+    if (loading) {
+      return (
+        <div className={styles.spinner}>
+          <Bspinner animation="border" />
+        </div>
+      );
+    }
+
+    return <div />;
   }
 }
 

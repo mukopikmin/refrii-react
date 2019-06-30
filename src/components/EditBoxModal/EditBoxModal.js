@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-
+import { Modal, Form, Button } from 'react-bootstrap';
 import Box from '../../models/box';
 
 class EditBoxModal extends Component {
@@ -105,49 +97,38 @@ class EditBoxModal extends Component {
     }
 
     return (
-      <Dialog
-        fullWidth
-        open={this.isOpen()}
-        onEnter={this.onOpened}
-        onClose={this.close}
-      >
-        <DialogTitle>{this.renderTitle()}</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={8} alignItems="center">
-            <Grid item xs={2}>
-              <FormLabel>名前</FormLabel>
-            </Grid>
-            <Grid item xs={10}>
-              <TextField
-                fullWidth
-                margin="dense"
-                variant="outlined"
+      <Modal show={this.isOpen()} onShow={this.onOpened} onHide={this.close}>
+        <Modal.Header closeButton>
+          <Modal.Title>{this.renderTitle()}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>名前</Form.Label>
+              <Form.Control
+                type="text"
                 value={name}
                 onChange={this.onNameChange}
               />
-            </Grid>
-          </Grid>
-          <Grid container spacing={8} alignItems="flex-start">
-            <Grid item xs={2}>
-              <FormLabel>メモ</FormLabel>
-            </Grid>
-            <Grid item xs={10}>
-              <TextField
-                fullWidth
-                multiline
-                margin="dense"
-                variant="outlined"
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>メモ</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="5"
                 value={notice}
                 onChange={this.onNoticeChange}
               />
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.close}>キャンセル</Button>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.close}>
+          キャンセル
+          </Button>
           {this.renderActions()}
-        </DialogActions>
-      </Dialog>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

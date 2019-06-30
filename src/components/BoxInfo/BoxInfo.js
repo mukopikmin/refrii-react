@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
+import { Button } from 'react-bootstrap';
 import Box from '../../models/box';
 import styles from './BoxInfo.module.css';
 
@@ -26,28 +24,21 @@ class BoxInfo extends Component {
     const { box, add, invite } = this.props;
 
     return (
-      <div className={styles.root}>
-        <Typography variant="h5" align="right">
-          {box.name}
-        </Typography>
-        <div className={styles.add}>
-          <Button color="primary" onClick={add}>食材の追加</Button>
-        </div>
-        <div>
-          {this.renderNotice()}
-        </div>
-        <div className={styles.invitation}>
-          <Typography variant="h6">
-        共有しているユーザー
-          </Typography>
-          <Button>{box.owner.name}</Button>
+      <div>
+        <h4>{box.name}</h4>
+        <Button onClick={add}>食材の追加</Button>
+        {this.renderNotice()}
+        <h5>共有しているユーザー</h5>
+        <ul>
+          <li>{box.owner.name}</li>
           {box.invitedUsers.map(user => (
-            <span key={user.email}>
-              <Button>{user.email}</Button>
-            </span>
+            <li key={user.email}>
+              {user.email}
+            </li>
           ))}
-          <Button onClick={invite}>共有</Button>
-        </div>
+        </ul>
+        <Button onClick={invite}>共有</Button>
+        <Button onClick={invite}>共有</Button>
       </div>
     );
   }

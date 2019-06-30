@@ -1,29 +1,10 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
-
+import { Row, Col, Container } from 'react-bootstrap';
 import BoxInfo from '../BoxInfo';
 import FoodList from '../FoodList';
 import BoxDrawer from '../BoxDrawer';
 import Header from '../Header';
-
-const drawerWidth = 360;
-const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  content: {
-    flexGrow: 1,
-    marginTop: 80,
-    // padding: theme.spacing.unit,
-  },
-});
+import styles from './Main.module.css';
 
 class Main extends Component {
   constructor(props) {
@@ -51,31 +32,31 @@ class Main extends Component {
   }
 
   render() {
-    const { classes } = this.props;
     const { drawerOpen } = this.state;
 
     return (
-      <div className={classes.root}>
-        <Header toggle={this.toggleDrawer} />
-        <nav className={classes.drawer}>
-          <BoxDrawer toggle={this.toggleDrawer} open={drawerOpen} />
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar}>
-            <Grid container spacing={24}>
-              <Grid item sm={9}>
+      <div>
+        <div>
+          <Header toggle={this.toggleDrawer} />
+        </div>
+        <div className={styles.content}>
+          <Container>
+            <Row>
+              <Col sm={3}>
+                <BoxDrawer toggle={this.toggleDrawer} open={drawerOpen} />
+              </Col>
+              <Col sm={6}>
                 <FoodList />
-              </Grid>
-              <Grid item sm={3}>
+              </Col>
+              <Col sm={3}>
                 {this.renderBoxInfo()}
-              </Grid>
-            </Grid>
-          </div>
-        </main>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
-
     );
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Main);
+export default Main;

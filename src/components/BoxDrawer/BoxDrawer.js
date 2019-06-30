@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import { withStyles } from '@material-ui/core/styles';
-
 import BoxList from '../BoxList';
 // import styles from './BoxList.module.css';
 
@@ -50,40 +46,42 @@ class BoxDrawer extends Component {
     } = this.props;
 
     return (
-      <nav>
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor="left"
-            open={open}
-            onClose={toggleDrawer}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            <BoxList />
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            <div className={classes.boxList}>
-              <BoxList />
-            </div>
-          </Drawer>
-        </Hidden>
-      </nav>
+      <BoxList />
+
+    // <nav>
+    //   <Hidden smUp implementation="css">
+    //     <Drawer
+    //       container={container}
+    //       variant="temporary"
+    //       anchor="left"
+    //       open={open}
+    //       onClose={toggleDrawer}
+    //       classes={{
+    //         paper: classes.drawerPaper,
+    //       }}
+    //       ModalProps={{
+    //         keepMounted: true, // Better open performance on mobile.
+    //       }}
+    //     >
+    //       <BoxList />
+    //     </Drawer>
+    //   </Hidden>
+    //   <Hidden xsDown implementation="css">
+    //     <Drawer
+    //       classes={{
+    //         paper: classes.drawerPaper,
+    //       }}
+    //       variant="permanent"
+    //       open
+    //     >
+    //       <div className={classes.boxList}>
+    //         <BoxList />
+    //       </div>
+    //     </Drawer>
+    //   </Hidden>
+    // </nav>
     );
   }
 }
 
-export default withStyles(styles, { withTheme: true })(BoxDrawer);
+export default BoxDrawer;

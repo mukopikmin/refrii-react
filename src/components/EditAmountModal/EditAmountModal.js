@@ -1,42 +1,14 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-
+import { Modal, Form, Button } from 'react-bootstrap';
 import Food from '../../models/food';
-
-const styles = () => ({
-  amount: {
-    margin: 20,
-    fontSize: 12,
-  },
-  actions: {
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  content: {
-    padding: 0,
-    marginBottom: 24,
-  },
-});
 
 class EditAmountModal extends Component {
   constructor(props) {
     super(props);
 
     this.onClose = this.onClose.bind(this);
+    this.onAmountChange = this.onAmountChange.bind(this);
     this.onIncrease = this.onIncrease.bind(this);
     this.onDecrease = this.onDecrease.bind(this);
     this.onOpened = this.onOpened.bind(this);
@@ -91,9 +63,7 @@ class EditAmountModal extends Component {
   }
 
   render() {
-    const {
-      food, isOpen, close, classes,
-    } = this.props;
+    const { food, isOpen, close } = this.props;
     const { name, amount, unit } = this.state;
 
     if (!food) {
@@ -101,45 +71,30 @@ class EditAmountModal extends Component {
     }
 
     return (
-      <Dialog
-        open={isOpen}
-        onEnter={this.onOpened}
-        onClose={this.onClose}
-      >
-        <DialogTitle>{name}</DialogTitle>
-        <DialogContent className={classes.content}>
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <ChatBubbleOutlineIcon />
-              </ListItemIcon>
-              <ListItemText primary={food.notice} />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <HourglassEmptyIcon />
-              </ListItemIcon>
-              <ListItemText primary={food.expirationDate} />
-            </ListItem>
-          </List>
-          <div className={classes.actions}>
-            <Button variant="outlined" color="secondary" onClick={this.onDecrease}>
-              <RemoveIcon />
-            </Button>
-            <span className={classes.amount}>
-              {`${amount} ${unit.label}`}
-            </span>
-            <Button variant="outlined" color="primary" onClick={this.onIncrease}>
-              <AddIcon />
-            </Button>
-          </div>
-        </DialogContent>
-        <DialogActions>
+      <Modal show={isOpen} onShow={this.onOpened} onHide={this.onClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Button onClick={this.onDecrease}>-</Button>
+          <Form>
+            <Form.Group>
+              <Form.Control
+                type="number"
+                value={amount}
+                onChange={this.onAmountChange}
+              />
+              {unit.label}
+            </Form.Group>
+          </Form>
+          <Button onClick={this.onIncrease}>+</Button>
+        </Modal.Body>
+        <Modal.Footer>
           <Button onClick={close}>キャンセル</Button>
           <Button onClick={this.edit} color="primary">編集</Button>
           <Button onClick={this.submit} color="primary">更新</Button>
-        </DialogActions>
-      </Dialog>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }
@@ -151,4 +106,4 @@ EditAmountModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles)(EditAmountModal);
+export default EditAmountModal;

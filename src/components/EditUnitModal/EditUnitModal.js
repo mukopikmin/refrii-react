@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
+import { Modal, Form, Button } from 'react-bootstrap';
 
 import Unit from '../../models/unit';
 
@@ -41,7 +34,7 @@ class EditUnitModal extends Component {
 
   onOpened() {
     const { unit } = this.props;
-
+    console.log(unit);
     this.setState(unit.toJson());
   }
 
@@ -101,49 +94,37 @@ class EditUnitModal extends Component {
     const { label, step } = this.state;
 
     return (
-      <Dialog
-        fullWidth
-        open={this.isOpen()}
-        onClose={this.close}
-        onEnter={this.onOpened}
-      >
-        <DialogTitle>{this.renderTitle()}</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={8} alignItems="center">
-            <Grid item xs={2}>
-              <FormLabel>ラベル</FormLabel>
-            </Grid>
-            <Grid item xs={10}>
-              <TextField
-                fullWidth
-                margin="dense"
-                variant="outlined"
+      <Modal show={this.isOpen()} onShow={this.onOpened} onHide={this.close}>
+        <Modal.Header closeButton>
+          <Modal.Title>{this.renderTitle()}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>ラベル</Form.Label>
+              <Form.Control
+                type="text"
                 value={label}
                 onChange={this.onLabelChange}
               />
-            </Grid>
-          </Grid>
-          <Grid container spacing={8} alignItems="center">
-            <Grid item xs={2}>
-              <FormLabel>増減値</FormLabel>
-            </Grid>
-            <Grid item xs={10}>
-              <TextField
-                fullWidth
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>増減値</Form.Label>
+              <Form.Control
                 type="number"
-                margin="dense"
-                variant="outlined"
                 value={step}
                 onChange={this.onStepChange}
               />
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.close}>キャンセル</Button>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.close}>
+          キャンセル
+          </Button>
           {this.renderAction()}
-        </DialogActions>
-      </Dialog>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

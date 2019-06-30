@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { Toast, Container } from 'react-bootstrap';
+import styles from './Notification.module.css';
 
 class Notification extends Component {
   constructor(props) {
@@ -27,26 +26,11 @@ class Notification extends Component {
     const { message } = this.props;
 
     return (
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        autoHideDuration={5000}
-        open={this.isOpen()}
-        onClose={this.handleClose}
-        message={message}
-        action={[
-          <IconButton
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            onClick={this.handleClose}
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
-      />
+      <div className={styles.toast}>
+        <Toast onClose={this.handleClose} show={this.isOpen()} delay={5000} autohide>
+          <Toast.Body>{message}</Toast.Body>
+        </Toast>
+      </div>
     );
   }
 }

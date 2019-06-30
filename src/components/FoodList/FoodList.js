@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Grid from '@material-ui/core/Grid';
+import { Button, Table } from 'react-bootstrap';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../Spinner';
 import styles from './FoodList.module.css';
 
@@ -41,7 +38,6 @@ class FoodList extends Component {
           </p>
           <p className={styles.message}>
             <Button variant="outlined" color="primary" onClick={add}>
-              <AddIcon className={styles.addIcon} />
               食材を登録する
             </Button>
           </p>
@@ -50,28 +46,19 @@ class FoodList extends Component {
     }
 
     return (
-      <div className={styles.root}>
-        <Grid container spacing={8}>
+      <Table responsive>
+        <tbody>
           {box.getFoods(foods).map(food => (
-            <Grid key={food.id} item sm={6} xs={12}>
-              <Card className={styles.card} onClick={() => this.editAmount(food)}>
-                <CardContent>
-                  <div className={styles.name}>
-                    <Typography variant="body1" className={styles.title}>
-                      {food.name}
-                    </Typography>
-                  </div>
-                  <div className={styles.amount}>
-                    <Typography variant="body1" className={styles.title}>
-                      {`${food.amount} ${food.unit.label}`}
-                    </Typography>
-                  </div>
-                </CardContent>
-              </Card>
-            </Grid>
+            <tr key={food.id}>
+              <td>{food.name}</td>
+              <td>{`${food.amount} ${food.unit.label}`}</td>
+              <td>
+                <FontAwesomeIcon icon={faPen} onClick={() => this.editAmount(food)} />
+              </td>
+            </tr>
           ))}
-        </Grid>
-      </div>
+        </tbody>
+      </Table>
     );
   }
 }

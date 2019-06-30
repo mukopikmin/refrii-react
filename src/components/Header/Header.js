@@ -1,54 +1,13 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import SettingsIcon from '@material-ui/icons/Settings';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-import { withStyles } from '@material-ui/core/styles';
+import {
+  Container, Navbar, Nav, NavDropdown, Button,
+} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
-
-const styles = theme => ({
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  menuButton: {
-    marginRight: 20,
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flexGrow: 1,
-  },
-  logo: {
-    height: 36,
-    marginRight: 10,
-    filter: 'drop-shadow(0px 0px 5px rgba(100, 100, 100, 0.7))',
-  },
-  title: {
-    height: '100%',
-    verticalAlign: 'middle',
-  },
-  setting: {
-    color: 'white',
-  },
-});
+import styles from './Header.module.css';
 
 class Header extends Component {
   constructor(props) {
@@ -102,18 +61,13 @@ class Header extends Component {
   }
 
   renderAction() {
-    const { location, toggleDrawer, classes } = this.props;
+    const { location, toggleDrawer } = this.props;
 
     if (location.pathname === '/') {
       return (
-        <IconButton
-          color="inherit"
-          aria-label="Open drawer"
-          onClick={toggleDrawer}
-          className={classes.menuButton}
-        >
-          <MenuIcon />
-        </IconButton>
+        <Button>
+          {/* <MenuIcon /> */}
+        </Button>
       );
     }
 
@@ -124,73 +78,50 @@ class Header extends Component {
     const { session } = this.props;
 
     if (session.user.admin) {
-      return (
-        <ListItem button onClick={this.toAdmin}>
-          <ListItemText primary="管理メニュー" />
-        </ListItem>
-      );
+      return <NavDropdown.Item onClick={this.toAdmin}>管理者メニュー</NavDropdown.Item>;
     }
 
     return <div />;
   }
 
   render() {
-    const { session, signout, classes } = this.props;
+    const { session, signout } = this.props;
     const { menuOpen } = this.state;
 
     return (
-      <div className={classes.root}>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            {this.renderAction()}
-            <Typography variant="h5" color="inherit" className={classes.flex} onClick={this.toRoot}>
-              <img className={classes.logo} src={logo} alt="" />
-            </Typography>
-            <Button
-              buttonRef={(node) => {
-                this.anchorEl = node;
-              }}
-              aria-owns={menuOpen ? 'menu-list-grow' : undefined}
-              aria-haspopup="true"
-              onClick={this.toggleMenu}
-            >
-              <SettingsIcon className={classes.setting} />
-            </Button>
-            <Popper open={menuOpen} anchorEl={this.anchorEl} transition disablePortal>
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  id="menu-list-grow"
-                  style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                >
-                  <Paper>
-                    <ClickAwayListener onClickAway={this.closeMenu}>
-                      <List>
-                        <ListItem button onClick={this.toRoot}>
-                          <ListItemText primary="食材一覧を表示" />
-                        </ListItem>
-                        <ListItem button onClick={this.reload}>
-                          <ListItemText primary="再読込" />
-                        </ListItem>
-                        <ListItem button onClick={this.toSetting}>
-                          <ListItemText primary="設定" />
-                        </ListItem>
-                        {this.renderAdminMenu()}
-                        <Divider />
-                        <ListItem button onClick={signout}>
-                          <ListItemText
-                            primary="ログアウト"
-                            secondary={`${session.user.name} としてログインしています`}
-                          />
-                        </ListItem>
-                      </List>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </Toolbar>
-        </AppBar>
+      <div>
+        <Navbar bg="light" expand="lg" fixed="top">
+          <Container>
+            <Navbar.Brand onClick={this.toRoot}>
+              <img
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                src={logo}
+                alt=""
+              />
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto" align="right">
+                <Nav.Link onClick={this.toRoot}>一覧</Nav.Link>
+                {session.user.admin && <Nav.Link onClick={this.toAdmin}>管理</Nav.Link>}
+                <NavDropdown title="メニュー" id="basic-nav-dropdown">
+                  <NavDropdown.Item onClick={this.toRoot}>食材一覧を表示</NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.reload}>再読込</NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.toSetting}>設定</NavDropdown.Item>
+                  {this.renderAdminMenu()}
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={signout}>
+ログアウト
+                    <br />
+                    <small>{`${session.user.name} としてログインしています`}</small>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </div>
     );
   }
@@ -204,4 +135,4 @@ Header.propTypes = {
   }).isRequired,
 };
 
-export default withStyles(styles)(withRouter(Header));
+export default withRouter(Header);

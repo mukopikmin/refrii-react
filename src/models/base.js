@@ -28,6 +28,6 @@ class Base {
   }
 }
 
-Base.endpoint = process.env.NODE_ENV === 'development' ? 'https://refrii-api-staging.herokuapp.com/' : 'https://api.refrii.com';
+Base.endpoint = process.env.NODE_ENV === 'development' ? 'https://staging.api.refrii.com/' : 'https://api.refrii.com';
 
 export default Base;

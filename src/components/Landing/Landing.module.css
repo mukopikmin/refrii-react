@@ -1,55 +1,41 @@
 .background {
   height: 100%;
   background: url('../../assets/background.jpg');
-  background-size:  cover;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-.explain {
-  margin: 40px;
+.whiten {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.googleLogo {
+  margin-right: 10px;
 }
 
 .appName {
-  margin-top: 20px;
   font-weight: bold;
-  color: #3289e7;
+  color: #328ae9;
+  text-shadow:3px 3px 15px #000;
 }
 
-.contents {
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  padding: 200px 0;
-  z-index: 1;
+.logo {
+  height: 64px;
+  margin-right: 20px;
 }
 
-.contents:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120%;
-  height: 60%;
-  margin: 400px -10% 0;
-  background: #011931;
-  -webkit-transform-origin: left center;
-  -ms-transform-origin: left center;
-  transform-origin: left center;
-  -webkit-transform: rotate(3deg);
-  -ms-transform: rotate(3deg);
-  transform: rotate(3deg);
-  z-index: -1;
+.content {
+  padding-top: 10%;
 }
 
-.contentsInner {
-  box-sizing: boder-box;
-  width: 100%;
-  max-width: 640px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 400px 10px 120px;
+.startApp {
+  padding-top: 10%;
+}
+
+.explain {
+  margin-top: 10%;
+  text-shadow:3px 3px 15px #000;
   color: #fff;
-  text-align: center;
-  height: 800px;
 }

@@ -1,4 +1,3 @@
-.root {
-  flex-grow: 1;
-  overflow: hidden;
+.content {
+  height: 100%;
 }

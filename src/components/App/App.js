@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { Container } from 'react-bootstrap';
+
 import Landing from '../Landing';
 import Admin from '../Admin';
+import PrivacyPolicy from '../PrivacyPolicy';
 import Main from '../Main';
 import Setting from '../Setting';
 import EditBoxModal from '../EditBoxModal';
@@ -22,7 +23,19 @@ class App extends Component {
     const { user } = session;
 
     if (!user) {
-      return <Landing />;
+      return (
+        <Fragment>
+          <BrowserRouter>
+            <div className={styles.content}>
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route path="/privacy" component={PrivacyPolicy} />
+                <Route component={Landing} />
+              </Switch>
+            </div>
+          </BrowserRouter>
+        </Fragment>
+      );
     }
 
     return (
@@ -30,9 +43,12 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <div>
-              <Route exact path="/" component={Main} />
-              <Route exact path="/setting" component={Setting} />
-              <Route exact path="/admin" component={Admin} />
+              <Switch>
+                <Route exact path="/" component={Main} />
+                <Route path="/setting" component={Setting} />
+                <Route path="/admin" component={Admin} />
+                <Route path="/" component={Main} />
+              </Switch>
             </div>
 
             <EditBoxModal />

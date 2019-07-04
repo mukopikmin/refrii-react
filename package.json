@@ -31,7 +31,8 @@
     "redux-actions": "^2.6.3",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
-    "redux-saga": "^0.16.2"
+    "redux-saga": "^0.16.2",
+    "snyk": "^1.190.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,7 +41,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,jsx src",
     "lint:fix": "eslint --fix --ext js,jsx src",
-    "deploy": "gh-pages --dist build --repo git@github.com:mukopikmin/refrii-react.git"
+    "deploy": "gh-pages --dist build --repo git@github.com:mukopikmin/refrii-react.git",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
@@ -54,5 +57,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "snyk": true
 }

@@ -16,18 +16,18 @@ class PrivacyPolicy extends Component {
                 <h2>プライバシーポリシー</h2>
               </div>
 
-              <h3>1. プライバシーの考え方</h3>
+              <h3 className={styles.section}>1. プライバシーの考え方</h3>
               <p>
                 Refrii（以下、当サイトという）では当サイトの円滑な運営に必要な範囲で、当サイトを利用される皆様（以下、ユーザーという）の情報を収集しています。
                 収集した情報は利用目的の範囲内で適切に取り扱います。
               </p>
 
-              <h3>2. 情報の収集</h3>
+              <h3 className={styles.section}>2. 情報の収集</h3>
               <p>
                 当サイトでは、以下の方法によりユーザーの情報を収集することがあります。
               </p>
 
-              <h4>2.1 Cookie（クッキー）</h4>
+              <h4 className={styles.section}>2.1 Cookie（クッキー）</h4>
               <p>
                 当サイトでは、利便性の向上および統計データの取得のために、Cookie を使ってユーザーの属性や行動履歴を取得することがあります。
                 Cookie には氏名やメールアドレスなど特定の個人を識別することができる情報は含まれません。
@@ -37,13 +37,13 @@ class PrivacyPolicy extends Component {
                 その場合、当サイトの一部の機能を利用できなくなることがありますがご了承願います。
               </p>
 
-              <h4>2.2 Google</h4>
+              <h4 className={styles.section}>2.2 Google</h4>
               <p>
                 当サイトでは、ユーザーを認証するために、Google アカウントによるログイン機能を使用しています。
                 ユーザーがログインする際に、ユーザーのアカウント情報を取得します。
               </p>
 
-              <h3>3. 情報の利用</h3>
+              <h3 className={styles.section}>3. 情報の利用</h3>
               <p>
                 当サイトでは、収集した情報を以下の目的で利用します。
               </p>
@@ -56,7 +56,7 @@ class PrivacyPolicy extends Component {
                 <li>法律の適用を受ける場合を除き、ユーザーの同意を得ることなくユーザーの情報を第三者に開示することはありません。</li>
               </ul>
 
-              <h3>4. 当サイトが利用・提携しているサービス</h3>
+              <h3 className={styles.section}>4. 当サイトが利用・提携しているサービス</h3>
               <p>
                 当サイトでは以下のサービスを利用・提携しています。
                 これらのサービスでは、当サイトが限定する範囲で、ユーザーのCookie 情報を収集することがあります。
@@ -67,14 +67,14 @@ class PrivacyPolicy extends Component {
               </p>
               <ul>
                 <li>
-                  <span>Google Analytics および Google AdSense</span>
+                  <span>Google Analytics</span>
                   <br />
-                  <a href="httls://policies.google.com/technologies/partner-sites?hl=ja">httls://policies.google.com/technologies/partner-sites?hl=ja</a>
+                  <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank">https://policies.google.com/technologies/partner-sites?hl=ja</a>
                 </li>
                 <li>
                   <span>Firebase</span>
                   <br />
-                  <a href="https://firebase.google.com/support/privacy/?hl=ja">https://firebase.google.com/support/privacy/?hl=ja</a>
+                  <a href="https://firebase.google.com/support/privacy/?hl=ja" target="_blank">https://firebase.google.com/support/privacy/?hl=ja</a>
                 </li>
               </ul>
             </Col>

@@ -8,5 +8,8 @@ export default createActions({
   [types.SESSION.VERIFY.REQUEST]: () => ({ }),
   [types.SESSION.VERIFY.RECEIVE]: user => ({ user }),
   [types.SESSION.VERIFY.FAILED]: error => ({ error }),
+  [types.SESSION.SIGNUP.REQUEST]: () => ({ }),
+  [types.SESSION.SIGNUP.RECEIVE]: user => ({ user }),
+  [types.SESSION.SIGNUP.FAILED]: error => ({ error }),
   [types.SIGNOUT]: () => ({}),
 });

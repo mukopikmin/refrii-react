@@ -44,6 +44,20 @@ class User extends Base {
       .then(response => response.json())
       .then(users => users.map(user => new User(user)));
   }
+
+  static signup(jwt) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    return super.authFetch(`${super.endpoint}/users/google`, jwt, options)
+      .then(super.handleErrors)
+      .then(response => response.json())
+      .then(user => new User(user));
+  }
 }
 
 User.emptyParams = {

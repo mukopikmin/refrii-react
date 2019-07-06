@@ -39,9 +39,12 @@ class Landing extends Component {
                     <span>Google アカウントでログイン</span>
                   </Button>
                   <p className={styles.signupExplain}>
-                    ログインしてサービスの利用を開始した場合、
+                    アカウントをお持ちでない場合は、
+                    <Link to="/signup">こちら</Link>
+からアカウントを作成してください。
+                    {/* ログインしてサービスの利用を開始した場合、
                     <Link to="/privacy">プライバシーポリシー</Link>
-                    に同意されたものとみなします。
+                    に同意されたものとみなします。 */}
                   </p>
                 </div>
               </Col>

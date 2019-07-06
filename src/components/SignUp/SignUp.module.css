@@ -19,11 +19,11 @@
   font-weight: bold;
   color: #328ae9;
   text-shadow:3px 3px 15px #000;
+  text-align: center;
 }
 
 .logo {
   height: 80px;
-  margin-right: 20px;
 }
 
 .content {
@@ -32,6 +32,7 @@
 
 .startApp {
   padding-top: 10%;
+  text-align: center;
 }
 
 .explain {
@@ -42,7 +43,7 @@
 }
 
 .signupExplain {
-  margin-top: 20px;
+  margin-top: 10px;
   text-shadow:3px 3px 15px #000;
   color: #fff;
 }

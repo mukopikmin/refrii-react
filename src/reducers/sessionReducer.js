@@ -17,6 +17,15 @@ export default handleActions({
     ...state,
     error: action.payload.error,
   }),
+  [types.SESSION.SIGNUP.REQUEST]: state => ({ ...state }),
+  [types.SESSION.SIGNUP.RECEIVE]: (state, action) => ({
+    ...state,
+    user: action.payload.user,
+  }),
+  [types.SESSION.SIGNUP.FAILED]: (state, action) => ({
+    ...state,
+    error: action.payload.error,
+  }),
   [types.SESSION.VERIFY.REQUEST]: state => ({ ...state }),
   [types.SESSION.VERIFY.RECEIVE]: (state, action) => ({
     ...state,

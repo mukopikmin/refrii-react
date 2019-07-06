@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 
 import Landing from '../Landing';
+import SignUp from '../SignUp';
 import Admin from '../Admin';
 import PrivacyPolicy from '../PrivacyPolicy';
 import Main from '../Main';
@@ -30,6 +31,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route path="/privacy" component={PrivacyPolicy} />
+                <Route path="/signup" component={SignUp} />
                 <Route component={Landing} />
               </Switch>
             </div>

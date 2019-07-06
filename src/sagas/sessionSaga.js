@@ -7,7 +7,20 @@ import selectors from '../selectors';
 import handleError from './handleErrors';
 import User from '../models/user';
 
-function* handleRequestVerifySession() {
+function* handleRequestSignup() {
+  try {
+    const session = yield select(selectors.getSession);
+    console.log(session);
+    const user = yield call(User.signup, session.jwt);
+
+    yield put(actions.receiveSignupSession(user));
+  } catch (error) {
+    yield put(actions.failedSignupSession(error));
+    yield fork(handleError, error);
+  }
+}
+
+function* handleRequestVerify() {
   try {
     const session = yield select(selectors.getSession);
     const user = yield call(User.verify, session.jwt);
@@ -20,5 +33,6 @@ function* handleRequestVerifySession() {
 }
 
 export default [
-  takeLatest(types.SESSION.VERIFY.REQUEST, handleRequestVerifySession),
+  takeLatest(types.SESSION.SIGNUP.REQUEST, handleRequestSignup),
+  takeLatest(types.SESSION.VERIFY.REQUEST, handleRequestVerify),
 ];

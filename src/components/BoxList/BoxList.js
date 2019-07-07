@@ -21,39 +21,67 @@ class BoxList extends Component {
     select(box);
   }
 
+  getOwnBoxes() {
+    const { boxes } = this.props;
+
+    return boxes.filter(box => !box.isInvited);
+  }
+
+  getInvitedBoxes() {
+    const { boxes } = this.props;
+
+    return boxes.filter(box => box.isInvited);
+  }
+
   render() {
-    const { boxes, edit, add } = this.props;
+    const { edit, add } = this.props;
 
     return (
       <div>
-        <p>
-        カテゴリ
-        </p>
-        <ListGroup>
-          {boxes.map(box => (
+        <div className={styles.section}>
+          <span>カテゴリ</span>
+          <ListGroup>
+            {this.getOwnBoxes().map(box => (
+              <ListGroup.Item
+                action
+                key={box.id}
+                onClick={() => this.select(box)}
+                className={styles.listItem}
+              >
+                {box.name}
+                <FontAwesomeIcon
+                  className={styles.editIcon}
+                  icon={faPen}
+                  onClick={() => edit(box)}
+                />
+              </ListGroup.Item>
+            ))}
             <ListGroup.Item
+              onClick={add}
               action
-              key={box.id}
-              onClick={() => this.select(box)}
               className={styles.listItem}
             >
-              {box.name}
-              <FontAwesomeIcon
-                className={styles.editIcon}
-                icon={faPen}
-                onClick={() => edit(box)}
-              />
+              <FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
+              <span>新規作成</span>
             </ListGroup.Item>
-          ))}
-          <ListGroup.Item
-            onClick={add}
-            action
-            className={styles.listItem}
-          >
-            <FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
-            <span>新規作成</span>
-          </ListGroup.Item>
-        </ListGroup>
+          </ListGroup>
+        </div>
+
+        <div className={styles.section}>
+          <span>共有されたカテゴリ</span>
+          <ListGroup>
+            {this.getInvitedBoxes().map(box => (
+              <ListGroup.Item
+                action
+                key={box.id}
+                onClick={() => this.select(box)}
+                className={styles.listItem}
+              >
+                {box.name}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
       </div>
     );
   }

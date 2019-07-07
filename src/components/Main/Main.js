@@ -42,14 +42,14 @@ class Main extends Component {
         <div className={styles.content}>
           <Container>
             <Row>
-              <Col sm={3}>
+              <Col sm={4}>
                 <BoxDrawer toggle={this.toggleDrawer} open={drawerOpen} />
               </Col>
-              <Col sm={6}>
-                <FoodList />
-              </Col>
-              <Col sm={3}>
+              <Col sm={8}>
                 {this.renderBoxInfo()}
+                <div className={styles.list}>
+                  <FoodList />
+                </div>
               </Col>
             </Row>
           </Container>

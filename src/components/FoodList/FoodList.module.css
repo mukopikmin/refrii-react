@@ -31,3 +31,24 @@
 .addIcon {
   margin-right: 10px;
 }
+
+.name {
+  float: left;
+}
+
+.amount {
+  float: right;
+}
+
+.detail {
+  text-align: right;
+  font-size: 0.9em;
+}
+
+.icon{
+  margin: 0 5px 0 10px;
+}
+
+.addIcon {
+  margin-right: 5px;
+}

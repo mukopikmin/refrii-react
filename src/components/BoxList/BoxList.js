@@ -26,17 +26,33 @@ class BoxList extends Component {
 
     return (
       <div>
+        <p>
+        カテゴリ
+        </p>
         <ListGroup>
           {boxes.map(box => (
             <ListGroup.Item
+              action
               key={box.id}
               onClick={() => this.select(box)}
+              className={styles.listItem}
             >
               {box.name}
-              <FontAwesomeIcon icon={faPen} onClick={() => edit(box)} />
+              <FontAwesomeIcon
+                className={styles.editIcon}
+                icon={faPen}
+                onClick={() => edit(box)}
+              />
             </ListGroup.Item>
           ))}
-          <ListGroup.Item onClick={add}><FontAwesomeIcon icon={faPlus} /></ListGroup.Item>
+          <ListGroup.Item
+            onClick={add}
+            action
+            className={styles.listItem}
+          >
+            <FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
+            <span>新規作成</span>
+          </ListGroup.Item>
         </ListGroup>
       </div>
     );

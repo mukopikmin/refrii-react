@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserFriends, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Box from '../../models/box';
 import styles from './BoxInfo.module.css';
 
@@ -20,25 +22,38 @@ class BoxInfo extends Component {
     });
   }
 
+  renderInviteButton() {
+    const { box, invite } = this.props;
+
+    if (box.isInvited) {
+      return <div />;
+    }
+
+    return (
+      <Badge className={styles.invitedUser} variant="secondary" onClick={invite}>
+        <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+        <span>共有ユーザーの追加</span>
+      </Badge>
+    );
+  }
+
   render() {
-    const { box, add, invite } = this.props;
+    const { box, invite } = this.props;
 
     return (
       <div>
         <h4>{box.name}</h4>
-        <Button onClick={add}>食材の追加</Button>
-        {this.renderNotice()}
-        <h5>共有しているユーザー</h5>
-        <ul>
-          <li>{box.owner.name}</li>
+
+        <div>
+          <FontAwesomeIcon className={styles.icon} icon={faUserFriends} />
+          <Badge variant="info">{box.owner.name}</Badge>
           {box.invitedUsers.map(user => (
-            <li key={user.email}>
-              {user.email}
-            </li>
+            <Badge className={styles.invitedUser} variant="success">{user.name}</Badge>
           ))}
-        </ul>
-        <Button onClick={invite}>共有</Button>
-        <Button onClick={invite}>共有</Button>
+          {this.renderInviteButton()}
+        </div>
+
+        {this.renderNotice()}
       </div>
     );
   }
@@ -46,7 +61,6 @@ class BoxInfo extends Component {
 
 BoxInfo.propTypes = {
   box: PropTypes.instanceOf(Box).isRequired,
-  add: PropTypes.func.isRequired,
 };
 
 export default BoxInfo;

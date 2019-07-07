@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Button, Table } from 'react-bootstrap';
-
+import { Button, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCubes, faCalendarCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../Spinner';
 import styles from './FoodList.module.css';
 
@@ -46,19 +45,32 @@ class FoodList extends Component {
     }
 
     return (
-      <Table responsive>
-        <tbody>
+      <div>
+        <ListGroup>
           {box.getFoods(foods).map(food => (
-            <tr key={food.id}>
-              <td>{food.name}</td>
-              <td>{`${food.amount} ${food.unit.label}`}</td>
-              <td>
-                <FontAwesomeIcon icon={faPen} onClick={() => this.editAmount(food)} />
-              </td>
-            </tr>
+            <ListGroup.Item
+              action
+              onClick={() => this.editAmount(food)}
+              key={food.id}
+            >
+              <span>{food.name}</span>
+              <div className={styles.detail}>
+                <FontAwesomeIcon className={styles.icon} icon={faCubes} />
+                <span>{`${food.amount} ${food.unit.label}`}</span>
+                <FontAwesomeIcon className={styles.icon} icon={faCalendarCheck} />
+                <span>{food.expirationDate}</span>
+              </div>
+            </ListGroup.Item>
           ))}
-        </tbody>
-      </Table>
+          <ListGroup.Item
+            action
+            onClick={add}
+          >
+            <FontAwesomeIcon className={styles.addIcon} icon={faPlus} />
+            <span>新規作成</span>
+          </ListGroup.Item>
+        </ListGroup>
+      </div>
     );
   }
 }

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Modal, Form, Button } from 'react-bootstrap';
+import {
+  Modal, Form, Button, Row, Col,
+} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Food from '../../models/food';
 
 class EditAmountModal extends Component {
@@ -76,18 +80,33 @@ class EditAmountModal extends Component {
           <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Button onClick={this.onDecrease}>-</Button>
-          <Form>
-            <Form.Group>
-              <Form.Control
-                type="number"
-                value={amount}
-                onChange={this.onAmountChange}
-              />
+          <Row>
+            <Col sm={3}>
+              <Button block variant="outline-danger" onClick={this.onDecrease}>
+                <FontAwesomeIcon icon={faMinus} />
+              </Button>
+            </Col>
+            <Col sm={3}>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    type="number"
+                    value={amount}
+                    onChange={this.onAmountChange}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+            <Col sm={3}>
               {unit.label}
-            </Form.Group>
-          </Form>
-          <Button onClick={this.onIncrease}>+</Button>
+            </Col>
+            <Col sm={3}>
+              <Button block variant="outline-primary" onClick={this.onIncrease}>
+                <FontAwesomeIcon icon={faPlus} />
+              </Button>
+            </Col>
+          </Row>
+
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={close}>キャンセル</Button>

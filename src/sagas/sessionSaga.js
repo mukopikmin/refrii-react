@@ -10,7 +10,6 @@ import User from '../models/user';
 function* handleRequestSignup() {
   try {
     const session = yield select(selectors.getSession);
-    console.log(session);
     const user = yield call(User.signup, session.jwt);
 
     yield put(actions.receiveSignupSession(user));

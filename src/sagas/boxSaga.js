@@ -61,7 +61,7 @@ function* handleRequestRemoveBox(action) {
     const { box } = action.payload;
     const session = yield select(selectors.getSession);
     yield call(Box.removeBox, session.jwt, box.id);
-    yield put(actions.receiveRemoveBox());
+    yield put(actions.receiveRemoveBox(box.id));
     // const boxes = yield call(Box.getBoxes, session.jwt);
     // yield put(actions.receiveListBox(boxes));
     yield put(actions.showNotification(`${box.name} が削除されました`));

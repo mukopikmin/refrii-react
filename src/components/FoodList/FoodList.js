@@ -5,21 +5,57 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faCalendarCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../Spinner';
 import styles from './FoodList.module.css';
+import EditFoodModal from '../EditFoodModal';
+import EditAmountModal from '../EditAmountModal';
 
 class FoodList extends Component {
-  edit(food) {
-    const { edit } = this.props;
+  constructor(props) {
+    super(props);
 
-    edit({
-      ...food,
-      unitId: food.unit.id,
+    this.state = {
+      editModalOpen: false,
+      amountModalOpen: false,
+      food: null,
+    };
+
+    this.closeAmountModal = this.closeAmountModal.bind(this);
+  }
+
+  edit(food) {
+    // const { edit } = this.props;
+
+    // edit({
+    //   ...food,
+    //   unitId: food.unit.id,
+    // });
+
+    this.setState({
+      editModalOpen: true,
+      food,
+    });
+  }
+
+  closeEdit() {
+    this.setState({
+      editModalOpen: false,
+      food: null,
     });
   }
 
   editAmount(food) {
-    const { editAmount } = this.props;
+    this.setState(pre => ({
+      ...pre,
+      amountModalOpen: true,
+      food,
+    }));
+  }
 
-    editAmount(food);
+  closeAmountModal() {
+    this.setState(pre => ({
+      ...pre,
+      amountModalOpen: false,
+      food: null,
+    }));
   }
 
   render() {
@@ -70,14 +106,19 @@ class FoodList extends Component {
             <span>新規作成</span>
           </ListGroup.Item>
         </ListGroup>
+
+        <EditFoodModal
+          open={this.state.editModalOpen}
+          close={this.close}
+          food={this.state.food}
+          box={this.props.box} />
+        <EditAmountModal
+          open={this.state.amountModalOpen}
+          food={this.state.food}
+          close={this.closeAmountModal} />
       </div>
     );
   }
 }
-
-FoodList.propTypes = {
-  editAmount: PropTypes.func.isRequired,
-  edit: PropTypes.func.isRequired,
-};
 
 export default FoodList;

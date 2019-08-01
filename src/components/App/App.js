@@ -53,10 +53,10 @@ class App extends Component {
               </Switch>
             </div>
 
-            <EditBoxModal />
-            <EditFoodModal />
+            {/* <EditBoxModal /> */}
+            {/* <EditFoodModal /> */}
             <EditUnitModal />
-            <EditAmountModal />
+            {/* <EditAmountModal /> */}
             <InvitationDialog />
 
             <Container>

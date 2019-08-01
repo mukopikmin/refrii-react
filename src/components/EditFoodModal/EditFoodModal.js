@@ -24,7 +24,7 @@ class EditFoodModal extends Component {
     this.onNeedsAddingChange = this.onNeedsAddingChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
-    this.close = this.close.bind(this);
+    // this.close = this.close.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.remove = this.remove.bind(this);
 
@@ -98,17 +98,17 @@ class EditFoodModal extends Component {
     remove(food);
   }
 
-  close() {
-    const { close } = this.props;
+  // close() {
+  //   const { close } = this.props;
 
-    close();
-  }
+  //   close();
+  // }
 
-  isOpen() {
-    const { isEditFoodModalOpen, isNewFoodModalOpen } = this.props;
+  // isOpen() {
+  //   const { isEditFoodModalOpen, isNewFoodModalOpen } = this.props;
 
-    return isNewFoodModalOpen || isEditFoodModalOpen;
-  }
+  //   return isNewFoodModalOpen || isEditFoodModalOpen;
+  // }
 
   renderTitle() {
     const { isEditFoodModalOpen } = this.props;
@@ -141,7 +141,7 @@ class EditFoodModal extends Component {
     }
 
     return (
-      <Modal show={this.isOpen()} onShow={this.onOpened} onHide={this.close}>
+      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
@@ -195,7 +195,7 @@ class EditFoodModal extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.close}>
+          <Button variant="secondary" onClick={this.props.close}>
         キャンセル
           </Button>
           {this.renderActions()}

@@ -11,7 +11,6 @@ class EditAmountModal extends Component {
   constructor(props) {
     super(props);
 
-    this.onClose = this.onClose.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
     this.onIncrease = this.onIncrease.bind(this);
     this.onDecrease = this.onDecrease.bind(this);
@@ -48,22 +47,18 @@ class EditAmountModal extends Component {
     this.setState(food.toJson());
   }
 
-  onClose() {
-    const { close } = this.props;
-
-    close();
-  }
-
   submit() {
-    const { update } = this.props;
+    const { update,close } = this.props;
 
     update(this.state);
+    close()
   }
 
   edit() {
-    const { edit, food } = this.props;
+    const { edit, food,close } = this.props;
 
     edit(food);
+    close()
   }
 
   render() {
@@ -75,7 +70,7 @@ class EditAmountModal extends Component {
     }
 
     return (
-      <Modal show={isOpen} onShow={this.onOpened} onHide={this.onClose}>
+      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
@@ -109,7 +104,7 @@ class EditAmountModal extends Component {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={close}>キャンセル</Button>
+          <Button onClick={this.props.close}>キャンセル</Button>
           <Button onClick={this.edit} color="primary">編集</Button>
           <Button onClick={this.submit} color="primary">更新</Button>
         </Modal.Footer>
@@ -122,7 +117,6 @@ EditAmountModal.propTypes = {
   edit: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
 };
 
 export default EditAmountModal;

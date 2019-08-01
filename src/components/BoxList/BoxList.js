@@ -6,19 +6,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Box from '../../models/box';
 import styles from './BoxList.module.css';
+import EditBoxModal from '../EditBoxModal';
 
 class BoxList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalOpen: false,
+    };
+
+    this.select = this.select.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.add = this.add.bind(this);
+  }
+
   componentDidMount() {
     const { onLoad } = this.props;
 
-    this.select = this.select.bind(this);
     onLoad();
-  }
-
-  select(box) {
-    const { select } = this.props;
-
-    select(box);
   }
 
   getOwnBoxes() {
@@ -33,9 +39,34 @@ class BoxList extends Component {
     return boxes.filter(box => box.isInvited);
   }
 
-  render() {
-    const { edit, add } = this.props;
+  select(box) {
+    const { select } = this.props;
 
+    select(box);
+  }
+
+  add() {
+    this.setState({
+      modalOpen: true,
+      box: null,
+    });
+  }
+
+  edit(box) {
+    this.setState({
+      modalOpen: true,
+      box,
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modalOpen: false,
+      box: null,
+    });
+  }
+
+  render() {
     return (
       <div>
         <div className={styles.section}>
@@ -52,12 +83,12 @@ class BoxList extends Component {
                 <FontAwesomeIcon
                   className={styles.editIcon}
                   icon={faPen}
-                  onClick={() => edit(box)}
+                  onClick={() => this.edit(box)}
                 />
               </ListGroup.Item>
             ))}
             <ListGroup.Item
-              onClick={add}
+              onClick={this.add}
               action
               className={styles.listItem}
             >
@@ -82,6 +113,8 @@ class BoxList extends Component {
             ))}
           </ListGroup>
         </div>
+
+        <EditBoxModal open={this.state.modalOpen} close={this.closeModal} box={this.state.box} />
       </div>
     );
   }
@@ -91,8 +124,6 @@ BoxList.propTypes = {
   onLoad: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
   boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
-  edit: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,

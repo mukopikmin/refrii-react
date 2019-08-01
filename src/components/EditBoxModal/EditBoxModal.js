@@ -11,8 +11,6 @@ class EditBoxModal extends Component {
     this.onNoticeChange = this.onNoticeChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
-    this.close = this.close.bind(this);
-    this.isOpen = this.isOpen.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.remove = this.remove.bind(this);
 
@@ -33,38 +31,30 @@ class EditBoxModal extends Component {
 
   onOpened() {
     const { box } = this.props;
+    const params = box ? box.toJson() : Box.mock().toJson();
 
-    this.setState(box.toJson());
+    this.setState(params);
   }
 
   create() {
-    const { create } = this.props;
+    const { create, close } = this.props;
 
     create(this.state);
+    close();
   }
 
   update() {
-    const { update } = this.props;
+    const { update, close } = this.props;
 
     update(this.state);
-  }
-
-  close() {
-    const { close } = this.props;
-
     close();
   }
 
   remove() {
-    const { remove } = this.props;
+    const { remove, close } = this.props;
 
     remove(this.state);
-  }
-
-  isOpen() {
-    const { isEditBoxModalOpen, isNewBoxModalOpen } = this.props;
-
-    return isNewBoxModalOpen || isEditBoxModalOpen;
+    close();
   }
 
   renderTitle() {
@@ -74,9 +64,9 @@ class EditBoxModal extends Component {
   }
 
   renderActions() {
-    const { isEditBoxModalOpen } = this.props;
+    const { box } = this.props;
 
-    if (isEditBoxModalOpen) {
+    if (box) {
       return (
         <div>
           <Button color="primary" onClick={this.update}>更新</Button>
@@ -89,15 +79,10 @@ class EditBoxModal extends Component {
   }
 
   render() {
-    const { box } = this.props;
     const { name, notice } = this.state;
 
-    if (!box) {
-      return <div />;
-    }
-
     return (
-      <Modal show={this.isOpen()} onShow={this.onOpened} onHide={this.close}>
+      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
@@ -136,10 +121,7 @@ class EditBoxModal extends Component {
 EditBoxModal.propTypes = {
   create: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
-  isEditBoxModalOpen: PropTypes.bool.isRequired,
-  isNewBoxModalOpen: PropTypes.bool.isRequired,
 };
 
 export default EditBoxModal;

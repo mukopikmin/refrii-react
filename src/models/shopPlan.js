@@ -16,9 +16,9 @@ class ShopPlan extends Base {
 
   static getAll(jwt) {
     return super.authFetch(`${super.endpoint}/shop_plans`, jwt)
-    .then(response => response.json())
-    .then(plans => plans.map(plan => new Food(plan)));
+      .then(response => response.json())
+      .then(plans => plans.map(plan => new Food(plan)));
   }
 }
 
-export default ShopPlan
+export default ShopPlan;

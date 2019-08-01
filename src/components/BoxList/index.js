@@ -12,8 +12,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.requestListFood());
   },
   select: box => dispatch(actions.selectBox(box)),
-  add: () => dispatch(actions.openNewBoxModal()),
-  edit: box => dispatch(actions.openEditBoxModal(box)),
 });
 
 export default connect(

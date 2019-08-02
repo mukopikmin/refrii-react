@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { PropTypes } from 'prop-types';
 import { ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
-import Box from '../../models/box';
 import styles from './BoxList.module.css';
 import EditBoxModal from '../EditBoxModal';
 
@@ -67,23 +65,25 @@ class BoxList extends Component {
   }
 
   render() {
+    const { modalOpen, box } = this.state;
+
     return (
       <div>
         <div className={styles.section}>
           <span>カテゴリ</span>
           <ListGroup>
-            {this.getOwnBoxes().map(box => (
+            {this.getOwnBoxes().map(ownBox => (
               <ListGroup.Item
                 action
-                key={box.id}
-                onClick={() => this.select(box)}
+                key={ownBox.id}
+                onClick={() => this.select(ownBox)}
                 className={styles.listItem}
               >
-                {box.name}
+                {ownBox.name}
                 <FontAwesomeIcon
                   className={styles.editIcon}
                   icon={faPen}
-                  onClick={() => this.edit(box)}
+                  onClick={() => this.edit(ownBox)}
                 />
               </ListGroup.Item>
             ))}
@@ -101,32 +101,27 @@ class BoxList extends Component {
         <div className={styles.section}>
           <span>共有されたカテゴリ</span>
           <ListGroup>
-            {this.getInvitedBoxes().map(box => (
+            {this.getInvitedBoxes().map(invitedBox => (
               <ListGroup.Item
                 action
-                key={box.id}
-                onClick={() => this.select(box)}
+                key={invitedBox.id}
+                onClick={() => this.select(invitedBox)}
                 className={styles.listItem}
               >
-                {box.name}
+                {invitedBox.name}
               </ListGroup.Item>
             ))}
           </ListGroup>
         </div>
 
-        <EditBoxModal open={this.state.modalOpen} close={this.closeModal} box={this.state.box} />
+        <EditBoxModal
+          open={modalOpen}
+          close={this.closeModal}
+          box={box}
+        />
       </div>
     );
   }
 }
-
-BoxList.propTypes = {
-  onLoad: PropTypes.func.isRequired,
-  select: PropTypes.func.isRequired,
-  boxes: PropTypes.arrayOf(PropTypes.instanceOf(Box)).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 export default withRouter(BoxList);

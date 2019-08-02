@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import { Button, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faCalendarCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -71,6 +70,7 @@ class FoodList extends Component {
 
   render() {
     const { box, foods } = this.props;
+    const { editModalOpen, food, amountModalOpen } = this.state;
 
     if (!box) {
       return <Spinner loading />;
@@ -89,10 +89,10 @@ class FoodList extends Component {
           </p>
 
           <EditFoodModal
-            open={this.state.editModalOpen}
+            open={editModalOpen}
             close={this.closeEdit}
-            food={this.state.food}
-            box={this.props.box}
+            food={food}
+            box={box}
           />
         </div>
       );
@@ -101,18 +101,18 @@ class FoodList extends Component {
     return (
       <div>
         <ListGroup>
-          {box.getFoods(foods).map(food => (
+          {box.getFoods(foods).map(foodInBox => (
             <ListGroup.Item
               action
-              onClick={() => this.editAmount(food)}
-              key={food.id}
+              onClick={() => this.editAmount(foodInBox)}
+              key={foodInBox.id}
             >
-              <span>{food.name}</span>
+              <span>{foodInBox.name}</span>
               <div className={styles.detail}>
                 <FontAwesomeIcon className={styles.icon} icon={faCubes} />
-                <span>{`${food.amount} ${food.unit.label}`}</span>
+                <span>{`${foodInBox.amount} ${foodInBox.unit.label}`}</span>
                 <FontAwesomeIcon className={styles.icon} icon={faCalendarCheck} />
-                <span>{food.expirationDate}</span>
+                <span>{foodInBox.expirationDate}</span>
               </div>
             </ListGroup.Item>
           ))}
@@ -126,15 +126,15 @@ class FoodList extends Component {
         </ListGroup>
 
         <EditFoodModal
-          open={this.state.editModalOpen}
+          open={editModalOpen}
           close={this.closeEdit}
-          food={this.state.food}
-          box={this.props.box}
+          food={food}
+          box={box}
         />
         <EditAmountModal
-          open={this.state.amountModalOpen}
+          open={amountModalOpen}
           edit={this.edit}
-          food={this.state.food}
+          food={food}
           close={this.closeAmountModal}
         />
       </div>

@@ -54,7 +54,9 @@ class EditAmountModal extends Component {
   }
 
   render() {
-    const { food, isOpen, close } = this.props;
+    const {
+      food, close, edit, open,
+    } = this.props;
     const { name, amount, unit } = this.state;
 
     if (!food) {
@@ -62,7 +64,7 @@ class EditAmountModal extends Component {
     }
 
     return (
-      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
+      <Modal show={open} onShow={this.onOpened} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
@@ -96,8 +98,8 @@ class EditAmountModal extends Component {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.close}>キャンセル</Button>
-          <Button onClick={() => this.props.edit(this.props.food)} color="primary">編集</Button>
+          <Button onClick={close}>キャンセル</Button>
+          <Button onClick={() => edit(food)} color="primary">編集</Button>
           <Button onClick={this.submit} color="primary">更新</Button>
         </Modal.Footer>
       </Modal>

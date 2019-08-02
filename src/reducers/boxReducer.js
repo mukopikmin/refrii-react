@@ -1,13 +1,8 @@
 import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
-import Box from '../models/box';
 
 const initialState = {
   list: [],
-  isNewBoxModalOpen: false,
-  isEditBoxModalOpen: false,
-  isInvitationDialogOpen: false,
-  target: null,
 };
 
 export default handleActions({

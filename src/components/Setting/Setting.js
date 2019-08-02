@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import {
-  Row, Col, Container, Table, Button,
-} from 'react-bootstrap';
+import { Container, Table, Button } from 'react-bootstrap';
 
 import Header from '../Header';
 import EditUnitModal from '../EditUnitModal';
@@ -50,9 +47,8 @@ class Setting extends Component {
   }
 
   render() {
-    const {
-      units, session, addUnit, editUnit,
-    } = this.props;
+    const { units, session } = this.props;
+    const { modalOpen, unit } = this.state;
     const { user } = session;
 
     return (
@@ -88,12 +84,12 @@ class Setting extends Component {
                 </tr>
               </thead>
               <tbody>
-                {units.map(unit => (
-                  <tr key={unit.id} onClick={() => this.edit(unit)}>
-                    <td>{unit.label}</td>
-                    <td>{unit.step}</td>
-                    <td>{unit.createdAt.format('YYYY/MM/DD hh:mm')}</td>
-                    <td>{unit.updatedAt.format('YYYY/MM/DD hh:mm')}</td>
+                {units.map(ownUnit => (
+                  <tr key={ownUnit.id} onClick={() => this.edit(ownUnit)}>
+                    <td>{ownUnit.label}</td>
+                    <td>{ownUnit.step}</td>
+                    <td>{ownUnit.createdAt.format('YYYY/MM/DD hh:mm')}</td>
+                    <td>{ownUnit.updatedAt.format('YYYY/MM/DD hh:mm')}</td>
                     <td />
                   </tr>
                 ))}
@@ -103,23 +99,13 @@ class Setting extends Component {
         </div>
 
         <EditUnitModal
-          open={this.state.modalOpen}
+          open={modalOpen}
           close={this.close}
-          unit={this.state.unit}
+          unit={unit}
         />
       </div>
     );
   }
 }
-
-Setting.propTypes = {
-  onLoad: PropTypes.func.isRequired,
-  units: PropTypes.arrayOf(PropTypes.any).isRequired,
-  session: PropTypes.shape({
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
 
 export default Setting;

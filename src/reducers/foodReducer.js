@@ -1,13 +1,8 @@
 import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
-import Food from '../models/food';
 
 const initialState = {
   list: [],
-  isNewFoodModalOpen: false,
-  isEditFoodModalOpen: false,
-  isAmountFoodModalOpen: false,
-  target: null,
 };
 
 export default handleActions({
@@ -58,9 +53,5 @@ export default handleActions({
   [types.FOOD.REMOVE.FAILED]: (state, action) => ({
     ...state,
     error: action.payload.error,
-  }),
-  [types.FOOD.SET_PARAMS]: (state, action) => ({
-    ...state,
-    target: action.payload.food,
   }),
 }, initialState);

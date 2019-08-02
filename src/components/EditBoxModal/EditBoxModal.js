@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import { Modal, Form, Button } from 'react-bootstrap';
 import Box from '../../models/box';
 
@@ -79,10 +78,11 @@ class EditBoxModal extends Component {
   }
 
   render() {
+    const { open, close } = this.props;
     const { name, notice } = this.state;
 
     return (
-      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
+      <Modal show={open} onShow={this.onOpened} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
@@ -117,11 +117,5 @@ class EditBoxModal extends Component {
     );
   }
 }
-
-EditBoxModal.propTypes = {
-  create: PropTypes.func.isRequired,
-  update: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
-};
 
 export default EditBoxModal;

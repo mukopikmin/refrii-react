@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
   Modal, Form, Button, Col,
 } from 'react-bootstrap';
 
-import Unit from '../../models/unit';
 import Food from '../../models/food';
 
 class EditFoodModal extends Component {
@@ -76,30 +74,30 @@ class EditFoodModal extends Component {
   }
 
   create() {
-    const { create, box } = this.props;
+    const { create, box, close } = this.props;
 
     create({
       ...this.state,
       boxId: box.id,
     });
-    this.props.close();
+    close();
   }
 
   update() {
-    const { update, box } = this.props;
+    const { update, box, close } = this.props;
 
     update({
       ...this.state,
       boxId: box.id,
     });
-    this.props.close();
+    close();
   }
 
   remove() {
-    const { remove, food } = this.props;
+    const { remove, food, close } = this.props;
 
     remove(food);
-    this.props.close();
+    close();
   }
 
   renderTitle() {
@@ -123,13 +121,15 @@ class EditFoodModal extends Component {
   }
 
   render() {
-    const { units, food } = this.props;
+    const {
+      units, open, close,
+    } = this.props;
     const {
       name, amount, expirationDate, notice, unit,
     } = this.state;
 
     return (
-      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
+      <Modal show={open} onShow={this.onOpened} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
@@ -183,7 +183,7 @@ class EditFoodModal extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.close}>
+          <Button variant="secondary" onClick={close}>
         キャンセル
           </Button>
           {this.renderActions()}
@@ -192,12 +192,5 @@ class EditFoodModal extends Component {
     );
   }
 }
-
-EditFoodModal.propTypes = {
-  onLoad: PropTypes.func.isRequired,
-  create: PropTypes.func.isRequired,
-  update: PropTypes.func.isRequired,
-  units: PropTypes.arrayOf(PropTypes.instanceOf(Unit)).isRequired,
-};
 
 export default EditFoodModal;

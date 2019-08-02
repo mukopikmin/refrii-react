@@ -1,12 +1,8 @@
 import { handleActions } from 'redux-actions';
 import types from '../actionTypes';
-import Unit from '../models/unit';
 
 const initialState = {
   list: [],
-  isNewUnitModalOpen: false,
-  isEditUnitModalOpen: false,
-  target: null,
 };
 
 export default handleActions({

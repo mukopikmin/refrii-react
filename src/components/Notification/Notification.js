@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Toast, Container } from 'react-bootstrap';
+import { Toast } from 'react-bootstrap';
 import styles from './Notification.module.css';
 
 class Notification extends Component {

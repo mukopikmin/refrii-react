@@ -69,12 +69,12 @@ class PrivacyPolicy extends Component {
                 <li>
                   <span>Google Analytics</span>
                   <br />
-                  <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank">https://policies.google.com/technologies/partner-sites?hl=ja</a>
+                  <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/partner-sites?hl=ja</a>
                 </li>
                 <li>
                   <span>Firebase</span>
                   <br />
-                  <a href="https://firebase.google.com/support/privacy/?hl=ja" target="_blank">https://firebase.google.com/support/privacy/?hl=ja</a>
+                  <a href="https://firebase.google.com/support/privacy/?hl=ja" target="_blank" rel="noopener noreferrer">https://firebase.google.com/support/privacy/?hl=ja</a>
                 </li>
               </ul>
             </Col>

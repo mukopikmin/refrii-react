@@ -6,23 +6,15 @@ import confirm from '../ConfirmDialog';
 
 const mapStateToProps = (state, ownProps) => ({
   session: state.session,
-  // isEditFoodModalOpen: state.food.isEditFoodModalOpen,
-  // isNewFoodModalOpen: state.food.isNewFoodModalOpen,
-  open: ownProps.open,
   units: state.unit.list,
   boxes: state.box.list,
-  // box: state.box.target,
-  // food: state.food.target,
+  open: ownProps.open,
   box: ownProps.box,
   food: ownProps.food,
   close: ownProps.close,
 });
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListUnit()),
-  // close: () => {
-  //   dispatch(actions.closeNewFoodModal());
-  //   dispatch(actions.closeEditFoodModal());
-  // },
   create: params => dispatch(actions.requestCreateFood(params)),
   update: params => dispatch(actions.requestUpdateFood(params)),
   remove: (food) => {

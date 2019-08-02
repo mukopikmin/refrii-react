@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-import { PropTypes } from 'prop-types';
-
-import styles from './InvitationDialog.module.css';
 
 class InvitationDialog extends Component {
   constructor(props) {
@@ -19,15 +16,15 @@ class InvitationDialog extends Component {
   }
 
   invite() {
-    const { box, invite } = this.props;
+    const { box, invite, close } = this.props;
     const { email } = this.state;
 
     invite(box, email);
-    this.props.close();
+    close();
   }
 
   render() {
-    const { box, close, isInvitationDialogOpen } = this.props;
+    const { box, close, open } = this.props;
     const { email } = this.state;
 
     if (!box) {
@@ -35,7 +32,7 @@ class InvitationDialog extends Component {
     }
 
     return (
-      <Modal show={this.props.open} onHide={this.props.close}>
+      <Modal show={open} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>{box.name}</Modal.Title>
         </Modal.Header>
@@ -52,16 +49,12 @@ class InvitationDialog extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.close}> キャンセル </Button>
+          <Button onClick={close}> キャンセル </Button>
           <Button color="primary" onClick={this.invite}>追加</Button>
         </Modal.Footer>
       </Modal>
     );
   }
 }
-
-InvitationDialog.propTypes = {
-  close: PropTypes.func.isRequired,
-};
 
 export default InvitationDialog;

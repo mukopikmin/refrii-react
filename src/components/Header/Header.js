@@ -4,10 +4,7 @@ import { withRouter } from 'react-router-dom';
 import {
   Container, Navbar, Nav, NavDropdown, Button,
 } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
-import styles from './Header.module.css';
 
 class Header extends Component {
   constructor(props) {
@@ -61,7 +58,7 @@ class Header extends Component {
   }
 
   renderAction() {
-    const { location, toggleDrawer } = this.props;
+    const { location } = this.props;
 
     if (location.pathname === '/') {
       return (
@@ -86,7 +83,6 @@ class Header extends Component {
 
   render() {
     const { session, signout } = this.props;
-    const { menuOpen } = this.state;
 
     return (
       <div>

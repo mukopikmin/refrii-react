@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Modal, Form, Button } from 'react-bootstrap';
 
@@ -39,30 +38,30 @@ class EditUnitModal extends Component {
   }
 
   create() {
-    const { create } = this.props;
+    const { create, close } = this.props;
 
     create(this.state);
-    this.props.close();
+    close();
   }
 
   update() {
-    const { update } = this.props;
+    const { update, close } = this.props;
 
     update(this.state);
-    this.props.close();
+    close();
   }
 
   remove() {
-    const { remove } = this.props;
+    const { remove, close } = this.props;
 
     remove(this.state);
-    this.props.close();
+    close();
   }
 
   renderTitle() {
-    const { isEditUnitModalOpen } = this.props;
+    const { unit } = this.props;
 
-    return isEditUnitModalOpen ? 'ラベルの編集' : 'ラベルの追加';
+    return unit ? 'ラベルの編集' : 'ラベルの追加';
   }
 
   renderAction() {
@@ -82,10 +81,11 @@ class EditUnitModal extends Component {
   }
 
   render() {
+    const { open, close } = this.props;
     const { label, step } = this.state;
 
     return (
-      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
+      <Modal show={open} onShow={this.onOpened} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
@@ -119,23 +119,5 @@ class EditUnitModal extends Component {
     );
   }
 }
-
-EditUnitModal.propTypes = {
-  params: PropTypes.shape({
-    label: PropTypes.string,
-    step: PropTypes.number,
-  }),
-  create: PropTypes.func.isRequired,
-  update: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
-};
-
-EditUnitModal.defaultProps = {
-  params: {
-    label: '',
-    step: 0,
-  },
-};
 
 export default EditUnitModal;

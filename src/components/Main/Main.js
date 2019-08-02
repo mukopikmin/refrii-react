@@ -1,27 +1,12 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import BoxInfo from '../BoxInfo';
+import BoxList from '../BoxList';
 import FoodList from '../FoodList';
-import BoxDrawer from '../BoxDrawer';
 import Header from '../Header';
 import styles from './Main.module.css';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-    this.toggleDrawer = this.toggleDrawer.bind(this);
-
-    this.state = { drawerOpen: false };
-  }
-
-  toggleDrawer() {
-    this.setState(pre => ({
-      ...pre,
-      drawerOpen: !pre.drawerOpen,
-    }));
-  }
-
   renderBoxInfo() {
     const { box } = this.props;
 
@@ -32,8 +17,6 @@ class Main extends Component {
   }
 
   render() {
-    const { drawerOpen } = this.state;
-
     return (
       <div>
         <div>
@@ -43,7 +26,7 @@ class Main extends Component {
           <Container>
             <Row>
               <Col sm={4}>
-                <BoxDrawer toggle={this.toggleDrawer} open={drawerOpen} />
+                <BoxList />
               </Col>
               <Col sm={8}>
                 {this.renderBoxInfo()}

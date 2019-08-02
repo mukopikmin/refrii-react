@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 class UserList extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class UserList extends Component {
     onLoad();
   }
 
-  renderChecked(isChecked) {
+  static renderChecked(isChecked) {
     return isChecked ? <FontAwesomeIcon icon={faPen} /> : <div />;
   }
 

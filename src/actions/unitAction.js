@@ -15,8 +15,4 @@ export default createActions({
   [types.UNIT.REMOVE.RECEIVE]: id => ({ id }),
   [types.UNIT.REMOVE.FAILED]: error => ({ error }),
   [types.UNIT.SET_PARAMS]: unit => ({ unit }),
-  [types.MODAL.UNIT.NEW.OPEN]: unit => ({ unit }),
-  [types.MODAL.UNIT.NEW.CLOSE]: () => ({ }),
-  [types.MODAL.UNIT.EDIT.OPEN]: unit => ({ unit }),
-  [types.MODAL.UNIT.EDIT.CLOSE]: () => ({ }),
 });

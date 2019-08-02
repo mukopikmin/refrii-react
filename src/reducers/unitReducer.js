@@ -58,24 +58,4 @@ export default handleActions({
     isEditUnitModalOpen: false,
     error: action.payload.error,
   }),
-  [types.MODAL.UNIT.NEW.OPEN]: state => ({
-    ...state,
-    isNewUnitModalOpen: true,
-    target: Unit.mock(),
-  }),
-  [types.MODAL.UNIT.NEW.CLOSE]: state => ({
-    ...state,
-    isNewUnitModalOpen: false,
-    target: null,
-  }),
-  [types.MODAL.UNIT.EDIT.OPEN]: (state, action) => ({
-    ...state,
-    isEditUnitModalOpen: true,
-    target: action.payload.unit,
-  }),
-  [types.MODAL.UNIT.EDIT.CLOSE]: state => ({
-    ...state,
-    isEditUnitModalOpen: false,
-    target: null,
-  }),
 }, initialState);

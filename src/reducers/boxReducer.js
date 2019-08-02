@@ -73,29 +73,4 @@ export default handleActions({
     ...state,
     target: action.payload.box,
   }),
-  [types.MODAL.BOX.NEW.OPEN]: (state, action) => ({
-    ...state,
-    isNewBoxModalOpen: true,
-    target: action.payload.target || Box.mock(),
-  }),
-  [types.MODAL.BOX.NEW.CLOSE]: state => ({
-    ...state,
-    isNewBoxModalOpen: false,
-  }),
-  [types.MODAL.BOX.EDIT.OPEN]: state => ({
-    ...state,
-    isEditBoxModalOpen: true,
-  }),
-  [types.MODAL.BOX.EDIT.CLOSE]: state => ({
-    ...state,
-    isEditBoxModalOpen: false,
-  }),
-  [types.MODAL.BOX.INVITE.OPEN]: state => ({
-    ...state,
-    isInvitationDialogOpen: true,
-  }),
-  [types.MODAL.BOX.INVITE.CLOSE]: state => ({
-    ...state,
-    isInvitationDialogOpen: false,
-  }),
 }, initialState);

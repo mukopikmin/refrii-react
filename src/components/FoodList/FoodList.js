@@ -37,13 +37,6 @@ class FoodList extends Component {
   }
 
   edit(food) {
-    // const { edit } = this.props;
-
-    // edit({
-    //   ...food,
-    //   unitId: food.unit.id,
-    // });
-
     this.setState(pre => ({
       ...pre,
       editModalOpen: true,
@@ -77,7 +70,7 @@ class FoodList extends Component {
   }
 
   render() {
-    const { box, foods, add } = this.props;
+    const { box, foods } = this.props;
 
     if (!box) {
       return <Spinner loading />;
@@ -90,10 +83,17 @@ class FoodList extends Component {
             食材は登録されていません
           </p>
           <p className={styles.message}>
-            <Button variant="outlined" color="primary" onClick={add}>
+            <Button variant="outlined" color="primary" onClick={this.add}>
               食材を登録する
             </Button>
           </p>
+
+          <EditFoodModal
+            open={this.state.editModalOpen}
+            close={this.closeEdit}
+            food={this.state.food}
+            box={this.props.box}
+          />
         </div>
       );
     }

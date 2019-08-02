@@ -25,7 +25,6 @@ export default {
       RECEIVE: 'RECEIVE_INVITE_BOX',
       FAILED: 'FAILED_INVITE_BOX',
     },
-    SET_PARAMS: 'SET_PARAMS_BOX',
     SELECT: 'SELECT_BOX',
   },
   FOOD: {
@@ -49,7 +48,6 @@ export default {
       RECEIVE: 'RECEIVE_REMOVE_FOOD',
       FAILED: 'FAILED_REMOVE_FOOD',
     },
-    SET_PARAMS: 'SET_PARAMS_FOOD',
   },
   UNIT: {
     CREATE: {
@@ -72,7 +70,6 @@ export default {
       RECEIVE: 'RECEIVE_REMOVE_UNIT',
       FAILED: 'FAILED_REMOVE_UNIT',
     },
-    SET_PARAMS: 'SET_PARAMS_UNIT',
   },
   USER: {
     LIST: {
@@ -96,46 +93,6 @@ export default {
       REQUEST: 'REQUEST_FIREBASE_AUTH_SESSION',
       RECEIVE: 'RECEIVE_FIREBASE_AUTH_SESSION',
       FAILED: 'FAILED_FIREBASE_AUTH_SESSION',
-    },
-  },
-  MODAL: {
-    BOX: {
-      NEW: {
-        OPEN: 'OPEN_NEW_BOX_MODAL',
-        CLOSE: 'CLOSE_NEW_BOX_MODAL',
-      },
-      EDIT: {
-        OPEN: 'OPEN_EDIT_BOX_MODAL',
-        CLOSE: 'CLOSE_EDIT_BOX_MODAL',
-      },
-      INVITE: {
-        OPEN: 'OPEN_INVITE_BOX_MODAL',
-        CLOSE: 'CLOSE_INVITE_BOX_MODAL',
-      },
-    },
-    FOOD: {
-      NEW: {
-        OPEN: 'OPEN_NEW_FOOD_MODAL',
-        CLOSE: 'CLOSE_NEW_FOOD_MODAL',
-      },
-      EDIT: {
-        OPEN: 'OPEN_EDIT_FOOD_MODAL',
-        CLOSE: 'CLOSE_EDIT_FOOD_MODAL',
-      },
-      AMOUNT: {
-        OPEN: 'OPEN_AMOUNT_FOOD_MODAL',
-        CLOSE: 'CLOSE_AMOUNT_FOOD_MODAL',
-      },
-    },
-    UNIT: {
-      NEW: {
-        OPEN: 'OPEN_NEW_UNIT_MODAL',
-        CLOSE: 'CLOSE_NEW_UNIT_MODAL',
-      },
-      EDIT: {
-        OPEN: 'OPEN_EDIT_UNIT_MODAL',
-        CLOSE: 'CLOSE_EDIT_UNIT_MODAL',
-      },
     },
   },
   NOTIFICATION: {

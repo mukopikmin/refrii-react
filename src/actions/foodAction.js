@@ -15,10 +15,4 @@ export default createActions({
   [types.FOOD.REMOVE.RECEIVE]: food => ({ food }),
   [types.FOOD.REMOVE.FAILED]: error => ({ error }),
   [types.FOOD.SET_PARAMS]: food => ({ food }),
-  [types.MODAL.FOOD.NEW.OPEN]: (food, box) => ({ food, box }),
-  [types.MODAL.FOOD.NEW.CLOSE]: () => ({}),
-  [types.MODAL.FOOD.EDIT.OPEN]: food => ({ food }),
-  [types.MODAL.FOOD.EDIT.CLOSE]: () => ({}),
-  [types.MODAL.FOOD.AMOUNT.OPEN]: food => ({ food }),
-  [types.MODAL.FOOD.AMOUNT.CLOSE]: () => ({}),
 });

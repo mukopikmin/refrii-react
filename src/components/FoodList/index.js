@@ -8,11 +8,7 @@ const mapStateToProps = state => ({
   box: state.box.target,
 });
 
-const mapDispatchToProps = dispatch => ({
-  // editAmount: food => dispatch(actions.openAmountFoodModal(food)),
-  // edit: food => dispatch(actions.openEditFoodModal(food)),
-  // add: () => dispatch(actions.openNewFoodModal()),
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,

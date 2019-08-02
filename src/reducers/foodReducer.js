@@ -63,36 +63,4 @@ export default handleActions({
     ...state,
     target: action.payload.food,
   }),
-  [types.MODAL.FOOD.NEW.OPEN]: (state, action) => ({
-    ...state,
-    isNewFoodModalOpen: true,
-    target: Food.mock(action.payload.box),
-  }),
-  [types.MODAL.FOOD.NEW.CLOSE]: state => ({
-    ...state,
-    isNewFoodModalOpen: false,
-    target: null,
-  }),
-  [types.MODAL.FOOD.EDIT.OPEN]: (state, action) => ({
-    ...state,
-    isEditFoodModalOpen: true,
-    isAmountFoodModalOpen: false,
-    target: action.payload.food,
-  }),
-  [types.MODAL.FOOD.EDIT.CLOSE]: state => ({
-    ...state,
-    isEditFoodModalOpen: false,
-    isAmountFoodModalOpen: false,
-    target: null,
-  }),
-  [types.MODAL.FOOD.AMOUNT.OPEN]: (state, action) => ({
-    ...state,
-    isAmountFoodModalOpen: true,
-    target: action.payload.food,
-  }),
-  [types.MODAL.FOOD.AMOUNT.CLOSE]: state => ({
-    ...state,
-    isAmountFoodModalOpen: false,
-    target: null,
-  }),
 }, initialState);

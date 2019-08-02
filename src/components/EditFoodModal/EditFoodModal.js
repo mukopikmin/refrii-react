@@ -103,9 +103,9 @@ class EditFoodModal extends Component {
   }
 
   renderTitle() {
-    const { isEditFoodModalOpen } = this.props;
+    const { food } = this.props;
 
-    return isEditFoodModalOpen ? '食材の編集' : '食材の追加';
+    return food ? '食材の編集' : '食材の追加';
   }
 
   renderActions() {

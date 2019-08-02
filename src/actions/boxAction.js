@@ -19,10 +19,4 @@ export default createActions({
   [types.BOX.INVITE.FAILED]: error => ({ error }),
   [types.BOX.SELECT]: box => ({ box }),
   [types.BOX.SET_PARAMS]: box => ({ box }),
-  [types.MODAL.BOX.NEW.OPEN]: box => ({ box }),
-  [types.MODAL.BOX.NEW.CLOSE]: () => ({ }),
-  [types.MODAL.BOX.EDIT.OPEN]: box => ({ box }),
-  [types.MODAL.BOX.EDIT.CLOSE]: () => ({ }),
-  [types.MODAL.BOX.INVITE.OPEN]: box => ({ box }),
-  [types.MODAL.BOX.INVITE.CLOSE]: () => ({ }),
 });

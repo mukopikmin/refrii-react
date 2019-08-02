@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap';
 
 import Header from '../Header';
+import EditUnitModal from '../EditUnitModal';
 import styles from './Setting.module.css';
 
 class Setting extends Component {
@@ -13,7 +14,39 @@ class Setting extends Component {
 
     const { onLoad } = this.props;
 
+    this.state = {
+      modalOpen: false,
+      unit: null,
+    };
+    this.edit = this.edit.bind(this);
+    this.close = this.close.bind(this);
+    this.add = this.add.bind(this);
+
     onLoad();
+  }
+
+  edit(unit) {
+    this.setState(pre => ({
+      ...pre,
+      modalOpen: true,
+      unit,
+    }));
+  }
+
+  close() {
+    this.setState(pre => ({
+      ...pre,
+      modalOpen: false,
+      unit: null,
+    }));
+  }
+
+  add() {
+    this.setState(pre => ({
+      ...pre,
+      modalOpen: true,
+      unit: null,
+    }));
   }
 
   render() {
@@ -44,7 +77,7 @@ class Setting extends Component {
                 </tr>
               </tbody>
             </Table>
-            <Button onClick={addUnit}>単位の作成</Button>
+            <Button onClick={this.add}>単位の作成</Button>
             <Table responsive>
               <thead>
                 <tr>
@@ -56,7 +89,7 @@ class Setting extends Component {
               </thead>
               <tbody>
                 {units.map(unit => (
-                  <tr key={unit.id} onClick={() => editUnit(unit)}>
+                  <tr key={unit.id} onClick={() => this.edit(unit)}>
                     <td>{unit.label}</td>
                     <td>{unit.step}</td>
                     <td>{unit.createdAt.format('YYYY/MM/DD hh:mm')}</td>
@@ -68,6 +101,12 @@ class Setting extends Component {
             </Table>
           </Container>
         </div>
+
+        <EditUnitModal
+          open={this.state.modalOpen}
+          close={this.close}
+          unit={this.state.unit}
+        />
       </div>
     );
   }
@@ -81,8 +120,6 @@ Setting.propTypes = {
       id: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
-  addUnit: PropTypes.func.isRequired,
-  editUnit: PropTypes.func.isRequired,
 };
 
 export default Setting;

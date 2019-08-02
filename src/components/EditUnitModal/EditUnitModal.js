@@ -13,7 +13,6 @@ class EditUnitModal extends Component {
     this.onStepChange = this.onStepChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
-    this.close = this.close.bind(this);
     this.remove = this.remove.bind(this);
     this.onOpened = this.onOpened.bind(this);
 
@@ -34,38 +33,30 @@ class EditUnitModal extends Component {
 
   onOpened() {
     const { unit } = this.props;
-    console.log(unit);
-    this.setState(unit.toJson());
+    const params = unit ? unit.toJson() : Unit.mock().toJson();
+
+    this.setState(params);
   }
 
   create() {
     const { create } = this.props;
 
     create(this.state);
+    this.props.close();
   }
 
   update() {
     const { update } = this.props;
 
     update(this.state);
-  }
-
-  close() {
-    const { close } = this.props;
-
-    close();
+    this.props.close();
   }
 
   remove() {
     const { remove } = this.props;
 
     remove(this.state);
-  }
-
-  isOpen() {
-    const { isEditUnitModalOpen, isNewUnitModalOpen } = this.props;
-
-    return isNewUnitModalOpen || isEditUnitModalOpen;
+    this.props.close();
   }
 
   renderTitle() {
@@ -75,9 +66,9 @@ class EditUnitModal extends Component {
   }
 
   renderAction() {
-    const { isEditUnitModalOpen } = this.props;
+    const { unit } = this.props;
 
-    if (isEditUnitModalOpen) {
+    if (unit) {
       return (
         <div>
           <Button color="secondary" onClick={this.remove}>削除</Button>
@@ -94,7 +85,7 @@ class EditUnitModal extends Component {
     const { label, step } = this.state;
 
     return (
-      <Modal show={this.isOpen()} onShow={this.onOpened} onHide={this.close}>
+      <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
@@ -138,8 +129,6 @@ EditUnitModal.propTypes = {
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
-  isEditUnitModalOpen: PropTypes.bool.isRequired,
-  isNewUnitModalOpen: PropTypes.bool.isRequired,
 };
 
 EditUnitModal.defaultProps = {

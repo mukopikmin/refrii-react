@@ -23,6 +23,7 @@ class InvitationDialog extends Component {
     const { email } = this.state;
 
     invite(box, email);
+    this.props.close();
   }
 
   render() {
@@ -34,7 +35,7 @@ class InvitationDialog extends Component {
     }
 
     return (
-      <Modal show={isInvitationDialogOpen} onHide={close}>
+      <Modal show={this.props.open} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>{box.name}</Modal.Title>
         </Modal.Header>
@@ -51,7 +52,7 @@ class InvitationDialog extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={close}> キャンセル </Button>
+          <Button onClick={this.props.close}> キャンセル </Button>
           <Button color="primary" onClick={this.invite}>追加</Button>
         </Modal.Footer>
       </Modal>
@@ -61,7 +62,6 @@ class InvitationDialog extends Component {
 
 InvitationDialog.propTypes = {
   close: PropTypes.func.isRequired,
-  isInvitationDialogOpen: PropTypes.bool.isRequired,
 };
 
 export default InvitationDialog;

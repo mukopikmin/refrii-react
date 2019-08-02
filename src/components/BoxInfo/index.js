@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => ({
   box: ownProps.box,
 });
 const mapDispatchToProps = dispatch => ({
-  invite: () => dispatch(actions.openInviteBoxModal()),
+  // invite: () => dispatch(actions.openInviteBoxModal()),
 });
 
 export default connect(

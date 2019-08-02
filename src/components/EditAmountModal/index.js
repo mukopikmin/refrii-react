@@ -8,10 +8,11 @@ const mapStateToProps = (state, ownProps) => ({
   open: ownProps.open,
   food: ownProps.food,
   close: ownProps.close,
+  edit: ownProps.edit,
 });
 const mapDispatchToProps = dispatch => ({
   update: food => dispatch(actions.requestUpdateFood(food)),
-  edit: food => dispatch(actions.openEditFoodModal(food)),
+  // edit: food => dispatch(actions.openEditFoodModal(food)),
   // close: () => dispatch(actions.closeAmountFoodModal()),
 });
 

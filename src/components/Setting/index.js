@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(actions.requestListUnit()),
-  addUnit: () => dispatch(actions.openNewUnitModal()),
-  editUnit: unit => dispatch(actions.openEditUnitModal(unit)),
+  // addUnit: () => dispatch(actions.openNewUnitModal()),
+  // editUnit: unit => dispatch(actions.openEditUnitModal(unit)),
 });
 
 export default connect(

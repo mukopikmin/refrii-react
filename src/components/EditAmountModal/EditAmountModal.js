@@ -16,7 +16,6 @@ class EditAmountModal extends Component {
     this.onDecrease = this.onDecrease.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.submit = this.submit.bind(this);
-    this.edit = this.edit.bind(this);
 
     this.state = Food.mock().toJson();
   }
@@ -48,17 +47,10 @@ class EditAmountModal extends Component {
   }
 
   submit() {
-    const { update,close } = this.props;
+    const { update, close } = this.props;
 
     update(this.state);
-    close()
-  }
-
-  edit() {
-    const { edit, food,close } = this.props;
-
-    edit(food);
-    close()
+    close();
   }
 
   render() {
@@ -105,7 +97,7 @@ class EditAmountModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.close}>キャンセル</Button>
-          <Button onClick={this.edit} color="primary">編集</Button>
+          <Button onClick={() => this.props.edit(this.props.food)} color="primary">編集</Button>
           <Button onClick={this.submit} color="primary">更新</Button>
         </Modal.Footer>
       </Modal>

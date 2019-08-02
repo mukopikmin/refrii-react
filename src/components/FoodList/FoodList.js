@@ -16,9 +16,24 @@ class FoodList extends Component {
       editModalOpen: false,
       amountModalOpen: false,
       food: null,
+      box: null,
     };
 
+    this.add = this.add.bind(this);
+    this.edit = this.edit.bind(this);
+    this.closeEdit = this.closeEdit.bind(this);
     this.closeAmountModal = this.closeAmountModal.bind(this);
+  }
+
+  add() {
+    const { box } = this.props;
+
+    this.setState(pre => ({
+      ...pre,
+      box,
+      food: null,
+      editModalOpen: true,
+    }));
   }
 
   edit(food) {
@@ -29,17 +44,20 @@ class FoodList extends Component {
     //   unitId: food.unit.id,
     // });
 
-    this.setState({
+    this.setState(pre => ({
+      ...pre,
       editModalOpen: true,
+      amountModalOpen: false,
       food,
-    });
+    }));
   }
 
   closeEdit() {
-    this.setState({
+    this.setState(pre => ({
+      ...pre,
       editModalOpen: false,
       food: null,
-    });
+    }));
   }
 
   editAmount(food) {
@@ -100,7 +118,7 @@ class FoodList extends Component {
           ))}
           <ListGroup.Item
             action
-            onClick={add}
+            onClick={this.add}
           >
             <FontAwesomeIcon className={styles.addIcon} icon={faPlus} />
             <span>新規作成</span>
@@ -109,13 +127,16 @@ class FoodList extends Component {
 
         <EditFoodModal
           open={this.state.editModalOpen}
-          close={this.close}
+          close={this.closeEdit}
           food={this.state.food}
-          box={this.props.box} />
+          box={this.props.box}
+        />
         <EditAmountModal
           open={this.state.amountModalOpen}
+          edit={this.edit}
           food={this.state.food}
-          close={this.closeAmountModal} />
+          close={this.closeAmountModal}
+        />
       </div>
     );
   }

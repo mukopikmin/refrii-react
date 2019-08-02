@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   // editAmount: food => dispatch(actions.openAmountFoodModal(food)),
   // edit: food => dispatch(actions.openEditFoodModal(food)),
-  add: () => dispatch(actions.openNewFoodModal()),
+  // add: () => dispatch(actions.openNewFoodModal()),
 });
 
 export default connect(

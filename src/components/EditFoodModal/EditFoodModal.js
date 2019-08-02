@@ -70,8 +70,9 @@ class EditFoodModal extends Component {
 
   onOpened() {
     const { food } = this.props;
+    const params = food ? food.toJson() : Food.mock().toJson();
 
-    this.setState(food.toJson());
+    this.setState(params);
   }
 
   create() {
@@ -81,6 +82,7 @@ class EditFoodModal extends Component {
       ...this.state,
       boxId: box.id,
     });
+    this.props.close();
   }
 
   update() {
@@ -90,25 +92,15 @@ class EditFoodModal extends Component {
       ...this.state,
       boxId: box.id,
     });
+    this.props.close();
   }
 
   remove() {
     const { remove, food } = this.props;
 
     remove(food);
+    this.props.close();
   }
-
-  // close() {
-  //   const { close } = this.props;
-
-  //   close();
-  // }
-
-  // isOpen() {
-  //   const { isEditFoodModalOpen, isNewFoodModalOpen } = this.props;
-
-  //   return isNewFoodModalOpen || isEditFoodModalOpen;
-  // }
 
   renderTitle() {
     const { isEditFoodModalOpen } = this.props;
@@ -117,9 +109,9 @@ class EditFoodModal extends Component {
   }
 
   renderActions() {
-    const { isEditFoodModalOpen } = this.props;
+    const { food } = this.props;
 
-    if (isEditFoodModalOpen) {
+    if (food) {
       return (
         <div>
           <Button color="secondary" onClick={this.remove}>削除</Button>
@@ -135,10 +127,6 @@ class EditFoodModal extends Component {
     const {
       name, amount, expirationDate, notice, unit,
     } = this.state;
-
-    if (!food) {
-      return <div />;
-    }
 
     return (
       <Modal show={this.props.open} onShow={this.onOpened} onHide={this.props.close}>
@@ -209,9 +197,6 @@ EditFoodModal.propTypes = {
   onLoad: PropTypes.func.isRequired,
   create: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  isEditFoodModalOpen: PropTypes.bool.isRequired,
-  isNewFoodModalOpen: PropTypes.bool.isRequired,
   units: PropTypes.arrayOf(PropTypes.instanceOf(Unit)).isRequired,
 };
 

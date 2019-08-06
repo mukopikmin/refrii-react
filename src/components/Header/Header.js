@@ -82,7 +82,7 @@ class Header extends Component {
   }
 
   render() {
-    const { session, signout } = this.props;
+    const { session, signout, toggleSidebar } = this.props;
 
     return (
       <div>
@@ -100,6 +100,7 @@ class Header extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto" align="right">
+                <Nav.Link onClick={toggleSidebar}>toggle</Nav.Link>
                 <Nav.Link onClick={this.toRoot}>一覧</Nav.Link>
                 {session.user.admin && <Nav.Link onClick={this.toAdmin}>管理</Nav.Link>}
                 <NavDropdown title="メニュー" id="basic-nav-dropdown">
@@ -109,7 +110,7 @@ class Header extends Component {
                   {this.renderAdminMenu()}
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={signout}>
-ログアウト
+                    <span>ログアウト</span>
                     <br />
                     <small>{`${session.user.name} としてログインしています`}</small>
                   </NavDropdown.Item>

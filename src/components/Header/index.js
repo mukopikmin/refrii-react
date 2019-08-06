@@ -5,8 +5,7 @@ import firebase from '../../firebase';
 
 const mapStateToProps = (state, ownProps) => ({
   session: state.session,
-  toggleDrawer: ownProps.toggle,
-  drawerOpen: ownProps.drawerOpen,
+  toggleSidebar: ownProps.toggleSidebar,
 });
 const mapDispatchToProps = dispatch => ({
   signout: () => {

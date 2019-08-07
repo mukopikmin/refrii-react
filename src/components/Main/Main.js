@@ -44,6 +44,16 @@ class Main extends Component {
 
     return (
       <div>
+        <div className={styles.sidebar}>
+          <Sidebar
+            sidebar={<BoxList />}
+            styles={sidebarStyles}
+            open={sidebarOpen}
+            onSetOpen={this.toggleSidebar}
+            pullRight
+          />
+        </div>
+
         <div>
           <Header toggleSidebar={this.toggleSidebar} />
         </div>
@@ -59,15 +69,6 @@ class Main extends Component {
               </div>
             </div>
           </Container>
-        </div>
-
-        <div className={styles.sidebar}>
-          <Sidebar
-            sidebar={<BoxList />}
-            styles={sidebarStyles}
-            open={sidebarOpen}
-            pullRight
-          />
         </div>
       </div>
     );

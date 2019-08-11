@@ -39,6 +39,24 @@ class User extends Base {
     };
   }
 
+  static update(jwt, id, name, avatar) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        avatar,
+      }),
+    };
+
+    return super.authFetch(`${super.endpoint}/users/${id}`, jwt, options)
+      .then(super.handleErrors)
+      .then(response => response.json())
+      .then(user => new User(user));
+  }
+
   static getUsers(jwt) {
     return super.authFetch(`${super.endpoint}/users`, jwt)
       .then(response => response.json())

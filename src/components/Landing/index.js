@@ -4,11 +4,12 @@ import actions from '../../actions';
 import firebase from '../../firebase';
 
 const mapStateToProps = state => ({
-  session: state.session,
+  session: state.user.session,
 });
 const mapDispatchToProps = dispatch => ({
   signin: () => {
     const provider = new firebase.auth.GoogleAuthProvider();
+
     firebase.auth().signInWithRedirect(provider);
   },
   watchAuthState: () => {

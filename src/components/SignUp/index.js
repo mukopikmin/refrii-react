@@ -4,7 +4,7 @@ import actions from '../../actions';
 import firebase from '../../firebase';
 
 const mapStateToProps = state => ({
-  session: state.session,
+  session: state.user.session,
 });
 const mapDispatchToProps = dispatch => ({
   signin: () => {

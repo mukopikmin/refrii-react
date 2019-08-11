@@ -32,7 +32,7 @@ class SignUp extends Component {
     }));
   }
 
-  static renderAcceptPolicyMessage() {
+  renderAcceptPolicyMessage() {
     return (
       <span>
         <Link to="/privacy">プライバシーポリシー</Link>

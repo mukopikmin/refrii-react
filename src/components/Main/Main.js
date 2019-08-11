@@ -51,7 +51,9 @@ class Main extends Component {
             open={sidebarOpen}
             onSetOpen={this.toggleSidebar}
             pullRight
-          />
+          >
+            <div />
+          </Sidebar>
         </div>
 
         <div>

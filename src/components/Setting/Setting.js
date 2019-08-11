@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Table, Button } from 'react-bootstrap';
+import {
+  Container, Table, Button, Form,
+} from 'react-bootstrap';
 
 import Header from '../Header';
 import EditUnitModal from '../EditUnitModal';
@@ -9,17 +11,27 @@ class Setting extends Component {
   constructor(props) {
     super(props);
 
-    const { onLoad } = this.props;
-
     this.state = {
       modalOpen: false,
       unit: null,
+      avatar: null,
+      name: this.props.session.user.name,
     };
     this.edit = this.edit.bind(this);
     this.close = this.close.bind(this);
     this.add = this.add.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.onAvatarChange = this.onAvatarChange.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
+  }
 
-    onLoad();
+  componentDidMount() {
+    const { fetchUnits, session } = this.props;
+
+    fetchUnits();
+    fetch(session.user.avatarUrl)
+      .then(response => response.blob())
+      .then(blob => this.generateBase64(blob));
   }
 
   edit(unit) {
@@ -46,22 +58,67 @@ class Setting extends Component {
     }));
   }
 
+  updateUser() {
+    const { session, updateUser } = this.props;
+    const { user } = session;
+    const { name, avatar } = this.state;
+
+    updateUser(user.id, name, avatar);
+  }
+
+  onAvatarChange(e) {
+    const file = e.target.files[0];
+
+    this.generateBase64(file);
+  }
+
+  onNameChange(e) {
+    const name = e.target.value;
+
+    this.setState(pre => ({
+      ...pre,
+      name,
+    }));
+  }
+
+  generateBase64(file) {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.setState(pre => ({
+        ...pre,
+        avatar: reader.result,
+      }));
+    };
+    reader.onerror = error => console.log(error);
+  }
+
   render() {
     const { units, session } = this.props;
     const { modalOpen, unit } = this.state;
     const { user } = session;
+    const { name } = this.state;
 
     return (
       <div>
         <Header />
         <div className={styles.content}>
           <Container>
-            <Button>ユーザー情報の編集</Button>
             <Table>
               <tbody>
                 <tr>
+                  <td>アイコン</td>
+                  <td>
+                    <img src={user.avatarUrl} alt="" width="100px" />
+                    <Form.Control type="file" onChange={this.onAvatarChange} />
+                  </td>
+                </tr>
+                <tr>
                   <td>ユーザー名</td>
-                  <td>{user.name}</td>
+                  <td>
+                    <Form.Control type="text" onChange={this.onNameChange} value={name} />
+                  </td>
                 </tr>
                 <tr>
                   <td>メールアドレス</td>
@@ -73,6 +130,10 @@ class Setting extends Component {
                 </tr>
               </tbody>
             </Table>
+            <Button variant="primary" onClick={this.updateUser}>
+              更新
+            </Button>
+
             <Button onClick={this.add}>単位の作成</Button>
             <Table responsive>
               <thead>

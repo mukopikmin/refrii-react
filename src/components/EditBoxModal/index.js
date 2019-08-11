@@ -4,7 +4,6 @@ import actions from '../../actions';
 import confirm from '../ConfirmDialog';
 
 const mapStateToProps = (state, ownProps) => ({
-  session: state.session,
   open: ownProps.open,
   box: ownProps.box,
   close: ownProps.close,

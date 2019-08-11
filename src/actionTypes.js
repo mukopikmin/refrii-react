@@ -77,6 +77,11 @@ export default {
       RECEIVE: 'RECEIVE_LIST_USER',
       FAILED: 'FAILED_LIST_USER',
     },
+    UPDATE: {
+      REQUEST: 'REQUEST_UPDATE_USER',
+      RECEIVE: 'RECEIVE_UPDATE_USER',
+      FAILED: 'FAILED_UPDATE_USER',
+    },
   },
   SESSION: {
     VERIFY: {

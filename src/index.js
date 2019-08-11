@@ -25,9 +25,9 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 moment.locale('ja-JP');
 
 const persistConfig = {
-  key: 'session',
+  key: 'user.session',
   storage,
-  whitelist: ['session'],
+  whitelist: ['user.session'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

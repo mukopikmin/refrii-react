@@ -4,7 +4,7 @@ import actions from '../../actions';
 import firebase from '../../firebase';
 
 const mapStateToProps = (state, ownProps) => ({
-  session: state.session,
+  session: state.user.session,
   toggleSidebar: ownProps.toggleSidebar,
 });
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
-import moment from 'moment';
+import moment from "moment";
 
-import Base from './base';
+import Base from "./base";
 
 class User extends Base {
   constructor(params) {
@@ -22,7 +22,8 @@ class User extends Base {
   }
 
   static verify(jwt) {
-    return super.authFetch(`${super.endpoint}/users/verify`, jwt)
+    return super
+      .authFetch(`${super.endpoint}/users/verify`, jwt)
       .then(super.handleErrors)
       .then(response => response.json())
       .then(user => new User(user));
@@ -35,43 +36,46 @@ class User extends Base {
       email: this.email,
       id: this.id,
       name: this.name,
-      provider: this.provider,
+      provider: this.provider
     };
   }
 
   static update(jwt, id, name, avatar) {
     const options = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name,
-        avatar,
-      }),
+        avatar
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/users/${id}`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/users/${id}`, jwt, options)
       .then(super.handleErrors)
       .then(response => response.json())
       .then(user => new User(user));
   }
 
   static getUsers(jwt) {
-    return super.authFetch(`${super.endpoint}/users`, jwt)
+    return super
+      .authFetch(`${super.endpoint}/users`, jwt)
       .then(response => response.json())
       .then(users => users.map(user => new User(user)));
   }
 
   static signup(jwt) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-      },
+        "Content-Type": "application/json"
+      }
     };
 
-    return super.authFetch(`${super.endpoint}/users/google`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/users/google`, jwt, options)
       .then(super.handleErrors)
       .then(response => response.json())
       .then(user => new User(user));
@@ -79,15 +83,15 @@ class User extends Base {
 }
 
 User.emptyParams = {
-  avatar_url: '',
+  avatar_url: "",
   created_at: null,
   updated_at: null,
-  email: '',
+  email: "",
   id: 0,
-  name: '',
-  provider: '',
+  name: "",
+  provider: "",
   admin: false,
-  disabled: false,
+  disabled: false
 };
 
 export default User;

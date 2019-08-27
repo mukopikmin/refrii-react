@@ -1,9 +1,9 @@
-import { connect } from 'react-redux';
-import BoxList from './BoxList';
-import actions from '../../actions';
+import { connect } from "react-redux";
+import BoxList from "./BoxList";
+import actions from "../../actions";
 
 const mapStateToProps = state => ({
-  boxes: state.box.list,
+  boxes: state.box.list
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -11,10 +11,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.requestListBox());
     dispatch(actions.requestListFood());
   },
-  select: box => dispatch(actions.selectBox(box)),
+  select: box => dispatch(actions.selectBox(box))
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(BoxList);

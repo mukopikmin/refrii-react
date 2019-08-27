@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
-import {
-  Modal, Form, Button, Col,
-} from 'react-bootstrap';
+import React, { Component } from "react";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
+import { Modal, Form, Button, Col } from "react-bootstrap";
 
-import Food from '../../models/food';
+import Food from "../../models/food";
 
 class EditFoodModal extends Component {
   constructor(props) {
@@ -62,7 +60,7 @@ class EditFoodModal extends Component {
   onNeedsAddingChange() {
     this.setState(prev => ({
       ...prev,
-      needsAdding: !prev.needsAdding,
+      needsAdding: !prev.needsAdding
     }));
   }
 
@@ -78,7 +76,7 @@ class EditFoodModal extends Component {
 
     create({
       ...this.state,
-      boxId: box.id,
+      boxId: box.id
     });
     close();
   }
@@ -88,7 +86,7 @@ class EditFoodModal extends Component {
 
     update({
       ...this.state,
-      boxId: box.id,
+      boxId: box.id
     });
     close();
   }
@@ -103,7 +101,7 @@ class EditFoodModal extends Component {
   renderTitle() {
     const { food } = this.props;
 
-    return food ? '食材の編集' : '食材の追加';
+    return food ? "食材の編集" : "食材の追加";
   }
 
   renderActions() {
@@ -112,21 +110,25 @@ class EditFoodModal extends Component {
     if (food) {
       return (
         <div>
-          <Button color="secondary" onClick={this.remove}>削除</Button>
-          <Button color="primary" onClick={this.update}>更新</Button>
+          <Button color="secondary" onClick={this.remove}>
+            削除
+          </Button>
+          <Button color="primary" onClick={this.update}>
+            更新
+          </Button>
         </div>
       );
     }
-    return <Button color="primary" onClick={this.create}>追加</Button>;
+    return (
+      <Button color="primary" onClick={this.create}>
+        追加
+      </Button>
+    );
   }
 
   render() {
-    const {
-      units, open, close,
-    } = this.props;
-    const {
-      name, amount, expirationDate, notice, unit,
-    } = this.state;
+    const { units, open, close } = this.props;
+    const { name, amount, expirationDate, notice, unit } = this.state;
 
     return (
       <Modal show={open} onShow={this.onOpened} onHide={close}>
@@ -154,10 +156,16 @@ class EditFoodModal extends Component {
               </Form.Group>
               <Form.Group as={Col}>
                 <Form.Label>単位</Form.Label>
-                <Form.Control as="select" value={unit.id} onChange={this.onUnitChange}>
+                <Form.Control
+                  as="select"
+                  value={unit.id}
+                  onChange={this.onUnitChange}
+                >
                   <option value="-1" />
                   {units.map(u => (
-                    <option key={u.id} value={u.id}>{u.label}</option>
+                    <option key={u.id} value={u.id}>
+                      {u.label}
+                    </option>
                   ))}
                 </Form.Control>
               </Form.Group>
@@ -184,7 +192,7 @@ class EditFoodModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={close}>
-        キャンセル
+            キャンセル
           </Button>
           {this.renderActions()}
         </Modal.Footer>

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Toast } from 'react-bootstrap';
-import styles from './Notification.module.css';
+import React, { Component } from "react";
+import { Toast } from "react-bootstrap";
+import styles from "./Notification.module.css";
 
 class Notification extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Notification extends Component {
   isOpen() {
     const { message } = this.props;
 
-    return message !== '';
+    return message !== "";
   }
 
   render() {
@@ -27,7 +27,12 @@ class Notification extends Component {
 
     return (
       <div className={styles.toast}>
-        <Toast onClose={this.handleClose} show={this.isOpen()} delay={5000} autohide>
+        <Toast
+          onClose={this.handleClose}
+          show={this.isOpen()}
+          delay={5000}
+          autohide
+        >
           <Toast.Body>{message}</Toast.Body>
         </Toast>
       </div>

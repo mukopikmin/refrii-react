@@ -1,5 +1,5 @@
-import Base from './base';
-import Food from './food';
+import Base from "./base";
+import Food from "./food";
 
 class ShopPlan extends Base {
   constructor(params) {
@@ -15,7 +15,8 @@ class ShopPlan extends Base {
   }
 
   static getAll(jwt) {
-    return super.authFetch(`${super.endpoint}/shop_plans`, jwt)
+    return super
+      .authFetch(`${super.endpoint}/shop_plans`, jwt)
       .then(response => response.json())
       .then(plans => plans.map(plan => new Food(plan)));
   }

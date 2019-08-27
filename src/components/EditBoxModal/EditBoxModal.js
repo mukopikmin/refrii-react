@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
-import Box from '../../models/box';
+import React, { Component } from "react";
+import { Modal, Form, Button } from "react-bootstrap";
+import Box from "../../models/box";
 
 class EditBoxModal extends Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class EditBoxModal extends Component {
   renderTitle() {
     const { isEditBoxModalOpen } = this.props;
 
-    return isEditBoxModalOpen ? 'カテゴリの編集' : 'カテゴリの追加';
+    return isEditBoxModalOpen ? "カテゴリの編集" : "カテゴリの追加";
   }
 
   renderActions() {
@@ -68,13 +68,21 @@ class EditBoxModal extends Component {
     if (box) {
       return (
         <div>
-          <Button color="primary" onClick={this.update}>更新</Button>
-          <Button color="secondary" onClick={this.remove}>削除</Button>
+          <Button color="primary" onClick={this.update}>
+            更新
+          </Button>
+          <Button color="secondary" onClick={this.remove}>
+            削除
+          </Button>
         </div>
       );
     }
 
-    return <Button color="primary" onClick={this.create}>追加</Button>;
+    return (
+      <Button color="primary" onClick={this.create}>
+        追加
+      </Button>
+    );
   }
 
   render() {
@@ -109,7 +117,7 @@ class EditBoxModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.close}>
-          キャンセル
+            キャンセル
           </Button>
           {this.renderActions()}
         </Modal.Footer>

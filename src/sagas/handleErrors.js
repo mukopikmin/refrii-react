@@ -1,6 +1,6 @@
-import { put } from 'redux-saga/effects';
+import { put } from "redux-saga/effects";
 
-import actions from '../actions';
+import actions from "../actions";
 
 export default function* handleError(error) {
   // switch(error.message) {
@@ -12,7 +12,7 @@ export default function* handleError(error) {
   //     break;
   // }
 
-  if (error.message.includes('auth')) {
+  if (error.message.includes("auth")) {
     yield put(actions.signout());
   } else {
     yield put(actions.showNotification(error.message));

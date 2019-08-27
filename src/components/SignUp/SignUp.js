@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import {
-  Container, Row, Col, Button, Form,
-} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
-import styles from './SignUp.module.css';
-import logo from '../../assets/logo.png';
+import React, { Component } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
+import styles from "./SignUp.module.css";
+import logo from "../../assets/logo.png";
 
 class SignUp extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class SignUp extends Component {
     this.onPrivacyPolicyChanged = this.onPrivacyPolicyChanged.bind(this);
 
     this.state = {
-      privacyPolicyAccepted: false,
+      privacyPolicyAccepted: false
     };
   }
 
@@ -28,7 +26,7 @@ class SignUp extends Component {
   onPrivacyPolicyChanged() {
     this.setState(pre => ({
       ...pre,
-      privacyPolicyAccepted: !pre.privacyPolicyAccepted,
+      privacyPolicyAccepted: !pre.privacyPolicyAccepted
     }));
   }
 
@@ -36,7 +34,7 @@ class SignUp extends Component {
     return (
       <span>
         <Link to="/privacy">プライバシーポリシー</Link>
-    に同意して、アカウントを作成します。
+        に同意して、アカウントを作成します。
       </span>
     );
   }
@@ -57,13 +55,21 @@ class SignUp extends Component {
 
                 <div className={styles.startApp}>
                   <Button onClick={signin} disabled={!privacyPolicyAccepted}>
-                    <FontAwesomeIcon icon={faGoogle} className={styles.googleLogo} />
+                    <FontAwesomeIcon
+                      icon={faGoogle}
+                      className={styles.googleLogo}
+                    />
                     <span>Google アカウントでログイン</span>
                   </Button>
 
                   <Form className={styles.signupExplain}>
                     <Form.Group>
-                      <Form.Check type="checkbox" label={this.renderAcceptPolicyMessage()} checked={privacyPolicyAccepted} onChange={this.onPrivacyPolicyChanged} />
+                      <Form.Check
+                        type="checkbox"
+                        label={this.renderAcceptPolicyMessage()}
+                        checked={privacyPolicyAccepted}
+                        onChange={this.onPrivacyPolicyChanged}
+                      />
                     </Form.Group>
                   </Form>
                 </div>

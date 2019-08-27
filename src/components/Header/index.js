@@ -1,11 +1,11 @@
-import { connect } from 'react-redux';
-import Header from './Header';
-import actions from '../../actions';
-import firebase from '../../firebase';
+import { connect } from "react-redux";
+import Header from "./Header";
+import actions from "../../actions";
+import firebase from "../../firebase";
 
 const mapStateToProps = (state, ownProps) => ({
   session: state.user.session,
-  toggleSidebar: ownProps.toggleSidebar,
+  toggleSidebar: ownProps.toggleSidebar
 });
 const mapDispatchToProps = dispatch => ({
   signout: () => {
@@ -15,10 +15,10 @@ const mapDispatchToProps = dispatch => ({
   reload: () => {
     dispatch(actions.requestListBox());
     dispatch(actions.requestListFood());
-  },
+  }
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Header);

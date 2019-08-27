@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
-import Sidebar from 'react-sidebar';
-import BoxInfo from '../BoxInfo';
-import BoxList from '../BoxList';
-import FoodList from '../FoodList';
-import Header from '../Header';
-import styles from './Main.module.css';
+import React, { Component } from "react";
+import { Container } from "react-bootstrap";
+import Sidebar from "react-sidebar";
+import BoxInfo from "../BoxInfo";
+import BoxList from "../BoxList";
+import FoodList from "../FoodList";
+import Header from "../Header";
+import styles from "./Main.module.css";
 
 class Main extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      sidebarOpen: false,
+      sidebarOpen: false
     };
 
     this.toggleSidebar = this.toggleSidebar.bind(this);
@@ -21,7 +21,7 @@ class Main extends Component {
   toggleSidebar() {
     this.setState(pre => ({
       ...pre,
-      sidebarOpen: !pre.sidebarOpen,
+      sidebarOpen: !pre.sidebarOpen
     }));
   }
 
@@ -38,8 +38,8 @@ class Main extends Component {
     const { sidebarOpen } = this.state;
     const sidebarStyles = {
       sidebar: {
-        background: 'white',
-      },
+        background: "white"
+      }
     };
 
     return (

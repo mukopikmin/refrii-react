@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { confirmable } from 'react-confirm';
-import { PropTypes } from 'prop-types';
-import { Modal, Button } from 'react-bootstrap';
-
+import React, { Component } from "react";
+import { confirmable } from "react-confirm";
+import { PropTypes } from "prop-types";
+import { Modal, Button } from "react-bootstrap";
 
 class ConfirmDialog extends Component {
   constructor() {
@@ -37,12 +36,12 @@ class ConfirmDialog extends Component {
         <Modal.Header closeButton>
           <Modal.Title>確認</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {confirmation}
-        </Modal.Body>
+        <Modal.Body>{confirmation}</Modal.Body>
         <Modal.Footer>
           <Button onClick={this.close}>キャンセル</Button>
-          <Button color="primary" onClick={this.continue}>実行</Button>
+          <Button color="primary" onClick={this.continue}>
+            実行
+          </Button>
         </Modal.Footer>
       </Modal>
     );
@@ -52,7 +51,7 @@ class ConfirmDialog extends Component {
 ConfirmDialog.propTypes = {
   dismiss: PropTypes.func.isRequired,
   proceed: PropTypes.func.isRequired,
-  confirmation: PropTypes.string.isRequired,
+  confirmation: PropTypes.string.isRequired
 };
 
 export default confirmable(ConfirmDialog);

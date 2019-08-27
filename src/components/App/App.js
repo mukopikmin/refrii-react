@@ -1,16 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import React, { Component, Fragment } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container } from "react-bootstrap";
 
-import Landing from '../Landing';
-import SignUp from '../SignUp';
-import Admin from '../Admin';
-import PrivacyPolicy from '../PrivacyPolicy';
-import Main from '../Main';
-import Setting from '../Setting';
-import styles from './App.module.css';
-import Notification from '../Notification';
+import Landing from "../Landing";
+import SignUp from "../SignUp";
+import Admin from "../Admin";
+import PrivacyPolicy from "../PrivacyPolicy";
+import Main from "../Main";
+import Setting from "../Setting";
+import styles from "./App.module.css";
+import Notification from "../Notification";
 
 class App extends Component {
   render() {

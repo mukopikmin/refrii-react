@@ -1,5 +1,5 @@
-import { createActions } from 'redux-actions';
-import types from '../actionTypes';
+import { createActions } from "redux-actions";
+import types from "../actionTypes";
 
 export default createActions({
   [types.BOX.LIST.REQUEST]: session => ({ session }),
@@ -15,8 +15,8 @@ export default createActions({
   [types.BOX.REMOVE.RECEIVE]: id => ({ id }),
   [types.BOX.REMOVE.FAILED]: error => ({ error }),
   [types.BOX.INVITE.REQUEST]: (box, email) => ({ box, email }),
-  [types.BOX.INVITE.RECEIVE]: () => ({ }),
+  [types.BOX.INVITE.RECEIVE]: () => ({}),
   [types.BOX.INVITE.FAILED]: error => ({ error }),
   [types.BOX.SELECT]: box => ({ box }),
-  [types.BOX.SET_PARAMS]: box => ({ box }),
+  [types.BOX.SET_PARAMS]: box => ({ box })
 });

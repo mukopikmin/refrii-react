@@ -1,6 +1,6 @@
-import moment from 'moment';
+import moment from "moment";
 
-import Base from './base';
+import Base from "./base";
 
 class Unit extends Base {
   constructor(params) {
@@ -18,48 +18,51 @@ class Unit extends Base {
   }
 
   static getUnits(jwt) {
-    return super.authFetch(`${super.endpoint}/units`, jwt)
+    return super
+      .authFetch(`${super.endpoint}/units`, jwt)
       .then(response => response.json())
       .then(units => units.map(unit => new Unit(unit)));
   }
 
   static createUnit(jwt, body) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         label: body.label,
-        step: body.step,
-      }),
+        step: body.step
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/units`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/units`, jwt, options)
       .then(response => response.json())
       .then(unit => new Unit(unit));
   }
 
   static updateUnit(jwt, body, id) {
     const options = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         label: body.label,
-        step: body.step,
-      }),
+        step: body.step
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/units/${id}`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/units/${id}`, jwt, options)
       .then(response => response.json())
       .then(unit => new Unit(unit));
   }
 
   static removeUnit(jwt, id) {
     const options = {
-      method: 'DELETE',
+      method: "DELETE"
     };
 
     return super.authFetch(`${super.endpoint}/units/${id}`, jwt, options);
@@ -71,7 +74,7 @@ class Unit extends Base {
       id: this.id,
       label: this.label,
       step: this.step,
-      updatedAt: this.updatedAt,
+      updatedAt: this.updatedAt
     };
   }
 }
@@ -79,9 +82,9 @@ class Unit extends Base {
 Unit.emptyParams = {
   created_at: null,
   id: 0,
-  label: '',
+  label: "",
   step: 0,
-  updated_at: null,
+  updated_at: null
 };
 
 export default Unit;

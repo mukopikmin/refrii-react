@@ -1,15 +1,15 @@
-import { connect } from 'react-redux';
-import UserList from './UserList';
-import actions from '../../actions';
+import { connect } from "react-redux";
+import UserList from "./UserList";
+import actions from "../../actions";
 
 const mapStateToProps = state => ({
-  users: state.user.list,
+  users: state.user.list
 });
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(actions.requestListUser()),
+  onLoad: () => dispatch(actions.requestListUser())
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(UserList);

@@ -1,12 +1,10 @@
-import {
-  call, put, takeLatest, select, fork,
-} from 'redux-saga/effects';
+import { call, put, takeLatest, select, fork } from "redux-saga/effects";
 
-import types from '../actionTypes';
-import actions from '../actions';
-import selectors from '../selectors';
-import Box from '../models/box';
-import handleError from './handleErrors';
+import types from "../actionTypes";
+import actions from "../actions";
+import selectors from "../selectors";
+import Box from "../models/box";
+import handleError from "./handleErrors";
 
 function* handleRequestListBox() {
   try {
@@ -91,5 +89,5 @@ export default [
   takeLatest(types.BOX.CREATE.REQUEST, handleRequestCreateBox),
   takeLatest(types.BOX.UPDATE.REQUEST, handleRequestUpdateBox),
   takeLatest(types.BOX.REMOVE.REQUEST, handleRequestRemoveBox),
-  takeLatest(types.BOX.INVITE.REQUEST, handleRequestInviteBox),
+  takeLatest(types.BOX.INVITE.REQUEST, handleRequestInviteBox)
 ];

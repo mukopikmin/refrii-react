@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Modal, Form, Button } from 'react-bootstrap';
+import React, { Component } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import { Modal, Form, Button } from "react-bootstrap";
 
-import Unit from '../../models/unit';
+import Unit from "../../models/unit";
 
 class EditUnitModal extends Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class EditUnitModal extends Component {
   renderTitle() {
     const { unit } = this.props;
 
-    return unit ? 'ラベルの編集' : 'ラベルの追加';
+    return unit ? "ラベルの編集" : "ラベルの追加";
   }
 
   renderAction() {
@@ -70,13 +70,19 @@ class EditUnitModal extends Component {
     if (unit) {
       return (
         <div>
-          <Button color="secondary" onClick={this.remove}>削除</Button>
-          <Button color="primary" onClick={this.update}>更新</Button>
+          <Button color="secondary" onClick={this.remove}>
+            削除
+          </Button>
+          <Button color="primary" onClick={this.update}>
+            更新
+          </Button>
         </div>
       );
     }
     return (
-      <Button color="primary" onClick={this.create}>追加</Button>
+      <Button color="primary" onClick={this.create}>
+        追加
+      </Button>
     );
   }
 
@@ -111,7 +117,7 @@ class EditUnitModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.close}>
-          キャンセル
+            キャンセル
           </Button>
           {this.renderAction()}
         </Modal.Footer>

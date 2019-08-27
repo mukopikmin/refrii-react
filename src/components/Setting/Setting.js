@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import {
-  Container, Table, Button, Form,
-} from 'react-bootstrap';
+import React, { Component } from "react";
+import { Container, Table, Button, Form } from "react-bootstrap";
 
-import Header from '../Header';
-import EditUnitModal from '../EditUnitModal';
-import styles from './Setting.module.css';
+import Header from "../Header";
+import EditUnitModal from "../EditUnitModal";
+import styles from "./Setting.module.css";
 
 class Setting extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class Setting extends Component {
       modalOpen: false,
       unit: null,
       avatar: null,
-      name: this.props.session.user.name,
+      name: this.props.session.user.name
     };
     this.edit = this.edit.bind(this);
     this.close = this.close.bind(this);
@@ -38,7 +36,7 @@ class Setting extends Component {
     this.setState(pre => ({
       ...pre,
       modalOpen: true,
-      unit,
+      unit
     }));
   }
 
@@ -46,7 +44,7 @@ class Setting extends Component {
     this.setState(pre => ({
       ...pre,
       modalOpen: false,
-      unit: null,
+      unit: null
     }));
   }
 
@@ -54,7 +52,7 @@ class Setting extends Component {
     this.setState(pre => ({
       ...pre,
       modalOpen: true,
-      unit: null,
+      unit: null
     }));
   }
 
@@ -77,7 +75,7 @@ class Setting extends Component {
 
     this.setState(pre => ({
       ...pre,
-      name,
+      name
     }));
   }
 
@@ -88,7 +86,7 @@ class Setting extends Component {
     reader.onload = () => {
       this.setState(pre => ({
         ...pre,
-        avatar: reader.result,
+        avatar: reader.result
       }));
     };
     reader.onerror = error => console.log(error);
@@ -117,7 +115,11 @@ class Setting extends Component {
                 <tr>
                   <td>ユーザー名</td>
                   <td>
-                    <Form.Control type="text" onChange={this.onNameChange} value={name} />
+                    <Form.Control
+                      type="text"
+                      onChange={this.onNameChange}
+                      value={name}
+                    />
                   </td>
                 </tr>
                 <tr>
@@ -149,8 +151,8 @@ class Setting extends Component {
                   <tr key={ownUnit.id} onClick={() => this.edit(ownUnit)}>
                     <td>{ownUnit.label}</td>
                     <td>{ownUnit.step}</td>
-                    <td>{ownUnit.createdAt.format('YYYY/MM/DD hh:mm')}</td>
-                    <td>{ownUnit.updatedAt.format('YYYY/MM/DD hh:mm')}</td>
+                    <td>{ownUnit.createdAt.format("YYYY/MM/DD hh:mm")}</td>
+                    <td>{ownUnit.updatedAt.format("YYYY/MM/DD hh:mm")}</td>
                     <td />
                   </tr>
                 ))}
@@ -159,11 +161,7 @@ class Setting extends Component {
           </Container>
         </div>
 
-        <EditUnitModal
-          open={modalOpen}
-          close={this.close}
-          unit={unit}
-        />
+        <EditUnitModal open={modalOpen} close={this.close} unit={unit} />
       </div>
     );
   }

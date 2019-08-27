@@ -1,12 +1,10 @@
-import {
-  call, put, takeLatest, select, fork,
-} from 'redux-saga/effects';
+import { call, put, takeLatest, select, fork } from "redux-saga/effects";
 
-import types from '../actionTypes';
-import actions from '../actions';
-import selectors from '../selectors';
-import Unit from '../models/unit';
-import handleError from './handleErrors';
+import types from "../actionTypes";
+import actions from "../actions";
+import selectors from "../selectors";
+import Unit from "../models/unit";
+import handleError from "./handleErrors";
 
 function* handleRequestListUnit() {
   try {
@@ -68,5 +66,5 @@ export default [
   takeLatest(types.UNIT.LIST.REQUEST, handleRequestListUnit),
   takeLatest(types.UNIT.CREATE.REQUEST, handleRequestCreateUnit),
   takeLatest(types.UNIT.UPDATE.REQUEST, handleRequestUpdateUnit),
-  takeLatest(types.UNIT.REMOVE.REQUEST, handleRequestRemoveUnit),
+  takeLatest(types.UNIT.REMOVE.REQUEST, handleRequestRemoveUnit)
 ];

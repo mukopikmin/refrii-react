@@ -1,18 +1,18 @@
-import { connect } from 'react-redux';
-import EditAmountModal from './EditAmountModal';
-import actions from '../../actions';
+import { connect } from "react-redux";
+import EditAmountModal from "./EditAmountModal";
+import actions from "../../actions";
 
 const mapStateToProps = (state, ownProps) => ({
   open: ownProps.open,
   food: ownProps.food,
   close: ownProps.close,
-  edit: ownProps.edit,
+  edit: ownProps.edit
 });
 const mapDispatchToProps = dispatch => ({
-  update: food => dispatch(actions.requestUpdateFood(food)),
+  update: food => dispatch(actions.requestUpdateFood(food))
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(EditAmountModal);

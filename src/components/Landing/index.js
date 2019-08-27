@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
-import Landing from './Landing';
-import actions from '../../actions';
-import firebase from '../../firebase';
+import { connect } from "react-redux";
+import Landing from "./Landing";
+import actions from "../../actions";
+import firebase from "../../firebase";
 
 const mapStateToProps = state => ({
-  session: state.user.session,
+  session: state.user.session
 });
 const mapDispatchToProps = dispatch => ({
   signin: () => {
@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
     firebase.auth().signInWithRedirect(provider);
   },
   watchAuthState: () => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (!user) {
         return;
       }
@@ -21,10 +21,10 @@ const mapDispatchToProps = dispatch => ({
       dispatch(actions.receiveFirebaseAuthSession(user));
       dispatch(actions.requestVerifySession(user.ra));
     });
-  },
+  }
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Landing);

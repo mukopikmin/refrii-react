@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-import Main from './Main';
+import { connect } from "react-redux";
+import Main from "./Main";
 
 const mapStateToProps = state => ({
-  box: state.box.target,
+  box: state.box.target
 });
-const mapDispatchToProps = () => ({ });
+const mapDispatchToProps = () => ({});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Main);

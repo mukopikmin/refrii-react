@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import {
-  Container, Navbar, Nav, NavDropdown, Button,
-} from 'react-bootstrap';
-import logo from '../../assets/logo.png';
+import React, { Component } from "react";
+import { PropTypes } from "prop-types";
+import { withRouter } from "react-router-dom";
+import { Container, Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import logo from "../../assets/logo.png";
 
 class Header extends Component {
   constructor(props) {
@@ -40,32 +38,28 @@ class Header extends Component {
     const { history } = this.props;
 
     this.closeMenu();
-    history.push('/');
+    history.push("/");
   }
 
   toSetting() {
     const { history } = this.props;
 
     this.closeMenu();
-    history.push('/setting');
+    history.push("/setting");
   }
 
   toAdmin() {
     const { history } = this.props;
 
     this.closeMenu();
-    history.push('/admin');
+    history.push("/admin");
   }
 
   renderAction() {
     const { location } = this.props;
 
-    if (location.pathname === '/') {
-      return (
-        <Button>
-          {/* <MenuIcon /> */}
-        </Button>
-      );
+    if (location.pathname === "/") {
+      return <Button>{/* <MenuIcon /> */}</Button>;
     }
 
     return <div />;
@@ -75,7 +69,11 @@ class Header extends Component {
     const { session } = this.props;
 
     if (session.user.admin) {
-      return <NavDropdown.Item onClick={this.toAdmin}>管理者メニュー</NavDropdown.Item>;
+      return (
+        <NavDropdown.Item onClick={this.toAdmin}>
+          管理者メニュー
+        </NavDropdown.Item>
+      );
     }
 
     return <div />;
@@ -102,11 +100,19 @@ class Header extends Component {
               <Nav className="mr-auto" align="right">
                 <Nav.Link onClick={toggleSidebar}>toggle</Nav.Link>
                 <Nav.Link onClick={this.toRoot}>一覧</Nav.Link>
-                {session.user.admin && <Nav.Link onClick={this.toAdmin}>管理</Nav.Link>}
+                {session.user.admin && (
+                  <Nav.Link onClick={this.toAdmin}>管理</Nav.Link>
+                )}
                 <NavDropdown title="メニュー" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={this.toRoot}>食材一覧を表示</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.reload}>再読込</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.toSetting}>設定</NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.toRoot}>
+                    食材一覧を表示
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.reload}>
+                    再読込
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.toSetting}>
+                    設定
+                  </NavDropdown.Item>
                   {this.renderAdminMenu()}
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={signout}>
@@ -128,8 +134,8 @@ Header.propTypes = {
   session: PropTypes.shape({}).isRequired,
   signout: PropTypes.func.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default withRouter(Header);

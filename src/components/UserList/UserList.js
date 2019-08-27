@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from "react";
+import { Table } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 class UserList extends Component {
   constructor(props) {
@@ -40,8 +40,8 @@ class UserList extends Component {
               <td>{this.renderChecked(user.disabled)}</td>
               <td>{this.renderChecked(user.admin)}</td>
               <td>{user.provider}</td>
-              <td>{user.createdAt.format('YYYY/MM/DD HH:mm:ss')}</td>
-              <td>{user.updatedAt.format('YYYY/MM/DD HH:mm:ss')}</td>
+              <td>{user.createdAt.format("YYYY/MM/DD HH:mm:ss")}</td>
+              <td>{user.updatedAt.format("YYYY/MM/DD HH:mm:ss")}</td>
             </tr>
           ))}
         </tbody>

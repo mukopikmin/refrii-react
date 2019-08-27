@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { ListGroup } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
-import styles from './BoxList.module.css';
-import EditBoxModal from '../EditBoxModal';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { ListGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import styles from "./BoxList.module.css";
+import EditBoxModal from "../EditBoxModal";
 
 class BoxList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      modalOpen: false,
+      modalOpen: false
     };
 
     this.select = this.select.bind(this);
@@ -46,21 +46,21 @@ class BoxList extends Component {
   add() {
     this.setState({
       modalOpen: true,
-      box: null,
+      box: null
     });
   }
 
   edit(box) {
     this.setState({
       modalOpen: true,
-      box,
+      box
     });
   }
 
   closeModal() {
     this.setState({
       modalOpen: false,
-      box: null,
+      box: null
     });
   }
 
@@ -114,11 +114,7 @@ class BoxList extends Component {
           </ListGroup>
         </div>
 
-        <EditBoxModal
-          open={modalOpen}
-          close={this.closeModal}
-          box={box}
-        />
+        <EditBoxModal open={modalOpen} close={this.closeModal} box={box} />
       </div>
     );
   }

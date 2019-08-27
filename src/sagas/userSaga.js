@@ -1,12 +1,10 @@
-import {
-  call, put, takeLatest, select, fork,
-} from 'redux-saga/effects';
+import { call, put, takeLatest, select, fork } from "redux-saga/effects";
 
-import types from '../actionTypes';
-import actions from '../actions';
-import selectors from '../selectors';
-import User from '../models/user';
-import handleError from './handleErrors';
+import types from "../actionTypes";
+import actions from "../actions";
+import selectors from "../selectors";
+import User from "../models/user";
+import handleError from "./handleErrors";
 
 function* handleRequestSignup() {
   try {
@@ -61,5 +59,5 @@ export default [
   takeLatest(types.SESSION.SIGNUP.REQUEST, handleRequestSignup),
   takeLatest(types.SESSION.VERIFY.REQUEST, handleRequestVerify),
   takeLatest(types.USER.LIST.REQUEST, handleRequestListUser),
-  takeLatest(types.USER.UPDATE.REQUEST, handleRequestUpdateUser),
+  takeLatest(types.USER.UPDATE.REQUEST, handleRequestUpdateUser)
 ];

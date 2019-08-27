@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
+import React, { Component } from "react";
+import { Modal, Form, Button } from "react-bootstrap";
 
 class InvitationDialog extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class InvitationDialog extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.invite = this.invite.bind(this);
 
-    this.state = { email: '' };
+    this.state = { email: "" };
   }
 
   onChangeEmail(e) {
@@ -37,7 +37,7 @@ class InvitationDialog extends Component {
           <Modal.Title>{box.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        このカテゴリを共有するユーザーのメールアドレスを入力してください。
+          このカテゴリを共有するユーザーのメールアドレスを入力してください。
           <Form>
             <Form.Group>
               <Form.Control
@@ -50,7 +50,9 @@ class InvitationDialog extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={close}> キャンセル </Button>
-          <Button color="primary" onClick={this.invite}>追加</Button>
+          <Button color="primary" onClick={this.invite}>
+            追加
+          </Button>
         </Modal.Footer>
       </Modal>
     );

@@ -1,7 +1,7 @@
 class Base {
   static handleErrors(response) {
     if (!response.ok) {
-      return response.json().then((json) => {
+      return response.json().then(json => {
         throw json;
       });
     }
@@ -11,7 +11,7 @@ class Base {
 
   static authFetch(url, jwt, _options = {}) {
     const options = {
-      ..._options,
+      ..._options
     };
 
     if (!_options.headers) {
@@ -20,14 +20,16 @@ class Base {
 
     options.headers = {
       ...options.headers,
-      Authorization: `Bearer: ${jwt}`,
+      Authorization: `Bearer: ${jwt}`
     };
 
-    return fetch(url, options)
-      .then(Base.handleErrors);
+    return fetch(url, options).then(Base.handleErrors);
   }
 }
 
-Base.endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://api.refrii.com';
+Base.endpoint =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://api.refrii.com";
 
 export default Base;

@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import { Button, ListGroup } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCubes, faCalendarCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import Spinner from '../Spinner';
-import styles from './FoodList.module.css';
-import EditFoodModal from '../EditFoodModal';
-import EditAmountModal from '../EditAmountModal';
+import React, { Component } from "react";
+import { Button, ListGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCubes,
+  faCalendarCheck,
+  faPlus
+} from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../Spinner";
+import styles from "./FoodList.module.css";
+import EditFoodModal from "../EditFoodModal";
+import EditAmountModal from "../EditAmountModal";
 
 class FoodList extends Component {
   constructor(props) {
@@ -15,7 +19,7 @@ class FoodList extends Component {
       editModalOpen: false,
       amountModalOpen: false,
       food: null,
-      box: null,
+      box: null
     };
 
     this.add = this.add.bind(this);
@@ -31,7 +35,7 @@ class FoodList extends Component {
       ...pre,
       box,
       food: null,
-      editModalOpen: true,
+      editModalOpen: true
     }));
   }
 
@@ -40,7 +44,7 @@ class FoodList extends Component {
       ...pre,
       editModalOpen: true,
       amountModalOpen: false,
-      food,
+      food
     }));
   }
 
@@ -48,7 +52,7 @@ class FoodList extends Component {
     this.setState(pre => ({
       ...pre,
       editModalOpen: false,
-      food: null,
+      food: null
     }));
   }
 
@@ -56,7 +60,7 @@ class FoodList extends Component {
     this.setState(pre => ({
       ...pre,
       amountModalOpen: true,
-      food,
+      food
     }));
   }
 
@@ -64,7 +68,7 @@ class FoodList extends Component {
     this.setState(pre => ({
       ...pre,
       amountModalOpen: false,
-      food: null,
+      food: null
     }));
   }
 
@@ -79,9 +83,7 @@ class FoodList extends Component {
     if (box.getFoods(foods).length === 0) {
       return (
         <div>
-          <p className={styles.message}>
-            食材は登録されていません
-          </p>
+          <p className={styles.message}>食材は登録されていません</p>
           <p className={styles.message}>
             <Button variant="outlined" color="primary" onClick={this.add}>
               食材を登録する
@@ -111,15 +113,15 @@ class FoodList extends Component {
               <div className={styles.detail}>
                 <FontAwesomeIcon className={styles.icon} icon={faCubes} />
                 <span>{`${foodInBox.amount} ${foodInBox.unit.label}`}</span>
-                <FontAwesomeIcon className={styles.icon} icon={faCalendarCheck} />
+                <FontAwesomeIcon
+                  className={styles.icon}
+                  icon={faCalendarCheck}
+                />
                 <span>{foodInBox.expirationDate}</span>
               </div>
             </ListGroup.Item>
           ))}
-          <ListGroup.Item
-            action
-            onClick={this.add}
-          >
+          <ListGroup.Item action onClick={this.add}>
             <FontAwesomeIcon className={styles.addIcon} icon={faPlus} />
             <span>新規作成</span>
           </ListGroup.Item>

@@ -1,9 +1,9 @@
-import moment from 'moment';
+import moment from "moment";
 
-import Base from './base';
-import Unit from './unit';
-import User from './user';
-import Box from './box';
+import Base from "./base";
+import Unit from "./unit";
+import User from "./user";
+import Box from "./box";
 
 class Food extends Base {
   constructor(params) {
@@ -29,16 +29,17 @@ class Food extends Base {
   }
 
   static getFoods(jwt) {
-    return super.authFetch(`${super.endpoint}/foods`, jwt)
+    return super
+      .authFetch(`${super.endpoint}/foods`, jwt)
       .then(response => response.json())
       .then(foods => foods.map(food => new Food(food)));
   }
 
   static updateFood(jwt, body) {
     const options = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: body.name,
@@ -46,20 +47,21 @@ class Food extends Base {
         expiration_date: body.expirationDate,
         needs_adding: body.needsAdding,
         notice: body.notice,
-        unit_id: body.unit.id,
-      }),
+        unit_id: body.unit.id
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/foods/${body.id}`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/foods/${body.id}`, jwt, options)
       .then(response => response.json())
       .then(food => new Food(food));
   }
 
   static createFood(jwt, body) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: body.name,
@@ -68,18 +70,19 @@ class Food extends Base {
         expiration_date: body.expirationDate,
         image_url: body.imageUrl,
         box_id: body.boxId,
-        unit_id: body.unit.id,
-      }),
+        unit_id: body.unit.id
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/foods`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/foods`, jwt, options)
       .then(response => response.json())
       .then(food => new Food(food));
   }
 
   static removeFood(jwt, id) {
     const options = {
-      method: 'DELETE',
+      method: "DELETE"
     };
 
     return super.authFetch(`${super.endpoint}/foods/${id}`, jwt, options);
@@ -98,7 +101,7 @@ class Food extends Base {
       needsAdding: this.needsAdding,
       notice: this.notice,
       unit: this.unit,
-      updatedAt: this.updatedAt,
+      updatedAt: this.updatedAt
     };
   }
 }
@@ -111,12 +114,12 @@ Food.emptyParams = {
   expiration_date: moment(),
   id: 0,
   image_url: null,
-  name: '',
+  name: "",
   needs_adding: false,
-  notice: '',
+  notice: "",
   unit: Unit.emptyParams,
   updated_at: null,
-  box: Box.emptyParams,
+  box: Box.emptyParams
 };
 
 export default Food;

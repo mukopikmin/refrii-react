@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { Badge } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends, faPlus } from '@fortawesome/free-solid-svg-icons';
-import styles from './BoxInfo.module.css';
-import InvitationDialog from '../InvitationDialog';
+import React, { Component } from "react";
+import { Badge } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserFriends, faPlus } from "@fortawesome/free-solid-svg-icons";
+import styles from "./BoxInfo.module.css";
+import InvitationDialog from "../InvitationDialog";
 
 class BoxInfo extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      modalOpen: false,
+      modalOpen: false
     };
     this.invite = this.invite.bind(this);
     this.close = this.close.bind(this);
@@ -22,7 +22,7 @@ class BoxInfo extends Component {
     this.setState(pre => ({
       ...pre,
       modalOpen: true,
-      box,
+      box
     }));
   }
 
@@ -30,14 +30,14 @@ class BoxInfo extends Component {
     this.setState(pre => ({
       ...pre,
       modalOpen: false,
-      box: null,
+      box: null
     }));
   }
 
   renderNotice() {
     const { box } = this.props;
 
-    return box.notice.split('\n').map((line, key) => {
+    return box.notice.split("\n").map((line, key) => {
       const id = `${box.id}-${key}`;
 
       return (
@@ -93,11 +93,7 @@ class BoxInfo extends Component {
 
         {this.renderNotice()}
 
-        <InvitationDialog
-          open={modalOpen}
-          close={this.close}
-          box={box}
-        />
+        <InvitationDialog open={modalOpen} close={this.close} box={box} />
       </div>
     );
   }

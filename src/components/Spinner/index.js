@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-import Spinner from './Spinner';
+import { connect } from "react-redux";
+import Spinner from "./Spinner";
 
 const mapStateToProps = (state, ownProps) => ({
-  loading: ownProps.loading,
+  loading: ownProps.loading
 });
 const mapDispatchToProps = () => ({});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Spinner);

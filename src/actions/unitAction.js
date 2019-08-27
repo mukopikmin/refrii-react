@@ -1,5 +1,5 @@
-import { createActions } from 'redux-actions';
-import types from '../actionTypes';
+import { createActions } from "redux-actions";
+import types from "../actionTypes";
 
 export default createActions({
   [types.UNIT.LIST.REQUEST]: session => ({ session }),
@@ -14,5 +14,5 @@ export default createActions({
   [types.UNIT.REMOVE.REQUEST]: unit => ({ unit }),
   [types.UNIT.REMOVE.RECEIVE]: id => ({ id }),
   [types.UNIT.REMOVE.FAILED]: error => ({ error }),
-  [types.UNIT.SET_PARAMS]: unit => ({ unit }),
+  [types.UNIT.SET_PARAMS]: unit => ({ unit })
 });

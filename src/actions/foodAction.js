@@ -1,5 +1,5 @@
-import { createActions } from 'redux-actions';
-import types from '../actionTypes';
+import { createActions } from "redux-actions";
+import types from "../actionTypes";
 
 export default createActions({
   [types.FOOD.LIST.REQUEST]: () => ({}),
@@ -14,5 +14,5 @@ export default createActions({
   [types.FOOD.REMOVE.REQUEST]: food => ({ food }),
   [types.FOOD.REMOVE.RECEIVE]: food => ({ food }),
   [types.FOOD.REMOVE.FAILED]: error => ({ error }),
-  [types.FOOD.SET_PARAMS]: food => ({ food }),
+  [types.FOOD.SET_PARAMS]: food => ({ food })
 });

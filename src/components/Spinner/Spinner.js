@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import { Spinner as Bspinner } from 'react-bootstrap';
-import styles from './Spinner.module.css';
+import React, { Component } from "react";
+import { PropTypes } from "prop-types";
+import { Spinner as Bspinner } from "react-bootstrap";
+import styles from "./Spinner.module.css";
 
 class Spinner extends Component {
   render() {
@@ -20,11 +20,11 @@ class Spinner extends Component {
 }
 
 Spinner.propTypes = {
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 Spinner.defaultProps = {
-  loading: false,
+  loading: false
 };
 
 export default Spinner;

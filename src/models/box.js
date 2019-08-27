@@ -1,7 +1,7 @@
-import moment from 'moment';
+import moment from "moment";
 
-import Base from './base';
-import User from './user';
+import Base from "./base";
+import User from "./user";
 
 class Box extends Base {
   constructor(params) {
@@ -25,15 +25,18 @@ class Box extends Base {
   }
 
   static getBoxes(jwt) {
-    return super.authFetch(`${super.endpoint}/boxes`, jwt)
+    return super
+      .authFetch(`${super.endpoint}/boxes`, jwt)
       .then(response => response.json())
       .then(boxes => boxes.map(param => new Box(param)))
-      .then(boxes => boxes.sort((a, b) => {
-        const timeA = new Date(a.updatedAt).getTime();
-        const timeB = new Date(b.updatedAt).getTime();
+      .then(boxes =>
+        boxes.sort((a, b) => {
+          const timeA = new Date(a.updatedAt).getTime();
+          const timeB = new Date(b.updatedAt).getTime();
 
-        return timeB - timeA;
-      }));
+          return timeB - timeA;
+        })
+      );
     // .then(boxes => boxes.map((_box) => {
     //   const box = _box;
     //   const foods = box.foods.sort((a, b) => {
@@ -49,41 +52,43 @@ class Box extends Base {
 
   static createBox(jwt, body) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: body.name,
-        notice: body.notice,
-      }),
+        notice: body.notice
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/boxes/`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/boxes/`, jwt, options)
       .then(response => response.json())
       .then(box => new Box(box));
   }
 
   static updateBox(jwt, body) {
     const options = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: body.name,
-        notice: body.notice,
-      }),
+        notice: body.notice
+      })
     };
 
-    return super.authFetch(`${super.endpoint}/boxes/${body.id}`, jwt, options)
+    return super
+      .authFetch(`${super.endpoint}/boxes/${body.id}`, jwt, options)
       .then(response => response.json())
       .then(box => new Box(box));
   }
 
   static removeBox(jwt, id) {
     const options = {
-      method: 'DELETE',
+      method: "DELETE"
     };
 
     return super.authFetch(`${super.endpoint}/boxes/${id}`, jwt, options);
@@ -91,14 +96,18 @@ class Box extends Base {
 
   static invite(jwt, id, email) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email })
     };
 
-    return super.authFetch(`${super.endpoint}/boxes/${id}/invite`, jwt, options);
+    return super.authFetch(
+      `${super.endpoint}/boxes/${id}/invite`,
+      jwt,
+      options
+    );
   }
 
   // static getFoodsInBox(jwt, boxId) {
@@ -123,7 +132,7 @@ class Box extends Base {
       name: this.name,
       notice: this.notice,
       owner: this.owner,
-      updatedAt: this.updatedAt,
+      updatedAt: this.updatedAt
     };
   }
 }
@@ -136,10 +145,10 @@ Box.emptyParams = {
   image_url: null,
   invited_users: [],
   is_invited: false,
-  name: '',
-  notice: '',
+  name: "",
+  notice: "",
   owner: User.emptyParams,
-  updated_At: null,
+  updated_At: null
 };
 
 export default Box;

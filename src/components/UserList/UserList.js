@@ -12,10 +12,6 @@ class UserList extends Component {
     onLoad();
   }
 
-  static renderChecked(isChecked) {
-    return isChecked ? <FontAwesomeIcon icon={faPen} /> : <div />;
-  }
-
   render() {
     const { users } = this.props;
 
@@ -37,8 +33,10 @@ class UserList extends Component {
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{this.renderChecked(user.disabled)}</td>
-              <td>{this.renderChecked(user.admin)}</td>
+              <td>
+                {user.disabled ? <FontAwesomeIcon icon={faPen} /> : <div />}
+              </td>
+              <td>{user.admin ? <FontAwesomeIcon icon={faPen} /> : <div />}</td>
               <td>{user.provider}</td>
               <td>{user.createdAt.format("YYYY/MM/DD HH:mm:ss")}</td>
               <td>{user.updatedAt.format("YYYY/MM/DD HH:mm:ss")}</td>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 class UserList extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class UserList extends Component {
     const { users } = this.props;
 
     return (
-      <Table>
+      <Table responsive>
         <thead>
           <tr>
             <td>表示名</td>
@@ -34,9 +34,11 @@ class UserList extends Component {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                {user.disabled ? <FontAwesomeIcon icon={faPen} /> : <div />}
+                {user.disabled ? <FontAwesomeIcon icon={faCheck} /> : <div />}
               </td>
-              <td>{user.admin ? <FontAwesomeIcon icon={faPen} /> : <div />}</td>
+              <td>
+                {user.admin ? <FontAwesomeIcon icon={faCheck} /> : <div />}
+              </td>
               <td>{user.provider}</td>
               <td>{user.createdAt.format("YYYY/MM/DD HH:mm:ss")}</td>
               <td>{user.updatedAt.format("YYYY/MM/DD HH:mm:ss")}</td>

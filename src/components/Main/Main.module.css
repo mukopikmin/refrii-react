@@ -24,6 +24,10 @@
     width: calc(100% - 340px);
 }
 
+.sidebar-content {
+    padding-top: 80px;
+}
+
 @media(max-width:800px) {
     .left {
         display: none;

@@ -3,6 +3,9 @@ import { PropTypes } from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import logo from "../../assets/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faCog } from "@fortawesome/free-solid-svg-icons";
+import styles from "./Header.module.css";
 
 class Header extends Component {
   constructor(props) {
@@ -86,43 +89,41 @@ class Header extends Component {
       <div>
         <Navbar bg="light" expand="lg" fixed="top">
           <Container>
-            <Navbar.Brand onClick={this.toRoot}>
-              <img
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-                src={logo}
-                alt=""
-              />
+            <Navbar.Brand>
+              <div className={styles.logo}>
+                <img
+                  width="30"
+                  height="30"
+                  className="d-inline-block align-top"
+                  src={logo}
+                  alt=""
+                  onClick={this.toRoot}
+                />
+              </div>
+              <div className={styles.sidebar}>
+                <FontAwesomeIcon icon={faBars} onClick={toggleSidebar} />
+              </div>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto" align="right">
-                <Nav.Link onClick={toggleSidebar}>toggle</Nav.Link>
-                <Nav.Link onClick={this.toRoot}>一覧</Nav.Link>
-                {session.user.admin && (
-                  <Nav.Link onClick={this.toAdmin}>管理</Nav.Link>
-                )}
-                <NavDropdown title="メニュー" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={this.toRoot}>
-                    食材一覧を表示
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.reload}>
-                    再読込
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.toSetting}>
-                    設定
-                  </NavDropdown.Item>
-                  {this.renderAdminMenu()}
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={signout}>
-                    <span>ログアウト</span>
-                    <br />
-                    <small>{`${session.user.name} としてログインしています`}</small>
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
+            <Nav>
+              <NavDropdown title={<FontAwesomeIcon icon={faCog} />} drop="down">
+                <NavDropdown.Item onClick={this.toRoot}>
+                  食材一覧を表示
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={this.reload}>
+                  再読込
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={this.toSetting}>
+                  設定
+                </NavDropdown.Item>
+                {this.renderAdminMenu()}
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={signout}>
+                  <span>ログアウト</span>
+                  <br />
+                  <small>{`${session.user.name} としてログインしています`}</small>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
           </Container>
         </Navbar>
       </div>

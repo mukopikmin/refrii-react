@@ -1,0 +1,19 @@
+@media(max-width:800px) {
+  .logo {
+      display: none;
+  }
+
+  .sidebar {
+    display: block
+  }
+}
+
+@media (min-width: 801px) {
+  .sidebar {
+      display: none;
+  }
+
+  .logo {
+    display: block
+  }
+}

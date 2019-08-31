@@ -46,11 +46,14 @@ class Main extends Component {
       <div>
         <div className={styles.sidebar}>
           <Sidebar
-            sidebar={<BoxList />}
+            sidebar={
+              <div className={styles.sidebarContent}>
+                <BoxList />
+              </div>
+            }
             styles={sidebarStyles}
             open={sidebarOpen}
             onSetOpen={this.toggleSidebar}
-            pullRight
           >
             <div />
           </Sidebar>

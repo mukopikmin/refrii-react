@@ -32,18 +32,18 @@ class Landing extends Component {
       <div className={styles.background}>
         <div className={styles.whiten}>
           <Container>
-            <Navbar bg="transparent" expand="lg">
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse
-                id="basic-navbar-nav"
-                className="justify-content-end"
-              >
-                <Nav>
+            <Navbar
+              bg="transparent"
+              expand="lg"
+              className="justify-content-end"
+            >
+              <Nav>
+                <Nav.Item>
                   <Nav.Link onClick={this.toPrivacyPolicy}>
-                    <span className={styles.header}>プライバシーポリシー</span>
+                    <div className={styles.header}>プライバシーポリシー</div>
                   </Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
+                </Nav.Item>
+              </Nav>
             </Navbar>
 
             <div className={styles.content}>

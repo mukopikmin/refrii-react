@@ -13,7 +13,7 @@ import "babel-polyfill";
 import "moment/locale/ja";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import App from "./components/App";
+import App from "./pages/App";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
 import "./index.css";

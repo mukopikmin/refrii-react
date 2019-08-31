@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
-import Header from "../Header";
-import UserList from "../UserList";
+import Header from "../../components/Header";
+import UserList from "../../components/UserList";
 import styles from "./Admin.module.css";
 
 class Admin extends Component {

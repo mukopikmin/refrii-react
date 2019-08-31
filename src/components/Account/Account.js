@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
+import { Table, Button, Form } from "react-bootstrap";
 
-import Header from "../../components/Header";
-import UnitList from "../../components/UnitList";
-import Account from "../../components/Account";
-import styles from "./Setting.module.css";
-
-class Setting extends Component {
+class Account extends Component {
   constructor(props) {
     super(props);
 
@@ -21,9 +16,8 @@ class Setting extends Component {
   }
 
   componentDidMount() {
-    const { fetchUnits, session } = this.props;
+    const { session } = this.props;
 
-    fetchUnits();
     fetch(session.user.avatarUrl)
       .then(response => response.blob())
       .then(blob => this.generateBase64(blob));
@@ -66,20 +60,47 @@ class Setting extends Component {
   }
 
   render() {
-    const { units, session } = this.props;
+    const { session } = this.props;
+    const { user } = session;
+    const { name } = this.state;
 
     return (
       <div>
-        <Header />
-        <div className={styles.content}>
-          <Container>
-            <Account session={session} />
-            <UnitList units={units} />
-          </Container>
-        </div>
+        <Table>
+          <tbody>
+            <tr>
+              <td>アイコン</td>
+              <td>
+                <img src={user.avatarUrl} alt="" width="100px" />
+                <Form.Control type="file" onChange={this.onAvatarChange} />
+              </td>
+            </tr>
+            <tr>
+              <td>ユーザー名</td>
+              <td>
+                <Form.Control
+                  type="text"
+                  onChange={this.onNameChange}
+                  value={name}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>メールアドレス</td>
+              <td>{user.email}</td>
+            </tr>
+            <tr>
+              <td>認証サービス</td>
+              <td>{user.provider}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Button variant="primary" onClick={this.updateUser}>
+          更新
+        </Button>
       </div>
     );
   }
 }
 
-export default Setting;
+export default Account;

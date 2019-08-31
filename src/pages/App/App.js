@@ -3,14 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 
-import Landing from "../Landing";
-import SignUp from "../SignUp";
+import Landing from "../../components/Landing";
+import SignUp from "../../components/SignUp";
 import Admin from "../Admin";
-import PrivacyPolicy from "../PrivacyPolicy";
+import PrivacyPolicy from "../../components/PrivacyPolicy";
 import Main from "../Main";
 import Setting from "../Setting";
 import styles from "./App.module.css";
-import Notification from "../Notification";
+import Notification from "../../components/Notification";
 
 class App extends Component {
   render() {

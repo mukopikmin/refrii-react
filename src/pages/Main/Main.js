@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import Sidebar from "react-sidebar";
-import BoxInfo from "../BoxInfo";
-import BoxList from "../BoxList";
-import FoodList from "../FoodList";
-import Header from "../Header";
+import BoxInfo from "../../components/BoxInfo";
+import BoxList from "../../components/BoxList";
+import FoodList from "../../components/FoodList";
+import Header from "../../components/Header";
 import styles from "./Main.module.css";
 
 class Main extends Component {

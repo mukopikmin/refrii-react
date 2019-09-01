@@ -68,10 +68,10 @@ class Main extends Component {
         </div>
         <div className={styles.content}>
           <Container>
-            <div sm={4} className={styles.left}>
+            <div className={styles.left}>
               <BoxList />
             </div>
-            <div sm={8} className={styles.right}>
+            <div className={styles.right}>
               {this.renderBoxInfo()}
               <div className={styles.list}>
                 <FoodList />

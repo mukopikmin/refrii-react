@@ -1,13 +1,10 @@
 import { connect } from "react-redux";
 import UnitList from "./UnitList";
-import actions from "../../actions";
 
 const mapStateToProps = (state, ownProps) => ({
-  units: ownProps.units
+  units: state.unit.list
 });
-const mapDispatchToProps = dispatch => ({
-  fetchUnits: () => dispatch(actions.requestListUnit())
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,

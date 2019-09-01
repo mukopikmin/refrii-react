@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import BoxInfo from "./BoxInfo";
 
 const mapStateToProps = (state, ownProps) => ({
-  box: ownProps.box
+  box: state.box.target
 });
 const mapDispatchToProps = () => ({});
 

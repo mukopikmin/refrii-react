@@ -19,12 +19,6 @@ class BoxList extends Component {
     this.add = this.add.bind(this);
   }
 
-  componentDidMount() {
-    const { onLoad } = this.props;
-
-    onLoad();
-  }
-
   getOwnBoxes() {
     const { boxes } = this.props;
 

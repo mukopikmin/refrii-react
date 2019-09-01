@@ -18,6 +18,10 @@ class Main extends Component {
     this.toggleSidebar = this.toggleSidebar.bind(this);
   }
 
+  componentDidMount() {
+    this.props.onLoad();
+  }
+
   toggleSidebar() {
     this.setState(pre => ({
       ...pre,

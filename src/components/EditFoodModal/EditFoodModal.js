@@ -10,8 +10,6 @@ class EditFoodModal extends Component {
   constructor(props) {
     super(props);
 
-    const { onLoad } = this.props;
-
     this.onNameChange = this.onNameChange.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
     this.onUnitChange = this.onUnitChange.bind(this);
@@ -20,13 +18,10 @@ class EditFoodModal extends Component {
     this.onNeedsAddingChange = this.onNeedsAddingChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
-    // this.close = this.close.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.remove = this.remove.bind(this);
 
     this.state = Food.mock().toJson();
-
-    onLoad();
   }
 
   onNameChange(e) {

@@ -6,14 +6,12 @@ import confirm from "../ConfirmDialog";
 
 const mapStateToProps = (state, ownProps) => ({
   units: state.unit.list,
-  boxes: state.box.list,
   open: ownProps.open,
   box: ownProps.box,
   food: ownProps.food,
   close: ownProps.close
 });
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(actions.requestListUnit()),
   create: params => dispatch(actions.requestCreateFood(params)),
   update: params => dispatch(actions.requestUpdateFood(params)),
   remove: food => {

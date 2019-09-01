@@ -29,7 +29,7 @@ class Base {
 
 Base.endpoint =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
+    ? "https://staging.api.refrii.com"
     : "https://api.refrii.com";
 
 export default Base;

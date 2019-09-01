@@ -73,7 +73,7 @@ class FoodList extends Component {
   }
 
   render() {
-    const { box, foods } = this.props;
+    const { box, foods, boxes, units } = this.props;
     const { editModalOpen, food, amountModalOpen } = this.state;
 
     if (!box) {
@@ -91,6 +91,8 @@ class FoodList extends Component {
           </p>
 
           <EditFoodModal
+            units={units}
+            boxes={boxes}
             open={editModalOpen}
             close={this.closeEdit}
             food={food}
@@ -128,6 +130,7 @@ class FoodList extends Component {
         </ListGroup>
 
         <EditFoodModal
+          units={units}
           open={editModalOpen}
           close={this.closeEdit}
           food={food}

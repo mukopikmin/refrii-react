@@ -3,7 +3,7 @@ import Account from "./Account";
 import actions from "../../actions";
 
 const mapStateToProps = (state, ownProps) => ({
-  session: ownProps.session
+  session: state.user.session
 });
 const mapDispatchToProps = dispatch => ({
   updateUser: (id, name, avatar) =>

@@ -4,7 +4,8 @@ import FoodList from "./FoodList";
 const mapStateToProps = state => ({
   boxes: state.box.list,
   foods: state.food.list,
-  box: state.box.target
+  box: state.box.target,
+  units: state.unit.list
 });
 
 const mapDispatchToProps = () => ({});

@@ -14,19 +14,23 @@ class Notice extends Base {
     this.updatedUser = new User(params.updated_user);
   }
 
-  static create(jwt, foodId, body) {
+  static create(jwt, params) {
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        text: body.text
+        text: params.text
       })
     };
 
     return super
-      .authFetch(`${super.endpoint}/foods/${foodId}/notices`, jwt, options)
+      .authFetch(
+        `${super.endpoint}/foods/${params.foodId}/notices`,
+        jwt,
+        options
+      )
       .then(response => response.json())
       .then(food => new Food(food));
   }

@@ -65,11 +65,11 @@ function* handleRequestRemoveFood(action) {
 
 function* handleRequestCreateNoticeFood(action) {
   try {
-    const { foodId, body } = action.payload;
+    const { params } = action.payload;
     const session = yield select(selectors.getSession);
-    const food = yield call(Notice.craete, session.jwt, foodId, body);
+    const food = yield call(Notice.create, session.jwt, params);
 
-    yield put(actions.receiveRequestCreateNoticeFood(food));
+    yield put(actions.receiveCreateNoticeFood(food));
     yield put(actions.showNotification(`${food.name} にメモを追加しました`));
   } catch (error) {
     yield put(actions.failedCreateNoticeFood(error));

@@ -184,6 +184,7 @@ class FoodList extends Component {
           close={this.closeAmountModal}
         />
         <NoticesModal
+          food={food}
           open={noticesModalOpen}
           title={food ? food.name : null}
           notices={food ? food.notices : null}

@@ -57,7 +57,7 @@ export default handleActions(
       const { food } = action.payload;
       const index = list.map(f => f.id).indexOf(food.id);
 
-      list[index] = food;
+      list[index].notices = food.notices;
 
       return {
         ...state,

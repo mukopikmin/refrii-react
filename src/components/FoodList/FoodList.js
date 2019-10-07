@@ -92,21 +92,8 @@ class FoodList extends Component {
     }));
   }
 
-  renderNotices(food) {
-    if (food.notices.length > 0) {
-      return (
-        <span>
-          <FontAwesomeIcon
-            onClick={() => this.showNotices(food)}
-            className={styles.icon}
-            icon={faCommentAlt}
-          />
-          <span>{food.notices.length}</span>
-        </span>
-      );
-    }
-
-    return <div></div>;
+  renderNoticesCount(notices) {
+    return notices.length > 0 ? notices.length : "";
   }
 
   render() {
@@ -153,7 +140,13 @@ class FoodList extends Component {
                 {foodInBox.name}
               </div>
               <div className={styles.detail}>
-                {this.renderNotices(foodInBox)}
+                <span onClick={() => this.showNotices(foodInBox)}>
+                  <FontAwesomeIcon
+                    className={styles.icon}
+                    icon={faCommentAlt}
+                  />
+                  <span>{this.renderNoticesCount(foodInBox.notices)}</span>
+                </span>
                 <FontAwesomeIcon className={styles.icon} icon={faCubes} />
                 <span>{`${foodInBox.amount} ${foodInBox.unit.label}`}</span>
                 <FontAwesomeIcon

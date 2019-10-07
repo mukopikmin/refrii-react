@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
   close: ownProps.close
 });
 const mapDispatchToProps = dispatch => ({
-  create: params => dispatch(actions.requestCreateNoticeFood(params))
+  create: params => dispatch(actions.requestCreateNoticeFood(params)),
+  remove: id => dispatch(actions.requestRemoveNoticeFood(id))
 });
 
 export default connect(

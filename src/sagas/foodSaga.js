@@ -77,10 +77,25 @@ function* handleRequestCreateNoticeFood(action) {
   }
 }
 
+function* handleRequestRemoveNoticeFood(action) {
+  try {
+    const { params } = action.payload;
+    const session = yield select(selectors.getSession);
+    const food = yield call(Notice.remove, session.jwt, params);
+
+    yield put(actions.receiveRemoveNoticeFood(params));
+    yield put(actions.showNotification(`${food.name} のメモを削除しました`));
+  } catch (error) {
+    yield put(actions.failedRemoveNoticeFood(error));
+    yield fork(handleError, error);
+  }
+}
+
 export default [
   takeLatest(types.FOOD.LIST.REQUEST, handleRequestListFood),
   takeLatest(types.FOOD.CREATE.REQUEST, handleRequestCreateFood),
   takeLatest(types.FOOD.UPDATE.REQUEST, handleRequestUpdateFood),
   takeLatest(types.FOOD.REMOVE.REQUEST, handleRequestRemoveFood),
-  takeLatest(types.FOOD.NOTICE.CREATE.REQUEST, handleRequestCreateNoticeFood)
+  takeLatest(types.FOOD.NOTICE.CREATE.REQUEST, handleRequestCreateNoticeFood),
+  takeLatest(types.FOOD.NOTICE.REMOVE.REQUEST, handleRequestRemoveNoticeFood)
 ];

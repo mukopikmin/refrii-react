@@ -34,6 +34,18 @@ class Notice extends Base {
       .then(response => response.json())
       .then(food => new Food(food));
   }
+
+  static remove(jwt, params) {
+    const options = {
+      method: "DELETE"
+    };
+
+    return super.authFetch(
+      `${super.endpoint}/foods/${params.foodId}/notices/${params.id}`,
+      jwt,
+      options
+    );
+  }
 }
 
 Notice.emptyParams = {

@@ -19,8 +19,7 @@ export default handleActions(
     [types.FOOD.CREATE.REQUEST]: state => ({ ...state }),
     [types.FOOD.CREATE.RECEIVE]: (state, action) => ({
       ...state,
-      list: state.list.concat([action.payload.food]),
-      isNewFoodModalOpen: false
+      list: state.list.concat([action.payload.food])
     }),
     [types.FOOD.CREATE.FAILED]: (state, action) => ({
       ...state,
@@ -36,9 +35,7 @@ export default handleActions(
 
       return {
         ...state,
-        list,
-        isEditFoodModalOpen: false,
-        isAmountFoodModalOpen: false
+        list
       };
     },
     [types.FOOD.UPDATE.FAILED]: (state, action) => ({
@@ -48,8 +45,7 @@ export default handleActions(
     [types.FOOD.REMOVE.REQUEST]: state => ({ ...state }),
     [types.FOOD.REMOVE.RECEIVE]: (state, action) => ({
       ...state,
-      list: state.list.filter(food => food.id !== action.payload.food.id),
-      isEditFoodModalOpen: false
+      list: state.list.filter(food => food.id !== action.payload.food.id)
     }),
     [types.FOOD.REMOVE.FAILED]: (state, action) => ({
       ...state,
@@ -65,12 +61,29 @@ export default handleActions(
 
       return {
         ...state,
-        list,
-        isEditFoodModalOpen: false,
-        isAmountFoodModalOpen: false
+        list
       };
     },
     [types.FOOD.NOTICE.CREATE.FAILED]: (state, action) => ({
+      ...state,
+      error: action.payload.error
+    }),
+    [types.FOOD.NOTICE.REMOVE.REQUEST]: state => ({ ...state }),
+    [types.FOOD.NOTICE.REMOVE.RECEIVE]: (state, action) => {
+      const { params } = action.payload;
+      const list = state.list.concat([]);
+      const index = list.map(f => f.id).indexOf(params.foodId);
+
+      list[index].notices = list[index].notices.filter(notice => {
+        return notice.id === params.id;
+      });
+
+      return {
+        ...state,
+        list
+      };
+    },
+    [types.FOOD.NOTICE.REMOVE.FAILED]: (state, action) => ({
       ...state,
       error: action.payload.error
     })

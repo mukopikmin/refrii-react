@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Form, Button, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import Food from "../../models/food";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NoticesDialog.module.css";
 
 class NoticesModal extends Component {
@@ -15,7 +14,8 @@ class NoticesModal extends Component {
 
     this.onTextChange = this.onTextChange.bind(this);
     this.onOpened = this.onOpened.bind(this);
-    this.submit = this.submit.bind(this);
+    this.createNotice = this.createNotice.bind(this);
+    this.removeNotice = this.removeNotice.bind(this);
   }
 
   onOpened() {
@@ -30,13 +30,22 @@ class NoticesModal extends Component {
     this.setState({ text });
   }
 
-  submit() {
+  createNotice() {
     const { create, food } = this.props;
     const { text } = this.state;
 
     create({
       foodId: food.id,
       text: text
+    });
+  }
+
+  removeNotice(id) {
+    const { remove, food } = this.props;
+
+    remove({
+      foodId: food.id,
+      id
     });
   }
 
@@ -56,10 +65,21 @@ class NoticesModal extends Component {
         <Modal.Body>
           {notices.map((notice, idx) => {
             return (
-              <div key={idx}>
-                <p>{notice.text}</p>
-                <p className={styles.timestamp}>{notice.createdAt}</p>
-              </div>
+              <Row>
+                <Col xs={11}>
+                  <div key={idx}>
+                    <p>{notice.text}</p>
+                    <p className={styles.timestamp}>{notice.createdAt}</p>
+                  </div>
+                </Col>
+                <Col xs={1}>
+                  <FontAwesomeIcon
+                    className={styles.trashIcon}
+                    icon={faTrashAlt}
+                    onClick={() => this.removeNotice(notice.id)}
+                  />
+                </Col>
+              </Row>
             );
           })}
           <Form.Control
@@ -69,8 +89,8 @@ class NoticesModal extends Component {
             onChange={this.onTextChange}
           />
           <Button
-            className={styles.submit}
-            onClick={this.submit}
+            className={styles.createNotice}
+            onClick={this.createNotice}
             block
             variant="outline-primary"
           >

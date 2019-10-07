@@ -13,6 +13,5 @@ export default createActions({
   [types.UNIT.UPDATE.FAILED]: error => ({ error }),
   [types.UNIT.REMOVE.REQUEST]: unit => ({ unit }),
   [types.UNIT.REMOVE.RECEIVE]: id => ({ id }),
-  [types.UNIT.REMOVE.FAILED]: error => ({ error }),
-  [types.UNIT.SET_PARAMS]: unit => ({ unit })
+  [types.UNIT.REMOVE.FAILED]: error => ({ error })
 });

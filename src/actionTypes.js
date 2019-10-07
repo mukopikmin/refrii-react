@@ -47,6 +47,13 @@ export default {
       REQUEST: "REQUEST_REMOVE_FOOD",
       RECEIVE: "RECEIVE_REMOVE_FOOD",
       FAILED: "FAILED_REMOVE_FOOD"
+    },
+    NOTICE: {
+      CREATE: {
+        REQUEST: "REQUEST_CREATE_NOTICE_FOOD",
+        RECEIVE: "RECEIVE_CREATE_NOTICE_FOOD",
+        FAILED: "FAILED_CREATE_NOTICE_FOOD"
+      }
     }
   },
   UNIT: {

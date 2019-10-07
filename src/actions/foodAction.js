@@ -14,5 +14,7 @@ export default createActions({
   [types.FOOD.REMOVE.REQUEST]: food => ({ food }),
   [types.FOOD.REMOVE.RECEIVE]: food => ({ food }),
   [types.FOOD.REMOVE.FAILED]: error => ({ error }),
-  [types.FOOD.SET_PARAMS]: food => ({ food })
+  [types.FOOD.NOTICE.CREATE.REQUEST]: notice => ({ notice }),
+  [types.FOOD.NOTICE.CREATE.RECEIVE]: food => ({ food }),
+  [types.FOOD.NOTICE.CREATE.FAILED]: error => ({ error })
 });

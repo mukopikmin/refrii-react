@@ -4,6 +4,7 @@ import Base from "./base";
 import Unit from "./unit";
 import User from "./user";
 import Box from "./box";
+import Notice from "./notice";
 
 class Food extends Base {
   constructor(params) {
@@ -17,8 +18,7 @@ class Food extends Base {
     this.id = params.id;
     this.imageUrl = params.image_url;
     this.name = params.name;
-    this.needsAdding = params.needs_adding;
-    this.notice = params.notice;
+    this.notices = params.notices.map(notice => new Notice(notice));
     this.unit = new Unit(params.unit);
     this.updatedAt = moment(params.updated_at);
     this.boxId = params.box.id;
@@ -115,11 +115,10 @@ Food.emptyParams = {
   id: 0,
   image_url: null,
   name: "",
-  needs_adding: false,
-  notice: "",
   unit: Unit.emptyParams,
   updated_at: null,
-  box: Box.emptyParams
+  box: Box.emptyParams,
+  notices: []
 };
 
 export default Food;

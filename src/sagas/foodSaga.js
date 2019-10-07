@@ -4,7 +4,7 @@ import types from "../actionTypes";
 import actions from "../actions";
 import selectors from "../selectors";
 import Food from "../models/food";
-// import Box from '../models/box';
+import Notice from "../models/notice";
 import handleError from "./handleErrors";
 
 function* handleRequestListFood() {
@@ -13,7 +13,7 @@ function* handleRequestListFood() {
     const foods = yield call(Food.getFoods, session.jwt);
     yield put(actions.receiveListFood(foods));
   } catch (error) {
-    yield put(actions.failedCreateFood(error));
+    yield put(actions.failedListFood(error));
     yield fork(handleError, error);
   }
 }
@@ -63,9 +63,24 @@ function* handleRequestRemoveFood(action) {
   }
 }
 
+function* handleRequestCreateNoticeFood(action) {
+  try {
+    const { foodId, body } = action.payload;
+    const session = yield select(selectors.getSession);
+    const food = yield call(Notice.craete, session.jwt, foodId, body);
+
+    yield put(actions.receiveRequestCreateNoticeFood(food));
+    yield put(actions.showNotification(`${food.name} にメモを追加しました`));
+  } catch (error) {
+    yield put(actions.failedCreateNoticeFood(error));
+    yield fork(handleError, error);
+  }
+}
+
 export default [
   takeLatest(types.FOOD.LIST.REQUEST, handleRequestListFood),
   takeLatest(types.FOOD.CREATE.REQUEST, handleRequestCreateFood),
   takeLatest(types.FOOD.UPDATE.REQUEST, handleRequestUpdateFood),
-  takeLatest(types.FOOD.REMOVE.REQUEST, handleRequestRemoveFood)
+  takeLatest(types.FOOD.REMOVE.REQUEST, handleRequestRemoveFood),
+  takeLatest(types.FOOD.NOTICE.CREATE.REQUEST, handleRequestCreateNoticeFood)
 ];

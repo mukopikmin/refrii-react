@@ -14,8 +14,6 @@ class EditFoodModal extends Component {
     this.onAmountChange = this.onAmountChange.bind(this);
     this.onUnitChange = this.onUnitChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
-    this.onNoticeChange = this.onNoticeChange.bind(this);
-    this.onNeedsAddingChange = this.onNeedsAddingChange.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.onOpened = this.onOpened.bind(this);
@@ -44,19 +42,6 @@ class EditFoodModal extends Component {
 
   onDateChange(date) {
     this.setState({ expirationDate: date });
-  }
-
-  onNoticeChange(e) {
-    const notice = e.target.value;
-
-    this.setState({ notice });
-  }
-
-  onNeedsAddingChange() {
-    this.setState(prev => ({
-      ...prev,
-      needsAdding: !prev.needsAdding
-    }));
   }
 
   onOpened() {
@@ -123,7 +108,7 @@ class EditFoodModal extends Component {
 
   render() {
     const { units, open, close } = this.props;
-    const { name, amount, expirationDate, notice, unit } = this.state;
+    const { name, amount, expirationDate, unit } = this.state;
 
     return (
       <Modal show={open} onShow={this.onOpened} onHide={close}>
@@ -172,15 +157,6 @@ class EditFoodModal extends Component {
                 customInput={<input type="text" />}
                 selected={moment(expirationDate).toDate()}
                 onChange={this.onDateChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>メモ</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows="5"
-                value={notice}
-                onChange={this.onNoticeChange}
               />
             </Form.Group>
           </Form>

@@ -54,6 +54,25 @@ export default handleActions(
     [types.FOOD.REMOVE.FAILED]: (state, action) => ({
       ...state,
       error: action.payload.error
+    }),
+    [types.FOOD.NOTICE.CREATE.REQUEST]: state => ({ ...state }),
+    [types.FOOD.NOTICE.CREATE.RECEIVE]: (state, action) => {
+      const list = state.list.concat([]);
+      const { food } = action.payload;
+      const index = list.map(f => f.id).indexOf(food.id);
+
+      list[index] = food;
+
+      return {
+        ...state,
+        list,
+        isEditFoodModalOpen: false,
+        isAmountFoodModalOpen: false
+      };
+    },
+    [types.FOOD.NOTICE.CREATE.FAILED]: (state, action) => ({
+      ...state,
+      error: action.payload.error
     })
   },
   initialState

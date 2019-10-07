@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCubes,
   faCalendarCheck,
+  faCommentAlt,
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../Spinner";
 import styles from "./FoodList.module.css";
 import EditFoodModal from "../EditFoodModal";
 import EditAmountModal from "../EditAmountModal";
+import NoticesModal from "../NoticesModal";
 
 class FoodList extends Component {
   constructor(props) {
@@ -18,14 +20,16 @@ class FoodList extends Component {
     this.state = {
       editModalOpen: false,
       amountModalOpen: false,
+      noticestModalOpen: false,
       food: null,
       box: null
     };
 
     this.add = this.add.bind(this);
     this.edit = this.edit.bind(this);
-    this.closeEdit = this.closeEdit.bind(this);
+    this.closeEditModal = this.closeEditModal.bind(this);
     this.closeAmountModal = this.closeAmountModal.bind(this);
+    this.closeNoticesModal = this.closeNoticesModal.bind(this);
   }
 
   add() {
@@ -48,7 +52,7 @@ class FoodList extends Component {
     }));
   }
 
-  closeEdit() {
+  closeEditModal() {
     this.setState(pre => ({
       ...pre,
       editModalOpen: false,
@@ -72,9 +76,47 @@ class FoodList extends Component {
     }));
   }
 
+  showNotices(food) {
+    this.setState(pre => ({
+      ...pre,
+      noticesModalOpen: true,
+      food
+    }));
+  }
+
+  closeNoticesModal() {
+    this.setState(pre => ({
+      ...pre,
+      noticesModalOpen: false,
+      food: null
+    }));
+  }
+
+  renderNotices(food) {
+    if (food.notices.length > 0) {
+      return (
+        <span>
+          <FontAwesomeIcon
+            onClick={() => this.showNotices(food)}
+            className={styles.icon}
+            icon={faCommentAlt}
+          />
+          <span>{food.notices.length}</span>
+        </span>
+      );
+    }
+
+    return <div></div>;
+  }
+
   render() {
     const { box, foods, boxes, units } = this.props;
-    const { editModalOpen, food, amountModalOpen } = this.state;
+    const {
+      editModalOpen,
+      food,
+      amountModalOpen,
+      noticesModalOpen
+    } = this.state;
 
     if (!box) {
       return <Spinner loading />;
@@ -94,7 +136,7 @@ class FoodList extends Component {
             units={units}
             boxes={boxes}
             open={editModalOpen}
-            close={this.closeEdit}
+            close={this.closeEditModal}
             food={food}
             box={box}
           />
@@ -106,13 +148,12 @@ class FoodList extends Component {
       <div>
         <ListGroup>
           {box.getFoods(foods).map(foodInBox => (
-            <ListGroup.Item
-              action
-              onClick={() => this.editAmount(foodInBox)}
-              key={foodInBox.id}
-            >
-              <span>{foodInBox.name}</span>
+            <ListGroup.Item action key={foodInBox.id}>
+              <div onClick={() => this.editAmount(foodInBox)}>
+                {foodInBox.name}
+              </div>
               <div className={styles.detail}>
+                {this.renderNotices(foodInBox)}
                 <FontAwesomeIcon className={styles.icon} icon={faCubes} />
                 <span>{`${foodInBox.amount} ${foodInBox.unit.label}`}</span>
                 <FontAwesomeIcon
@@ -132,7 +173,7 @@ class FoodList extends Component {
         <EditFoodModal
           units={units}
           open={editModalOpen}
-          close={this.closeEdit}
+          close={this.closeEditModal}
           food={food}
           box={box}
         />
@@ -141,6 +182,12 @@ class FoodList extends Component {
           edit={this.edit}
           food={food}
           close={this.closeAmountModal}
+        />
+        <NoticesModal
+          open={noticesModalOpen}
+          title={food ? food.name : null}
+          notices={food ? food.notices : null}
+          close={this.closeNoticesModal}
         />
       </div>
     );

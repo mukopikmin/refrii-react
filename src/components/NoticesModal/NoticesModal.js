@@ -38,6 +38,10 @@ class NoticesModal extends Component {
       foodId: food.id,
       text: text
     });
+
+    this.setState({
+      text: ""
+    });
   }
 
   removeNotice(id) {

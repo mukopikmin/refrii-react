@@ -70,12 +70,13 @@ export default handleActions(
     }),
     [types.FOOD.NOTICE.REMOVE.REQUEST]: state => ({ ...state }),
     [types.FOOD.NOTICE.REMOVE.RECEIVE]: (state, action) => {
-      const { params } = action.payload;
+      const { id } = action.payload;
       const list = state.list.concat([]);
-      const index = list.map(f => f.id).indexOf(params.foodId);
+      const food = list.find(f => f.notices.map(n => n.id).includes(id));
+      const index = list.map(f => f.id).indexOf(food.id);
 
       list[index].notices = list[index].notices.filter(notice => {
-        return notice.id === params.id;
+        return notice.id !== id;
       });
 
       return {

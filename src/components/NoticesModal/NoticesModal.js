@@ -45,12 +45,9 @@ class NoticesModal extends Component {
   }
 
   removeNotice(id) {
-    const { remove, food } = this.props;
+    const { remove } = this.props;
 
-    remove({
-      foodId: food.id,
-      id
-    });
+    remove(id);
   }
 
   render() {
@@ -69,9 +66,9 @@ class NoticesModal extends Component {
         <Modal.Body>
           {notices.map((notice, idx) => {
             return (
-              <Row>
+              <Row key={idx}>
                 <Col xs={11}>
-                  <div key={idx}>
+                  <div>
                     <p>{notice.text}</p>
                     <p className={styles.timestamp}>{notice.createdAt}</p>
                   </div>

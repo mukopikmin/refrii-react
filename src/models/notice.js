@@ -35,16 +35,12 @@ class Notice extends Base {
       .then(food => new Food(food));
   }
 
-  static remove(jwt, params) {
+  static remove(jwt, id) {
     const options = {
       method: "DELETE"
     };
 
-    return super.authFetch(
-      `${super.endpoint}/foods/${params.foodId}/notices/${params.id}`,
-      jwt,
-      options
-    );
+    return super.authFetch(`${super.endpoint}/notices/${id}`, jwt, options);
   }
 }
 

@@ -17,7 +17,7 @@ export default createActions({
   [types.FOOD.NOTICE.CREATE.REQUEST]: params => ({ params }),
   [types.FOOD.NOTICE.CREATE.RECEIVE]: food => ({ food }),
   [types.FOOD.NOTICE.CREATE.FAILED]: error => ({ error }),
-  [types.FOOD.NOTICE.REMOVE.REQUEST]: params => ({ params }),
-  [types.FOOD.NOTICE.REMOVE.RECEIVE]: params => ({ params }),
+  [types.FOOD.NOTICE.REMOVE.REQUEST]: id => ({ id }),
+  [types.FOOD.NOTICE.REMOVE.RECEIVE]: id => ({ id }),
   [types.FOOD.NOTICE.REMOVE.FAILED]: error => ({ error })
 });

@@ -1,59 +1,32 @@
 {
-  "name": "refrii",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://refrii.com",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.6",
-    "@fortawesome/free-brands-svg-icons": "^5.9.0",
-    "@fortawesome/free-solid-svg-icons": "^5.4.1",
-    "@fortawesome/react-fontawesome": "^0.1.3",
-    "@react-firebase/auth": "^0.2.9",
-    "@ridi/object-case-converter": "^2.0.4",
-    "babel-polyfill": "^6.26.0",
-    "bootstrap": "^4.3.1",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "firebase": "^6.2.3",
-    "moment": "^2.22.2",
-    "prettier": "^1.18.2",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.0",
-    "react-bootstrap": "^1.0.0-beta.9",
-    "react-confirm": "^0.1.18",
-    "react-datepicker": "^2.7.0",
-    "react-dom": "^16.6.0",
-    "react-ga": "^2.5.3",
-    "react-redux": "^7.1.0",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.3.0",
-    "react-sidebar": "^3.0.2",
-    "redux": "^4.0.1",
-    "redux-actions": "^2.6.3",
-    "redux-logger": "^3.0.6",
-    "redux-persist": "^5.10.0",
-    "redux-saga": "^1.0.3"
-  },
+  "name": "with-typescript",
+  "version": "1.0.0",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && cp build/index.html build/404.html",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext js,jsx src",
-    "lint:fix": "eslint --fix --ext js,jsx src"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
+    "dayjs": "^1.9.6",
+    "dotenv-webpack": "^6.0.0",
+    "firebase": "^8.0.2",
+    "next": "latest",
+    "normalizr": "^3.6.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
-    "gh-pages": "^2.0.1"
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.11",
+    "@types/redux-logger": "^3.0.8",
+    "typescript": "4.0"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "license": "MIT"
 }

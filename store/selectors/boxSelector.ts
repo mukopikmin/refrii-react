@@ -1,6 +1,11 @@
-import { useSelector } from 'react-redux'
-import { BoxState } from '../slices/boxSlice'
+import { useSelector } from "react-redux";
+import { StoreState } from "../createStore";
+import { boxesAdapter, BoxState } from "../slices/boxSlice";
+
+export const boxSelector = boxesAdapter.getSelectors(
+  (state: StoreState) => state.box
+);
 
 export const useBoxState = () => {
-  return useSelector((state: { box: BoxState }) => state.box)
-}
+  return useSelector(boxSelector.selectAll);
+};

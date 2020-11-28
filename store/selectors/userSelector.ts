@@ -11,3 +11,6 @@ export const useUsersState = () =>
 
 export const useUserState = (id: number) =>
   useSelector((state: StoreState) => userSelector.selectById(state, id))
+
+export const useUserLoadingState = () =>
+  useSelector((state: StoreState) => state.user.loading)

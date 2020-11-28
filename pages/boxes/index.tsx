@@ -1,18 +1,27 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { AuthContext } from '../../components/Auth'
 import Layout from '../../components/Layout'
 import { fetchBoxes } from '../../store/effects/boxEffect'
 import BoxList from '../../components/BoxList'
 import React from 'react'
+import { useBoxLoadingState } from '../../store/selectors/boxSelector'
+import Loading from '../../components/Loading'
 
 const BoxesPage = () => {
   const dispatch = useDispatch()
-  const { currentUser } = useContext(AuthContext)
+  const loading = useBoxLoadingState()
 
   useEffect(() => {
     dispatch(fetchBoxes())
-  }, [currentUser])
+  }, [])
+
+  if (loading) {
+    return (
+      <Layout title="Home | Next.js + TypeScript Example">
+        <Loading />
+      </Layout>
+    )
+  }
 
   return (
     <Layout title="Home | Next.js + TypeScript Example">

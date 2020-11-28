@@ -4,9 +4,9 @@ export interface Box {
   id: number
   name: string
   notice: string
-  image_url: string | null
-  created_at: Date
-  updated_at: Date
+  imageUrl: string | null
+  createdAt: string
+  updatedAt: string
   is_invited: boolean
   owner: User
   invitations: Invitation[]
@@ -14,7 +14,7 @@ export interface Box {
 
 export interface Invitation {
   id: number
-  created_at: Date
-  updated_at: Date
+  createdAt: string
+  updatedAt: string
   user: User
 }

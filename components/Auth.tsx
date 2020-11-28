@@ -1,27 +1,31 @@
-import { User } from 'firebase';
-import { FC, createContext, useEffect, useState } from 'react';
-
-import firebase from '../utils/firebase';
+import { FC, createContext, useEffect, useState } from 'react'
+import firebaseUtil from '../utils/firebase'
 
 type AuthContextProps = {
-  currentUser: User | null | undefined
+  currentUser: firebaseUtil.User | null | undefined
 }
 
-const AuthContext = createContext<AuthContextProps>({ currentUser: undefined });
+const AuthContext = createContext<AuthContextProps>({ currentUser: undefined })
 
 const AuthProvider: FC = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | null | undefined>(
-    undefined
-  );
+  const [currentUser, setCurrentUser] = useState<
+    firebaseUtil.User | null | undefined
+  >(undefined)
 
   useEffect(() => {
-    // ログイン状態が変化するとfirebaseのauthメソッドを呼び出す
-    firebase.auth().onAuthStateChanged((user) => {
-      setCurrentUser(user);
-    })
-  }, []);
+    firebaseUtil.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user)
 
-  /* 下階層のコンポーネントをラップする */
+      user?.getIdTokenResult()?.then((result) => {
+        const token = result?.token
+
+        if (token) {
+          localStorage.setItem('token', token)
+        }
+      })
+    })
+  }, [])
+
   return (
     <AuthContext.Provider value={{ currentUser: currentUser }}>
       {children}

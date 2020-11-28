@@ -1,11 +1,13 @@
-import { useSelector } from "react-redux";
-import { StoreState } from "../createStore";
-import { usersAdapter, UserState } from "../slices/userSlice";
+import { useSelector } from 'react-redux'
+import { StoreState } from '../createStore'
+import { usersAdapter } from '../slices/userSlice'
 
-export const userSelctor = usersAdapter.getSelectors(
+export const userSelector = usersAdapter.getSelectors(
   (state: StoreState) => state.user
-);
+)
 
-export const useUserState = () => {
-  return useSelector(userSelctor.selectAll);
-};
+export const useUsersState = () =>
+  useSelector((state: StoreState) => userSelector.selectAll(state))
+
+export const useUserState = (id: number) =>
+  useSelector((state: StoreState) => userSelector.selectById(state, id))

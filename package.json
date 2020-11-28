@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
+    "camelcase-keys": "^6.2.2",
     "dayjs": "^1.9.6",
     "dotenv-webpack": "^6.0.0",
     "firebase": "^8.0.2",

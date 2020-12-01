@@ -1,11 +1,11 @@
 import Layout from '../../components/Layout'
 import { useDispatch } from 'react-redux'
-import React, { useContext, useEffect } from 'react'
-import { AuthContext } from '../../components/Auth'
+import React, { useEffect } from 'react'
 import { fetchUsers } from '../../store/effects/userEffect'
 import UserList from '../../components/UserList'
 import { useUserLoadingState } from '../../store/selectors/userSelector'
 import Loading from '../../components/Loading'
+import { Heading } from '@chakra-ui/react'
 
 const UsersPage = () => {
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const UsersPage = () => {
 
   return (
     <Layout title="Users List | Next.js + TypeScript Example">
-      <h1>Users List</h1>
+      <Heading>Accounts</Heading>
       <UserList />
     </Layout>
   )

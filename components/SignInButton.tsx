@@ -2,6 +2,7 @@ import { FC, useEffect, useContext } from 'react'
 import Router from 'next/router'
 import firebase from '../utils/firebase'
 import { AuthContext } from './Auth'
+import { Button } from '@chakra-ui/react'
 
 const SignInButton: FC = () => {
   const { currentUser } = useContext(AuthContext)
@@ -15,12 +16,11 @@ const SignInButton: FC = () => {
     firebase.auth().signInWithRedirect(provider)
   }
 
-  return (
-    <div className="container">
-      {currentUser?.displayName}
-      <button onClick={login}>googleでログインする</button>
-    </div>
-  )
+  if (currentUser) {
+    return <span>{currentUser.displayName}</span>
+  }
+
+  return <Button onClick={login}>googleでログインする</Button>
 }
 
 export default SignInButton

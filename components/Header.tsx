@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Box, Heading, Flex, Text, Button } from '@chakra-ui/react'
-import SignInButton from './SignInButton'
+import firebaseUtil from '../utils/firebase'
 
 const MenuItems = (props: { href: string; children: string }) => (
   <Link href={props.href}>
@@ -16,6 +16,10 @@ const MenuItems = (props: { href: string; children: string }) => (
 const Header = (props: {}) => {
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
+  const signout = () => {
+    firebaseUtil.auth().signOut()
+    localStorage.clear()
+  }
 
   return (
     <Flex
@@ -60,6 +64,8 @@ const Header = (props: {}) => {
           display={{ sm: show ? 'block' : 'none', md: 'block' }}
           mt={{ base: 4, md: 0 }}
         ></Box>
+
+        <Button onClick={signout}>Sign out</Button>
       </Flex>
     </Flex>
   )

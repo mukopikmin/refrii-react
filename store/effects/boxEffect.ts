@@ -13,11 +13,9 @@ export const fetchBoxes = createAsyncThunk('boxes/fetch', async () => {
   const url = 'https://api.mypantry.muko.app/boxes'
   const token = localStorage.getItem('token')
   const headers = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    Authorization: `Bearer ${token}`,
   }
-  const res = await fetch(url, headers)
+  const res = await fetch(url, { headers })
 
   if (res.ok) {
     const body = camelcaseKeys(await res.json())
@@ -41,11 +39,9 @@ export const fetchBox = createAsyncThunk(
     const url = `https://api.mypantry.muko.app/boxes/${arg.id}`
     const token = localStorage.getItem('token')
     const headers = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      Authorization: `Bearer ${token}`,
     }
-    const res = await fetch(url, headers)
+    const res = await fetch(url, { headers })
 
     if (res.ok) {
       const body = camelcaseKeys(await res.json())

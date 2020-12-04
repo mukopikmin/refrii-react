@@ -2,8 +2,10 @@ import React from 'react'
 import { useUsersState } from '../store/selectors/userSelector'
 import DataTable from 'react-data-table-component'
 import { User } from '../models/user'
+import { useRouter } from 'next/router'
 
 const UserList = () => {
+  const router = useRouter()
   const users = useUsersState()
   const columns = [
     {
@@ -53,8 +55,18 @@ const UserList = () => {
       grow: 2,
     },
   ]
+  const showUser = (user: User) => {
+    router.replace(`/users/${user.id}`)
+  }
 
-  return <DataTable noHeader columns={columns} data={users} />
+  return (
+    <DataTable
+      noHeader
+      onRowClicked={showUser}
+      columns={columns}
+      data={users}
+    />
+  )
 }
 
 export default UserList

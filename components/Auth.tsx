@@ -28,8 +28,11 @@ const AuthProvider: FC = ({ children }) => {
         const token = result?.token
 
         if (token) {
-          localStorage.setItem('token', token)
           setAuthorized(true)
+          localStorage.setItem('token', token)
+          if (user.email) {
+            localStorage.setItem('email', user.email)
+          }
         }
       })
     })

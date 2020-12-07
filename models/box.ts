@@ -1,3 +1,4 @@
+import { Invitation } from './invitation'
 import { User } from './user'
 
 export interface Box {
@@ -7,14 +8,7 @@ export interface Box {
   imageUrl: string | null
   createdAt: string
   updatedAt: string
-  is_invited: boolean
+  isInvited: boolean
   owner: User
   invitations: Invitation[]
-}
-
-export interface Invitation {
-  id: number
-  createdAt: string
-  updatedAt: string
-  user: User
 }

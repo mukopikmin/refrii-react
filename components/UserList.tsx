@@ -56,7 +56,7 @@ const UserList = () => {
     },
   ]
   const showUser = (user: User) => {
-    router.replace(`/users/${user.id}`)
+    router.push(`/users/${user.id}`)
   }
 
   return (

@@ -25,7 +25,7 @@ const UsersPage = () => {
 
   return (
     <Layout title="Users List | Next.js + TypeScript Example">
-      <Heading>Accounts</Heading>
+      <Heading size="lg">Accounts</Heading>
       <UserList />
     </Layout>
   )

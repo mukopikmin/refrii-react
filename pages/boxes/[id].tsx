@@ -1,34 +1,57 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { AuthContext } from '../../components/Auth'
-import BoxDetail from '../../components/BoxDetail'
 import { useBoxState } from '../../store/selectors/boxSelector'
 import { fetchBoxes } from '../../store/effects/boxEffect'
+import { fetchFoodsByBox } from '../../store/effects/foodEffect'
+import { Box } from '@chakra-ui/react'
+import BoxList from '../../components/BoxList'
+import FoodList from '../../components/FoodList'
 
 const BoxPage = () => {
   const dispatch = useDispatch()
-  const { currentUser } = useContext(AuthContext)
   const router = useRouter()
   const { id } = router.query
-  const box = useBoxState(Number(id))
+  const boxId = Number(id)
+  const box = useBoxState(boxId)
 
   useEffect(() => {
-    dispatch(fetchBoxes())
-  }, [currentUser])
+    if (boxId) {
+      dispatch(fetchBoxes())
+      dispatch(fetchFoodsByBox({ boxId }))
+    }
+  }, [boxId])
 
   if (box) {
     return (
-      <Layout title="Users Detail | Next.js + TypeScript Example">
-        <BoxDetail box={box} />
+      <Layout>
+        <Box display="flex" height="100vh">
+          <Box display="flex" flex="1">
+            <Box overflowY="scroll" padding={1} flex="1">
+              <BoxList />
+            </Box>
+            <Box overflowY="scroll" padding={1} flex="2">
+              <FoodList boxId={boxId} />
+            </Box>
+          </Box>
+        </Box>
       </Layout>
     )
   }
 
   return (
-    <Layout title="Users Detail | Next.js + TypeScript Example">
-      <p>User not found.</p>
+    <Layout>
+      <Box display="flex" height="100vh">
+        <Box display="flex" flex="1">
+          <Box overflowY="scroll" padding={1} flex="1">
+            <BoxList />
+          </Box>
+          <Box overflowY="scroll" padding={1} flex="2">
+            <p>Box not found.</p>
+          </Box>
+        </Box>
+      </Box>
     </Layout>
   )
 }

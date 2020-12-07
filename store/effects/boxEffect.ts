@@ -12,9 +12,7 @@ export const boxEntity = new schema.Entity('boxes', {
 export const fetchBoxes = createAsyncThunk('boxes/fetch', async () => {
   const url = 'https://api.mypantry.muko.app/boxes'
   const token = localStorage.getItem('token')
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  }
+  const headers = { Authorization: `Bearer ${token}` }
   const res = await fetch(url, { headers })
 
   if (res.ok) {
@@ -34,13 +32,11 @@ export const fetchBoxes = createAsyncThunk('boxes/fetch', async () => {
 })
 
 export const fetchBox = createAsyncThunk(
-  'boxes/fetch/id',
+  'boxes/fetchOne',
   async (arg: { id: number }) => {
     const url = `https://api.mypantry.muko.app/boxes/${arg.id}`
     const token = localStorage.getItem('token')
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    }
+    const headers = { Authorization: `Bearer ${token}` }
     const res = await fetch(url, { headers })
 
     if (res.ok) {
@@ -51,8 +47,8 @@ export const fetchBox = createAsyncThunk(
           boxes: { [key: number]: Box }
           users: { [key: number]: User }
         }
-      >(body, [boxEntity])
-
+      >([body], [boxEntity])
+      console.log(normalized)
       return normalized.entities
     }
 

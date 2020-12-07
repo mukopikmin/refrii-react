@@ -2,11 +2,6 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { Box } from '../../models/box'
 import { fetchBox, fetchBoxes } from '../effects/boxEffect'
 
-export type BoxState = {
-  boxes: Box[]
-  loading: boolean
-}
-
 export const boxesAdapter = createEntityAdapter<Box>({
   selectId: (box) => box.id,
 })
@@ -25,7 +20,7 @@ const boxSlice = createSlice({
         state.loading = true
       })
       .addCase(fetchBoxes.fulfilled, (state, action) => {
-        boxesAdapter.upsertMany(state, action.payload.boxes)
+        boxesAdapter.setAll(state, action.payload.boxes)
         state.loading = false
       })
       .addCase(fetchBoxes.rejected, (state, action) => {
@@ -38,6 +33,10 @@ const boxSlice = createSlice({
       .addCase(fetchBox.fulfilled, (state, action) => {
         boxesAdapter.upsertMany(state, action.payload.boxes)
         state.loading = false
+      })
+      .addCase(fetchBox.rejected, (state, action) => {
+        state.loading = false
+        console.log(action.payload)
       })
   },
 })

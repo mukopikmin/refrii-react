@@ -3,10 +3,10 @@ import { User } from '../../models/user'
 import { fetchBoxes } from '../effects/boxEffect'
 import { fetchUsers, updateUser } from '../effects/userEffect'
 
-export type UserState = {
-  users: User[]
-  loading: boolean
-}
+// export type UserState = {
+//   users: User[]
+//   loading: boolean
+// }
 
 export const usersAdapter = createEntityAdapter<User>()
 
@@ -26,6 +26,9 @@ const userSlice = createSlice({
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false
         usersAdapter.setAll(state, action.payload.users)
+      })
+      .addCase(fetchUsers.rejected, (state, _) => {
+        state.loading = false
       })
       .addCase(updateUser.pending, (state, _) => {
         state.loading = true

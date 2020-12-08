@@ -38,7 +38,7 @@ const AuthProvider: FC = ({ children }) => {
     })
 
     if (!authorized && !loading) {
-      router.replace('/')
+      router.push('/')
     }
   }, [router.pathname])
 

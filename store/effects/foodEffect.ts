@@ -7,12 +7,14 @@ import { Unit } from '../../models/unit'
 
 const apiEndpoint = process.env.apiEndpoint
 
+export const boxEntity = new schema.Entity('boxes')
 export const userEntity = new schema.Entity('users')
 export const unitEntity = new schema.Entity('units')
 export const foodEntity = new schema.Entity('foods', {
   createdUser: userEntity,
   updatedUser: userEntity,
   unit: unitEntity,
+  box: boxEntity,
 })
 
 export const fetchFoodsByBox = createAsyncThunk(
@@ -30,7 +32,7 @@ export const fetchFoodsByBox = createAsyncThunk(
         {
           foods: { [key: number]: Food }
           users: { [key: number]: User }
-          unit: { [key: number]: Unit }
+          units: { [key: number]: Unit }
         }
       >(body, [foodEntity])
 
@@ -54,9 +56,9 @@ export const fetchFood = createAsyncThunk(
       const normalized = normalize<
         any,
         {
-          food: { [key: number]: Food }
-          user: { [key: number]: User }
-          unit: { [key: number]: Unit }
+          foods: { [key: number]: Food }
+          users: { [key: number]: User }
+          units: { [key: number]: Unit }
         }
       >(body, [foodEntity])
 

@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { User } from '../../models/user'
 import { fetchBoxes } from '../effects/boxEffect'
-import { fetchUsers, updateUser } from '../effects/userEffect'
+import { fetchUser, fetchUsers, updateUser } from '../effects/userEffect'
 
 // export type UserState = {
 //   users: User[]
@@ -28,6 +28,16 @@ const userSlice = createSlice({
         usersAdapter.setAll(state, action.payload.users)
       })
       .addCase(fetchUsers.rejected, (state, _) => {
+        state.loading = false
+      })
+      .addCase(fetchUser.pending, (state, _) => {
+        state.loading = true
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.loading = false
+        usersAdapter.upsertMany(state, action.payload.users)
+      })
+      .addCase(fetchUser.rejected, (state, _) => {
         state.loading = false
       })
       .addCase(updateUser.pending, (state, _) => {

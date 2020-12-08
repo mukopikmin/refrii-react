@@ -4,11 +4,13 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import boxSlice, { initialState as boxState } from './slices/boxSlice'
 import userSlice, { initialState as userState } from './slices/userSlice'
 import foodSlice, { initialState as foodState } from './slices/foodSlice'
+import unitSlice, { initialState as unitState } from './slices/unitSlice'
 
 const rootReducer = combineReducers({
   box: boxSlice.reducer,
   user: userSlice.reducer,
   food: foodSlice.reducer,
+  unit: unitSlice.reducer,
 })
 
 const preloadedState = () => {
@@ -16,6 +18,7 @@ const preloadedState = () => {
     box: boxState,
     user: userState,
     food: foodState,
+    unit: unitState,
   }
 }
 

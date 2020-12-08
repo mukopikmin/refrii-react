@@ -17,10 +17,10 @@ const unitSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFoodsByBox.fulfilled, (state, { payload }) => {
-        unitsAdapter.upsertMany(state, payload.unit)
+        unitsAdapter.upsertMany(state, payload.units)
       })
       .addCase(fetchFood.fulfilled, (state, { payload }) => {
-        unitsAdapter.upsertMany(state, payload.unit)
+        unitsAdapter.upsertMany(state, payload.units)
       })
   },
 })

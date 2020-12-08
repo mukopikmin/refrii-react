@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import {
@@ -7,25 +7,33 @@ import {
 } from '../../store/selectors/userSelector'
 import UserDetail from '../../components/UserDetail'
 import Loading from '../../components/Loading'
+import { useDispatch } from 'react-redux'
+import { fetchUser } from '../../store/effects/userEffect'
 
 const UserPage = () => {
+  const dispatch = useDispatch()
   const router = useRouter()
   const { id } = router.query
-  const user = useUserState(Number(id))
+  const userId = Number(id)
+  const user = useUserState(userId)
   const loading = useUserLoadingState()
+
+  useEffect(() => {
+    dispatch(fetchUser({ id: userId }))
+  }, [userId])
+
+  if (loading) {
+    return (
+      <Layout title="Users Detail | Next.js + TypeScript Example">
+        <Loading visible={loading} />
+      </Layout>
+    )
+  }
 
   if (user) {
     return (
       <Layout title="Users Detail | Next.js + TypeScript Example">
         <UserDetail user={user} />
-      </Layout>
-    )
-  }
-
-  if (loading) {
-    return (
-      <Layout title="Users Detail | Next.js + TypeScript Example">
-        <Loading />
       </Layout>
     )
   }

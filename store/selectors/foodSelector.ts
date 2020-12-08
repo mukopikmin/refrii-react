@@ -1,6 +1,31 @@
 import { useSelector } from 'react-redux'
 import { StoreState } from '../createStore'
 import { foodsAdapter } from '../slices/foodSlice'
+import { denormalize, schema } from 'normalizr'
+import { Food } from '../../models/food'
+
+const boxEntity = new schema.Entity('boxes')
+const userEntity = new schema.Entity('users')
+const unitEntity = new schema.Entity('units')
+const foodEntity = new schema.Entity('foods', {
+  createdUser: userEntity,
+  updatedUser: userEntity,
+  unit: unitEntity,
+  box: boxEntity,
+})
+
+const denormalizeFoods = (state: StoreState) => {
+  return denormalize(
+    { foods: state.food.ids },
+    { foods: [foodEntity] },
+    {
+      foods: state.food.entities,
+      units: state.unit.entities,
+      boxes: state.box.entities,
+      users: state.user.entities,
+    }
+  ).foods
+}
 
 export const foodSelector = foodsAdapter.getSelectors(
   (state: StoreState) => state.food
@@ -10,9 +35,7 @@ export const useFoodsState = () => useSelector(foodSelector.selectAll)
 
 export const useFoodByBoxState = (boxId: number) =>
   useSelector((state: StoreState) =>
-    state.food.ids
-      .map((id) => state.food.entities[id])
-      .filter((food) => food && food.box.id === boxId)
+    denormalizeFoods(state).filter((food: Food) => food.box.id === boxId)
   )
 
 export const useFoodState = (id: number) =>

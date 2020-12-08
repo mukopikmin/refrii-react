@@ -26,7 +26,7 @@ const BoxesPage = () => {
 
   return (
     <Layout>
-      <Loading />
+      <Loading visible={loading} />
     </Layout>
   )
 }

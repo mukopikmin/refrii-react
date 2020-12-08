@@ -18,7 +18,7 @@ const UsersPage = () => {
   if (loading) {
     return (
       <Layout title="Users List | Next.js + TypeScript Example">
-        <Loading />
+        <Loading visible={loading} />
       </Layout>
     )
   }

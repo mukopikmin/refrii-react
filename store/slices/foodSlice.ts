@@ -31,7 +31,7 @@ const foodSlice = createSlice({
         state.loading = true
       })
       .addCase(fetchFood.fulfilled, (state, { payload }) => {
-        foodsAdapter.upsertMany(state, payload.food)
+        foodsAdapter.upsertMany(state, payload.foods)
       })
       .addCase(fetchFood.rejected, (state, { payload }) => {
         state.loading = false

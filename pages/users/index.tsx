@@ -1,19 +1,21 @@
 import Layout from '../../components/Layout'
 import { useDispatch } from 'react-redux'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { fetchUsers } from '../../store/effects/userEffect'
 import UserList from '../../components/UserList'
 import { useUserLoadingState } from '../../store/selectors/userSelector'
 import Loading from '../../components/Loading'
 import { Heading } from '@chakra-ui/react'
+import { AuthContext } from '../../components/Auth'
 
 const UsersPage = () => {
+  const { currentUser } = useContext(AuthContext)
   const dispatch = useDispatch()
   const loading = useUserLoadingState()
 
   useEffect(() => {
     dispatch(fetchUsers())
-  }, [])
+  }, [currentUser])
 
   if (loading) {
     return (

@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { useBoxState } from '../store/selectors/boxSelector'
 import Loading from './Loading'
+import FoodListItemDetail from './FoodListItemDetail'
 
 const FoodList = (props: { boxId: number }) => {
   const foods = useFoodByBoxState(props.boxId)
@@ -41,7 +42,9 @@ const FoodList = (props: { boxId: number }) => {
               </Flex>
               <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel pb={4}>{food?.expirationDate}</AccordionPanel>
+            <AccordionPanel pb={4}>
+              <FoodListItemDetail food={food} />
+            </AccordionPanel>
           </AccordionItem>
         ))}
       </Accordion>

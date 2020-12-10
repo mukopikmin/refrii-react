@@ -68,3 +68,24 @@ export const fetchFood = createAsyncThunk(
     throw new Error('fetch foods error')
   }
 )
+
+export const updateFood = createAsyncThunk(
+  'foods/update',
+  async (arg: { id: number; amount: number }) => {
+    const url = `${apiEndpoint}/foods/${arg.id}`
+    const token = localStorage.getItem('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    const body = JSON.stringify({ ...arg })
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers,
+      body,
+    })
+
+    if (response.ok) {
+      return { ...arg }
+    }
+
+    throw new Error('fetch foods error')
+  }
+)

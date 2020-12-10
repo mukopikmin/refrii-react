@@ -65,6 +65,7 @@ export const updateUser = createAsyncThunk(
     if (response.ok) {
       return { ...arg }
     }
+
     throw new Error('update user error')
   }
 )

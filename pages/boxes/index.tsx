@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Layout from '../../components/Layout'
 import { fetchBoxes } from '../../store/effects/boxEffect'
@@ -9,8 +9,10 @@ import {
 } from '../../store/selectors/boxSelector'
 import Loading from '../../components/Loading'
 import { useRouter } from 'next/router'
+import { AuthContext } from '../../components/Auth'
 
 const BoxesPage = () => {
+  const { currentUser } = useContext(AuthContext)
   const router = useRouter()
   const dispatch = useDispatch()
   const loading = useBoxLoadingState()
@@ -18,7 +20,7 @@ const BoxesPage = () => {
 
   useEffect(() => {
     dispatch(fetchBoxes())
-  }, [])
+  }, [currentUser])
 
   if (!loading && boxes.length > 0) {
     router.push(`/boxes/${boxes[0].id}`)

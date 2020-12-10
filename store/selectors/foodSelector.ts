@@ -7,14 +7,14 @@ import { Food } from '../../models/food'
 const boxEntity = new schema.Entity('boxes')
 const userEntity = new schema.Entity('users')
 const unitEntity = new schema.Entity('units')
-const foodEntity = new schema.Entity('foods', {
+const foodEntity = new schema.Entity<Food>('foods', {
   createdUser: userEntity,
   updatedUser: userEntity,
   unit: unitEntity,
   box: boxEntity,
 })
 
-const denormalizeFoods = (state: StoreState) => {
+const denormalizeFoods = (state: StoreState): Food[] => {
   return denormalize(
     { foods: state.food.ids },
     { foods: [foodEntity] },

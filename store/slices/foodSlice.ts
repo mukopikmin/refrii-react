@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { Food } from '../../models/food'
-import { fetchFood, fetchFoodsByBox } from '../effects/foodEffect'
+import { fetchFood, fetchFoodsByBox, updateFood } from '../effects/foodEffect'
 
 export const foodsAdapter = createEntityAdapter<Food>({
   selectId: (food) => food.id,
@@ -34,6 +34,19 @@ const foodSlice = createSlice({
         foodsAdapter.upsertMany(state, payload.foods)
       })
       .addCase(fetchFood.rejected, (state, { payload }) => {
+        state.loading = false
+        console.log(payload)
+      })
+      .addCase(updateFood.pending, (state, _) => {
+        state.loading = true
+      })
+      .addCase(updateFood.fulfilled, (state, { payload }) => {
+        const { id, ...changes } = payload
+
+        state.loading = false
+        foodsAdapter.updateOne(state, { id, changes })
+      })
+      .addCase(updateFood.rejected, (state, { payload }) => {
         state.loading = false
         console.log(payload)
       })

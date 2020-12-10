@@ -17,7 +17,7 @@ const BoxList = () => {
           <ListItem key={box.id}>
             <Link href="/boxes/[id]" as={`/boxes/${box.id}`}>
               <a>
-                <ListIcon as={MdFolder} color="green.500" />
+                <ListIcon as={MdFolder} fontSize="xl" color="green.500" />
                 {box.name}
               </a>
             </Link>

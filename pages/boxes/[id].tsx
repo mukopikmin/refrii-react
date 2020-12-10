@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
@@ -8,6 +8,7 @@ import { fetchFoodsByBox } from '../../store/effects/foodEffect'
 import { Box } from '@chakra-ui/react'
 import BoxList from '../../components/BoxList'
 import FoodList from '../../components/FoodList'
+import { AuthContext } from '../../components/Auth'
 
 const BoxPage = () => {
   const dispatch = useDispatch()
@@ -15,13 +16,14 @@ const BoxPage = () => {
   const { id } = router.query
   const boxId = Number(id)
   const box = useBoxState(boxId)
+  const { currentUser } = useContext(AuthContext)
 
   useEffect(() => {
     if (boxId) {
       dispatch(fetchBoxes())
       dispatch(fetchFoodsByBox({ boxId }))
     }
-  }, [boxId])
+  }, [boxId, currentUser])
 
   if (box) {
     return (

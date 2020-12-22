@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react'
-import Head from 'next/head'
-import Header from './Header'
-import { Container } from '@chakra-ui/react'
+import React, { ReactNode } from "react";
+import Head from "next/head";
+import Header from "./Header";
+import { Container } from "@chakra-ui/react";
 
 type Props = {
-  children?: ReactNode
-  title?: string
-}
+  children?: ReactNode;
+  title?: string;
+};
 
 const Layout = ({ children, title = process.env.appName }: Props) => (
   <div>
@@ -18,10 +18,10 @@ const Layout = ({ children, title = process.env.appName }: Props) => (
     <header>
       <Header />
     </header>
-    <Container maxWidth="1200px" marginTop="10px">
+    <Container maxWidth="1200px" marginTop="10px" height="100%" width="100%">
       {children}
     </Container>
   </div>
-)
+);
 
-export default Layout
+export default Layout;

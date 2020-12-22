@@ -1,32 +1,34 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react'
-import { AuthContext } from '../components/Auth'
-import Layout from '../components/Layout'
-import SignInButton from '../components/SignInButton'
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../components/Auth";
+import Landing from "../components/Landing";
 
 const IndexPage = () => {
-  const router = useRouter()
-  const { currentUser } = useContext(AuthContext)
+  const router = useRouter();
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (currentUser) {
-      router.push('/boxes')
+      router.push("/boxes");
     }
-  }, [currentUser])
+  }, [currentUser]);
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
-      <h1>Hello Next.js 👋</h1>
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </p>
+    <div>
+      <style global jsx>{`
+        html,
+        body,
+        body > div:first-child,
+        div#__next,
+        div#__next > div,
+        div#__next > div > div {
+          height: 100%;
+        }
+      `}</style>
 
-      <SignInButton />
-    </Layout>
-  )
-}
+      <Landing />
+    </div>
+  );
+};
 
-export default IndexPage
+export default IndexPage;

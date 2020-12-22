@@ -1,52 +1,56 @@
-import { useRouter } from 'next/router'
-import { FC, createContext, useEffect, useState } from 'react'
-import firebaseUtil from '../utils/firebase'
+import { useRouter } from "next/router";
+import { FC, createContext, useEffect, useState } from "react";
+import firebaseUtil from "../utils/firebase";
 
 type AuthContextProps = {
-  currentUser: firebaseUtil.User | null | undefined
-}
+  currentUser: firebaseUtil.User | null | undefined;
+};
 
-const AuthContext = createContext<AuthContextProps>({ currentUser: undefined })
+const AuthContext = createContext<AuthContextProps>({ currentUser: undefined });
 
 const AuthProvider: FC = ({ children }) => {
-  const router = useRouter()
+  const router = useRouter();
   const [currentUser, setCurrentUser] = useState<
     firebaseUtil.User | null | undefined
-  >(undefined)
-  const [loading, setLoading] = useState(true)
-  const [authorized, setAuthorized] = useState(false)
+  >(undefined);
+  const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
-    setAuthorized(false)
+    if (router.pathname === "/privacy") {
+      return;
+    }
+
+    setLoading(true);
+    setAuthorized(false);
 
     firebaseUtil.auth().onAuthStateChanged((user) => {
-      setLoading(false)
-      setCurrentUser(user)
+      setLoading(false);
+      setCurrentUser(user);
 
       user?.getIdTokenResult()?.then((result) => {
-        const token = result?.token
+        const token = result?.token;
 
         if (token) {
-          setAuthorized(true)
-          localStorage.setItem('token', token)
+          setAuthorized(true);
+          localStorage.setItem("token", token);
           if (user.email) {
-            localStorage.setItem('email', user.email)
+            localStorage.setItem("email", user.email);
           }
         }
-      })
-    })
+      });
+    });
 
     if (!authorized && !loading) {
-      router.push('/')
+      router.push("/");
     }
-  }, [router.pathname])
+  }, [router.pathname]);
 
   return (
     <AuthContext.Provider value={{ currentUser: currentUser }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
-export { AuthContext, AuthProvider }
+export { AuthContext, AuthProvider };

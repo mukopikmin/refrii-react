@@ -1,0 +1,6 @@
+import React from "react";
+import PrivacyPolicy from "../components/PrivacyPolicy";
+
+const PrivacyPage = () => <PrivacyPolicy />;
+
+export default PrivacyPage;
